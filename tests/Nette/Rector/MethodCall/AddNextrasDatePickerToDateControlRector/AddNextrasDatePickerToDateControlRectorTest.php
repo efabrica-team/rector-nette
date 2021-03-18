@@ -26,7 +26,7 @@ final class AddNextrasDatePickerToDateControlRectorTest extends AbstractRectorTe
         return $this->yieldFilesFromDirectory(__DIR__ . '/Fixture');
     }
 
-    public function provideConfigFilePath(): string
+    protected function provideConfigFilePath(): string
     {
         return __DIR__ . '/config/configured_rule.php';
     }
