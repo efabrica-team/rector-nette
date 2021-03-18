@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Rector\Tests\Nette\Rector\Identical\StartsWithFunctionToNetteUtilsStringsRector;
 
 use Iterator;
-use Rector\Nette\Rector\Identical\StartsWithFunctionToNetteUtilsStringsRector;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -27,8 +26,8 @@ final class StartsWithFunctionToNetteUtilsStringsRectorTest extends AbstractRect
         return $this->yieldFilesFromDirectory(__DIR__ . '/Fixture');
     }
 
-    protected function getRectorClass(): string
+    public function provideConfigFilePath(): string
     {
-        return StartsWithFunctionToNetteUtilsStringsRector::class;
+        return __DIR__ . '/config/configured_rule.php';
     }
 }

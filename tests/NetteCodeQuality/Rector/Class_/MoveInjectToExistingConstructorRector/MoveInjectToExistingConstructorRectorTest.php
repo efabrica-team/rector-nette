@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Rector\Tests\NetteCodeQuality\Rector\Class_\MoveInjectToExistingConstructorRector;
 
 use Iterator;
-use Rector\NetteCodeQuality\Rector\Class_\MoveInjectToExistingConstructorRector;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -27,8 +26,8 @@ final class MoveInjectToExistingConstructorRectorTest extends AbstractRectorTest
         return $this->yieldFilesFromDirectory(__DIR__ . '/Fixture');
     }
 
-    protected function getRectorClass(): string
+    public function provideConfigFilePath(): string
     {
-        return MoveInjectToExistingConstructorRector::class;
+        return __DIR__ . '/config/configured_rule.php';
     }
 }

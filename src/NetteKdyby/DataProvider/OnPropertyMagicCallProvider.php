@@ -16,8 +16,7 @@ use Rector\Testing\PHPUnit\StaticPHPUnitEnvironment;
 final class OnPropertyMagicCallProvider
 {
     /**
-     * Package "nette/application" is required for DEV, might not exist for PROD.
-     * So access the class throgh the string
+     * Package "nette/application" is required for DEV, might not exist for PROD. So access the class throgh the string
      *
      * @var string
      */
@@ -70,8 +69,7 @@ final class OnPropertyMagicCallProvider
     }
 
     /**
-     * Detects method call on, e.g:
-     * public $onSomeProperty;
+     * Detects method call on, e.g: public $onSomeProperty;
      */
     private function isLocalOnPropertyCall(MethodCall $methodCall, Scope $scope): bool
     {

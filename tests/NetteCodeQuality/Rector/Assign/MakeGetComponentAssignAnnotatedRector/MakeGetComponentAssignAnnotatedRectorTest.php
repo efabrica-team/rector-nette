@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Rector\Tests\NetteCodeQuality\Rector\Assign\MakeGetComponentAssignAnnotatedRector;
 
 use Iterator;
-use Rector\NetteCodeQuality\Rector\Assign\MakeGetComponentAssignAnnotatedRector;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -27,8 +26,8 @@ final class MakeGetComponentAssignAnnotatedRectorTest extends AbstractRectorTest
         return $this->yieldFilesFromDirectory(__DIR__ . '/Fixture');
     }
 
-    protected function getRectorClass(): string
+    public function provideConfigFilePath(): string
     {
-        return MakeGetComponentAssignAnnotatedRector::class;
+        return __DIR__ . '/config/configured_rule.php';
     }
 }

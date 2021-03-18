@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Rector\NetteCodeQuality\NodeAdding;
@@ -60,6 +61,7 @@ final class FunctionLikeFirstLevelStatementResolver
 
     /**
      * Form might be costructured inside private closure for multiplier
+     *
      * @see https://doc.nette.org/en/3.0/multiplier
      */
     private function matchMultiplierClosure(Node $node): ?Closure

@@ -184,7 +184,7 @@ CODE_SAMPLE
     {
         $kdybyEventName = $this->valueResolver->getValue($expr);
         if (Strings::contains($kdybyEventName, '::')) {
-            return (string) Strings::after($kdybyEventName, '::', - 1);
+            return (string) Strings::after($kdybyEventName, '::', -1);
         }
 
         throw new NotImplementedYetException($kdybyEventName);

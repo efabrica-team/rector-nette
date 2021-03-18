@@ -88,7 +88,6 @@ final class TemplatePropertyAssignCollector
 
     private function collectVariableFromAssign(Assign $assign): void
     {
-        // $this->template = x
         if (! $assign->var instanceof PropertyFetch) {
             return;
         }

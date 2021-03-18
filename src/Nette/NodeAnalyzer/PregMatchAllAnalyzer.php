@@ -14,8 +14,9 @@ use PhpParser\Node\Scalar\LNumber;
 final class PregMatchAllAnalyzer
 {
     /**
-     * Compensate enforced flag https://github.com/nette/utils/blob/e3dd1853f56ee9a68bfbb2e011691283c2ed420d/src/Utils/Strings.php#L487
-     * See https://stackoverflow.com/a/61424319/1348344
+     * Compensate enforced flag
+     * https://github.com/nette/utils/blob/e3dd1853f56ee9a68bfbb2e011691283c2ed420d/src/Utils/Strings.php#L487 See
+     * https://stackoverflow.com/a/61424319/1348344
      *
      * @param Arg[] $args
      * @return Arg[]

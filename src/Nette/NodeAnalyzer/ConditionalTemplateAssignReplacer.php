@@ -10,19 +10,11 @@ use Rector\Nette\ValueObject\TemplateParametersAssigns;
 /**
  * Replaces:
  *
- * if (...) {
- *    $this->template->key = 'some';
- * } else {
- *    $this->template->key = 'another';
- * }
+ * if (...) { $this->template->key = 'some'; } else { $this->template->key = 'another'; }
  *
  * ↓
  *
- * if (...) {
- *    $key = 'some';
- * } else {
- *    $key = 'another';
- * }
+ * if (...) { $key = 'some'; } else { $key = 'another'; }
  */
 final class ConditionalTemplateAssignReplacer
 {

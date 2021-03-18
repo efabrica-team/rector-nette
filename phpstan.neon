@@ -17,8 +17,11 @@ parameters:
         - */Source/*
         - *Source/*
 
-#    ignoreErrors:
-#        -
+    ignoreErrors:
+        -
+            message: '#Parameter "(.*?)" cannot be nullable#'
+            path: src/NetteKdyby/ValueObject/*
+
 #            message: '#Do not inherit from abstract class, better use composition#'
 #            path: "*Rector.php"
 #

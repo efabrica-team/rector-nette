@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Rector\Tests\Nette\Rector\FuncCall\FilePutContentsToFileSystemWriteRector;
 
 use Iterator;
-use Rector\Nette\Rector\FuncCall\FilePutContentsToFileSystemWriteRector;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -27,8 +26,8 @@ final class FilePutContentsToFileSystemWriteRectorTest extends AbstractRectorTes
         return $this->yieldFilesFromDirectory(__DIR__ . '/Fixture');
     }
 
-    protected function getRectorClass(): string
+    public function provideConfigFilePath(): string
     {
-        return FilePutContentsToFileSystemWriteRector::class;
+        return __DIR__ . '/config/configured_rule.php';
     }
 }

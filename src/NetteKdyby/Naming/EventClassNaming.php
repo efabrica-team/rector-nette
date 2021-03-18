@@ -35,9 +35,7 @@ final class EventClassNaming
     }
 
     /**
-     * "App\SomeNamespace\SomeClass::onUpload"
-     * ↓
-     * "App\SomeNamespace\Event\SomeClassUploadEvent"
+     * "App\SomeNamespace\SomeClass::onUpload" → "App\SomeNamespace\Event\SomeClassUploadEvent"
      */
     public function createEventClassNameFromMethodCall(MethodCall $methodCall): string
     {
@@ -103,9 +101,7 @@ final class EventClassNaming
     }
 
     /**
-     * TomatoMarket, onBuy
-     * ↓
-     * TomatoMarketBuyEvent
+     * TomatoMarket, onBuy → TomatoMarketBuyEvent
      */
     private function createShortEventClassNameFromClassAndProperty(string $class, string $property): string
     {

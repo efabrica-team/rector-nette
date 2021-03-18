@@ -57,8 +57,7 @@ final class ThisTemplatePropertyFetchAnalyzer
     }
 
     /**
-     * Looks for:
-     * $this->template
+     * Looks for: $this->template
      *
      * $template
      */

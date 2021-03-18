@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Rector\Tests\Nette\Rector\MethodCall\ConvertAddUploadWithThirdArgumentTrueToAddMultiUploadRector;
 
 use Iterator;
-use Rector\Nette\Rector\MethodCall\ConvertAddUploadWithThirdArgumentTrueToAddMultiUploadRector;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -27,8 +26,8 @@ final class ConvertAddUploadWithThirdArgumentTrueToAddMultiUploadRectorTest exte
         return $this->yieldFilesFromDirectory(__DIR__ . '/Fixture');
     }
 
-    protected function getRectorClass(): string
+    public function provideConfigFilePath(): string
     {
-        return ConvertAddUploadWithThirdArgumentTrueToAddMultiUploadRector::class;
+        return __DIR__ . '/config/configured_rule.php';
     }
 }

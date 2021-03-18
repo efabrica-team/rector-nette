@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Rector\Tests\Nette\Rector\FuncCall\PregFunctionToNetteUtilsStringsRector;
 
 use Iterator;
-use Rector\Nette\Rector\FuncCall\PregFunctionToNetteUtilsStringsRector;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -27,8 +26,8 @@ final class PregFunctionToNetteUtilsStringsRectorTest extends AbstractRectorTest
         return $this->yieldFilesFromDirectory(__DIR__ . '/Fixture');
     }
 
-    protected function getRectorClass(): string
+    public function provideConfigFilePath(): string
     {
-        return PregFunctionToNetteUtilsStringsRector::class;
+        return __DIR__ . '/config/configured_rule.php';
     }
 }
