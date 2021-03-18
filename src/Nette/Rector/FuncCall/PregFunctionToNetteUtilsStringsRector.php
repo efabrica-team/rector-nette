@@ -190,7 +190,7 @@ CODE_SAMPLE
      */
     private function processSplit(FuncCall $funcCall, StaticCall $matchStaticCall): Expr
     {
-        $matchStaticCall = $this->compensateNetteUtilsSplitDelimCapture($matchStaticCall);
+        $this->compensateNetteUtilsSplitDelimCapture($matchStaticCall);
 
         if (! isset($funcCall->args[2])) {
             return $matchStaticCall;
@@ -210,22 +210,20 @@ CODE_SAMPLE
     /**
      * Handles https://github.com/rectorphp/rector/issues/2348
      */
-    private function compensateNetteUtilsSplitDelimCapture(StaticCall $staticCall): StaticCall
+    private function compensateNetteUtilsSplitDelimCapture(StaticCall $staticCall): void
     {
         $patternValue = $this->valueResolver->getValue($staticCall->args[1]->value);
         if (! is_string($patternValue)) {
-            return $staticCall;
+            return;
         }
 
         $match = Strings::match($patternValue, self::SLASH_REGEX);
         if ($match === null) {
-            return $staticCall;
+            return;
         }
 
         $constFetch = new ConstFetch(new Name('PREG_SPLIT_DELIM_CAPTURE'));
         $bitwiseAnd = new BitwiseAnd(new LNumber(0), new BitwiseNot($constFetch));
         $staticCall->args[2] = new Arg($bitwiseAnd);
-
-        return $staticCall;
     }
 }

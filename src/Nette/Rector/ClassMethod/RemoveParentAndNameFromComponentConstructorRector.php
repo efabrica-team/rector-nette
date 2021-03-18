@@ -131,7 +131,8 @@ CODE_SAMPLE
         }
 
         if ($this->isObjectType($node->class, new ObjectType('Nette\Application\UI\Control'))) {
-            return $this->refactorNew($node);
+            $this->refactorNew($node);
+            return $node;
         }
 
         return null;
@@ -147,7 +148,8 @@ CODE_SAMPLE
             return null;
         }
 
-        return $this->removeClassMethodParams($classMethod);
+        $this->removeClassMethodParams($classMethod);
+        return $classMethod;
     }
 
     private function refactorStaticCall(StaticCall $staticCall): ?StaticCall
@@ -182,7 +184,7 @@ CODE_SAMPLE
         return $staticCall;
     }
 
-    private function refactorNew(New_ $new): New_
+    private function refactorNew(New_ $new): void
     {
         $parameterNames = $this->methodReflectionProvider->provideParameterNamesByNew($new);
 
@@ -199,8 +201,6 @@ CODE_SAMPLE
 
             $this->removeNode($arg);
         }
-
-        return $new;
     }
 
     private function isInsideNetteComponentClass(Node $node): bool
@@ -223,7 +223,7 @@ CODE_SAMPLE
         return $classReflection->isSubclassOf($this->controlObjectType->getClassName());
     }
 
-    private function removeClassMethodParams(ClassMethod $classMethod): ClassMethod
+    private function removeClassMethodParams(ClassMethod $classMethod): void
     {
         foreach ($classMethod->params as $param) {
             if ($this->paramFinder->isInAssign((array) $classMethod->stmts, $param)) {
@@ -239,8 +239,6 @@ CODE_SAMPLE
                 $this->removeNode($param);
             }
         }
-
-        return $classMethod;
     }
 
     private function shouldRemoveEmptyCall(StaticCall $staticCall): bool

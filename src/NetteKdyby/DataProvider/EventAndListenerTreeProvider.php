@@ -165,7 +165,7 @@ final class EventAndListenerTreeProvider
         $listeningClassMethodsByClass = [];
 
         foreach ($this->getSubscribedEventsClassMethodProvider->provide() as $getSubscribedClassMethod) {
-            /** @var string $className */
+            /** @var class-string $className */
             $className = $getSubscribedClassMethod->getAttribute(AttributeKey::CLASS_NAME);
 
             $listeningClassMethods = $this->listeningMethodsCollector->classMethodsListeningToEventClass(
@@ -202,6 +202,7 @@ final class EventAndListenerTreeProvider
             /** @var PropertyFetch $propertyFetch */
             $propertyFetch = $return->expr;
 
+            /** @var string $classMethodName */
             $classMethodName = $this->nodeNameResolver->getName($classMethod);
 
             /** @var string $variableName */

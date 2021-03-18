@@ -99,10 +99,9 @@ final class TemplatePropertyAssignCollector
 
         $propertyFetch = $assign->var;
 
-        $foundParent = $this->betterNodeFinder->findParentTypes(
-            $propertyFetch->var,
-            ControlStructure::CONDITIONAL_NODE_SCOPE_TYPES + [FunctionLike::class]
-        );
+        /** @var array<class-string<\PhpParser\Node>> $nodeTypes */
+        $nodeTypes = ControlStructure::CONDITIONAL_NODE_SCOPE_TYPES + [FunctionLike::class];
+        $foundParent = $this->betterNodeFinder->findParentTypes($propertyFetch->var, $nodeTypes);
 
         if ($foundParent && $this->scopeNestingComparator->isInBothIfElseBranch($foundParent, $propertyFetch)) {
             $this->conditionalTemplateParameterAssigns[] = new ConditionalTemplateParameterAssign(

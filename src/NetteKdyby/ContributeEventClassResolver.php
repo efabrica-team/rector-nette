@@ -106,7 +106,7 @@ final class ContributeEventClassResolver
     public function resolveGetterMethodByEventClassAndParam(
         string $eventClass,
         Param $param,
-        ?EventAndListenerTree $eventAndListenerTree = null
+        ?EventAndListenerTree $eventAndListenerTree
     ): string {
         $getterMethodsWithType = self::CONTRIBUTTE_EVENT_GETTER_METHODS_WITH_TYPE[$eventClass] ?? null;
 

@@ -118,7 +118,7 @@ final class ListeningClassMethodArgumentManipulator
     private function createEventGetterToVariableMethodCall(
         string $eventClass,
         Param $param,
-        ?EventAndListenerTree $eventAndListenerTree = null
+        ?EventAndListenerTree $eventAndListenerTree
     ): Assign {
         $paramName = $this->classNaming->getVariableName($eventClass);
         $eventVariable = new Variable($paramName);

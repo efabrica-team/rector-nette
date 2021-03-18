@@ -124,6 +124,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ]),
         ]]);
 
+    $nullableTemplateType = new UnionType([new ObjectType('Nette\Application\UI\Template'), new NullType()]);
     $services->set(AddParamTypeDeclarationRector::class)
         ->call('configure', [[
             AddParamTypeDeclarationRector::PARAMETER_TYPEHINTS => ValueObjectInliner::inline([
@@ -131,7 +132,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                     'Nette\Application\UI\Presenter',
                     'sendTemplate',
                     0,
-                    new UnionType([new ObjectType('Nette\Application\UI\Template'), new NullType()])
+                    $nullableTemplateType
                 ),
             ]),
         ]]);

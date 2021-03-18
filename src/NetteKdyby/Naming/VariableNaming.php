@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Rector\NetteKdyby\Naming;
 
-use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
-use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\ArrayDimFetch;
 use PhpParser\Node\Expr\Cast;
 use PhpParser\Node\Expr\FuncCall;
@@ -20,7 +18,6 @@ use PhpParser\Node\Expr\Ternary;
 use PhpParser\Node\Name;
 use PhpParser\Node\Scalar;
 use PhpParser\Node\Scalar\String_;
-use PHPStan\Analyser\Scope;
 use PHPStan\Type\ThisType;
 use PHPStan\Type\Type;
 use Rector\Core\Exception\NotImplementedYetException;
@@ -78,56 +75,6 @@ final class VariableNaming
 
         $stringy = new Stringy($variableName);
         return (string) $stringy->camelize();
-    }
-
-    public function resolveFromNodeWithScopeCountAndFallbackName(
-        Expr $expr,
-        Scope $scope,
-        string $fallbackName
-    ): string {
-        $name = $this->resolveFromNode($expr);
-        if ($name === null) {
-            $name = $fallbackName;
-        }
-
-        if (Strings::contains($name, '\\')) {
-            $name = (string) Strings::after($name, '\\', -1);
-        }
-
-        $countedValueName = $this->createCountedValueName($name, $scope);
-        return lcfirst($countedValueName);
-    }
-
-    public function createCountedValueName(string $valueName, ?Scope $scope): string
-    {
-        if ($scope === null) {
-            return $valueName;
-        }
-
-        // make sure variable name is unique
-        if (! $scope->hasVariableType($valueName)->yes()) {
-            return $valueName;
-        }
-
-        // we need to add number suffix until the variable is unique
-        $i = 2;
-        $countedValueNamePart = $valueName;
-        while ($scope->hasVariableType($valueName)->yes()) {
-            $valueName = $countedValueNamePart . $i;
-            ++$i;
-        }
-
-        return $valueName;
-    }
-
-    public function resolveFromFuncCallFirstArgumentWithSuffix(
-        FuncCall $funcCall,
-        string $suffix,
-        string $fallbackName,
-        ?Scope $scope
-    ): string {
-        $bareName = $this->resolveBareFuncCallArgumentName($funcCall, $fallbackName, $suffix);
-        return $this->createCountedValueName($bareName, $scope);
     }
 
     private function resolveBareFromNode(Node $node): ?string
@@ -264,6 +211,10 @@ final class VariableNaming
     {
         if ($new->class instanceof Name) {
             $className = $this->nodeNameResolver->getName($new->class);
+            if ($className === null) {
+                throw new NotImplementedYetException();
+            }
+
             return $this->nodeNameResolver->getShortName($className);
         }
 
