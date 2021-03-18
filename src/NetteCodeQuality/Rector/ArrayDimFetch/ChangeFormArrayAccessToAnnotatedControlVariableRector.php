@@ -131,7 +131,6 @@ CODE_SAMPLE
             return null;
         }
 
-
         $parent = $node->getAttribute(AttributeKey::PARENT_NODE);
         if ($this->typeChecker->isInstanceOf($parent, [Isset_::class, Unset_::class])) {
             return null;
