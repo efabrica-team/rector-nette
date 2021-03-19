@@ -51,7 +51,11 @@ final class StrlenEndsWithResolver
 
     public function matchContentExprAndNeedleExpr(Node $node, Variable $variable): ?ContentExprAndNeedleExpr
     {
-        if (! $this->nodeNameResolver->isFuncCallName($node, 'substr')) {
+        if (! $node instanceof FuncCall) {
+            return null;
+        }
+
+        if (! $this->nodeNameResolver->isName($node, 'substr')) {
             return null;
         }
 
@@ -63,7 +67,11 @@ final class StrlenEndsWithResolver
         /** @var UnaryMinus $unaryMinus */
         $unaryMinus = $node->args[1]->value;
 
-        if (! $this->nodeNameResolver->isFuncCallName($unaryMinus->expr, 'strlen')) {
+        if (! $unaryMinus->expr instanceof FuncCall) {
+            return null;
+        }
+
+        if (! $this->nodeNameResolver->isName($unaryMinus->expr, 'strlen')) {
             return null;
         }
 
