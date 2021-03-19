@@ -9,6 +9,7 @@ use Symplify\SymfonyPhpConfig\ValueObjectInliner;
 
 // @see https://doc.nette.org/en/2.4/migration-2-4#toc-nette-smartobject
 return static function (ContainerConfigurator $containerConfigurator): void {
+    $containerConfigurator->import(__DIR__ . '/../../../../../../config/config.php');
     $services = $containerConfigurator->services();
 
     $services->set(ParentClassToTraitsRector::class)
