@@ -18,7 +18,6 @@ use Symplify\SymfonyPhpConfig\ValueObjectInliner;
 
 # @see https://tomasvotruba.com/blog/2018/07/30/hidden-gems-of-php-packages-nette-utils
 return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->import(__DIR__ . '/../../../../../../config/config.php');
     $services = $containerConfigurator->services();
 
     $services->set(FuncCallToStaticCallRector::class)
