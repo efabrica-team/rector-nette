@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Set;
+namespace Rector\Nette\Set;
 
 use Rector\Set\Contract\SetListInterface;
 
