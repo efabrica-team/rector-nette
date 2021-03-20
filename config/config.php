@@ -16,6 +16,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autowire()
         ->autoconfigure();
 
-    $services->load('Rector\\', __DIR__ . '/../src')
-        ->exclude([__DIR__ . '/../src/*/{Rector,ValueObject,Contract}']);
+    $services->load('Rector\\Nette\\', __DIR__ . '/../src')
+        ->exclude([
+            __DIR__ . '/../src/Contract',
+            __DIR__ . '/../src/Rector',
+            __DIR__ . '/../src/ValueObject',
+            __DIR__ . '/../src/Kdyby/Rector',
+            __DIR__ . '/../src/Kdyby/ValueObject',
+            __DIR__ . '/../src/PhpDoc/NodeFactory',
+        ]);
 };
