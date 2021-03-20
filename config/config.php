@@ -23,6 +23,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             __DIR__ . '/../src/ValueObject',
             __DIR__ . '/../src/Kdyby/Rector',
             __DIR__ . '/../src/Kdyby/ValueObject',
-            __DIR__ . '/../src/PhpDoc/NodeFactory',
+            __DIR__ . '/../src/PhpDoc/Node',
         ]);
 };
