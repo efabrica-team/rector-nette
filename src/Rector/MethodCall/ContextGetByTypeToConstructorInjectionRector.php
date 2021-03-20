@@ -6,7 +6,6 @@ namespace Rector\Nette\Rector\MethodCall;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Expr\PropertyFetch;
 use PHPStan\Type\ObjectType;
 use Rector\Core\Rector\AbstractRector;
 use Rector\PHPUnit\NodeAnalyzer\TestsNodeAnalyzer;
@@ -98,11 +97,10 @@ CODE_SAMPLE
             return null;
         }
 
-        if (! $node->var instanceof PropertyFetch) {
-            return null;
-        }
+        $callerType = $this->nodeTypeResolver->resolve($node->var);
+        $containerObjectType = new ObjectType('Nette\DI\Container');
 
-        if (! $this->isObjectType($node->var, new ObjectType('Nette\DI\Container'))) {
+        if (! $containerObjectType->isSuperTypeOf($callerType)->yes()) {
             return null;
         }
 
