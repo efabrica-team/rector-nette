@@ -12,10 +12,10 @@ use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Expression;
 use Rector\CodingStyle\Naming\ClassNaming;
+use Rector\Core\NodeAnalyzer\ParamAnalyzer;
 use Rector\Nette\Kdyby\ContributeEventClassResolver;
 use Rector\Nette\Kdyby\ValueObject\EventAndListenerTree;
 use Rector\Nette\Kdyby\ValueObject\EventClassAndClassMethod;
-use Symfony\Contracts\EventDispatcher\Event;
 
 final class ListeningClassMethodArgumentManipulator
 {

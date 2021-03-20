@@ -34,9 +34,6 @@ parameters:
         # fixed on php-parser dev
         - '#Method Rector\\Nette\\Kdyby\\NodeFactory\\EventValueObjectClassFactory\:\:wrapClassToNamespace\(\) should return PhpParser\\Node\\Stmt\\Namespace_ but returns PhpParser\\Node#'
 
-        # known types, probably make an extension for it?
-        - '#Parameter \#1 \$node of method Rector\\Nette\\Kdyby\\Naming\\VariableNaming\:\:resolveFromMethodCall\(\) expects PhpParser\\Node\\Expr\\MethodCall\|PhpParser\\Node\\Expr\\NullsafeMethodCall\|PhpParser\\Node\\Expr\\StaticCall, PhpParser\\Node given#'
-
         # cleanup later
         -
             message: '#Parameter "eventAndListenerTree" cannot be nullable#'

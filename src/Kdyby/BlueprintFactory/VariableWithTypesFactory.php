@@ -8,7 +8,7 @@ use PhpParser\Node\Arg;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\StaticType;
 use Rector\Core\Exception\ShouldNotHappenException;
-use Rector\Nette\Kdyby\Naming\VariableNaming;
+use Rector\Naming\Naming\VariableNaming;
 use Rector\Nette\Kdyby\ValueObject\VariableWithType;
 use Rector\NodeTypeResolver\NodeTypeResolver;
 use Rector\StaticTypeMapper\StaticTypeMapper;

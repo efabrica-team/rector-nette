@@ -12,7 +12,7 @@ use PHPStan\Type\MixedType;
 use PHPStan\Type\Type;
 use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\PhpParser\Comparing\NodeComparator;
-use Rector\Nette\Kdyby\Naming\VariableNaming;
+use Rector\Naming\Naming\VariableNaming;
 use Rector\Nette\Kdyby\ValueObject\EventAndListenerTree;
 use Rector\NodeNameResolver\NodeNameResolver;
 use Rector\StaticTypeMapper\StaticTypeMapper;
