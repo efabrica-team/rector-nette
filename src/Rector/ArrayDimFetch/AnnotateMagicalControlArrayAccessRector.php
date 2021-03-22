@@ -172,11 +172,11 @@ CODE_SAMPLE
         }
 
         $parent = $arrayDimFetch->getAttribute(AttributeKey::PARENT_NODE);
-        if (StaticInstanceOf::isOneOf($parent, [Isset_::class, Unset_::class])) {
-            return ! $arrayDimFetch->dim instanceof Variable;
+        if (! $parent instanceof Isset_ && ! $parent instanceof Unset_) {
+            return false;
         }
 
-        return false;
+        return ! $arrayDimFetch->dim instanceof Variable;
     }
 
     private function resolveControlType(ArrayDimFetch $arrayDimFetch, string $controlName): ObjectType
