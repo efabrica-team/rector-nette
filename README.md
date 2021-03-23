@@ -6,4 +6,4 @@
 composer require rector/rector-nette
 ```
 
-@todo
+See available [Nette rules](/docs/rector_rules_overview.md)
