@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Rector\ClassMethod;
 
-use Error;
 use PhpParser\Node;
 use PhpParser\Node\Expr\ArrayDimFetch;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\BinaryOp\Coalesce;
+use PhpParser\Node\Expr\Error;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Param;
 use PhpParser\Node\Scalar\LNumber;
@@ -111,7 +111,7 @@ CODE_SAMPLE
         $secondParam->default = null;
         $secondParam->variadic = true;
 
-        if ($secondParam->var instanceof Node\Expr\Error) {
+        if ($secondParam->var instanceof Error) {
             throw new ShouldNotHappenException();
         }
 
