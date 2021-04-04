@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Rector\ClassMethod;
 
+use Error;
 use PhpParser\Node;
 use PhpParser\Node\Expr\ArrayDimFetch;
 use PhpParser\Node\Expr\Assign;
@@ -14,6 +15,7 @@ use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\NodeTraverser;
 use PHPStan\Type\ObjectType;
+use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\Rector\AbstractRector;
 use Rector\NodeTypeResolver\Node\AttributeKey;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -108,6 +110,11 @@ CODE_SAMPLE
 
         $secondParam->default = null;
         $secondParam->variadic = true;
+
+        if ($secondParam->var instanceof Node\Expr\Error) {
+            throw new ShouldNotHappenException();
+        }
+
         $secondParam->var->name = self::PARAMETERS;
 
         return $node;
