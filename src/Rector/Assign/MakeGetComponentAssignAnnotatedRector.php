@@ -145,9 +145,11 @@ CODE_SAMPLE
         if (! $expr instanceof MethodCall) {
             return $this->isArrayDimFetchStringOnControlVariable($expr);
         }
+
         if (! $this->isOnClassMethodCall($expr, new ObjectType('Nette\Application\UI\Control'), 'getComponent')) {
             return $this->isArrayDimFetchStringOnControlVariable($expr);
         }
+
         return true;
     }
 
