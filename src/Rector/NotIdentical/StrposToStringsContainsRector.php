@@ -91,26 +91,27 @@ CODE_SAMPLE
     {
         if ($this->valueResolver->isFalse($binaryOp->left)) {
             $rightExpr = $binaryOp->right;
-            if (! $rightExpr instanceof FuncCall) {
-                return null;
-            }
-
-            if ($this->isName($rightExpr, 'strpos')) {
+            if ($this->isStrposFuncCall($rightExpr)) {
                 return $rightExpr;
             }
         }
 
         if ($this->valueResolver->isFalse($binaryOp->right)) {
             $leftExpr = $binaryOp->left;
-            if (! $leftExpr instanceof FuncCall) {
-                return null;
-            }
-
-            if ($this->isName($leftExpr, 'strpos')) {
+            if ($this->isStrposFuncCall($leftExpr)) {
                 return $leftExpr;
             }
         }
 
         return null;
+    }
+
+    private function isStrposFuncCall(Expr $expr): bool
+    {
+        if (! $expr instanceof FuncCall) {
+            return false;
+        }
+
+        return $this->isName($expr, 'strpos');
     }
 }
