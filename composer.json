@@ -16,7 +16,8 @@
         "nette/application": "^3.0.7",
         "nette/di": "^3.0",
         "nette/forms": "3.0.*",
-        "symplify/rule-doc-generator": "^9.2"
+        "symplify/rule-doc-generator": "^9.2",
+        "tracy/tracy": "^2.8"
     },
     "autoload": {
         "psr-4": {

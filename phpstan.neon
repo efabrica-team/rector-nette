@@ -57,3 +57,7 @@ parameters:
         -
             message: '#Use another value object over array with string\-keys and objects, array<string, ValueObject\>#'
             path: src/ValueObject/TemplateParametersAssigns.php
+
+        -
+            message: '#Do not use static property#'
+            path: tests/bootstrap.php
