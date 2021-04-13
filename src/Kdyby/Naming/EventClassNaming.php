@@ -6,7 +6,9 @@ namespace Rector\Nette\Kdyby\Naming;
 
 use Nette\Utils\Strings;
 use PhpParser\Node\Expr\MethodCall;
+use PHPStan\Analyser\Scope;
 use Rector\CodingStyle\Naming\ClassNaming;
+use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\NodeNameResolver\NodeNameResolver;
 use Rector\NodeTypeResolver\Node\AttributeKey;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -51,10 +53,14 @@ final class EventClassNaming
     {
         $shortEventClassName = $this->getShortEventClassName($methodCall);
 
-        /** @var SmartFileInfo $fileInfo */
-        $fileInfo = $methodCall->getAttribute(AttributeKey::FILE_INFO);
+        $scope = $methodCall->getAttribute(AttributeKey::SCOPE);
+        if (! $scope instanceof Scope) {
+            throw new ShouldNotHappenException();
+        }
 
-        return $fileInfo->getPath() . DIRECTORY_SEPARATOR . self::EVENT . DIRECTORY_SEPARATOR . $shortEventClassName . '.php';
+        $directory = dirname($scope->getFile());
+
+        return $directory . DIRECTORY_SEPARATOR . self::EVENT . DIRECTORY_SEPARATOR . $shortEventClassName . '.php';
     }
 
     public function resolveEventFileLocationFromClassNameAndFileInfo(

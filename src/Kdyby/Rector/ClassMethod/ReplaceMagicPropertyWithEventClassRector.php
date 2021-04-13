@@ -164,6 +164,7 @@ CODE_SAMPLE
             );
 
             $node->key = $this->nodeFactory->createClassConstReference($eventClassName);
+            return $node;
         });
     }
 }

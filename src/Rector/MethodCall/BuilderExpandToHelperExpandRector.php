@@ -71,11 +71,16 @@ CODE_SAMPLE
      */
     public function refactor(Node $node): ?Node
     {
-        if (! $this->isOnClassMethodCall($node, new ObjectType('Nette\DI\ContainerBuilder'), 'expand')) {
+        if (! $this->isObjectType($node->var, new ObjectType('Nette\DI\ContainerBuilder'))) {
+            return null;
+        }
+
+        if (! $this->isName($node->name, 'expand')) {
             return null;
         }
 
         $args = $node->args;
+
         $getContainerBuilderMethodCall = new MethodCall(new Variable('this'), 'getContainerBuilder');
         $parametersPropertyFetch = new PropertyFetch($getContainerBuilderMethodCall, 'parameters');
 

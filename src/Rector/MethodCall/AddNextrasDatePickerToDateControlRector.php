@@ -74,11 +74,11 @@ CODE_SAMPLE
     {
         // 1. chain call
         if ($node->var instanceof MethodCall) {
-            if (! $this->isOnClassMethodCall(
-                $node->var,
-                new ObjectType('Nette\Application\UI\Form'),
-                'addDatePicker'
-            )) {
+            if (! $this->isObjectType($node->var->var, new ObjectType('Nette\Application\UI\Form'))) {
+                return null;
+            }
+
+            if (! $this->isName($node->var->name, 'addDatePicker')) {
                 return null;
             }
 
@@ -98,7 +98,11 @@ CODE_SAMPLE
         }
 
         // 2. assign call
-        if (! $this->isOnClassMethodCall($node, new ObjectType('Nette\Application\UI\Form'), 'addDatePicker')) {
+        if (! $this->isObjectType($node->var, new ObjectType('Nette\Application\UI\Form'))) {
+            return null;
+        }
+
+        if (! $this->isName($node->name, 'addDatePicker')) {
             return null;
         }
 

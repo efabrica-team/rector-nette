@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Rector\Nette\Tests\Kdyby\Rector\MethodCall\ReplaceMagicPropertyEventWithEventClassRector;
 
 use Iterator;
+use Rector\FileSystemRector\ValueObject\AddedFileWithContent;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
+use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class ReplaceMagicPropertyEventWithEventClassRectorTest extends AbstractRectorTestCase
 {
@@ -19,31 +21,33 @@ final class ReplaceMagicPropertyEventWithEventClassRectorTest extends AbstractRe
     /**
      * @dataProvider provideData()
      */
-    public function test(
-        SmartFileInfo $fixtureFileInfo,
-        string $expectedRelativeFilePath,
-        string $expectedContentFilePath
-    ): void {
+    public function test(SmartFileInfo $fixtureFileInfo, AddedFileWithContent $expectedAddedFileWithContent): void
+    {
         $this->doTestFileInfo($fixtureFileInfo);
-
-        $this->doTestExtraFile($expectedRelativeFilePath, $expectedContentFilePath);
+        $this->assertFileWasAdded($expectedAddedFileWithContent);
     }
 
     /**
-     * @return Iterator<mixed>
+     * @return Iterator<array<SmartFileInfo|AddedFileWithContent>>
      */
     public function provideData(): Iterator
     {
+        $smartFileSystem = new SmartFileSystem();
+
         yield [
             new SmartFileInfo(__DIR__ . '/Fixture/simple_event.php.inc'),
-            '/Event/FileManagerUploadEvent.php',
-            __DIR__ . '/Source/ExpectedFileManagerUploadEvent.php',
+            new AddedFileWithContent(
+                $this->getFixtureTempDirectory() . '/Event/FileManagerUploadEvent.php',
+                $smartFileSystem->readFile(__DIR__ . '/Source/ExpectedFileManagerUploadEvent.php')
+            ),
         ];
 
         yield [
             new SmartFileInfo(__DIR__ . '/Fixture/duplicated_event_params.php.inc'),
-            '/Event/DuplicatedEventParamsUploadEvent.php',
-            __DIR__ . '/Source/ExpectedDuplicatedEventParamsUploadEvent.php',
+            new AddedFileWithContent(
+                $this->getFixtureTempDirectory() . '/Event/DuplicatedEventParamsUploadEvent.php',
+                $smartFileSystem->readFile(__DIR__ . '/Source/ExpectedDuplicatedEventParamsUploadEvent.php'),
+            ),
         ];
     }
 

@@ -71,7 +71,11 @@ CODE_SAMPLE
      */
     public function refactor(Node $node): ?Node
     {
-        if (! $this->isOnClassMethodCall($node, new ObjectType('Nette\DI\CompilerExtension'), 'getConfig')) {
+        if (! $this->isObjectType($node->var, new ObjectType('Nette\DI\CompilerExtension'))) {
+            return null;
+        }
+
+        if (! $this->isName($node->name, 'getConfig')) {
             return null;
         }
 
