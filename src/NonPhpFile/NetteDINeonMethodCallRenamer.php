@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Rector\Nette\NonPhpFile;
 
+use Nette\Utils\Strings;
 use Rector\Core\Contract\Processor\FileProcessorInterface;
 use Rector\Core\ValueObject\Application\File;
 use Rector\Renaming\Collector\MethodCallRenameCollector;
@@ -56,7 +57,7 @@ final class NetteDINeonMethodCallRenamer implements FileProcessorInterface
             $newMethodName = $methodCallRename->getNewMethod();
 
             $pattern = '/\n(.*?)(class|factory): ' . $className . '(\n|\((.*?)\)\n)\1setup:(.*?)- ' . $oldMethodName . '\(/s';
-            while (preg_match($pattern, $content, $matches)) {
+            while ($matches = Strings::match($content, $pattern)) {
                 $replacedMatch = str_replace($oldMethodName . '(', $newMethodName . '(', $matches[0]);
                 $content = str_replace($matches[0], $replacedMatch, $content);
             }

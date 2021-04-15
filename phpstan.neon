@@ -14,6 +14,22 @@ parameters:
         - *Source/*
 
     ignoreErrors:
+<<<<<<< HEAD
+=======
+        -
+            message: '#Parameter "(.*?)" cannot be nullable#'
+            paths:
+                - src/Kdyby/ValueObject
+                - src/Kdyby/NodeManipulator
+                - src/Rector/FuncCall/PregFunctionToNetteUtilsStringsRector.php
+                - src/NodeAnalyzer/ReturnAnalyzer.php
+
+        # useful nesting
+        -
+            message: '#new <class\> is limited to 3 "new <class\>\(new <class\>\)\)" nesting to each other\. You have 4 nesting#'
+            path: 'config/sets/*'
+
+>>>>>>> b30ffc1 (Fixed tests and CI)
         # fixed on php-parser dev
         - '#Method Rector\\Nette\\Kdyby\\NodeFactory\\EventValueObjectClassFactory\:\:wrapClassToNamespace\(\) should return PhpParser\\Node\\Stmt\\Namespace_ but returns PhpParser\\Node#'
 
@@ -23,4 +39,14 @@ parameters:
         - '#Cognitive complexity for "Rector\\Nette\\FormControlTypeResolver\\MagicNetteFactoryInterfaceFormControlTypeResolver\:\:resolve\(\)" is 12, keep it under 9#'
         - '#Cognitive complexity for "Rector\\Nette\\Kdyby\\ContributeEventClassResolver\:\:resolveGetterMethodByEventClassAndParam\(\)" is 10, keep it under 9#'
 
+<<<<<<< HEAD
         - '#generic class Rector\\BetterPhpDocParser\\PhpDocInfo\\PhpDocInfo but does not specify its types\: TNode#'
+=======
+        -
+            message: '#Do not use static property#'
+            path: tests/bootstrap.php
+
+        -
+            message: '#Regex must use string named capture groups instead of numeric#'
+            path: src/NonPhpFile/NetteDINeonMethodCallRenamer.php
+>>>>>>> b30ffc1 (Fixed tests and CI)
