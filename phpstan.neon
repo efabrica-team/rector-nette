@@ -21,10 +21,10 @@ parameters:
         -
             message: '#Parameter "(.*?)" cannot be nullable#'
             paths:
-                 - src/Kdyby/ValueObject
-                 - src/Kdyby/NodeManipulator
-                 - src/Rector/FuncCall/PregFunctionToNetteUtilsStringsRector.php
-                 - src/NodeAnalyzer/ReturnAnalyzer.php
+                - src/Kdyby/ValueObject
+                - src/Kdyby/NodeManipulator
+                - src/Rector/FuncCall/PregFunctionToNetteUtilsStringsRector.php
+                - src/NodeAnalyzer/ReturnAnalyzer.php
 
         # useful nesting
         -
@@ -61,3 +61,7 @@ parameters:
         -
             message: '#Do not use static property#'
             path: tests/bootstrap.php
+
+        -
+            message: '#Regex must use string named capture groups instead of numeric#'
+            path: src/NonPhpFile/NetteDINeonMethodCallRenamer.php
