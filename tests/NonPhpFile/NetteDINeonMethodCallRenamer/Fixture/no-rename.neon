@@ -1,0 +1,13 @@
+services:
+    firstService:
+        factory: Rector\Nette\Tests\NonPhpFile\NetteDINeonMethodCallRenamer\Source\FirstService
+        setup:
+            - add('key1', 'value1')
+            - add('key2', 'value2')
+-----
+services:
+    firstService:
+        factory: Rector\Nette\Tests\NonPhpFile\NetteDINeonMethodCallRenamer\Source\FirstService
+        setup:
+            - add('key1', 'value1')
+            - add('key2', 'value2')
