@@ -2,17 +2,10 @@
     "name": "rector/rector-nette",
     "license": "MIT",
     "description": "Rector upgrades rules for Nette Framework",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/lulco/rector"
-        }
-    ],
-
     "require": {
         "php": ">=7.3",
         "ext-xml": "*",
-        "rector/rector": "dev-neon-rename-method as 0.10.7"
+        "rector/rector": "dev-main as 0.10.7"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
