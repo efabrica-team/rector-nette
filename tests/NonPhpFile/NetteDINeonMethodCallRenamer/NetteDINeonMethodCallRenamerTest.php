@@ -8,7 +8,6 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class NetteDINeonMethodCallRenamerTest extends AbstractRectorTestCase
 {
-
     /**
      * @dataProvider provideData()
      */

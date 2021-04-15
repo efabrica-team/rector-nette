@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Rector\Nette\NonPhpFile;
@@ -32,6 +33,17 @@ final class NetteDINeonMethodCallRenamer implements FileProcessorInterface
         }
     }
 
+    public function supports(File $file): bool
+    {
+        $fileInfo = $file->getSmartFileInfo();
+        return $fileInfo->hasSuffixes($this->getSupportedFileExtensions());
+    }
+
+    public function getSupportedFileExtensions(): array
+    {
+        return ['neon'];
+    }
+
     private function processFile(File $file): void
     {
         $content = $file->getFileContent();
@@ -50,16 +62,5 @@ final class NetteDINeonMethodCallRenamer implements FileProcessorInterface
             }
         }
         $file->changeFileContent($content);
-    }
-
-    public function supports(File $file): bool
-    {
-        $fileInfo = $file->getSmartFileInfo();
-        return $fileInfo->hasSuffixes($this->getSupportedFileExtensions());
-    }
-
-    public function getSupportedFileExtensions(): array
-    {
-        return ['neon'];
     }
 }
