@@ -112,9 +112,9 @@ final class EventValueObjectClassFactory
 
         // add getters
         foreach ($variablesWithTypes as $variableWithType) {
-            $getterClassMethod = $this->nodeFactory->createGetterClassMethodFromNameAndType(
+            $getterClassMethod = $this->nodeFactory->createGetterClassMethod(
                 $variableWithType->getName(),
-                $variableWithType->getPhpParserTypeNode()
+                $variableWithType->getType()
             );
 
             $classBuilder->addStmt($getterClassMethod);
