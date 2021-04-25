@@ -10,7 +10,7 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\TypeWithClassName;
-use Rector\Core\PhpParser\Parser\FunctionLikeParser;
+use Rector\Core\Reflection\FunctionLikeReflectionParser;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\Contract\MethodNamesByInputNamesResolverAwareInterface;
@@ -42,9 +42,9 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
     private $nodeRepository;
 
     /**
-     * @var FunctionLikeParser
+     * @var FunctionLikeReflectionParser
      */
-    private $functionLikeParser;
+    private $functionLikeReflectionParser;
 
     /**
      * @var ReflectionProvider
@@ -55,13 +55,13 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
         NodeRepository $nodeRepository,
         NodeNameResolver $nodeNameResolver,
         NodeTypeResolver $nodeTypeResolver,
-        FunctionLikeParser $functionLikeParser,
+        \Rector\Core\Reflection\FunctionLikeReflectionParser $functionLikeReflectionParser,
         ReflectionProvider $reflectionProvider
     ) {
         $this->nodeTypeResolver = $nodeTypeResolver;
         $this->nodeNameResolver = $nodeNameResolver;
         $this->nodeRepository = $nodeRepository;
-        $this->functionLikeParser = $functionLikeParser;
+        $this->functionLikeReflectionParser = $functionLikeReflectionParser;
         $this->reflectionProvider = $reflectionProvider;
     }
 
@@ -138,7 +138,7 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
 
         $methodReflection = $classReflection->getNativeMethod($methodName);
 
-        return $this->functionLikeParser->parseMethodReflection($methodReflection);
+        return $this->functionLikeReflectionParser->parseMethodReflection($methodReflection);
     }
 
     private function resolveReflectionClassMethodFromClassNameAndMethod(
@@ -151,7 +151,7 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
 
         $classReflection = $this->reflectionProvider->getClass($className);
         $methodReflection = $classReflection->getNativeMethod($methodName);
-        return $this->functionLikeParser->parseMethodReflection($methodReflection);
+        return $this->functionLikeReflectionParser->parseMethodReflection($methodReflection);
     }
 
     private function resolveClassReflectionByMethodCall(MethodCall $methodCall): ?ClassReflection
