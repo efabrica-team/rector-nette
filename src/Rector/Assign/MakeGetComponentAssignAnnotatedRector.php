@@ -189,7 +189,9 @@ CODE_SAMPLE
             return false;
         }
 
-        return is_a($varStaticType->getClassName(), 'Nette\Application\UI\Control', true);
+        $controlObjecType = new ObjectType('Nette\Application\UI\Control');
+        return $controlObjecType->isSuperTypeOf($varStaticType)
+            ->yes();
     }
 
     private function resolveCreateComponentMethodCallReturnType(MethodCall $methodCall): Type
