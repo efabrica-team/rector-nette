@@ -22,3 +22,5 @@ parameters:
 
         - '#Cognitive complexity for "Rector\\Nette\\FormControlTypeResolver\\MagicNetteFactoryInterfaceFormControlTypeResolver\:\:resolve\(\)" is 12, keep it under 9#'
         - '#Cognitive complexity for "Rector\\Nette\\Kdyby\\ContributeEventClassResolver\:\:resolveGetterMethodByEventClassAndParam\(\)" is 10, keep it under 9#'
+
+        - '#generic class Rector\\BetterPhpDocParser\\PhpDocInfo\\PhpDocInfo but does not specify its types\: TNode#'
