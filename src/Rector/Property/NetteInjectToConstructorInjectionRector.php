@@ -10,8 +10,8 @@ use Rector\BetterPhpDocParser\PhpDocInfo\PhpDocInfo;
 use Rector\BetterPhpDocParser\PhpDocManipulator\PhpDocTagRemover;
 use Rector\Core\Rector\AbstractRector;
 use Rector\Core\ValueObject\PhpVersionFeature;
-use Rector\DependencyInjection\NodeAnalyzer\NetteInjectPropertyAnalyzer;
 use Rector\FamilyTree\NodeAnalyzer\PropertyUsageAnalyzer;
+use Rector\Nette\NodeAnalyzer\NetteInjectPropertyAnalyzer;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
