@@ -1,3 +1,19 @@
+includes:
+    - vendor/symplify/phpstan-rules/config/nette-rules.neon
+    - vendor/symplify/phpstan-rules/config/static-rules.neon
+    - vendor/symplify/phpstan-rules/config/generic-rules.neon
+    - vendor/symplify/phpstan-rules/config/array-rules.neon
+    - vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
+    - vendor/symplify/phpstan-rules/config/forbidden-static-rules.neon
+    - vendor/symplify/phpstan-rules/config/doctrine-rules.neon
+    - vendor/symplify/phpstan-rules/config/size-rules.neon
+    - vendor/symplify/phpstan-rules/config/regex-rules.neon
+    - vendor/symplify/phpstan-rules/config/symfony-rules.neon
+    - vendor/symplify/phpstan-rules/config/test-rules.neon
+    - vendor/symplify/phpstan-rules/config/services-rules.neon
+    - vendor/symplify/phpstan-rules/config/naming-rules.neon
+    - vendor/symplify/phpstan-rules/config/string-to-constant-rules.neon
+
 parameters:
     level: max
 
@@ -14,39 +30,30 @@ parameters:
         - *Source/*
 
     ignoreErrors:
-<<<<<<< HEAD
-=======
-        -
-            message: '#Parameter "(.*?)" cannot be nullable#'
-            paths:
-                - src/Kdyby/ValueObject
-                - src/Kdyby/NodeManipulator
-                - src/Rector/FuncCall/PregFunctionToNetteUtilsStringsRector.php
-                - src/NodeAnalyzer/ReturnAnalyzer.php
-
-        # useful nesting
-        -
-            message: '#new <class\> is limited to 3 "new <class\>\(new <class\>\)\)" nesting to each other\. You have 4 nesting#'
-            path: 'config/sets/*'
-
->>>>>>> b30ffc1 (Fixed tests and CI)
         # fixed on php-parser dev
         - '#Method Rector\\Nette\\Kdyby\\NodeFactory\\EventValueObjectClassFactory\:\:wrapClassToNamespace\(\) should return PhpParser\\Node\\Stmt\\Namespace_ but returns PhpParser\\Node#'
 
-        # cleanup later
         - '#Class "Rector\\Nette\\Rector\\Class_\\MoveFinalGetUserToCheckRequirementsClassMethodRector" is missing @see annotation with test case class reference#'
 
         - '#Cognitive complexity for "Rector\\Nette\\FormControlTypeResolver\\MagicNetteFactoryInterfaceFormControlTypeResolver\:\:resolve\(\)" is 12, keep it under 9#'
         - '#Cognitive complexity for "Rector\\Nette\\Kdyby\\ContributeEventClassResolver\:\:resolveGetterMethodByEventClassAndParam\(\)" is 10, keep it under 9#'
 
-<<<<<<< HEAD
         - '#generic class Rector\\BetterPhpDocParser\\PhpDocInfo\\PhpDocInfo but does not specify its types\: TNode#'
-=======
-        -
-            message: '#Do not use static property#'
-            path: tests/bootstrap.php
+        - '#Use another value object over array with string\-keys and objects, array<string, ValueObject\>#'
+
+        # fix in symplify dev-main
+        - '#Use decoupled factory service to create "PHPStan\\Type\\MixedType" object#'
+
 
         -
-            message: '#Regex must use string named capture groups instead of numeric#'
-            path: src/NonPhpFile/NetteDINeonMethodCallRenamer.php
->>>>>>> b30ffc1 (Fixed tests and CI)
+            message: '#new <class\> is limited to 3 "new <class\>\(new <class\>\)\)" nesting to each other\. You have \d+ nesting#'
+            path:  config/sets
+
+        # refactor
+        -
+            message: '#Do not use factory/method call in constructor\. Put factory in config and get service with dependency injection#'
+            path: src/NodeResolver/MethodNamesByInputNamesResolver.php
+
+        -
+            message: '#\$this as argument is not allowed\. Refactor method to service composition#'
+            path: src/NodeResolver/MethodNamesByInputNamesResolver.php

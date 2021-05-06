@@ -1,12 +1,12 @@
 <?php
 
-namespace Rector\Nette\Tests\NonPhpFile\NetteDINeonMethodCallRenamer;
+namespace Rector\Nette\Tests\Rector\Neon\RenameMethodNeonRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class NetteDINeonMethodCallRenamerTest extends AbstractRectorTestCase
+final class RenameMethodNeonRectorTest extends AbstractRectorTestCase
 {
     /**
      * @dataProvider provideData()
