@@ -104,9 +104,9 @@ class SomeControl extends Control
     }
 }
 CODE_SAMPLE
-
-            ),
-            ]);
+                ),
+            ]
+        );
     }
 
     /**

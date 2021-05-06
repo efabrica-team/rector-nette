@@ -107,8 +107,9 @@ class GetApplesSubscriber implements Subscriber
     }
 }
 CODE_SAMPLE
-            ),
-            ]);
+                ),
+            ]
+        );
     }
 
     /**

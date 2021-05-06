@@ -79,8 +79,9 @@ final class FileManager
     }
 }
 CODE_SAMPLE
-            ),
-            ]);
+                ),
+            ]
+        );
     }
 
     /**

@@ -95,8 +95,9 @@ final class AnotherControl extends Control
 {
 }
 CODE_SAMPLE
-            ),
-            ]);
+                ),
+            ]
+        );
     }
 
     /**

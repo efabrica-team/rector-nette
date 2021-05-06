@@ -92,7 +92,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                     'getAuthorizator',
                     new UnionType([new ObjectType('Nette\Security\IAuthorizator'), new NullType()])
                 ),
-                new AddReturnTypeDeclaration('Nette\Security\User', 'getLogoutReason',
+                new AddReturnTypeDeclaration(
+                    'Nette\Security\User',
+                    'getLogoutReason',
                     new UnionType([new IntegerType(), new NullType()])
                 ),
                 new AddReturnTypeDeclaration('Nette\Security\User', 'getRoles', $arrayType),
@@ -107,7 +109,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 new AddReturnTypeDeclaration(
                     'Nette\Security\IUserStorage',
                     'getLogoutReason',
-                    new UnionType([new IntegerType(), new NullType()])),
+                    new UnionType([new IntegerType(), new NullType()])
+                ),
                 new AddReturnTypeDeclaration(
                     'Nette\ComponentModel\Component',
                     'lookup',
@@ -147,7 +150,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                     'createComponent',
                     new UnionType([new ObjectType('Nette\ComponentModel\IComponent'), new NullType()])
                 ),
-                new AddReturnTypeDeclaration('Nette\ComponentModel\Container', 'getComponents',
+                new AddReturnTypeDeclaration(
+                    'Nette\ComponentModel\Container',
+                    'getComponents',
                     new ObjectType('Iterator')
                 ),
                 new AddReturnTypeDeclaration(
