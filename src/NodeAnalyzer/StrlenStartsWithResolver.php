@@ -59,7 +59,9 @@ final class StrlenStartsWithResolver
     }
 
     private function matchContentExprAndNeedleExpr(
-        Node $node, Variable $variable, string $functionName
+        Node $node,
+        Variable $variable,
+        string $functionName
     ): ?ContentExprAndNeedleExpr {
         if (! $node instanceof FuncCall) {
             return null;

@@ -118,8 +118,9 @@ class SomePresenter
     }
 }
 CODE_SAMPLE
-            ),
-            ]);
+                ),
+            ]
+        );
     }
 
     /**

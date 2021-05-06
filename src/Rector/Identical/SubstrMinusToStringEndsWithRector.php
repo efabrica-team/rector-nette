@@ -53,8 +53,9 @@ CODE_SAMPLE
 ! \Nette\Utils\Strings::endsWith($var, 'Test');
 \Nette\Utils\Strings::endsWith($var, 'Test');
 CODE_SAMPLE
-            ),
-            ]);
+                ),
+            ]
+        );
     }
 
     /**

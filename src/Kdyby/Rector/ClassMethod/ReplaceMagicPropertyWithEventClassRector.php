@@ -99,8 +99,9 @@ final class ActionLogEventSubscriber implements Subscriber
     }
 }
 CODE_SAMPLE
-            ),
-            ]);
+                ),
+            ]
+        );
     }
 
     /**
