@@ -10,7 +10,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->import(SetList::PSR_12);
     $containerConfigurator->import(SetList::SYMPLIFY);
     $containerConfigurator->import(SetList::COMMON);
-    $containerConfigurator->import( SetList::CLEAN_CODE);
+    $containerConfigurator->import(SetList::CLEAN_CODE);
 
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::PATHS, [
