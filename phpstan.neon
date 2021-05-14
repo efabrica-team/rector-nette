@@ -1,7 +1,6 @@
 includes:
     - vendor/symplify/phpstan-rules/config/nette-rules.neon
     - vendor/symplify/phpstan-rules/config/static-rules.neon
-    - vendor/symplify/phpstan-rules/config/generic-rules.neon
     - vendor/symplify/phpstan-rules/config/array-rules.neon
     - vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
     - vendor/symplify/phpstan-rules/config/forbidden-static-rules.neon
@@ -57,3 +56,6 @@ parameters:
         -
             message: '#\$this as argument is not allowed\. Refactor method to service composition#'
             path: src/NodeResolver/MethodNamesByInputNamesResolver.php
+
+        # not on PHP 7.4 yet
+        - '#This property type might be inlined to PHP\. Do you have confidence it is correct\? Put it here#'
