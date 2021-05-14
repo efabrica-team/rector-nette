@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Rector\Identical;
 
-use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\BinaryOp\Identical;
 use PhpParser\Node\Expr\BinaryOp\NotIdentical;
@@ -95,7 +94,7 @@ CODE_SAMPLE
         }
 
         $arguments = [$substrFuncCall->args[0]->value, $string];
-        $staticCall = $this->nodeFactory->createStaticCall(Strings::class, 'endsWith', $arguments);
+        $staticCall = $this->nodeFactory->createStaticCall('Nette\Utils\Strings', 'endsWith', $arguments);
 
         if ($node instanceof Identical) {
             return $staticCall;
