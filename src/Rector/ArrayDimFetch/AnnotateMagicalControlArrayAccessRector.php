@@ -30,50 +30,14 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class AnnotateMagicalControlArrayAccessRector extends AbstractRector
 {
-    /**
-     * @var MethodNamesByInputNamesResolver
-     */
-    private $methodNamesByInputNamesResolver;
-
-    /**
-     * @var ArrayDimFetchRenamer
-     */
-    private $arrayDimFetchRenamer;
-
-    /**
-     * @var ArrayDimFetchAnalyzer
-     */
-    private $arrayDimFetchAnalyzer;
-
-    /**
-     * @var ControlDimFetchAnalyzer
-     */
-    private $controlDimFetchAnalyzer;
-
-    /**
-     * @var NetteControlNaming
-     */
-    private $netteControlNaming;
-
-    /**
-     * @var AssignAnalyzer
-     */
-    private $assignAnalyzer;
-
     public function __construct(
-        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver,
-        ArrayDimFetchRenamer $arrayDimFetchRenamer,
-        ArrayDimFetchAnalyzer $arrayDimFetchAnalyzer,
-        ControlDimFetchAnalyzer $controlDimFetchAnalyzer,
-        NetteControlNaming $netteControlNaming,
-        AssignAnalyzer $assignAnalyzer
+        private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver,
+        private ArrayDimFetchRenamer $arrayDimFetchRenamer,
+        private ArrayDimFetchAnalyzer $arrayDimFetchAnalyzer,
+        private ControlDimFetchAnalyzer $controlDimFetchAnalyzer,
+        private NetteControlNaming $netteControlNaming,
+        private AssignAnalyzer $assignAnalyzer
     ) {
-        $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
-        $this->arrayDimFetchRenamer = $arrayDimFetchRenamer;
-        $this->arrayDimFetchAnalyzer = $arrayDimFetchAnalyzer;
-        $this->controlDimFetchAnalyzer = $controlDimFetchAnalyzer;
-        $this->netteControlNaming = $netteControlNaming;
-        $this->assignAnalyzer = $assignAnalyzer;
     }
 
     /**

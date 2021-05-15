@@ -25,36 +25,12 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class ChangeNetteEventNamesInGetSubscribedEventsRector extends AbstractRector
 {
-    /**
-     * @var GetSubscribedEventsArrayManipulator
-     */
-    private $getSubscribedEventsArrayManipulator;
-
-    /**
-     * @var ListeningClassMethodArgumentManipulator
-     */
-    private $listeningClassMethodArgumentManipulator;
-
-    /**
-     * @var ListeningMethodsCollector
-     */
-    private $listeningMethodsCollector;
-
-    /**
-     * @var GetSubscribedEventsClassMethodAnalyzer
-     */
-    private $getSubscribedEventsClassMethodAnalyzer;
-
     public function __construct(
-        GetSubscribedEventsArrayManipulator $getSubscribedEventsArrayManipulator,
-        ListeningClassMethodArgumentManipulator $listeningClassMethodArgumentManipulator,
-        ListeningMethodsCollector $listeningMethodsCollector,
-        GetSubscribedEventsClassMethodAnalyzer $getSubscribedEventsClassMethodAnalyzer
+        private GetSubscribedEventsArrayManipulator $getSubscribedEventsArrayManipulator,
+        private ListeningClassMethodArgumentManipulator $listeningClassMethodArgumentManipulator,
+        private ListeningMethodsCollector $listeningMethodsCollector,
+        private GetSubscribedEventsClassMethodAnalyzer $getSubscribedEventsClassMethodAnalyzer
     ) {
-        $this->getSubscribedEventsArrayManipulator = $getSubscribedEventsArrayManipulator;
-        $this->listeningClassMethodArgumentManipulator = $listeningClassMethodArgumentManipulator;
-        $this->listeningMethodsCollector = $listeningMethodsCollector;
-        $this->getSubscribedEventsClassMethodAnalyzer = $getSubscribedEventsClassMethodAnalyzer;
     }
 
     public function getRuleDefinition(): RuleDefinition

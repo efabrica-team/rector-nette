@@ -12,20 +12,10 @@ use Rector\NodeNestingScope\ScopeNestingComparator;
 
 final class ReturnAnalyzer
 {
-    /**
-     * @var BetterNodeFinder
-     */
-    private $betterNodeFinder;
-
-    /**
-     * @var ScopeNestingComparator
-     */
-    private $scopeNestingComparator;
-
-    public function __construct(BetterNodeFinder $betterNodeFinder, ScopeNestingComparator $scopeNestingComparator)
-    {
-        $this->betterNodeFinder = $betterNodeFinder;
-        $this->scopeNestingComparator = $scopeNestingComparator;
+    public function __construct(
+        private BetterNodeFinder $betterNodeFinder,
+        private ScopeNestingComparator $scopeNestingComparator
+    ) {
     }
 
     public function findLastClassMethodReturn(ClassMethod $classMethod): ?Return_

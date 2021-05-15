@@ -6,27 +6,20 @@ namespace Rector\Nette\NodeResolver;
 
 use PhpParser\Node;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
-use Rector\Nette\Contract\MethodNamesByInputNamesResolverAwareInterface;
 
 final class MethodNamesByInputNamesResolver
 {
     /**
      * @var FormControlTypeResolverInterface[]
      */
-    private $formControlTypeResolvers = [];
+    private array $formControlTypeResolvers = [];
 
     /**
      * @param FormControlTypeResolverInterface[] $formControlTypeResolvers
      */
     public function __construct(array $formControlTypeResolvers)
     {
-        foreach ($formControlTypeResolvers as $formControlTypeResolver) {
-            if ($formControlTypeResolver instanceof MethodNamesByInputNamesResolverAwareInterface) {
-                $formControlTypeResolver->setResolver($this);
-            }
-
-            $this->formControlTypeResolvers[] = $formControlTypeResolver;
-        }
+        $this->formControlTypeResolvers = $formControlTypeResolvers;
     }
 
     /**

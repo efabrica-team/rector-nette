@@ -11,14 +11,9 @@ use Rector\Nette\ValueObject\NetteFormMethodNameToControlType;
 
 final class FormVariableInputNameTypeResolver
 {
-    /**
-     * @var MethodNamesByInputNamesResolver
-     */
-    private $methodNamesByInputNamesResolver;
-
-    public function __construct(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver)
-    {
-        $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
+    public function __construct(
+        private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
+    ) {
     }
 
     public function resolveControlTypeByInputName(Expr $formOrControlExpr, string $inputName): string

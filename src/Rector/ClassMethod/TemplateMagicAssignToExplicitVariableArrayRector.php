@@ -28,57 +28,15 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class TemplateMagicAssignToExplicitVariableArrayRector extends AbstractRector
 {
-    /**
-     * @var TemplatePropertyAssignCollector
-     */
-    private $templatePropertyAssignCollector;
-
-    /**
-     * @var RenderMethodAnalyzer
-     */
-    private $renderMethodAnalyzer;
-
-    /**
-     * @var NetteClassAnalyzer
-     */
-    private $netteClassAnalyzer;
-
-    /**
-     * @var RenderParameterArrayFactory
-     */
-    private $renderParameterArrayFactory;
-
-    /**
-     * @var ConditionalTemplateAssignReplacer
-     */
-    private $conditionalTemplateAssignReplacer;
-
-    /**
-     * @var RightAssignTemplateRemover
-     */
-    private $rightAssignTemplateRemover;
-
-    /**
-     * @var TemplatePropertyParametersReplacer
-     */
-    private $templatePropertyParametersReplacer;
-
     public function __construct(
-        TemplatePropertyAssignCollector $templatePropertyAssignCollector,
-        RenderMethodAnalyzer $renderMethodAnalyzer,
-        NetteClassAnalyzer $netteClassAnalyzer,
-        RenderParameterArrayFactory $renderParameterArrayFactory,
-        ConditionalTemplateAssignReplacer $conditionalTemplateAssignReplacer,
-        RightAssignTemplateRemover $rightAssignTemplateRemover,
-        TemplatePropertyParametersReplacer $templatePropertyParametersReplacer
+        private TemplatePropertyAssignCollector $templatePropertyAssignCollector,
+        private RenderMethodAnalyzer $renderMethodAnalyzer,
+        private NetteClassAnalyzer $netteClassAnalyzer,
+        private RenderParameterArrayFactory $renderParameterArrayFactory,
+        private ConditionalTemplateAssignReplacer $conditionalTemplateAssignReplacer,
+        private RightAssignTemplateRemover $rightAssignTemplateRemover,
+        private TemplatePropertyParametersReplacer $templatePropertyParametersReplacer
     ) {
-        $this->templatePropertyAssignCollector = $templatePropertyAssignCollector;
-        $this->renderMethodAnalyzer = $renderMethodAnalyzer;
-        $this->netteClassAnalyzer = $netteClassAnalyzer;
-        $this->renderParameterArrayFactory = $renderParameterArrayFactory;
-        $this->conditionalTemplateAssignReplacer = $conditionalTemplateAssignReplacer;
-        $this->rightAssignTemplateRemover = $rightAssignTemplateRemover;
-        $this->templatePropertyParametersReplacer = $templatePropertyParametersReplacer;
     }
 
     public function getRuleDefinition(): RuleDefinition

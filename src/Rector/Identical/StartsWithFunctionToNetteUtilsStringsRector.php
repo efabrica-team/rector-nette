@@ -21,14 +21,9 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class StartsWithFunctionToNetteUtilsStringsRector extends AbstractRector
 {
-    /**
-     * @var StrlenStartsWithResolver
-     */
-    private $strlenStartsWithResolver;
-
-    public function __construct(StrlenStartsWithResolver $strlenStartsWithResolver)
-    {
-        $this->strlenStartsWithResolver = $strlenStartsWithResolver;
+    public function __construct(
+        private StrlenStartsWithResolver $strlenStartsWithResolver
+    ) {
     }
 
     /**

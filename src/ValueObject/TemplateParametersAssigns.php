@@ -10,23 +10,13 @@ use Rector\Nette\Contract\ValueObject\ParameterArrayInterface;
 final class TemplateParametersAssigns implements ParameterArrayInterface
 {
     /**
-     * @var AlwaysTemplateParameterAssign[]
+     * @param AlwaysTemplateParameterAssign[] $templateParameterAssigns
+     * @param ConditionalTemplateParameterAssign[] $conditionalTemplateParameterAssign
      */
-    private $templateParameterAssigns = [];
-
-    /**
-     * @var ConditionalTemplateParameterAssign[]
-     */
-    private $conditionalTemplateParameterAssign = [];
-
-    /**
-     * @param AlwaysTemplateParameterAssign[] $alwaysTemplateParameterAssigns
-     * @param ConditionalTemplateParameterAssign[] $conditionalTemplateParameterAssigns
-     */
-    public function __construct(array $alwaysTemplateParameterAssigns, array $conditionalTemplateParameterAssigns)
-    {
-        $this->templateParameterAssigns = $alwaysTemplateParameterAssigns;
-        $this->conditionalTemplateParameterAssign = $conditionalTemplateParameterAssigns;
+    public function __construct(
+        private array $templateParameterAssigns,
+        private array $conditionalTemplateParameterAssign
+    ) {
     }
 
     /**

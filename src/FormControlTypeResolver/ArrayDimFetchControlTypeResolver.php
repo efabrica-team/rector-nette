@@ -17,43 +17,13 @@ use Rector\TypeDeclaration\TypeInferer\ReturnTypeInferer;
 
 final class ArrayDimFetchControlTypeResolver implements FormControlTypeResolverInterface
 {
-    /**
-     * @var ControlDimFetchAnalyzer
-     */
-    private $controlDimFetchAnalyzer;
-
-    /**
-     * @var NodeTypeResolver
-     */
-    private $nodeTypeResolver;
-
-    /**
-     * @var NetteControlNaming
-     */
-    private $netteControlNaming;
-
-    /**
-     * @var ReturnTypeInferer
-     */
-    private $returnTypeInferer;
-
-    /**
-     * @var NodeRepository
-     */
-    private $nodeRepository;
-
     public function __construct(
-        ControlDimFetchAnalyzer $controlDimFetchAnalyzer,
-        NetteControlNaming $netteControlNaming,
-        NodeTypeResolver $nodeTypeResolver,
-        ReturnTypeInferer $returnTypeInferer,
-        NodeRepository $nodeRepository
+        private ControlDimFetchAnalyzer $controlDimFetchAnalyzer,
+        private NetteControlNaming $netteControlNaming,
+        private NodeTypeResolver $nodeTypeResolver,
+        private ReturnTypeInferer $returnTypeInferer,
+        private NodeRepository $nodeRepository
     ) {
-        $this->controlDimFetchAnalyzer = $controlDimFetchAnalyzer;
-        $this->nodeTypeResolver = $nodeTypeResolver;
-        $this->netteControlNaming = $netteControlNaming;
-        $this->returnTypeInferer = $returnTypeInferer;
-        $this->nodeRepository = $nodeRepository;
     }
 
     /**

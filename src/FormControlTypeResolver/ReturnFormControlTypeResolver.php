@@ -10,24 +10,24 @@ use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Return_;
 use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
-use Rector\Nette\Contract\MethodNamesByInputNamesResolverAwareInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
 
-final class ReturnFormControlTypeResolver implements FormControlTypeResolverInterface, MethodNamesByInputNamesResolverAwareInterface
+final class ReturnFormControlTypeResolver implements FormControlTypeResolverInterface
 {
-    /**
-     * @var BetterNodeFinder
-     */
-    private $betterNodeFinder;
+    private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver;
+
+    public function __construct(
+        private BetterNodeFinder $betterNodeFinder
+    ) {
+    }
 
     /**
-     * @var MethodNamesByInputNamesResolver
+     * @required
      */
-    private $methodNamesByInputNamesResolver;
-
-    public function __construct(BetterNodeFinder $betterNodeFinder)
-    {
-        $this->betterNodeFinder = $betterNodeFinder;
+    public function autowireReturnFormControlTypeResolver(
+        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
+    ): void {
+        $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 
     /**
@@ -49,10 +49,5 @@ final class ReturnFormControlTypeResolver implements FormControlTypeResolverInte
         }
 
         return $this->methodNamesByInputNamesResolver->resolveExpr($node);
-    }
-
-    public function setResolver(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
-    {
-        $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 }

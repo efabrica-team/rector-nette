@@ -13,20 +13,10 @@ use Rector\NodeTypeResolver\Node\AttributeKey;
 
 final class ParamFinder
 {
-    /**
-     * @var BetterNodeFinder
-     */
-    private $betterNodeFinder;
-
-    /**
-     * @var NodeComparator
-     */
-    private $nodeComparator;
-
-    public function __construct(BetterNodeFinder $betterNodeFinder, NodeComparator $nodeComparator)
-    {
-        $this->betterNodeFinder = $betterNodeFinder;
-        $this->nodeComparator = $nodeComparator;
+    public function __construct(
+        private BetterNodeFinder $betterNodeFinder,
+        private NodeComparator $nodeComparator
+    ) {
     }
 
     /**

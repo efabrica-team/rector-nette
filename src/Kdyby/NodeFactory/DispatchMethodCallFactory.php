@@ -12,14 +12,9 @@ use Rector\CodingStyle\Naming\ClassNaming;
 
 final class DispatchMethodCallFactory
 {
-    /**
-     * @var ClassNaming
-     */
-    private $classNaming;
-
-    public function __construct(ClassNaming $classNaming)
-    {
-        $this->classNaming = $classNaming;
+    public function __construct(
+        private ClassNaming $classNaming
+    ) {
     }
 
     public function createFromEventClassName(string $eventClassName): MethodCall

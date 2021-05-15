@@ -21,20 +21,10 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class MoveInjectToExistingConstructorRector extends AbstractRector
 {
-    /**
-     * @var PropertyUsageAnalyzer
-     */
-    private $propertyUsageAnalyzer;
-
-    /**
-     * @var PhpDocTagRemover
-     */
-    private $phpDocTagRemover;
-
-    public function __construct(PropertyUsageAnalyzer $propertyUsageAnalyzer, PhpDocTagRemover $phpDocTagRemover)
-    {
-        $this->propertyUsageAnalyzer = $propertyUsageAnalyzer;
-        $this->phpDocTagRemover = $phpDocTagRemover;
+    public function __construct(
+        private PropertyUsageAnalyzer $propertyUsageAnalyzer,
+        private PhpDocTagRemover $phpDocTagRemover
+    ) {
     }
 
     public function getRuleDefinition(): RuleDefinition

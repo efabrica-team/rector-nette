@@ -10,14 +10,8 @@ use Nette\Application\Request;
 
 class ParentWithSomeTypeToInjectPropertyPresenter implements IPresenter
 {
-    /**
-     * @var SomeTypeToInject
-     */
-    protected $someTypeToInject;
-
-    public function __construct(SomeTypeToInject $someTypeToInject)
+    public function __construct(protected SomeTypeToInject $someTypeToInject)
     {
-        $this->someTypeToInject = $someTypeToInject;
     }
 
     function run(Request $request): IResponse

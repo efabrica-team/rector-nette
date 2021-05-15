@@ -15,20 +15,10 @@ use Rector\NodeTypeResolver\NodeTypeResolver;
 
 final class AssignDimFetchFormTypeResolver implements FormControlTypeResolverInterface
 {
-    /**
-     * @var BetterNodeFinder
-     */
-    private $betterNodeFinder;
-
-    /**
-     * @var NodeTypeResolver
-     */
-    private $nodeTypeResolver;
-
-    public function __construct(BetterNodeFinder $betterNodeFinder, NodeTypeResolver $nodeTypeResolver)
-    {
-        $this->betterNodeFinder = $betterNodeFinder;
-        $this->nodeTypeResolver = $nodeTypeResolver;
+    public function __construct(
+        private BetterNodeFinder $betterNodeFinder,
+        private NodeTypeResolver $nodeTypeResolver
+    ) {
     }
 
     /**

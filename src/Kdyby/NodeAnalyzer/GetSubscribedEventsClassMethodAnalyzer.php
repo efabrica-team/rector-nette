@@ -13,20 +13,10 @@ use Rector\NodeTypeResolver\NodeTypeResolver;
 
 final class GetSubscribedEventsClassMethodAnalyzer
 {
-    /**
-     * @var NodeTypeResolver
-     */
-    private $nodeTypeResolver;
-
-    /**
-     * @var NodeNameResolver
-     */
-    private $nodeNameResolver;
-
-    public function __construct(NodeTypeResolver $nodeTypeResolver, NodeNameResolver $nodeNameResolver)
-    {
-        $this->nodeTypeResolver = $nodeTypeResolver;
-        $this->nodeNameResolver = $nodeNameResolver;
+    public function __construct(
+        private NodeTypeResolver $nodeTypeResolver,
+        private NodeNameResolver $nodeNameResolver
+    ) {
     }
 
     public function detect(ClassMethod $classMethod): bool

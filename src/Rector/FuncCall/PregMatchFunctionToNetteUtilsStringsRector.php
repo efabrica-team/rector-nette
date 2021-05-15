@@ -35,14 +35,9 @@ final class PregMatchFunctionToNetteUtilsStringsRector extends AbstractRector
         'preg_match_all' => 'matchAll',
     ];
 
-    /**
-     * @var PregMatchAllAnalyzer
-     */
-    private $pregMatchAllAnalyzer;
-
-    public function __construct(PregMatchAllAnalyzer $pregMatchAllAnalyzer)
-    {
-        $this->pregMatchAllAnalyzer = $pregMatchAllAnalyzer;
+    public function __construct(
+        private PregMatchAllAnalyzer $pregMatchAllAnalyzer
+    ) {
     }
 
     public function getRuleDefinition(): RuleDefinition

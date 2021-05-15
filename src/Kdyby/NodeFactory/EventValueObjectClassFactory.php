@@ -28,36 +28,12 @@ use Symplify\Astral\ValueObject\NodeBuilder\NamespaceBuilder;
  */
 final class EventValueObjectClassFactory
 {
-    /**
-     * @var ClassNaming
-     */
-    private $classNaming;
-
-    /**
-     * @var VariableWithTypesFactory
-     */
-    private $variableWithTypesFactory;
-
-    /**
-     * @var NodeFactory
-     */
-    private $nodeFactory;
-
-    /**
-     * @var NodeNameResolver
-     */
-    private $nodeNameResolver;
-
     public function __construct(
-        ClassNaming $classNaming,
-        NodeFactory $nodeFactory,
-        NodeNameResolver $nodeNameResolver,
-        VariableWithTypesFactory $variableWithTypesFactory
+        private ClassNaming $classNaming,
+        private NodeFactory $nodeFactory,
+        private NodeNameResolver $nodeNameResolver,
+        private VariableWithTypesFactory $variableWithTypesFactory
     ) {
-        $this->classNaming = $classNaming;
-        $this->variableWithTypesFactory = $variableWithTypesFactory;
-        $this->nodeFactory = $nodeFactory;
-        $this->nodeNameResolver = $nodeNameResolver;
     }
 
     /**

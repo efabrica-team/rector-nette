@@ -72,36 +72,12 @@ final class ContributeEventClassResolver
         ],
     ];
 
-    /**
-     * @var NodeNameResolver
-     */
-    private $nodeNameResolver;
-
-    /**
-     * @var VariableNaming
-     */
-    private $variableNaming;
-
-    /**
-     * @var StaticTypeMapper
-     */
-    private $staticTypeMapper;
-
-    /**
-     * @var NodeComparator
-     */
-    private $nodeComparator;
-
     public function __construct(
-        NodeNameResolver $nodeNameResolver,
-        StaticTypeMapper $staticTypeMapper,
-        VariableNaming $variableNaming,
-        NodeComparator $nodeComparator
+        private NodeNameResolver $nodeNameResolver,
+        private StaticTypeMapper $staticTypeMapper,
+        private VariableNaming $variableNaming,
+        private NodeComparator $nodeComparator
     ) {
-        $this->nodeNameResolver = $nodeNameResolver;
-        $this->variableNaming = $variableNaming;
-        $this->staticTypeMapper = $staticTypeMapper;
-        $this->nodeComparator = $nodeComparator;
     }
 
     public function resolveGetterMethodByEventClassAndParam(

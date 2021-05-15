@@ -8,20 +8,10 @@ use PhpParser\Node\Expr;
 
 final class ContentExprAndNeedleExpr
 {
-    /**
-     * @var Expr
-     */
-    private $contentExpr;
-
-    /**
-     * @var Expr
-     */
-    private $needleExpr;
-
-    public function __construct(Expr $contentExpr, Expr $needleExpr)
-    {
-        $this->contentExpr = $contentExpr;
-        $this->needleExpr = $needleExpr;
+    public function __construct(
+        private Expr $contentExpr,
+        private Expr $needleExpr
+    ) {
     }
 
     public function getContentExpr(): Expr

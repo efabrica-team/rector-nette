@@ -18,22 +18,10 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class ContextGetByTypeToConstructorInjectionRector extends AbstractRector
 {
-    /**
-     * @var TestsNodeAnalyzer
-     */
-    private $testsNodeAnalyzer;
-
-    /**
-     * @var DependencyInjectionMethodCallAnalyzer
-     */
-    private $dependencyInjectionMethodCallAnalyzer;
-
     public function __construct(
-        TestsNodeAnalyzer $testsNodeAnalyzer,
-        DependencyInjectionMethodCallAnalyzer $dependencyInjectionMethodCallAnalyzer
+        private TestsNodeAnalyzer $testsNodeAnalyzer,
+        private DependencyInjectionMethodCallAnalyzer $dependencyInjectionMethodCallAnalyzer
     ) {
-        $this->testsNodeAnalyzer = $testsNodeAnalyzer;
-        $this->dependencyInjectionMethodCallAnalyzer = $dependencyInjectionMethodCallAnalyzer;
     }
 
     public function getRuleDefinition(): RuleDefinition

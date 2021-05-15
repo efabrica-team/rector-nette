@@ -25,22 +25,10 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class ReplaceEventManagerWithEventSubscriberRector extends AbstractRector
 {
-    /**
-     * @var EventClassNaming
-     */
-    private $eventClassNaming;
-
-    /**
-     * @var EventValueObjectClassFactory
-     */
-    private $eventValueObjectClassFactory;
-
     public function __construct(
-        EventClassNaming $eventClassNaming,
-        EventValueObjectClassFactory $eventValueObjectClassFactory
+        private EventClassNaming $eventClassNaming,
+        private EventValueObjectClassFactory $eventValueObjectClassFactory
     ) {
-        $this->eventClassNaming = $eventClassNaming;
-        $this->eventValueObjectClassFactory = $eventValueObjectClassFactory;
     }
 
     public function getRuleDefinition(): RuleDefinition

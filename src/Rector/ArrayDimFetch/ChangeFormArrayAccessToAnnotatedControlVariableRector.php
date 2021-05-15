@@ -27,50 +27,14 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class ChangeFormArrayAccessToAnnotatedControlVariableRector extends AbstractRector
 {
-    /**
-     * @var FormVariableInputNameTypeResolver
-     */
-    private $formVariableInputNameTypeResolver;
-
-    /**
-     * @var TypeChecker
-     */
-    private $typeChecker;
-
-    /**
-     * @var ArrayDimFetchAnalyzer
-     */
-    private $arrayDimFetchAnalyzer;
-
-    /**
-     * @var NetteControlNaming
-     */
-    private $netteControlNaming;
-
-    /**
-     * @var AssignAnalyzer
-     */
-    private $assignAnalyzer;
-
-    /**
-     * @var ControlDimFetchAnalyzer
-     */
-    private $controlDimFetchAnalyzer;
-
     public function __construct(
-        FormVariableInputNameTypeResolver $formVariableInputNameTypeResolver,
-        TypeChecker $typeChecker,
-        ArrayDimFetchAnalyzer $arrayDimFetchAnalyzer,
-        NetteControlNaming $netteControlNaming,
-        AssignAnalyzer $assignAnalyzer,
-        ControlDimFetchAnalyzer $controlDimFetchAnalyzer
+        private FormVariableInputNameTypeResolver $formVariableInputNameTypeResolver,
+        private TypeChecker $typeChecker,
+        private ArrayDimFetchAnalyzer $arrayDimFetchAnalyzer,
+        private NetteControlNaming $netteControlNaming,
+        private AssignAnalyzer $assignAnalyzer,
+        private ControlDimFetchAnalyzer $controlDimFetchAnalyzer
     ) {
-        $this->formVariableInputNameTypeResolver = $formVariableInputNameTypeResolver;
-        $this->typeChecker = $typeChecker;
-        $this->arrayDimFetchAnalyzer = $arrayDimFetchAnalyzer;
-        $this->netteControlNaming = $netteControlNaming;
-        $this->assignAnalyzer = $assignAnalyzer;
-        $this->controlDimFetchAnalyzer = $controlDimFetchAnalyzer;
     }
 
     /**

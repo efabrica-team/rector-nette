@@ -29,9 +29,6 @@ parameters:
         - *Source/*
 
     ignoreErrors:
-        # fixed on php-parser dev
-        - '#Method Rector\\Nette\\Kdyby\\NodeFactory\\EventValueObjectClassFactory\:\:wrapClassToNamespace\(\) should return PhpParser\\Node\\Stmt\\Namespace_ but returns PhpParser\\Node#'
-
         - '#Class "Rector\\Nette\\Rector\\Class_\\MoveFinalGetUserToCheckRequirementsClassMethodRector" is missing @see annotation with test case class reference#'
 
         - '#Cognitive complexity for "Rector\\Nette\\FormControlTypeResolver\\MagicNetteFactoryInterfaceFormControlTypeResolver\:\:resolve\(\)" is 12, keep it under 9#'
@@ -40,22 +37,13 @@ parameters:
         - '#generic class Rector\\BetterPhpDocParser\\PhpDocInfo\\PhpDocInfo but does not specify its types\: TNode#'
         - '#Use another value object over array with string\-keys and objects, array<string, ValueObject\>#'
 
-        # fix in symplify dev-main
-        - '#Use decoupled factory service to create "PHPStan\\Type\\MixedType" object#'
-
-
         -
             message: '#new <class\> is limited to 3 "new <class\>\(new <class\>\)\)" nesting to each other\. You have \d+ nesting#'
             path:  config/sets
 
-        # refactor
-        -
-            message: '#Do not use factory/method call in constructor\. Put factory in config and get service with dependency injection#'
-            path: src/NodeResolver/MethodNamesByInputNamesResolver.php
-
-        -
-            message: '#\$this as argument is not allowed\. Refactor method to service composition#'
-            path: src/NodeResolver/MethodNamesByInputNamesResolver.php
-
         # not on PHP 7.4 yet
         - '#This property type might be inlined to PHP\. Do you have confidence it is correct\? Put it here#'
+
+        -
+            message: '#Use required typed property over of nullable property#'
+            path: src/NodeAnalyzer/TemplatePropertyAssignCollector.php

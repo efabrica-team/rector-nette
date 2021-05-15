@@ -18,14 +18,9 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class MergeTemplateSetFileToTemplateRenderRector extends AbstractRector
 {
-    /**
-     * @var NetteClassAnalyzer
-     */
-    private $netteClassAnalyzer;
-
-    public function __construct(NetteClassAnalyzer $netteClassAnalyzer)
-    {
-        $this->netteClassAnalyzer = $netteClassAnalyzer;
+    public function __construct(
+        private NetteClassAnalyzer $netteClassAnalyzer
+    ) {
     }
 
     public function getRuleDefinition(): RuleDefinition

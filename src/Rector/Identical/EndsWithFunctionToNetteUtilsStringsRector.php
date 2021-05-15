@@ -20,14 +20,9 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class EndsWithFunctionToNetteUtilsStringsRector extends AbstractRector
 {
-    /**
-     * @var StrlenEndsWithResolver
-     */
-    private $strlenEndsWithResolver;
-
-    public function __construct(StrlenEndsWithResolver $strlenEndsWithResolver)
-    {
-        $this->strlenEndsWithResolver = $strlenEndsWithResolver;
+    public function __construct(
+        private StrlenEndsWithResolver $strlenEndsWithResolver
+    ) {
     }
 
     /**

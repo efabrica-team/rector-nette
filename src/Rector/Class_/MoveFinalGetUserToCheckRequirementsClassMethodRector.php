@@ -20,22 +20,10 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class MoveFinalGetUserToCheckRequirementsClassMethodRector extends AbstractRector
 {
-    /**
-     * @var CheckRequirementsClassMethodFactory
-     */
-    private $checkRequirementsClassMethodFactory;
-
-    /**
-     * @var ClassInsertManipulator
-     */
-    private $classInsertManipulator;
-
     public function __construct(
-        CheckRequirementsClassMethodFactory $checkRequirementsClassMethodFactory,
-        ClassInsertManipulator $classInsertManipulator
+        private CheckRequirementsClassMethodFactory $checkRequirementsClassMethodFactory,
+        private ClassInsertManipulator $classInsertManipulator
     ) {
-        $this->checkRequirementsClassMethodFactory = $checkRequirementsClassMethodFactory;
-        $this->classInsertManipulator = $classInsertManipulator;
     }
 
     public function getRuleDefinition(): RuleDefinition

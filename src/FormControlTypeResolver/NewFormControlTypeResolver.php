@@ -9,32 +9,27 @@ use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Stmt\ClassMethod;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
-use Rector\Nette\Contract\MethodNamesByInputNamesResolverAwareInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
 use Rector\NodeCollector\NodeCollector\NodeRepository;
 use Rector\NodeNameResolver\NodeNameResolver;
 
-final class NewFormControlTypeResolver implements FormControlTypeResolverInterface, MethodNamesByInputNamesResolverAwareInterface
+final class NewFormControlTypeResolver implements FormControlTypeResolverInterface
 {
-    /**
-     * @var NodeNameResolver
-     */
-    private $nodeNameResolver;
+    private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver;
+
+    public function __construct(
+        private NodeNameResolver $nodeNameResolver,
+        private NodeRepository $nodeRepository
+    ) {
+    }
 
     /**
-     * @var MethodNamesByInputNamesResolver
+     * @required
      */
-    private $methodNamesByInputNamesResolver;
-
-    /**
-     * @var NodeRepository
-     */
-    private $nodeRepository;
-
-    public function __construct(NodeNameResolver $nodeNameResolver, NodeRepository $nodeRepository)
-    {
-        $this->nodeNameResolver = $nodeNameResolver;
-        $this->nodeRepository = $nodeRepository;
+    public function autowireNewFormControlTypeResolver(
+        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
+    ): void {
+        $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 
     /**
@@ -57,10 +52,5 @@ final class NewFormControlTypeResolver implements FormControlTypeResolverInterfa
         }
 
         return $this->methodNamesByInputNamesResolver->resolveExpr($constructorClassMethod);
-    }
-
-    public function setResolver(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
-    {
-        $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 }
