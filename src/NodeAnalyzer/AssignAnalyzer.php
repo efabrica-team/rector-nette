@@ -18,33 +18,15 @@ use Rector\PostRector\Collector\NodesToAddCollector;
 final class AssignAnalyzer
 {
     /**
-     * @var FunctionLikeFirstLevelStatementResolver
-     */
-    private $functionLikeFirstLevelStatementResolver;
-
-    /**
      * @var string[]
      */
-    private $alreadyInitializedAssignsClassMethodObjectHashes = [];
-
-    /**
-     * @var NodesToAddCollector
-     */
-    private $nodesToAddCollector;
-
-    /**
-     * @var VarAnnotationManipulator
-     */
-    private $varAnnotationManipulator;
+    private array $alreadyInitializedAssignsClassMethodObjectHashes = [];
 
     public function __construct(
-        FunctionLikeFirstLevelStatementResolver $functionLikeFirstLevelStatementResolver,
-        NodesToAddCollector $nodesToAddCollector,
-        VarAnnotationManipulator $varAnnotationManipulator
+        private FunctionLikeFirstLevelStatementResolver $functionLikeFirstLevelStatementResolver,
+        private NodesToAddCollector $nodesToAddCollector,
+        private VarAnnotationManipulator $varAnnotationManipulator
     ) {
-        $this->functionLikeFirstLevelStatementResolver = $functionLikeFirstLevelStatementResolver;
-        $this->nodesToAddCollector = $nodesToAddCollector;
-        $this->varAnnotationManipulator = $varAnnotationManipulator;
     }
 
     public function addAssignExpressionForFirstCase(

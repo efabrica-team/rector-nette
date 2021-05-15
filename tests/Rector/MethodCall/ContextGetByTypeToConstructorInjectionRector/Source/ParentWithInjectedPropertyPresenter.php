@@ -12,9 +12,8 @@ class ParentWithInjectedPropertyPresenter implements IPresenter
 {
     /**
      * @inject
-     * @var SomeTypeToInject
      */
-    public $someTypeToInject;
+    public \Rector\Nette\Tests\Rector\MethodCall\ContextGetByTypeToConstructorInjectionRector\Source\SomeTypeToInject $someTypeToInject;
 
     function run(Request $request): IResponse
     {

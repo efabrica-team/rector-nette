@@ -15,20 +15,10 @@ use Symplify\Astral\NodeTraverser\SimpleCallableNodeTraverser;
 
 final class GetSubscribedEventsArrayManipulator
 {
-    /**
-     * @var SimpleCallableNodeTraverser
-     */
-    private $simpleCallableNodeTraverser;
-
-    /**
-     * @var ValueResolver
-     */
-    private $valueResolver;
-
-    public function __construct(SimpleCallableNodeTraverser $simpleCallableNodeTraverser, ValueResolver $valueResolver)
-    {
-        $this->simpleCallableNodeTraverser = $simpleCallableNodeTraverser;
-        $this->valueResolver = $valueResolver;
+    public function __construct(
+        private SimpleCallableNodeTraverser $simpleCallableNodeTraverser,
+        private ValueResolver $valueResolver
+    ) {
     }
 
     public function change(Array_ $array): void

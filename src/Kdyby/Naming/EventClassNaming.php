@@ -20,20 +20,10 @@ final class EventClassNaming
      */
     private const EVENT = 'Event';
 
-    /**
-     * @var NodeNameResolver
-     */
-    private $nodeNameResolver;
-
-    /**
-     * @var ClassNaming
-     */
-    private $classNaming;
-
-    public function __construct(ClassNaming $classNaming, NodeNameResolver $nodeNameResolver)
-    {
-        $this->nodeNameResolver = $nodeNameResolver;
-        $this->classNaming = $classNaming;
+    public function __construct(
+        private ClassNaming $classNaming,
+        private NodeNameResolver $nodeNameResolver
+    ) {
     }
 
     /**

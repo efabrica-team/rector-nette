@@ -11,29 +11,11 @@ use Rector\NodeRemoval\NodeRemover;
 
 final class RightAssignTemplateRemover
 {
-    /**
-     * @var BetterNodeFinder
-     */
-    private $betterNodeFinder;
-
-    /**
-     * @var ThisTemplatePropertyFetchAnalyzer
-     */
-    private $thisTemplatePropertyFetchAnalyzer;
-
-    /**
-     * @var NodeRemover
-     */
-    private $nodeRemover;
-
     public function __construct(
-        BetterNodeFinder $betterNodeFinder,
-        ThisTemplatePropertyFetchAnalyzer $thisTemplatePropertyFetchAnalyzer,
-        NodeRemover $nodeRemover
+        private BetterNodeFinder $betterNodeFinder,
+        private ThisTemplatePropertyFetchAnalyzer $thisTemplatePropertyFetchAnalyzer,
+        private NodeRemover $nodeRemover
     ) {
-        $this->betterNodeFinder = $betterNodeFinder;
-        $this->thisTemplatePropertyFetchAnalyzer = $thisTemplatePropertyFetchAnalyzer;
-        $this->nodeRemover = $nodeRemover;
     }
 
     public function removeInClassMethod(ClassMethod $classMethod): void

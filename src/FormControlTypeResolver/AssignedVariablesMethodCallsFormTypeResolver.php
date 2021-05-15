@@ -9,24 +9,24 @@ use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\Variable;
 use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
-use Rector\Nette\Contract\MethodNamesByInputNamesResolverAwareInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
 
-final class AssignedVariablesMethodCallsFormTypeResolver implements FormControlTypeResolverInterface, MethodNamesByInputNamesResolverAwareInterface
+final class AssignedVariablesMethodCallsFormTypeResolver implements FormControlTypeResolverInterface
 {
-    /**
-     * @var BetterNodeFinder
-     */
-    private $betterNodeFinder;
+    private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver;
+
+    public function __construct(
+        private BetterNodeFinder $betterNodeFinder
+    ) {
+    }
 
     /**
-     * @var MethodNamesByInputNamesResolver
+     * @required
      */
-    private $methodNamesByInputNamesResolver;
-
-    public function __construct(BetterNodeFinder $betterNodeFinder)
-    {
-        $this->betterNodeFinder = $betterNodeFinder;
+    public function autowireAssignedVariablesMethodCallsFormTypeResolver(
+        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
+    ): void {
+        $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 
     /**
@@ -44,10 +44,5 @@ final class AssignedVariablesMethodCallsFormTypeResolver implements FormControlT
         }
 
         return $this->methodNamesByInputNamesResolver->resolveExpr($formVariableAssign->expr);
-    }
-
-    public function setResolver(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
-    {
-        $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 }

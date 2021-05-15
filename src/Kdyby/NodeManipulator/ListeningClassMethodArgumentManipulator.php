@@ -24,29 +24,11 @@ final class ListeningClassMethodArgumentManipulator
      */
     private const EVENT_PARAMETER_REPLACED = 'event_parameter_replaced';
 
-    /**
-     * @var ClassNaming
-     */
-    private $classNaming;
-
-    /**
-     * @var ContributeEventClassResolver
-     */
-    private $contributeEventClassResolver;
-
-    /**
-     * @var ParamAnalyzer
-     */
-    private $paramAnalyzer;
-
     public function __construct(
-        ClassNaming $classNaming,
-        ContributeEventClassResolver $contributeEventClassResolver,
-        ParamAnalyzer $paramAnalyzer
+        private ClassNaming $classNaming,
+        private ContributeEventClassResolver $contributeEventClassResolver,
+        private ParamAnalyzer $paramAnalyzer
     ) {
-        $this->classNaming = $classNaming;
-        $this->contributeEventClassResolver = $contributeEventClassResolver;
-        $this->paramAnalyzer = $paramAnalyzer;
     }
 
     public function changeFromEventAndListenerTreeAndCurrentClassName(

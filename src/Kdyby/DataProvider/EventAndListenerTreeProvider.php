@@ -26,59 +26,17 @@ final class EventAndListenerTreeProvider
     /**
      * @var EventAndListenerTree[]
      */
-    private $eventAndListenerTrees = [];
-
-    /**
-     * @var OnPropertyMagicCallProvider
-     */
-    private $onPropertyMagicCallProvider;
-
-    /**
-     * @var ListeningMethodsCollector
-     */
-    private $listeningMethodsCollector;
-
-    /**
-     * @var NodeNameResolver
-     */
-    private $nodeNameResolver;
-
-    /**
-     * @var EventClassNaming
-     */
-    private $eventClassNaming;
-
-    /**
-     * @var EventValueObjectClassFactory
-     */
-    private $eventValueObjectClassFactory;
-
-    /**
-     * @var DispatchMethodCallFactory
-     */
-    private $dispatchMethodCallFactory;
-
-    /**
-     * @var GetSubscribedEventsClassMethodProvider
-     */
-    private $getSubscribedEventsClassMethodProvider;
+    private array $eventAndListenerTrees = [];
 
     public function __construct(
-        DispatchMethodCallFactory $dispatchMethodCallFactory,
-        EventClassNaming $eventClassNaming,
-        EventValueObjectClassFactory $eventValueObjectClassFactory,
-        GetSubscribedEventsClassMethodProvider $getSubscribedEventsClassMethodProvider,
-        ListeningMethodsCollector $listeningMethodsCollector,
-        NodeNameResolver $nodeNameResolver,
-        OnPropertyMagicCallProvider $onPropertyMagicCallProvider
+        private DispatchMethodCallFactory $dispatchMethodCallFactory,
+        private EventClassNaming $eventClassNaming,
+        private EventValueObjectClassFactory $eventValueObjectClassFactory,
+        private GetSubscribedEventsClassMethodProvider $getSubscribedEventsClassMethodProvider,
+        private ListeningMethodsCollector $listeningMethodsCollector,
+        private NodeNameResolver $nodeNameResolver,
+        private OnPropertyMagicCallProvider $onPropertyMagicCallProvider
     ) {
-        $this->onPropertyMagicCallProvider = $onPropertyMagicCallProvider;
-        $this->listeningMethodsCollector = $listeningMethodsCollector;
-        $this->nodeNameResolver = $nodeNameResolver;
-        $this->eventClassNaming = $eventClassNaming;
-        $this->eventValueObjectClassFactory = $eventValueObjectClassFactory;
-        $this->dispatchMethodCallFactory = $dispatchMethodCallFactory;
-        $this->getSubscribedEventsClassMethodProvider = $getSubscribedEventsClassMethodProvider;
     }
 
     public function matchMethodCall(MethodCall $methodCall): ?EventAndListenerTree
@@ -118,7 +76,6 @@ final class EventAndListenerTreeProvider
             $magicProperty = $this->resolveMagicProperty($methodCall);
 
             $eventClassName = $this->eventClassNaming->createEventClassNameFromMethodCall($methodCall);
-
             $eventFileLocation = $this->eventClassNaming->resolveEventFileLocationFromMethodCall($methodCall);
 
             $eventClassInNamespace = $this->eventValueObjectClassFactory->create(

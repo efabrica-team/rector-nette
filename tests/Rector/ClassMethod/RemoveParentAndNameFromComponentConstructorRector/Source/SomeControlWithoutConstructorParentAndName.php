@@ -7,12 +7,7 @@ use Nette\Application\UI\Control;
 
 final class SomeControlWithoutConstructorParentAndName extends Control
 {
-    private $key;
-    private $value;
-
-    public function __construct($key, $value)
+    public function __construct(private $key, private $value)
     {
-        $this->key = $key;
-        $this->value = $value;
     }
 }

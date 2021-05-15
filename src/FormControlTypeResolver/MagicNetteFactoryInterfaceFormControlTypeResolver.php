@@ -13,56 +13,31 @@ use PHPStan\Type\TypeWithClassName;
 use Rector\Core\Reflection\FunctionLikeReflectionParser;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
-use Rector\Nette\Contract\MethodNamesByInputNamesResolverAwareInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
 use Rector\NodeCollector\NodeCollector\NodeRepository;
 use Rector\NodeNameResolver\NodeNameResolver;
 use Rector\NodeTypeResolver\NodeTypeResolver;
 
-final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormControlTypeResolverInterface, MethodNamesByInputNamesResolverAwareInterface
+final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormControlTypeResolverInterface
 {
-    /**
-     * @var NodeTypeResolver
-     */
-    private $nodeTypeResolver;
-
-    /**
-     * @var MethodNamesByInputNamesResolver
-     */
-    private $methodNamesByInputNamesResolver;
-
-    /**
-     * @var NodeNameResolver
-     */
-    private $nodeNameResolver;
-
-    /**
-     * @var NodeRepository
-     */
-    private $nodeRepository;
-
-    /**
-     * @var FunctionLikeReflectionParser
-     */
-    private $functionLikeReflectionParser;
-
-    /**
-     * @var ReflectionProvider
-     */
-    private $reflectionProvider;
+    private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver;
 
     public function __construct(
-        NodeRepository $nodeRepository,
-        NodeNameResolver $nodeNameResolver,
-        NodeTypeResolver $nodeTypeResolver,
-        \Rector\Core\Reflection\FunctionLikeReflectionParser $functionLikeReflectionParser,
-        ReflectionProvider $reflectionProvider
+        private NodeRepository $nodeRepository,
+        private NodeNameResolver $nodeNameResolver,
+        private NodeTypeResolver $nodeTypeResolver,
+        private FunctionLikeReflectionParser $functionLikeReflectionParser,
+        private ReflectionProvider $reflectionProvider
     ) {
-        $this->nodeTypeResolver = $nodeTypeResolver;
-        $this->nodeNameResolver = $nodeNameResolver;
-        $this->nodeRepository = $nodeRepository;
-        $this->functionLikeReflectionParser = $functionLikeReflectionParser;
-        $this->reflectionProvider = $reflectionProvider;
+    }
+
+    /**
+     * @required
+     */
+    public function autowireMagicNetteFactoryInterfaceFormControlTypeResolver(
+        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
+    ): void {
+        $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 
     /**
@@ -122,11 +97,6 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
         }
 
         return $this->methodNamesByInputNamesResolver->resolveExpr($constructorClassMethod);
-    }
-
-    public function setResolver(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
-    {
-        $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 
     private function resolveReflectionClassMethod(MethodCall $methodCall, string $methodName): ?ClassMethod

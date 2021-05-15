@@ -15,29 +15,11 @@ use Rector\NodeNameResolver\NodeNameResolver;
 
 final class OnVariableMethodCallsFormControlTypeResolver implements FormControlTypeResolverInterface
 {
-    /**
-     * @var MethodCallManipulator
-     */
-    private $methodCallManipulator;
-
-    /**
-     * @var NodeNameResolver
-     */
-    private $nodeNameResolver;
-
-    /**
-     * @var ValueResolver
-     */
-    private $valueResolver;
-
     public function __construct(
-        MethodCallManipulator $methodCallManipulator,
-        NodeNameResolver $nodeNameResolver,
-        ValueResolver $valueResolver
+        private MethodCallManipulator $methodCallManipulator,
+        private NodeNameResolver $nodeNameResolver,
+        private ValueResolver $valueResolver
     ) {
-        $this->methodCallManipulator = $methodCallManipulator;
-        $this->nodeNameResolver = $nodeNameResolver;
-        $this->valueResolver = $valueResolver;
     }
 
     /**

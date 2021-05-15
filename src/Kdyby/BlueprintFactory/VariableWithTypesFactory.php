@@ -15,29 +15,11 @@ use Rector\StaticTypeMapper\StaticTypeMapper;
 
 final class VariableWithTypesFactory
 {
-    /**
-     * @var VariableNaming
-     */
-    private $variableNaming;
-
-    /**
-     * @var NodeTypeResolver
-     */
-    private $nodeTypeResolver;
-
-    /**
-     * @var StaticTypeMapper
-     */
-    private $staticTypeMapper;
-
     public function __construct(
-        NodeTypeResolver $nodeTypeResolver,
-        StaticTypeMapper $staticTypeMapper,
-        VariableNaming $variableNaming
+        private NodeTypeResolver $nodeTypeResolver,
+        private StaticTypeMapper $staticTypeMapper,
+        private VariableNaming $variableNaming
     ) {
-        $this->variableNaming = $variableNaming;
-        $this->nodeTypeResolver = $nodeTypeResolver;
-        $this->staticTypeMapper = $staticTypeMapper;
     }
 
     /**

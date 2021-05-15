@@ -24,29 +24,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class NetteInjectToConstructorInjectionRector extends AbstractRector
 {
-    /**
-     * @var PropertyUsageAnalyzer
-     */
-    private $propertyUsageAnalyzer;
-
-    /**
-     * @var NetteInjectPropertyAnalyzer
-     */
-    private $netteInjectPropertyAnalyzer;
-
-    /**
-     * @var PhpDocTagRemover
-     */
-    private $phpDocTagRemover;
-
     public function __construct(
-        PropertyUsageAnalyzer $propertyUsageAnalyzer,
-        NetteInjectPropertyAnalyzer $netteInjectPropertyAnalyzer,
-        PhpDocTagRemover $phpDocTagRemover
+        private PropertyUsageAnalyzer $propertyUsageAnalyzer,
+        private NetteInjectPropertyAnalyzer $netteInjectPropertyAnalyzer,
+        private PhpDocTagRemover $phpDocTagRemover
     ) {
-        $this->propertyUsageAnalyzer = $propertyUsageAnalyzer;
-        $this->netteInjectPropertyAnalyzer = $netteInjectPropertyAnalyzer;
-        $this->phpDocTagRemover = $phpDocTagRemover;
     }
 
     public function getRuleDefinition(): RuleDefinition

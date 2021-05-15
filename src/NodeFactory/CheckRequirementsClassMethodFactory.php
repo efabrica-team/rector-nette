@@ -21,14 +21,9 @@ final class CheckRequirementsClassMethodFactory
      */
     private const CHECK_REQUIREMENTS_METHOD_NAME = 'checkRequirements';
 
-    /**
-     * @var ParentGetterStmtsToExternalStmtsFactory
-     */
-    private $parentGetterStmtsToExternalStmtsFactory;
-
-    public function __construct(ParentGetterStmtsToExternalStmtsFactory $parentGetterStmtsToExternalStmtsFactory)
-    {
-        $this->parentGetterStmtsToExternalStmtsFactory = $parentGetterStmtsToExternalStmtsFactory;
+    public function __construct(
+        private ParentGetterStmtsToExternalStmtsFactory $parentGetterStmtsToExternalStmtsFactory
+    ) {
     }
 
     /**

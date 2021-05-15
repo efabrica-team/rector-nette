@@ -8,20 +8,10 @@ use PhpParser\Node\Stmt\ClassMethod;
 
 final class EventClassAndClassMethod
 {
-    /**
-     * @var string
-     */
-    private $eventClass;
-
-    /**
-     * @var ClassMethod
-     */
-    private $classMethod;
-
-    public function __construct(string $eventClass, ClassMethod $classMethod)
-    {
-        $this->eventClass = $eventClass;
-        $this->classMethod = $classMethod;
+    public function __construct(
+        private string $eventClass,
+        private ClassMethod $classMethod
+    ) {
     }
 
     public function getEventClass(): string

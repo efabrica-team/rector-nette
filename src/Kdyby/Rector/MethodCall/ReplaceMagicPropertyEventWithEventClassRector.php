@@ -26,22 +26,10 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class ReplaceMagicPropertyEventWithEventClassRector extends AbstractRector
 {
-    /**
-     * @var ClassNaming
-     */
-    private $classNaming;
-
-    /**
-     * @var EventAndListenerTreeProvider
-     */
-    private $eventAndListenerTreeProvider;
-
     public function __construct(
-        ClassNaming $classNaming,
-        EventAndListenerTreeProvider $eventAndListenerTreeProvider
+        private ClassNaming $classNaming,
+        private EventAndListenerTreeProvider $eventAndListenerTreeProvider
     ) {
-        $this->classNaming = $classNaming;
-        $this->eventAndListenerTreeProvider = $eventAndListenerTreeProvider;
     }
 
     public function getRuleDefinition(): RuleDefinition

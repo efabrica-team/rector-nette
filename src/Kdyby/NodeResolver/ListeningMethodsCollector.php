@@ -33,31 +33,13 @@ final class ListeningMethodsCollector
     /**
      * @var EventClassAndClassMethod[]
      */
-    private $eventClassesAndClassMethods = [];
-
-    /**
-     * @var SimpleCallableNodeTraverser
-     */
-    private $simpleCallableNodeTraverser;
-
-    /**
-     * @var ValueResolver
-     */
-    private $valueResolver;
-
-    /**
-     * @var EventClassNaming
-     */
-    private $eventClassNaming;
+    private array $eventClassesAndClassMethods = [];
 
     public function __construct(
-        SimpleCallableNodeTraverser $simpleCallableNodeTraverser,
-        EventClassNaming $eventClassNaming,
-        ValueResolver $valueResolver
+        private SimpleCallableNodeTraverser $simpleCallableNodeTraverser,
+        private EventClassNaming $eventClassNaming,
+        private ValueResolver $valueResolver
     ) {
-        $this->simpleCallableNodeTraverser = $simpleCallableNodeTraverser;
-        $this->valueResolver = $valueResolver;
-        $this->eventClassNaming = $eventClassNaming;
     }
 
     /**

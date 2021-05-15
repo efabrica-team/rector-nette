@@ -16,20 +16,10 @@ use Rector\NodeTypeResolver\Node\AttributeKey;
 
 final class FunctionLikeFirstLevelStatementResolver
 {
-    /**
-     * @var ParentScopeFinder
-     */
-    private $parentScopeFinder;
-
-    /**
-     * @var BetterNodeFinder
-     */
-    private $betterNodeFinder;
-
-    public function __construct(ParentScopeFinder $parentScopeFinder, BetterNodeFinder $betterNodeFinder)
-    {
-        $this->parentScopeFinder = $parentScopeFinder;
-        $this->betterNodeFinder = $betterNodeFinder;
+    public function __construct(
+        private ParentScopeFinder $parentScopeFinder,
+        private BetterNodeFinder $betterNodeFinder
+    ) {
     }
 
     public function resolveFirstLevelStatement(Node $node): Node

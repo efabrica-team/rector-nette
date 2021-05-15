@@ -20,51 +20,24 @@ use Rector\NodeNestingScope\ValueObject\ControlStructure;
 
 final class TemplatePropertyAssignCollector
 {
-    /**
-     * @var ScopeNestingComparator
-     */
-    private $scopeNestingComparator;
-
-    /**
-     * @var BetterNodeFinder
-     */
-    private $betterNodeFinder;
-
-    /**
-     * @var ThisTemplatePropertyFetchAnalyzer
-     */
-    private $thisTemplatePropertyFetchAnalyzer;
-
-    /**
-     * @var Return_|null
-     */
-    private $lastReturn;
-
-    /**
-     * @var ReturnAnalyzer
-     */
-    private $returnAnalyzer;
+    private ?Return_ $lastReturn = null;
 
     /**
      * @var AlwaysTemplateParameterAssign[]
      */
-    private $alwaysTemplateParameterAssigns = [];
+    private array $alwaysTemplateParameterAssigns = [];
 
     /**
      * @var ConditionalTemplateParameterAssign[]
      */
-    private $conditionalTemplateParameterAssigns = [];
+    private array $conditionalTemplateParameterAssigns = [];
 
     public function __construct(
-        ScopeNestingComparator $scopeNestingComparator,
-        BetterNodeFinder $betterNodeFinder,
-        ThisTemplatePropertyFetchAnalyzer $thisTemplatePropertyFetchAnalyzer,
-        ReturnAnalyzer $returnAnalyzer
+        private ScopeNestingComparator $scopeNestingComparator,
+        private BetterNodeFinder $betterNodeFinder,
+        private ThisTemplatePropertyFetchAnalyzer $thisTemplatePropertyFetchAnalyzer,
+        private ReturnAnalyzer $returnAnalyzer
     ) {
-        $this->scopeNestingComparator = $scopeNestingComparator;
-        $this->betterNodeFinder = $betterNodeFinder;
-        $this->thisTemplatePropertyFetchAnalyzer = $thisTemplatePropertyFetchAnalyzer;
-        $this->returnAnalyzer = $returnAnalyzer;
     }
 
     public function collect(ClassMethod $classMethod): TemplateParametersAssigns

@@ -14,28 +14,13 @@ use PHPStan\Type\Type;
 final class VariableWithType
 {
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var Type
-     */
-    private $type;
-
-    /**
-     * @var Identifier|Name|NullableType|UnionType|null
-     */
-    private $phpParserTypeNode;
-
-    /**
      * @param Identifier|Name|NullableType|UnionType|null $phpParserTypeNode
      */
-    public function __construct(string $name, Type $staticType, ?Node $phpParserTypeNode)
-    {
-        $this->name = $name;
-        $this->type = $staticType;
-        $this->phpParserTypeNode = $phpParserTypeNode;
+    public function __construct(
+        private string $name,
+        private Type $type,
+        private $phpParserTypeNode
+    ) {
     }
 
     public function getName(): string

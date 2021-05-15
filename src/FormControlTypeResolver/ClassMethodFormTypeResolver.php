@@ -11,31 +11,26 @@ use PhpParser\Node\Stmt\Return_;
 use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
-use Rector\Nette\Contract\MethodNamesByInputNamesResolverAwareInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
 use Rector\NodeNameResolver\NodeNameResolver;
 
-final class ClassMethodFormTypeResolver implements FormControlTypeResolverInterface, MethodNamesByInputNamesResolverAwareInterface
+final class ClassMethodFormTypeResolver implements FormControlTypeResolverInterface
 {
-    /**
-     * @var BetterNodeFinder
-     */
-    private $betterNodeFinder;
+    private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver;
+
+    public function __construct(
+        private BetterNodeFinder $betterNodeFinder,
+        private NodeNameResolver $nodeNameResolver
+    ) {
+    }
 
     /**
-     * @var MethodNamesByInputNamesResolver
+     * @required
      */
-    private $methodNamesByInputNamesResolver;
-
-    /**
-     * @var NodeNameResolver
-     */
-    private $nodeNameResolver;
-
-    public function __construct(BetterNodeFinder $betterNodeFinder, NodeNameResolver $nodeNameResolver)
-    {
-        $this->betterNodeFinder = $betterNodeFinder;
-        $this->nodeNameResolver = $nodeNameResolver;
+    public function autowireClassMethodFormTypeResolver(
+        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
+    ): void {
+        $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 
     /**
@@ -61,10 +56,5 @@ final class ClassMethodFormTypeResolver implements FormControlTypeResolverInterf
         }
 
         return $this->methodNamesByInputNamesResolver->resolveExpr($lastReturn->expr);
-    }
-
-    public function setResolver(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
-    {
-        $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 }

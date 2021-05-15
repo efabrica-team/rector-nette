@@ -25,7 +25,7 @@ final class RenameMethodNeonRector implements NeonRectorInterface, ConfigurableR
     /**
      * @var MethodCallRename[]
      */
-    private $methodCallRenames = [];
+    private array $methodCallRenames = [];
 
     public function getRuleDefinition(): RuleDefinition
     {

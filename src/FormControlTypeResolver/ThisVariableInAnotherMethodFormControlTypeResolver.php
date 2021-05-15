@@ -10,26 +10,26 @@ use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
-use Rector\Nette\Contract\MethodNamesByInputNamesResolverAwareInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
 use Rector\NodeNameResolver\NodeNameResolver;
 use Rector\NodeTypeResolver\Node\AttributeKey;
 
-final class ThisVariableInAnotherMethodFormControlTypeResolver implements FormControlTypeResolverInterface, MethodNamesByInputNamesResolverAwareInterface
+final class ThisVariableInAnotherMethodFormControlTypeResolver implements FormControlTypeResolverInterface
 {
-    /**
-     * @var MethodNamesByInputNamesResolver
-     */
-    private $methodNamesByInputNamesResolver;
+    private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver;
+
+    public function __construct(
+        private NodeNameResolver $nodeNameResolver
+    ) {
+    }
 
     /**
-     * @var NodeNameResolver
+     * @required
      */
-    private $nodeNameResolver;
-
-    public function __construct(NodeNameResolver $nodeNameResolver)
-    {
-        $this->nodeNameResolver = $nodeNameResolver;
+    public function autowireThisVariableInAnotherMethodFormControlTypeResolver(
+        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
+    ): void {
+        $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 
     /**
@@ -62,10 +62,5 @@ final class ThisVariableInAnotherMethodFormControlTypeResolver implements FormCo
         }
 
         return $this->methodNamesByInputNamesResolver->resolveExpr($constructorClassMethod);
-    }
-
-    public function setResolver(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
-    {
-        $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 }

@@ -9,26 +9,11 @@ use PhpParser\Node\Expr\Assign;
 
 final class AlwaysTemplateParameterAssign
 {
-    /**
-     * @var Assign
-     */
-    private $assign;
-
-    /**
-     * @var string
-     */
-    private $parameterName;
-
-    /**
-     * @var Expr
-     */
-    private $assignedExpr;
-
-    public function __construct(Assign $assign, string $parameterName, Expr $assignedExpr)
-    {
-        $this->assign = $assign;
-        $this->parameterName = $parameterName;
-        $this->assignedExpr = $assignedExpr;
+    public function __construct(
+        private Assign $assign,
+        private string $parameterName,
+        private Expr $assignedExpr
+    ) {
     }
 
     public function getAssign(): Assign

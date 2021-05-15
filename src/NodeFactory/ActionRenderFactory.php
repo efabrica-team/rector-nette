@@ -14,22 +14,10 @@ use Rector\NetteToSymfony\ValueObject\ClassMethodRender;
 
 final class ActionRenderFactory
 {
-    /**
-     * @var NodeFactory
-     */
-    private $nodeFactory;
-
-    /**
-     * @var RenderParameterArrayFactory
-     */
-    private $renderParameterArrayFactory;
-
     public function __construct(
-        NodeFactory $nodeFactory,
-        RenderParameterArrayFactory $renderParameterArrayFactory
+        private NodeFactory $nodeFactory,
+        private RenderParameterArrayFactory $renderParameterArrayFactory
     ) {
-        $this->nodeFactory = $nodeFactory;
-        $this->renderParameterArrayFactory = $renderParameterArrayFactory;
     }
 
     public function createThisRenderMethodCall(ClassMethodRender $classMethodRender): MethodCall

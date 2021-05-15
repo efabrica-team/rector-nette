@@ -11,16 +11,11 @@ use Rector\Nette\Contract\Rector\NeonRectorInterface;
 final class NeonFileProcessor implements FileProcessorInterface
 {
     /**
-     * @var NeonRectorInterface[]
-     */
-    private $neonRectors = [];
-
-    /**
      * @param NeonRectorInterface[] $neonRectors
      */
-    public function __construct(array $neonRectors)
-    {
-        $this->neonRectors = $neonRectors;
+    public function __construct(
+        private array $neonRectors
+    ) {
     }
 
     /**

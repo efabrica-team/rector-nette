@@ -11,49 +11,21 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\TypeWithClassName;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
-use Rector\Nette\Contract\MethodNamesByInputNamesResolverAwareInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
 use Rector\NodeCollector\NodeCollector\NodeRepository;
 use Rector\NodeNameResolver\NodeNameResolver;
 use Rector\NodeTypeResolver\NodeTypeResolver;
 
-final class VariableConstructorFormControlTypeResolver implements FormControlTypeResolverInterface, MethodNamesByInputNamesResolverAwareInterface
+final class VariableConstructorFormControlTypeResolver implements FormControlTypeResolverInterface
 {
-    /**
-     * @var MethodNamesByInputNamesResolver
-     */
-    private $methodNamesByInputNamesResolver;
-
-    /**
-     * @var NodeTypeResolver
-     */
-    private $nodeTypeResolver;
-
-    /**
-     * @var NodeNameResolver
-     */
-    private $nodeNameResolver;
-
-    /**
-     * @var NodeRepository
-     */
-    private $nodeRepository;
-
-    /**
-     * @var ReflectionProvider
-     */
-    private $reflectionProvider;
+    private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver;
 
     public function __construct(
-        NodeTypeResolver $nodeTypeResolver,
-        NodeNameResolver $nodeNameResolver,
-        NodeRepository $nodeRepository,
-        ReflectionProvider $reflectionProvider
+        private NodeTypeResolver $nodeTypeResolver,
+        private NodeNameResolver $nodeNameResolver,
+        private NodeRepository $nodeRepository,
+        private ReflectionProvider $reflectionProvider
     ) {
-        $this->nodeTypeResolver = $nodeTypeResolver;
-        $this->nodeNameResolver = $nodeNameResolver;
-        $this->nodeRepository = $nodeRepository;
-        $this->reflectionProvider = $reflectionProvider;
     }
 
     /**
@@ -92,8 +64,12 @@ final class VariableConstructorFormControlTypeResolver implements FormControlTyp
         return $this->methodNamesByInputNamesResolver->resolveExpr($constructorClassMethod);
     }
 
-    public function setResolver(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
-    {
+    /**
+     * @required
+     */
+    public function autowireVariableConstructorFormControlTypeResolver(
+        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
+    ): void {
         $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 }

@@ -15,14 +15,9 @@ use Rector\NodeTypeResolver\Node\AttributeKey;
 
 final class NetteInjectPropertyAnalyzer
 {
-    /**
-     * @var ClassChildAnalyzer
-     */
-    private $classChildAnalyzer;
-
-    public function __construct(ClassChildAnalyzer $classChildAnalyzer)
-    {
-        $this->classChildAnalyzer = $classChildAnalyzer;
+    public function __construct(
+        private ClassChildAnalyzer $classChildAnalyzer
+    ) {
     }
 
     public function canBeRefactored(Property $property, PhpDocInfo $phpDocInfo): bool

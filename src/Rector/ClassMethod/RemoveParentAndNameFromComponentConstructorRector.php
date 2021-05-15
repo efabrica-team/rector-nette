@@ -41,35 +41,13 @@ final class RemoveParentAndNameFromComponentConstructorRector extends AbstractRe
      */
     private const NAME = 'name';
 
-    /**
-     * @var StaticCallAnalyzer
-     */
-    private $staticCallAnalyzer;
-
-    /**
-     * @var MethodReflectionProvider
-     */
-    private $methodReflectionProvider;
-
-    /**
-     * @var ParamFinder
-     */
-    private $paramFinder;
-
-    /**
-     * @var ObjectType
-     */
-    private $controlObjectType;
+    private \PHPStan\Type\ObjectType $controlObjectType;
 
     public function __construct(
-        ParamFinder $paramFinder,
-        StaticCallAnalyzer $staticCallAnalyzer,
-        MethodReflectionProvider $methodReflectionProvider
+        private ParamFinder $paramFinder,
+        private StaticCallAnalyzer $staticCallAnalyzer,
+        private MethodReflectionProvider $methodReflectionProvider
     ) {
-        $this->staticCallAnalyzer = $staticCallAnalyzer;
-        $this->methodReflectionProvider = $methodReflectionProvider;
-        $this->paramFinder = $paramFinder;
-
         $this->controlObjectType = new ObjectType('Nette\Application\UI\Control');
     }
 

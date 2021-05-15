@@ -29,14 +29,9 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class MakeGetComponentAssignAnnotatedRector extends AbstractRector
 {
-    /**
-     * @var VarAnnotationManipulator
-     */
-    private $varAnnotationManipulator;
-
-    public function __construct(VarAnnotationManipulator $varAnnotationManipulator)
-    {
-        $this->varAnnotationManipulator = $varAnnotationManipulator;
+    public function __construct(
+        private VarAnnotationManipulator $varAnnotationManipulator
+    ) {
     }
 
     public function getRuleDefinition(): RuleDefinition
