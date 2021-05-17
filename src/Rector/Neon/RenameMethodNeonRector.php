@@ -72,7 +72,10 @@ CODE_SAMPLE
 
     public function changeContent(string $content): string
     {
-        $methodCallRenames = array_merge($this->methodCallRenameCollector->getMethodCallRenames(), $this->methodCallRenames);
+        $methodCallRenames = array_merge(
+            $this->methodCallRenameCollector->getMethodCallRenames(),
+            $this->methodCallRenames
+        );
         foreach ($methodCallRenames as $methodCallRename) {
             $oldObjectType = $methodCallRename->getOldObjectType();
             $objectClassName = $oldObjectType->getClassName();
