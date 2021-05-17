@@ -7,7 +7,6 @@ namespace Rector\Nette\Rector\Neon;
 use Nette\Utils\Strings;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Nette\Contract\Rector\NeonRectorInterface;
-use Rector\Renaming\Collector\MethodCallRenameCollector;
 use Rector\Renaming\ValueObject\MethodCallRename;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
@@ -27,11 +26,6 @@ final class RenameMethodNeonRector implements NeonRectorInterface, ConfigurableR
      * @var MethodCallRename[]
      */
     private array $methodCallRenames = [];
-
-    public function __construct(
-        private MethodCallRenameCollector $methodCallRenameCollector
-    ) {
-    }
 
     public function getRuleDefinition(): RuleDefinition
     {
@@ -72,11 +66,7 @@ CODE_SAMPLE
 
     public function changeContent(string $content): string
     {
-        $methodCallRenames = array_merge(
-            $this->methodCallRenameCollector->getMethodCallRenames(),
-            $this->methodCallRenames
-        );
-        foreach ($methodCallRenames as $methodCallRename) {
+        foreach ($this->methodCallRenames as $methodCallRename) {
             $oldObjectType = $methodCallRename->getOldObjectType();
             $objectClassName = $oldObjectType->getClassName();
             $className = str_replace('\\', '\\\\', $objectClassName);

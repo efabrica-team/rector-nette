@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Rector\Nette\Rector\Latte;
 
 use Nette\Utils\Strings;
+use PHPStan\BetterReflection\Reflection\ReflectionClass;
+use PHPStan\BetterReflection\Reflection\ReflectionNamedType;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Nette\Contract\Rector\LatteRectorInterface;
 use Rector\Renaming\Collector\MethodCallRenameCollector;
@@ -68,23 +70,20 @@ CODE_SAMPLE
 
     public function changeContent(string $content): string
     {
+        $typesToVariables = $this->findTypesForVariables($content);
+
         $methodCallRenames = array_merge(
             $this->methodCallRenameCollector->getMethodCallRenames(),
             $this->methodCallRenames
         );
         foreach ($methodCallRenames as $methodCallRename) {
             $oldObjectType = $methodCallRename->getOldObjectType();
-            $objectClassName = $oldObjectType->getClassName();
-            $className = str_replace('\\', '\\\\', $objectClassName);
-
+            $className = $oldObjectType->getClassName();
             $oldMethodName = $methodCallRename->getOldMethod();
             $newMethodName = $methodCallRename->getNewMethod();
 
-            $varTypePattern = '#{varType ' . $className . ' (.*?)}#';
-            $varTypeMatches = Strings::matchAll($content, $varTypePattern, PREG_PATTERN_ORDER);
-
-            foreach ($varTypeMatches[1] ?? [] as $classVariableName) {
-                $methodCallPattern = '#\\' . $classVariableName . '->' . $oldMethodName . '\(#';
+            foreach ($typesToVariables[$className] ?? [] as $classVariableName) {
+                $methodCallPattern = '#\$' . $classVariableName . '->' . $oldMethodName . '\(#';
                 if (Strings::match($content, $methodCallPattern)) {
                     $content = str_replace(
                         $classVariableName . '->' . $oldMethodName . '(',
@@ -96,5 +95,39 @@ CODE_SAMPLE
         }
 
         return $content;
+    }
+
+    private function findTypesForVariables(string $content): array
+    {
+        $typesToVariables = [];
+
+        $templateTypePattern = '#{templateType (.*?)}#';
+        $templateTypeMatch = Strings::match($content, $templateTypePattern);
+        $templateType = $templateTypeMatch[1] ?? null;
+
+        if ($templateType) {
+            $reflectionClass = ReflectionClass::createFromName($templateType);
+            foreach ($reflectionClass->getProperties() as $property) {
+                /** @var ReflectionNamedType $type */
+                $type = $property->getType();
+
+                if (!isset($typesToVariables[$type->getName()])) {
+                    $typesToVariables[$type->getName()] = [];
+                }
+                $typesToVariables[$type->getName()][] = $property->getName();
+            }
+        }
+
+        $varTypePattern = '#{varType (.*?) \$(.*?)}#';
+        $varTypeMatches = Strings::matchAll($content, $varTypePattern);
+
+        foreach ($varTypeMatches as $varTypeMatch) {
+            if (!isset($typesToVariables[$varTypeMatch[1]])) {
+                $typesToVariables[$varTypeMatch[1]] = [];
+            }
+            $typesToVariables[$varTypeMatch[1]][] = $varTypeMatch[2];
+        }
+
+        return $typesToVariables;
     }
 }
