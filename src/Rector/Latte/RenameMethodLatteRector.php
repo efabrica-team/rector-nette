@@ -125,7 +125,7 @@ CODE_SAMPLE
         $varTypeMatches = Strings::matchAll($content, $varTypePattern);
 
         foreach ($varTypeMatches as $varTypeMatch) {
-            $className = (string)$varTypeMatch['class'];
+            $className = (string) $varTypeMatch['class'];
             if (! isset($typesToVariables[$className])) {
                 $typesToVariables[$className] = [];
             }
