@@ -13,7 +13,6 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Type\ObjectType;
-use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\Rector\AbstractRector;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\NodeAnalyzer\StaticCallAnalyzer;
@@ -190,7 +189,7 @@ CODE_SAMPLE
 
         $classReflection = $scope->getClassReflection();
         if (! $classReflection instanceof ClassReflection) {
-            throw new ShouldNotHappenException();
+            return false;
         }
 
         // presenter is not a component
