@@ -97,13 +97,16 @@ CODE_SAMPLE
         return $content;
     }
 
+    /**
+     * @return array<string, string[]> list of types with all variables of this type
+     */
     private function findTypesForVariables(string $content): array
     {
         $typesToVariables = [];
 
-        $templateTypePattern = '#{templateType (.*?)}#';
+        $templateTypePattern = '#{templateType (?P<template>.*?)}#';
         $templateTypeMatch = Strings::match($content, $templateTypePattern);
-        $templateType = $templateTypeMatch[1] ?? null;
+        $templateType = $templateTypeMatch['template'] ?? null;
 
         if ($templateType) {
             $reflectionClass = ReflectionClass::createFromName($templateType);
@@ -111,21 +114,22 @@ CODE_SAMPLE
                 /** @var ReflectionNamedType $type */
                 $type = $property->getType();
 
-                if (!isset($typesToVariables[$type->getName()])) {
+                if (! isset($typesToVariables[$type->getName()])) {
                     $typesToVariables[$type->getName()] = [];
                 }
                 $typesToVariables[$type->getName()][] = $property->getName();
             }
         }
 
-        $varTypePattern = '#{varType (.*?) \$(.*?)}#';
+        $varTypePattern = '#{varType (?P<class>.*?) \$(?P<variable>.*?)}#';
         $varTypeMatches = Strings::matchAll($content, $varTypePattern);
 
         foreach ($varTypeMatches as $varTypeMatch) {
-            if (!isset($typesToVariables[$varTypeMatch[1]])) {
-                $typesToVariables[$varTypeMatch[1]] = [];
+            $className = (string)$varTypeMatch['class'];
+            if (! isset($typesToVariables[$className])) {
+                $typesToVariables[$className] = [];
             }
-            $typesToVariables[$varTypeMatch[1]][] = $varTypeMatch[2];
+            $typesToVariables[$className][] = $varTypeMatch['variable'];
         }
 
         return $typesToVariables;
