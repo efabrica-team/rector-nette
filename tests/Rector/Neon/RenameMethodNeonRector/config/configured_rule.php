@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rector\Nette\Rector\Neon\RenameMethodNeonRector;
 use Rector\Nette\Tests\Rector\Neon\RenameMethodNeonRector\Source\SecondService;
+use Rector\Renaming\Rector\MethodCall\RenameMethodRector;
 use Rector\Renaming\ValueObject\MethodCallRename;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\SymfonyPhpConfig\ValueObjectInliner;
@@ -13,9 +13,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services = $containerConfigurator->services();
 
-    $services->set(RenameMethodNeonRector::class)
+    $services->set(RenameMethodRector::class)
         ->call('configure', [[
-            RenameMethodNeonRector::RENAME_METHODS => ValueObjectInliner::inline([
+            RenameMethodRector::METHOD_CALL_RENAMES => ValueObjectInliner::inline([
                 new MethodCallRename(SecondService::class, 'add', 'addConfig'),
             ]),
         ]]);
