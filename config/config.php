@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Rector\Core\NonPhpFile\Rector\RenameClassNonPhpRector;
+use Rector\Nette\Rector\Latte\RenameMethodLatteRector;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -22,4 +23,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             __DIR__ . '/../src/Kdyby/ValueObject',
         ]);
     $services->set(RenameClassNonPhpRector::class);
+    $services->set(RenameMethodLatteRector::class);
 };
