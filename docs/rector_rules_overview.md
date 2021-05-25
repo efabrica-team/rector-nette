@@ -550,29 +550,7 @@ Remove `$parent` and `$name` in control constructor
 
 Renames method calls in NEON configs
 
-:wrench: **configure it!**
-
 - class: [`Rector\Nette\Rector\Neon\RenameMethodNeonRector`](../src/Rector/Neon/RenameMethodNeonRector.php)
-
-```php
-use Rector\Nette\Rector\Neon\RenameMethodNeonRector;
-use Rector\Renaming\ValueObject\MethodCallRename;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symplify\SymfonyPhpConfig\ValueObjectInliner;
-
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $services = $containerConfigurator->services();
-
-    $services->set(RenameMethodNeonRector::class)
-        ->call('configure', [[
-            RenameMethodNeonRector::RENAME_METHODS => ValueObjectInliner::inline([
-                new MethodCallRename('SomeClass', 'oldCall', 'newCall'),
-            ]),
-        ]]);
-};
-```
-
-↓
 
 ```diff
  services:

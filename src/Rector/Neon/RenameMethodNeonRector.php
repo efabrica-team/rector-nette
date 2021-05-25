@@ -15,11 +15,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class RenameMethodNeonRector implements NeonRectorInterface
 {
-    /**
-     * @var string
-     */
-    public const RENAME_METHODS = 'rename_methods';
-
     public function __construct(
         private MethodCallRenameCollector $methodCallRenameCollector
     ) {
