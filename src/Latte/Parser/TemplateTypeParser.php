@@ -38,7 +38,7 @@ final class TemplateTypeParser
         foreach ($reflectionClass->getProperties() as $property) {
             /** @var ReflectionNamedType $type */
             $type = $property->getType();
-            $variableTypes[] = new LatteVariableType($property->getName(), $type);
+            $variableTypes[] = new LatteVariableType($property->getName(), (string) $type);
         }
         return $variableTypes;
     }
