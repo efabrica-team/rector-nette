@@ -1,4 +1,6 @@
 {templateType Rector\Nette\Tests\Rector\Latte\RenameMethodLatteRector\Source\SomeTemplate}
+
+<div class="container"></div>
 -----
 Array
 (

@@ -1,6 +1,10 @@
 {varType Rector\Nette\Tests\Rector\Latte\RenameMethodLatteRector\Source\SomeClass $abcd}
 {varType string $text}
 {varType int $number}
+
+<div class="container">
+    {$text} - {$number}
+</div>
 -----
 Array
 (
