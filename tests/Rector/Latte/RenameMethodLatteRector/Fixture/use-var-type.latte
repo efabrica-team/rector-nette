@@ -1,0 +1,11 @@
+{varType Rector\Nette\Tests\Rector\Latte\RenameMethodLatteRector\Source\SomeClass $someClass}
+
+<div n:foreach="$someClass->get() as $item">
+    {$item->doSomething()}
+</div>
+-----
+{varType Rector\Nette\Tests\Rector\Latte\RenameMethodLatteRector\Source\SomeClass $someClass}
+
+<div n:foreach="$someClass->getAll() as $item">
+    {$item->doSomething()}
+</div>

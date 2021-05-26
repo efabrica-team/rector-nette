@@ -1,4 +1,4 @@
-# 35 Rules Overview
+# 36 Rules Overview
 
 ## AddNextrasDatePickerToDateControlRector
 
@@ -542,6 +542,21 @@ Remove `$parent` and `$name` in control constructor
          $this->value = $value;
      }
  }
+```
+
+<br>
+
+## RenameMethodLatteRector
+
+Renames method calls in LATTE templates
+
+- class: [`Rector\Nette\Rector\Latte\RenameMethodLatteRector`](../src/Rector/Latte/RenameMethodLatteRector.php)
+
+```diff
+ {varType SomeClass $someClass}
+
+-<div n:foreach="$someClass->oldCall() as $item"></div>
++<div n:foreach="$someClass->newCall() as $item"></div>
 ```
 
 <br>
