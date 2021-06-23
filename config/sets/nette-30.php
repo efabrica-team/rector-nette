@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rector\Arguments\Rector\ClassMethod\ArgumentDefaultValueReplacerRector;
-use Rector\Arguments\ValueObject\ArgumentDefaultValueReplacer;
+use Rector\Arguments\Rector\ClassMethod\ReplaceArgumentDefaultValueRector;
+use Rector\Arguments\ValueObject\ReplaceArgumentDefaultValue;
 use Rector\DeadCode\Rector\StaticCall\RemoveParentCallWithoutParentRector;
 use Rector\Nette\Rector\ArrayDimFetch\ChangeFormArrayAccessToAnnotatedControlVariableRector;
 use Rector\Nette\Rector\Class_\MoveFinalGetUserToCheckRequirementsClassMethodRector;
@@ -71,11 +71,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'WebChemistry\Forms\Controls\Multiplier' => 'Contributte\FormMultiplier\Multiplier',
             ],
         ]]);
-    $services->set(ArgumentDefaultValueReplacerRector::class)
+    $services->set(ReplaceArgumentDefaultValueRector::class)
         ->call('configure', [[
-            ArgumentDefaultValueReplacerRector::REPLACED_ARGUMENTS => ValueObjectInliner::inline([
+            ReplaceArgumentDefaultValueRector::REPLACED_ARGUMENTS => ValueObjectInliner::inline([
                 // json 2nd argument is now `int` typed
-                new ArgumentDefaultValueReplacer(
+                new ReplaceArgumentDefaultValue(
                     'Nette\Utils\Json',
                     'decode',
                     1,
@@ -83,7 +83,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                     'Nette\Utils\Json::FORCE_ARRAY'
                 ),
                 // @see https://github.com/nette/forms/commit/574b97f9d5e7a902a224e57d7d584e7afc9fefec
-                new ArgumentDefaultValueReplacer('Nette\Forms\Form', 'decode', 0, true, 'array'),
+                new ReplaceArgumentDefaultValue('Nette\Forms\Form', 'decode', 0, true, 'array'),
             ]),
         ]]);
     $services->set(RenameMethodRector::class)
