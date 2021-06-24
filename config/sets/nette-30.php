@@ -5,7 +5,6 @@ declare(strict_types=1);
 use Rector\Arguments\Rector\ClassMethod\ReplaceArgumentDefaultValueRector;
 use Rector\Arguments\ValueObject\ReplaceArgumentDefaultValue;
 use Rector\DeadCode\Rector\StaticCall\RemoveParentCallWithoutParentRector;
-use Rector\Nette\Rector\ArrayDimFetch\ChangeFormArrayAccessToAnnotatedControlVariableRector;
 use Rector\Nette\Rector\Class_\MoveFinalGetUserToCheckRequirementsClassMethodRector;
 use Rector\Nette\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector;
 use Rector\Nette\Rector\MethodCall\AddNextrasDatePickerToDateControlRector;
@@ -32,7 +31,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services = $containerConfigurator->services();
     $services->set(AddNextrasDatePickerToDateControlRector::class);
-    $services->set(ChangeFormArrayAccessToAnnotatedControlVariableRector::class);
     $services->set(MergeDefaultsInGetConfigCompilerExtensionRector::class);
     // Control class has remove __construct(), e.g. https://github.com/Pixidos/GPWebPay/pull/16/files#diff-fdc8251950f85c5467c63c249df05786
     $services->set(RemoveParentCallWithoutParentRector::class);
