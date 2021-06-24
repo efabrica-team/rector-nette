@@ -59,13 +59,7 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
             return [];
         }
 
-        $classMethod = $this->nodeRepository->findClassMethodByMethodCall($node);
-        if (! $classMethod instanceof ClassMethod) {
-            $classMethod = $this->resolveReflectionClassMethod($node, $methodName);
-            if (! $classMethod instanceof ClassMethod) {
-                return [];
-            }
-        }
+        $classMethod = $this->resolveReflectionClassMethod($node, $methodName);
 
         $classReflection = $this->resolveClassReflectionByMethodCall($node);
         if (! $classReflection instanceof ClassReflection) {
@@ -126,11 +120,12 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
 
     private function resolveClassReflectionByMethodCall(MethodCall $methodCall): ?ClassReflection
     {
-        $callerClassName = $this->nodeRepository->resolveCallerClassName($methodCall);
-        if ($callerClassName === null) {
+        $callerType = $this->nodeTypeResolver->resolve($methodCall->var);
+        if (! $callerType instanceof TypeWithClassName) {
             return null;
         }
 
+        $callerClassName = $callerType->getClassName();
         if (! $this->reflectionProvider->hasClass($callerClassName)) {
             return null;
         }
