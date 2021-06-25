@@ -54,7 +54,7 @@ final class VariableConstructorFormControlTypeResolver implements FormControlTyp
             return [];
         }
 
-        $class = $this->nodeRepository->findClass($formType->getClassName());
+        $class = $this->nodeRepository->findClassLike($formType->getClassName());
         if (! $class instanceof ClassLike) {
             return [];
         }

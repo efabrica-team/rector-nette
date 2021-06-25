@@ -61,7 +61,7 @@ final class GetComponentMethodCallFormControlTypeResolver implements FormControl
 
         // combine constructor + method body name
         $constructorClassMethodData = [];
-        $class = $this->nodeRepository->findClass($staticType->getClassName());
+        $class = $this->nodeRepository->findClassLike($staticType->getClassName());
         if (! $class instanceof ClassLike) {
             return [];
         }
@@ -76,7 +76,7 @@ final class GetComponentMethodCallFormControlTypeResolver implements FormControl
 
         $createComponentClassMethodData = [];
         if ($callerType instanceof TypeWithClassName) {
-            $class = $this->nodeRepository->findClass($callerType->getClassName());
+            $class = $this->nodeRepository->findClassLike($callerType->getClassName());
             if (! $class instanceof ClassLike) {
                 return [];
             }

@@ -47,7 +47,7 @@ final class NewFormControlTypeResolver implements FormControlTypeResolverInterfa
             return [];
         }
 
-        $class = $this->nodeRepository->findClass($className);
+        $class = $this->nodeRepository->findClassLike($className);
         if (! $class instanceof ClassLike) {
             return [];
         }

@@ -72,7 +72,7 @@ final class ArrayDimFetchControlTypeResolver implements FormControlTypeResolverI
             $controlShortName
         );
 
-        $class = $this->nodeRepository->findClass($callerType->getClassName());
+        $class = $this->nodeRepository->findClassLike($callerType->getClassName());
         if (! $class instanceof ClassLike) {
             return null;
         }
