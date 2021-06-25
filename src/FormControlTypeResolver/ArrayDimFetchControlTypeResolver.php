@@ -6,6 +6,7 @@ namespace Rector\Nette\FormControlTypeResolver;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\ArrayDimFetch;
+use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Type\TypeWithClassName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
@@ -71,9 +72,11 @@ final class ArrayDimFetchControlTypeResolver implements FormControlTypeResolverI
             $controlShortName
         );
 
-        return $this->nodeRepository->findClassMethod(
-            $callerType->getClassName(),
-            $createComponentClassMethodName
-        );
+        $class = $this->nodeRepository->findClass($callerType->getClassName());
+        if (! $class instanceof ClassLike) {
+            return null;
+        }
+
+        return $class->getMethod($createComponentClassMethodName);
     }
 }

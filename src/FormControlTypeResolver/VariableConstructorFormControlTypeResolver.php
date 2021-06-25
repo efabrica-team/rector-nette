@@ -6,6 +6,7 @@ namespace Rector\Nette\FormControlTypeResolver;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\Variable;
+use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\TypeWithClassName;
@@ -53,10 +54,12 @@ final class VariableConstructorFormControlTypeResolver implements FormControlTyp
             return [];
         }
 
-        $constructorClassMethod = $this->nodeRepository->findClassMethod(
-            $formType->getClassName(),
-            MethodName::CONSTRUCT
-        );
+        $class = $this->nodeRepository->findClass($formType->getClassName());
+        if (! $class instanceof ClassLike) {
+            return [];
+        }
+
+        $constructorClassMethod = $class->getMethod(MethodName::CONSTRUCT);
         if (! $constructorClassMethod instanceof ClassMethod) {
             return [];
         }

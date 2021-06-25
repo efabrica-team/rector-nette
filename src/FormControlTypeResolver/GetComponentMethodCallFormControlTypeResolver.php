@@ -6,6 +6,7 @@ namespace Rector\Nette\FormControlTypeResolver;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Stmt\ClassLike;
 use PHPStan\Type\TypeWithClassName;
 use Rector\Core\PhpParser\Node\Value\ValueResolver;
 use Rector\Core\ValueObject\MethodName;
@@ -60,10 +61,12 @@ final class GetComponentMethodCallFormControlTypeResolver implements FormControl
 
         // combine constructor + method body name
         $constructorClassMethodData = [];
-        $constructorClassMethod = $this->nodeRepository->findClassMethod(
-            $staticType->getClassName(),
-            MethodName::CONSTRUCT
-        );
+        $class = $this->nodeRepository->findClass($staticType->getClassName());
+        if (! $class instanceof ClassLike) {
+            return [];
+        }
+
+        $constructorClassMethod = $class->getMethod(MethodName::CONSTRUCT);
 
         if ($constructorClassMethod !== null) {
             $constructorClassMethodData = $this->methodNamesByInputNamesResolver->resolveExpr($constructorClassMethod);
@@ -73,10 +76,12 @@ final class GetComponentMethodCallFormControlTypeResolver implements FormControl
 
         $createComponentClassMethodData = [];
         if ($callerType instanceof TypeWithClassName) {
-            $createComponentClassMethod = $this->nodeRepository->findClassMethod(
-                $callerType->getClassName(),
-                $createComponentClassMethodName
-            );
+            $class = $this->nodeRepository->findClass($callerType->getClassName());
+            if (! $class instanceof ClassLike) {
+                return [];
+            }
+
+            $createComponentClassMethod = $class->getMethod($createComponentClassMethodName);
 
             if ($createComponentClassMethod !== null) {
                 $createComponentClassMethodData = $this->methodNamesByInputNamesResolver->resolveExpr(
