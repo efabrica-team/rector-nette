@@ -7,11 +7,12 @@ namespace Rector\Nette\FormControlTypeResolver;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Type\TypeWithClassName;
+use Rector\Core\PhpParser\AstResolver;
 use Rector\Core\PhpParser\Node\Value\ValueResolver;
+use Rector\Core\Reflection\ReflectionResolver;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
-use Rector\NodeCollector\NodeCollector\NodeRepository;
 use Rector\NodeNameResolver\NodeNameResolver;
 use Rector\NodeTypeResolver\NodeTypeResolver;
 use Rector\StaticTypeMapper\ValueObject\Type\FullyQualifiedObjectType;
@@ -24,7 +25,8 @@ final class GetComponentMethodCallFormControlTypeResolver implements FormControl
         private NodeNameResolver $nodeNameResolver,
         private NodeTypeResolver $nodeTypeResolver,
         private ValueResolver $valueResolver,
-        private NodeRepository $nodeRepository
+        private ReflectionResolver $reflectionResolver,
+        private AstResolver $astResolver
     ) {
     }
 
@@ -60,7 +62,8 @@ final class GetComponentMethodCallFormControlTypeResolver implements FormControl
 
         // combine constructor + method body name
         $constructorClassMethodData = [];
-        $constructorClassMethod = $this->nodeRepository->findClassMethod(
+
+        $constructorClassMethod = $this->astResolver->resolveClassMethod(
             $staticType->getClassName(),
             MethodName::CONSTRUCT
         );
@@ -70,19 +73,21 @@ final class GetComponentMethodCallFormControlTypeResolver implements FormControl
         }
 
         $callerType = $this->nodeTypeResolver->getStaticType($node->var);
+        if (! $callerType instanceof TypeWithClassName) {
+            return $constructorClassMethodData;
+        }
 
         $createComponentClassMethodData = [];
-        if ($callerType instanceof TypeWithClassName) {
-            $createComponentClassMethod = $this->nodeRepository->findClassMethod(
-                $callerType->getClassName(),
-                $createComponentClassMethodName
-            );
 
-            if ($createComponentClassMethod !== null) {
-                $createComponentClassMethodData = $this->methodNamesByInputNamesResolver->resolveExpr(
-                    $createComponentClassMethod
-                );
-            }
+        $createComponentClassMethod = $this->astResolver->resolveClassMethod(
+            $callerType->getClassName(),
+            $createComponentClassMethodName
+        );
+
+        if ($createComponentClassMethod !== null) {
+            $createComponentClassMethodData = $this->methodNamesByInputNamesResolver->resolveExpr(
+                $createComponentClassMethod
+            );
         }
 
         return array_merge($constructorClassMethodData, $createComponentClassMethodData);

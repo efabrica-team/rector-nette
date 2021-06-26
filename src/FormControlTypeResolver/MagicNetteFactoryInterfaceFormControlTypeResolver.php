@@ -6,15 +6,14 @@ namespace Rector\Nette\FormControlTypeResolver;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\TypeWithClassName;
-use Rector\Core\Reflection\FunctionLikeReflectionParser;
+use Rector\Core\PhpParser\AstResolver;
+use Rector\Core\Reflection\ReflectionResolver;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
-use Rector\NodeCollector\NodeCollector\NodeRepository;
 use Rector\NodeNameResolver\NodeNameResolver;
 use Rector\NodeTypeResolver\NodeTypeResolver;
 
@@ -23,11 +22,11 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
     private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver;
 
     public function __construct(
-        private NodeRepository $nodeRepository,
         private NodeNameResolver $nodeNameResolver,
         private NodeTypeResolver $nodeTypeResolver,
-        private FunctionLikeReflectionParser $functionLikeReflectionParser,
-        private ReflectionProvider $reflectionProvider
+        private ReflectionProvider $reflectionProvider,
+        private ReflectionResolver $reflectionResolver,
+        private AstResolver $astResolver,
     ) {
     }
 
@@ -59,9 +58,7 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
             return [];
         }
 
-        $classMethod = $this->resolveReflectionClassMethod($node, $methodName);
-
-        $classReflection = $this->resolveClassReflectionByMethodCall($node);
+        $classReflection = $this->resolveClassReflectionByExpr($node->var);
         if (! $classReflection instanceof ClassReflection) {
             return [];
         }
@@ -71,65 +68,25 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
             return [];
         }
 
-        $constructorClassMethod = $this->nodeRepository->findClassMethod(
-            $returnedType->getClassName(),
-            MethodName::CONSTRUCT
-        );
-
-        if (! $constructorClassMethod instanceof ClassMethod) {
-            $constructorClassMethod = $this->resolveReflectionClassMethodFromClassNameAndMethod(
-                $returnedType->getClassName(),
-                MethodName::CONSTRUCT
-            );
-            if (! $classMethod instanceof ClassMethod) {
-                return [];
-            }
-        }
-
-        if (! $constructorClassMethod instanceof ClassMethod) {
+        $classMethod = $this->astResolver->resolveClassMethod($returnedType->getClassName(), MethodName::CONSTRUCT);
+        if ($classMethod === null) {
             return [];
         }
 
-        return $this->methodNamesByInputNamesResolver->resolveExpr($constructorClassMethod);
+        return $this->methodNamesByInputNamesResolver->resolveExpr($classMethod);
     }
 
-    private function resolveReflectionClassMethod(MethodCall $methodCall, string $methodName): ?ClassMethod
+    private function resolveClassReflectionByExpr(Node\Expr $expr): ?ClassReflection
     {
-        $classReflection = $this->resolveClassReflectionByMethodCall($methodCall);
-        if (! $classReflection instanceof ClassReflection) {
+        $staticType = $this->nodeTypeResolver->resolve($expr);
+        if (! $staticType instanceof TypeWithClassName) {
             return null;
         }
 
-        $methodReflection = $classReflection->getNativeMethod($methodName);
-
-        return $this->functionLikeReflectionParser->parseMethodReflection($methodReflection);
-    }
-
-    private function resolveReflectionClassMethodFromClassNameAndMethod(
-        string $className,
-        string $methodName
-    ): ?ClassMethod {
-        if (! $this->reflectionProvider->hasClass($className)) {
+        if (! $this->reflectionProvider->hasClass($staticType->getClassName())) {
             return null;
         }
 
-        $classReflection = $this->reflectionProvider->getClass($className);
-        $methodReflection = $classReflection->getNativeMethod($methodName);
-        return $this->functionLikeReflectionParser->parseMethodReflection($methodReflection);
-    }
-
-    private function resolveClassReflectionByMethodCall(MethodCall $methodCall): ?ClassReflection
-    {
-        $callerType = $this->nodeTypeResolver->resolve($methodCall->var);
-        if (! $callerType instanceof TypeWithClassName) {
-            return null;
-        }
-
-        $callerClassName = $callerType->getClassName();
-        if (! $this->reflectionProvider->hasClass($callerClassName)) {
-            return null;
-        }
-
-        return $this->reflectionProvider->getClass($callerClassName);
+        return $this->reflectionProvider->getClass($staticType->getClassName());
     }
 }

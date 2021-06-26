@@ -8,10 +8,11 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\ArrayDimFetch;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Type\TypeWithClassName;
+use Rector\Core\PhpParser\AstResolver;
+use Rector\Core\Reflection\ReflectionResolver;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\Naming\NetteControlNaming;
 use Rector\Nette\NodeAnalyzer\ControlDimFetchAnalyzer;
-use Rector\NodeCollector\NodeCollector\NodeRepository;
 use Rector\NodeTypeResolver\NodeTypeResolver;
 use Rector\TypeDeclaration\TypeInferer\ReturnTypeInferer;
 
@@ -22,7 +23,8 @@ final class ArrayDimFetchControlTypeResolver implements FormControlTypeResolverI
         private NetteControlNaming $netteControlNaming,
         private NodeTypeResolver $nodeTypeResolver,
         private ReturnTypeInferer $returnTypeInferer,
-        private NodeRepository $nodeRepository
+        private ReflectionResolver $reflectionResolver,
+        private AstResolver $astResolver,
     ) {
     }
 
@@ -67,13 +69,7 @@ final class ArrayDimFetchControlTypeResolver implements FormControlTypeResolverI
             return null;
         }
 
-        $createComponentClassMethodName = $this->netteControlNaming->createCreateComponentClassMethodName(
-            $controlShortName
-        );
-
-        return $this->nodeRepository->findClassMethod(
-            $callerType->getClassName(),
-            $createComponentClassMethodName
-        );
+        $methodName = $this->netteControlNaming->createCreateComponentClassMethodName($controlShortName);
+        return $this->astResolver->resolveClassMethod($callerType->getClassName(), $methodName);
     }
 }

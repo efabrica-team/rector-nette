@@ -6,11 +6,11 @@ namespace Rector\Nette\FormControlTypeResolver;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\New_;
-use PhpParser\Node\Stmt\ClassMethod;
+use Rector\Core\PhpParser\AstResolver;
+use Rector\Core\Reflection\ReflectionResolver;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
-use Rector\NodeCollector\NodeCollector\NodeRepository;
 use Rector\NodeNameResolver\NodeNameResolver;
 
 final class NewFormControlTypeResolver implements FormControlTypeResolverInterface
@@ -19,7 +19,8 @@ final class NewFormControlTypeResolver implements FormControlTypeResolverInterfa
 
     public function __construct(
         private NodeNameResolver $nodeNameResolver,
-        private NodeRepository $nodeRepository
+        private ReflectionResolver $reflectionResolver,
+        private AstResolver $astResolver,
     ) {
     }
 
@@ -46,11 +47,11 @@ final class NewFormControlTypeResolver implements FormControlTypeResolverInterfa
             return [];
         }
 
-        $constructorClassMethod = $this->nodeRepository->findClassMethod($className, MethodName::CONSTRUCT);
-        if (! $constructorClassMethod instanceof ClassMethod) {
+        $classMethod = $this->astResolver->resolveClassMethod($className, MethodName::CONSTRUCT);
+        if ($classMethod === null) {
             return [];
         }
 
-        return $this->methodNamesByInputNamesResolver->resolveExpr($constructorClassMethod);
+        return $this->methodNamesByInputNamesResolver->resolveExpr($classMethod);
     }
 }

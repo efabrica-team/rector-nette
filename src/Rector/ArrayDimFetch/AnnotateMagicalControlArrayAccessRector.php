@@ -12,8 +12,6 @@ use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Unset_;
 use PHPStan\Type\ObjectType;
-use Rector\Core\Exception\NotImplementedYetException;
-use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\Rector\AbstractRector;
 use Rector\Naming\ArrayDimFetchRenamer;
 use Rector\Nette\Naming\NetteControlNaming;
@@ -119,6 +117,10 @@ CODE_SAMPLE
 
         $variableName = $this->netteControlNaming->createVariableName($controlName);
         $controlObjectType = $this->resolveControlType($node, $controlName);
+        if ($controlObjectType === null) {
+            return null;
+        }
+
         $this->assignAnalyzer->addAssignExpressionForFirstCase($variableName, $node, $controlObjectType);
 
         $classMethod = $node->getAttribute(AttributeKey::METHOD_NODE);
@@ -143,15 +145,15 @@ CODE_SAMPLE
         return ! $arrayDimFetch->dim instanceof Variable;
     }
 
-    private function resolveControlType(ArrayDimFetch $arrayDimFetch, string $controlName): ObjectType
+    private function resolveControlType(ArrayDimFetch $arrayDimFetch, string $controlName): ?ObjectType
     {
         $controlTypes = $this->methodNamesByInputNamesResolver->resolveExpr($arrayDimFetch);
         if ($controlTypes === []) {
-            throw new NotImplementedYetException($controlName);
+            return null;
         }
 
         if (! isset($controlTypes[$controlName])) {
-            throw new ShouldNotHappenException($controlName);
+            return null;
         }
 
         return new ObjectType($controlTypes[$controlName]);
