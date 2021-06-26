@@ -7,7 +7,6 @@ namespace Rector\Nette\FormControlTypeResolver;
 use PhpParser\Node;
 use PhpParser\Node\Expr\New_;
 use Rector\Core\PhpParser\AstResolver;
-use Rector\Core\Reflection\ReflectionResolver;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
@@ -19,7 +18,6 @@ final class NewFormControlTypeResolver implements FormControlTypeResolverInterfa
 
     public function __construct(
         private NodeNameResolver $nodeNameResolver,
-        private ReflectionResolver $reflectionResolver,
         private AstResolver $astResolver,
     ) {
     }

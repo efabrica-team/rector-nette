@@ -9,7 +9,6 @@ use PhpParser\Node\Expr\Variable;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\TypeWithClassName;
 use Rector\Core\PhpParser\AstResolver;
-use Rector\Core\Reflection\ReflectionResolver;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
@@ -24,7 +23,6 @@ final class VariableConstructorFormControlTypeResolver implements FormControlTyp
         private NodeTypeResolver $nodeTypeResolver,
         private NodeNameResolver $nodeNameResolver,
         private ReflectionProvider $reflectionProvider,
-        private ReflectionResolver $reflectionResolver,
         private AstResolver $astResolver,
     ) {
     }

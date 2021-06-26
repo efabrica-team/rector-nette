@@ -9,7 +9,6 @@ use PhpParser\Node\Expr\ArrayDimFetch;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Type\TypeWithClassName;
 use Rector\Core\PhpParser\AstResolver;
-use Rector\Core\Reflection\ReflectionResolver;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\Naming\NetteControlNaming;
 use Rector\Nette\NodeAnalyzer\ControlDimFetchAnalyzer;
@@ -23,7 +22,6 @@ final class ArrayDimFetchControlTypeResolver implements FormControlTypeResolverI
         private NetteControlNaming $netteControlNaming,
         private NodeTypeResolver $nodeTypeResolver,
         private ReturnTypeInferer $returnTypeInferer,
-        private ReflectionResolver $reflectionResolver,
         private AstResolver $astResolver,
     ) {
     }

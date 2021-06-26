@@ -10,7 +10,6 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\TypeWithClassName;
 use Rector\Core\PhpParser\AstResolver;
-use Rector\Core\Reflection\ReflectionResolver;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
@@ -25,7 +24,6 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
         private NodeNameResolver $nodeNameResolver,
         private NodeTypeResolver $nodeTypeResolver,
         private ReflectionProvider $reflectionProvider,
-        private ReflectionResolver $reflectionResolver,
         private AstResolver $astResolver,
     ) {
     }
