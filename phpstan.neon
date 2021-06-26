@@ -46,3 +46,6 @@ parameters:
         -
             message: '#Use required typed property over of nullable property#'
             path: src/NodeAnalyzer/TemplatePropertyAssignCollector.php
+
+        # PHPSTan false positive
+        - '#Parameter \#1 \$className (.*?) expects class\-string, string given#'

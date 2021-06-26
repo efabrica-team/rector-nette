@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Rector\NetteToSymfony\Rector\MethodCall\WrapTransParameterNameRector;
+use Rector\Nette\Kdyby\Rector\MethodCall\WrapTransParameterNameRector;
 use Rector\Renaming\Rector\MethodCall\RenameMethodRector;
 use Rector\Renaming\Rector\Name\RenameClassRector;
 use Rector\Renaming\ValueObject\MethodCallRename;

@@ -17,7 +17,7 @@ use Rector\Core\Rector\AbstractRector;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\NodeAnalyzer\StaticCallAnalyzer;
 use Rector\Nette\NodeFinder\ParamFinder;
-use Rector\NodeCollector\Reflection\MethodReflectionProvider;
+use Rector\NodeTypeResolver\MethodParameterTypeResolver;
 use Rector\NodeTypeResolver\Node\AttributeKey;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
@@ -45,7 +45,7 @@ final class RemoveParentAndNameFromComponentConstructorRector extends AbstractRe
     public function __construct(
         private ParamFinder $paramFinder,
         private StaticCallAnalyzer $staticCallAnalyzer,
-        private MethodReflectionProvider $methodReflectionProvider
+        private MethodParameterTypeResolver $methodParameterTypeResolver,
     ) {
         $this->controlObjectType = new ObjectType('Nette\Application\UI\Control');
     }
@@ -163,7 +163,7 @@ CODE_SAMPLE
 
     private function refactorNew(New_ $new): void
     {
-        $parameterNames = $this->methodReflectionProvider->provideParameterNamesByNew($new);
+        $parameterNames = $this->methodParameterTypeResolver->provideParameterNamesByNew($new);
 
         foreach ($new->args as $position => $arg) {
             // is on position of $parent or $name?
