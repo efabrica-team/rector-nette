@@ -12,8 +12,11 @@ use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
+use PHPStan\Reflection\ParameterReflection;
+use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Type\ObjectType;
 use Rector\Core\Rector\AbstractRector;
+use Rector\Core\Reflection\ReflectionResolver;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\NodeAnalyzer\StaticCallAnalyzer;
 use Rector\Nette\NodeFinder\ParamFinder;
@@ -40,12 +43,13 @@ final class RemoveParentAndNameFromComponentConstructorRector extends AbstractRe
      */
     private const NAME = 'name';
 
-    private \PHPStan\Type\ObjectType $controlObjectType;
+    private ObjectType $controlObjectType;
 
     public function __construct(
         private ParamFinder $paramFinder,
         private StaticCallAnalyzer $staticCallAnalyzer,
         private MethodParameterTypeResolver $methodParameterTypeResolver,
+        private ReflectionResolver $reflectionResolver
     ) {
         $this->controlObjectType = new ObjectType('Nette\Application\UI\Control');
     }
@@ -163,7 +167,17 @@ CODE_SAMPLE
 
     private function refactorNew(New_ $new): void
     {
-        $parameterNames = $this->methodParameterTypeResolver->provideParameterNamesByNew($new);
+        $methodReflection = $this->reflectionResolver->resolveMethodReflectionFromNew($new);
+        if ($methodReflection === null) {
+            return;
+        }
+
+        $parameterNames = [];
+        $parametersAcceptor = ParametersAcceptorSelector::selectSingle($methodReflection->getVariants());
+        foreach ($parametersAcceptor->getParameters() as $parameterReflection) {
+            /** @var ParameterReflection $parameterReflection */
+            $parameterNames[] = $parameterReflection->getName();
+        }
 
         foreach ($new->args as $position => $arg) {
             // is on position of $parent or $name?
