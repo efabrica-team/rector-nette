@@ -18,20 +18,15 @@ final class LatteFileProcessor implements FileProcessorInterface
     ) {
     }
 
-    /**
-     * @param File[] $files
-     */
-    public function process(array $files): void
+    public function process(File $file): void
     {
-        foreach ($files as $file) {
-            $fileContent = $file->getFileContent();
+        $fileContent = $file->getFileContent();
 
-            foreach ($this->latteRectors as $latteRector) {
-                $fileContent = $latteRector->changeContent($fileContent);
-            }
-
-            $file->changeFileContent($fileContent);
+        foreach ($this->latteRectors as $latteRector) {
+            $fileContent = $latteRector->changeContent($fileContent);
         }
+
+        $file->changeFileContent($fileContent);
     }
 
     public function supports(File $file): bool

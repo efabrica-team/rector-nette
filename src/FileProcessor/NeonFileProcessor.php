@@ -18,20 +18,15 @@ final class NeonFileProcessor implements FileProcessorInterface
     ) {
     }
 
-    /**
-     * @param File[] $files
-     */
-    public function process(array $files): void
+    public function process(File $file): void
     {
-        foreach ($files as $file) {
-            $fileContent = $file->getFileContent();
+        $fileContent = $file->getFileContent();
 
-            foreach ($this->neonRectors as $neonRector) {
-                $fileContent = $neonRector->changeContent($fileContent);
-            }
-
-            $file->changeFileContent($fileContent);
+        foreach ($this->neonRectors as $neonRector) {
+            $fileContent = $neonRector->changeContent($fileContent);
         }
+
+        $file->changeFileContent($fileContent);
     }
 
     public function supports(File $file): bool
