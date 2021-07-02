@@ -19,7 +19,7 @@ final class NeonFileProcessor implements FileProcessorInterface
     ) {
     }
 
-    public function process(File $file): void
+    public function process(File $file, Configuration $configuration): void
     {
         $fileContent = $file->getFileContent();
 
