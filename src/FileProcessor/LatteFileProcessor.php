@@ -6,6 +6,7 @@ namespace Rector\Nette\FileProcessor;
 
 use Rector\Core\Contract\Processor\FileProcessorInterface;
 use Rector\Core\ValueObject\Application\File;
+use Rector\Core\ValueObject\Configuration;
 use Rector\Nette\Contract\Rector\LatteRectorInterface;
 
 final class LatteFileProcessor implements FileProcessorInterface
@@ -29,7 +30,7 @@ final class LatteFileProcessor implements FileProcessorInterface
         $file->changeFileContent($fileContent);
     }
 
-    public function supports(File $file): bool
+    public function supports(File $file, Configuration $configuration): bool
     {
         $fileInfo = $file->getSmartFileInfo();
         return $fileInfo->hasSuffixes($this->getSupportedFileExtensions());
