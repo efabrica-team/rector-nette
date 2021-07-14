@@ -86,6 +86,9 @@ final class AssignAnalyzer
         $assignedArrayDimFetch = clone $arrayDimFetch;
         $assign = new Assign($variable, $assignedArrayDimFetch);
 
+        $variable->setAttribute(AttributeKey::PARENT_NODE, $assign);
+        $assignedArrayDimFetch->setAttribute(AttributeKey::PARENT_NODE, $assign);
+
         return new Expression($assign);
     }
 }
