@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Rector\Nette\NodeAnalyzer;
 
+use PhpParser\Node;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\PropertyFetch;
 use PhpParser\Node\FunctionLike;
@@ -20,6 +21,11 @@ use Rector\NodeNestingScope\ValueObject\ControlStructure;
 
 final class TemplatePropertyAssignCollector
 {
+    /**
+     * @var array<class-string<\PhpParser\Node>>
+     */
+    private const NODE_TYPES = ControlStructure::CONDITIONAL_NODE_SCOPE_TYPES + [FunctionLike::class];
+
     private ?Return_ $lastReturn = null;
 
     /**
@@ -59,6 +65,24 @@ final class TemplatePropertyAssignCollector
         );
     }
 
+    /**
+     * @return Node[]
+     */
+    private function getFoundParents(PropertyFetch $propertyFetch): array
+    {
+        $foundParents = [];
+
+        /** @var class-string<Node> $nodeType */
+        foreach (self::NODE_TYPES as $nodeType) {
+            $parentType = $this->betterNodeFinder->findParentType($propertyFetch->var, $nodeType);
+            if ($parentType instanceof Node) {
+                $foundParents[] = $parentType;
+            }
+        }
+
+        return $foundParents;
+    }
+
     private function collectVariableFromAssign(Assign $assign): void
     {
         if (! $assign->var instanceof PropertyFetch) {
@@ -71,25 +95,24 @@ final class TemplatePropertyAssignCollector
         }
 
         $propertyFetch = $assign->var;
+        $foundParents = $this->getFoundParents($propertyFetch);
 
-        /** @var array<class-string<\PhpParser\Node>> $nodeTypes */
-        $nodeTypes = ControlStructure::CONDITIONAL_NODE_SCOPE_TYPES + [FunctionLike::class];
-        $foundParent = $this->betterNodeFinder->findParentTypes($propertyFetch->var, $nodeTypes);
+        foreach ($foundParents as $foundParent) {
+            if ($this->scopeNestingComparator->isInBothIfElseBranch($foundParent, $propertyFetch)) {
+                $this->conditionalTemplateParameterAssigns[] = new ConditionalTemplateParameterAssign(
+                    $assign,
+                    $parameterName
+                );
+                return;
+            }
 
-        if ($foundParent && $this->scopeNestingComparator->isInBothIfElseBranch($foundParent, $propertyFetch)) {
-            $this->conditionalTemplateParameterAssigns[] = new ConditionalTemplateParameterAssign(
-                $assign,
-                $parameterName
-            );
-            return;
-        }
+            if ($foundParent instanceof If_) {
+                return;
+            }
 
-        if ($foundParent instanceof If_) {
-            return;
-        }
-
-        if ($foundParent instanceof Else_) {
-            return;
+            if ($foundParent instanceof Else_) {
+                return;
+            }
         }
 
         // there is a return before this assign, to do not remove it and keep ti
