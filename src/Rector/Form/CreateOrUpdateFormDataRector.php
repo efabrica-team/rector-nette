@@ -5,37 +5,100 @@ declare(strict_types=1);
 namespace Rector\Nette\Rector\Form;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr\Assign;
-use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Expr\Variable;
-use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\Class_;
-use PhpParser\Node\Stmt\Expression;
-use PHPStan\Type\ObjectType;
+use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
+use Rector\Core\NodeFactory\ClassWithPublicPropertiesFactory;
 use Rector\Core\Rector\AbstractRector;
 use Rector\FileSystemRector\ValueObject\AddedFileWithContent;
-use Rector\Nette\NodeFactory\ClassWithPublicPropertiesFactory;
+use Rector\Nette\NodeFinder\FormFinder;
+use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use Webmozart\Assert\Assert;
 
 /**
  * @see https://doc.nette.org/en/3.1/form-presenter#toc-mapping-to-classes
  */
-final class CreateOrUpdateFormDataRector extends AbstractRector
+final class CreateOrUpdateFormDataRector extends AbstractRector implements ConfigurableRectorInterface
 {
+    const FORM_DATA_CLASS_PARENT = 'form_data_class_parent';
+
+    const FORM_DATA_CLASS_TRAITS = 'form_data_class_traits';
+
+    private ?string $formDataClassParent = '\Nette\Utils\ArrayHash';
+
+    private array $formDataClassTraits = ['\Nette\SmartObject'];
+
     public function __construct(
+        private FormFinder $formFinder,
         private ClassWithPublicPropertiesFactory $classWithPublicPropertiesFactory
     ) {
     }
 
-
     public function getRuleDefinition(): RuleDefinition
     {
-        return new RuleDefinition('Create or update form data class with all fields of Form', [/* TODO */]);
+        return new RuleDefinition('Create or update form data class with all fields of Form', [
+            new ConfiguredCodeSample(
+                <<<'CODE_SAMPLE'
+class MyFormFactory
+{
+    public function create()
+    {
+        $form = new Form();
+
+        $form->addText('foo', 'Foo');
+        $form->addText('bar', 'Bar')->setRequired();
+        $form->onSuccess[] = function (Form $form, ArrayHash $values) {
+            // do something
+        }
+    }
+}
+CODE_SAMPLE
+                ,
+                <<<'CODE_SAMPLE'
+class MyFormFactoryFormData
+{
+    public string $foo;
+    public string $bar;
+}
+
+class MyFormFactory
+{
+    public function create()
+    {
+        $form = new Form();
+
+        $form->addText('foo', 'Foo');
+        $form->addText('bar', 'Bar')->setRequired();
+        $form->onSuccess[] = function (Form $form, MyFormFactoryFormData $values) {
+            // do something
+        }
+    }
+}
+CODE_SAMPLE
+                ,
+                [
+                    self::FORM_DATA_CLASS_PARENT => null,
+                    self::FORM_DATA_CLASS_TRAITS => [],
+                ]
+            )
+        ]);
     }
 
     public function getNodeTypes(): array
     {
         return [Class_::class];
+    }
+
+    public function configure(array $configuration): void
+    {
+        if (array_key_exists(self::FORM_DATA_CLASS_PARENT, $configuration)) {
+            Assert::nullOrString($configuration[self::FORM_DATA_CLASS_PARENT]);
+            $this->formDataClassParent = $configuration[self::FORM_DATA_CLASS_PARENT];
+        }
+        if (array_key_exists(self::FORM_DATA_CLASS_TRAITS, $configuration)) {
+            Assert::isArray($configuration[self::FORM_DATA_CLASS_TRAITS]);
+            $this->formDataClassTraits = $configuration[self::FORM_DATA_CLASS_TRAITS];
+        }
     }
 
     /**
@@ -44,23 +107,31 @@ final class CreateOrUpdateFormDataRector extends AbstractRector
     public function refactor(Node $node): ?Node
     {
         $className = $node->name->name;
+
         $fullClassName = $this->getName($node);
-        $form = $this->findForm($node);
+        $form = $this->formFinder->findFormVariable($node);
         if ($form === null) {
             return null;
         }
 
-        $formFields = $this->findFormFields($node, $form);
+        $formFields = $this->formFinder->findFormFields($node, $form);
+        $properties = [];
+        foreach ($formFields as $fieldName => $fieldProperties) {
+            $properties[$fieldName] = [
+                'type' => $fieldProperties['type'],
+                'nullable' => $fieldProperties['type'] === 'int' && $fieldProperties['required'] === false,
+            ];
+        }
 
         $formDataClassName = $className . 'FormData';
-        $class = $this->classWithPublicPropertiesFactory->createNode(
+        $formDataClass = $this->classWithPublicPropertiesFactory->createNode(
             $fullClassName . 'FormData',
-            $formFields,
-            '\Nette\Utils\ArrayHash',   // TODO configurable in rule
-            ['\Nette\SmartObject']  // TODO configurable in rule
+            $properties,
+            $this->formDataClassParent,
+            $this->formDataClassTraits
         );
 
-        $printedClassContent = "<?php\n\n" . $this->betterStandardPrinter->print($class) . "\n";
+        $printedClassContent = "<?php\n\n" . $this->betterStandardPrinter->print($formDataClass) . "\n";
 
         $smartFileInfo = $this->file->getSmartFileInfo();
         $targetFilePath = $smartFileInfo->getRealPathDirectory() . '/' . $formDataClassName . '.php';
@@ -68,89 +139,8 @@ final class CreateOrUpdateFormDataRector extends AbstractRector
         $addedFileWithContent = new AddedFileWithContent($targetFilePath, $printedClassContent);
         $this->removedAndAddedFilesCollector->addAddedFile($addedFileWithContent);
 
+        // TODO find onSuccess and change $values (second parameter of it), also $form->getValues() should have this classname as attribute
+
         return null;
-    }
-
-
-    /**
-     * @TODO extract to some service
-     */
-    private function findForm(Class_ $node): ?Variable
-    {
-        foreach ($node->getMethods() as $method) {
-            foreach ($method->stmts as $stmt) {
-                if (! $stmt instanceof Expression) {
-                    continue;
-                }
-
-                if (! $stmt->expr instanceof Assign) {
-                    continue;
-                }
-
-                $var = $stmt->expr->var;
-                $expr = $stmt->expr->expr;
-
-                if (! $var instanceof Variable) {
-                    continue;
-                }
-
-                if (! $this->isObjectType($expr, new ObjectType('Nette\Forms\Form'))) {
-                    continue;
-                }
-
-                return $var;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * @TODO extract to some service
-     */
-    private function findFormFields(Class_ $node, Variable $form): array
-    {
-        $formFields = [];
-        foreach ($node->getMethods() as $method) {
-            foreach ($method->stmts as $stmt) {
-                if (! $stmt instanceof Expression) {
-                    continue;
-                }
-
-                if (! $stmt->expr instanceof MethodCall) {
-                    continue;
-                }
-
-                $methodCall = $stmt->expr;
-
-                if (! $methodCall->var instanceof Variable) {   // TODO fluent calls like $form->addText()->setRequired() not pass this condition
-                    continue;
-                }
-
-                if ($methodCall->var->name !== $form->name) {
-                    continue;
-                }
-
-                // skip groups, renderers, translator etc.
-                if (! $this->isObjectType($methodCall, new ObjectType('Nette\Forms\Controls\BaseControl'))) {
-                    continue;
-                }
-
-                // skip submit buttons
-                if ($this->isObjectType($methodCall, new ObjectType('Nette\Forms\Controls\SubmitButton'))) {
-                    continue;
-                }
-
-
-                $arg = $methodCall->args[0] ?? null;
-                if (! $arg) {
-                    continue;
-                }
-                $name = $arg->value;
-                if ($name instanceof String_) {
-                    $formFields[$name->value] = 'string'; // TODO remap method to type, also we need check if field is required (int is send as null so it is nullable, text is empty string), check select (numeric and string keys) with prompt
-                }
-            }
-        }
-        return $formFields;
     }
 }
