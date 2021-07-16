@@ -21,6 +21,11 @@ use Rector\NodeNestingScope\ValueObject\ControlStructure;
 
 final class TemplatePropertyAssignCollector
 {
+    /**
+     * @var array<class-string<\PhpParser\Node>>
+     */
+    private const NODE_TYPES = ControlStructure::CONDITIONAL_NODE_SCOPE_TYPES + [FunctionLike::class];
+
     private ?Return_ $lastReturn = null;
 
     /**
@@ -60,6 +65,24 @@ final class TemplatePropertyAssignCollector
         );
     }
 
+    /**
+     * @return Node[] $foundParent
+     */
+    private function getFoundParents(PropertyFetch $propertyFetch): array
+    {
+        $foundParents = [];
+
+        /** @var class-string<Node> $nodeType */
+        foreach (self::NODE_TYPES as $nodeType) {
+            $parentType = $this->betterNodeFinder->findParentType($propertyFetch->var, $nodeType);
+            if ($parentType instanceof Node) {
+                $foundParents[] = $parentType;
+            }
+        }
+
+        return $foundParents;
+    }
+
     private function collectVariableFromAssign(Assign $assign): void
     {
         if (! $assign->var instanceof PropertyFetch) {
@@ -72,20 +95,10 @@ final class TemplatePropertyAssignCollector
         }
 
         $propertyFetch = $assign->var;
+        $foundParents = $this->getFoundParents($propertyFetch);
 
-        /** @var array<class-string<\PhpParser\Node>> $nodeTypes */
-        $nodeTypes = ControlStructure::CONDITIONAL_NODE_SCOPE_TYPES + [FunctionLike::class];
-        $foundParent = [];
-        /** @var string $nodeType */
-        foreach ($nodeTypes as $nodeType) {
-            $parentType = $this->betterNodeFinder->findParentType($propertyFetch->var, $nodeType);
-            if ($parentType instanceof Node) {
-                $foundParent[] = $parentType;
-            }
-        }
-
-        foreach ($foundParent as $parentType) {
-            if ($this->scopeNestingComparator->isInBothIfElseBranch($parentType, $propertyFetch)) {
+        foreach ($foundParents as $foundParent) {
+            if ($this->scopeNestingComparator->isInBothIfElseBranch($foundParent, $propertyFetch)) {
                 $this->conditionalTemplateParameterAssigns[] = new ConditionalTemplateParameterAssign(
                     $assign,
                     $parameterName
@@ -93,11 +106,11 @@ final class TemplatePropertyAssignCollector
                 return;
             }
 
-            if ($parentType instanceof If_) {
+            if ($foundParent instanceof If_) {
                 return;
             }
 
-            if ($parentType instanceof Else_) {
+            if ($foundParent instanceof Else_) {
                 return;
             }
         }
