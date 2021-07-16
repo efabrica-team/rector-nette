@@ -66,7 +66,7 @@ final class TemplatePropertyAssignCollector
     }
 
     /**
-     * @return Node[] $foundParent
+     * @return Node[]
      */
     private function getFoundParents(PropertyFetch $propertyFetch): array
     {
