@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Tests\NodeFinder\FormFinder;
 
-use InvalidArgumentException;
 use Iterator;
+use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Namespace_;
+use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Nette\NodeFinder\FormFinder;
 use Rector\Testing\PHPUnit\AbstractTestCase;
 use Rector\Testing\TestingParser\TestingParser;
@@ -22,7 +23,6 @@ final class FormFinderTest extends AbstractTestCase
     private FormFinder $formFinder;
 
     private TestingParser $parser;
-
 
     protected function setUp(): void
     {
@@ -46,10 +46,14 @@ final class FormFinderTest extends AbstractTestCase
 
         $classNode = $this->findClassNode($nodes);
         if ($classNode === null) {
-            throw new InvalidArgumentException('No class node found');
+            throw new ShouldNotHappenException('No class node found');
         }
 
         $form = $this->formFinder->findFormVariable($classNode);
+        if ($form === null) {
+            throw new ShouldNotHappenException('No form variable found');
+        }
+
         $fields = $this->formFinder->findFormFields($classNode, $form);
         $output = json_encode($fields, JSON_PRETTY_PRINT);
         $this->assertSame($expected, $output);
@@ -63,6 +67,9 @@ final class FormFinderTest extends AbstractTestCase
         return StaticFixtureFinder::yieldDirectoryExclusively(__DIR__ . '/Fixture');
     }
 
+    /**
+     * @param Node[] $nodes
+     */
     private function findClassNode(array $nodes): ?Class_
     {
         foreach ($nodes as $node) {

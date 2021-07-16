@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Rector\Form;
+namespace Rector\Nette\Rector\Class_;
 
 use PhpParser\Node;
+use PhpParser\Node\Identifier;
 use PhpParser\Node\Stmt\Class_;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\NodeFactory\ClassWithPublicPropertiesFactory;
@@ -20,9 +21,9 @@ use Webmozart\Assert\Assert;
  */
 final class CreateOrUpdateFormDataRector extends AbstractRector implements ConfigurableRectorInterface
 {
-    const FORM_DATA_CLASS_PARENT = 'form_data_class_parent';
+    public const FORM_DATA_CLASS_PARENT = 'form_data_class_parent';
 
-    const FORM_DATA_CLASS_TRAITS = 'form_data_class_traits';
+    public const FORM_DATA_CLASS_TRAITS = 'form_data_class_traits';
 
     private ?string $formDataClassParent = '\Nette\Utils\ArrayHash';
 
@@ -80,7 +81,7 @@ CODE_SAMPLE
                     self::FORM_DATA_CLASS_PARENT => null,
                     self::FORM_DATA_CLASS_TRAITS => [],
                 ]
-            )
+            ),
         ]);
     }
 
@@ -124,8 +125,9 @@ CODE_SAMPLE
         }
 
         $formDataClassName = $className . 'FormData';
+        $fullFormDataClassName = '\\' . $fullClassName . 'FormData';
         $formDataClass = $this->classWithPublicPropertiesFactory->createNode(
-            $fullClassName . 'FormData',
+            $fullFormDataClassName,
             $properties,
             $this->formDataClassParent,
             $this->formDataClassTraits
@@ -139,8 +141,16 @@ CODE_SAMPLE
         $addedFileWithContent = new AddedFileWithContent($targetFilePath, $printedClassContent);
         $this->removedAndAddedFilesCollector->addAddedFile($addedFileWithContent);
 
-        // TODO find onSuccess and change $values (second parameter of it), also $form->getValues() should have this classname as attribute
+        $onSuccessCallback = $this->formFinder->findOnSuccessCallback($node, $form);
+        if ($onSuccessCallback === null) {
+            return null;
+        }
+        $valuesParam = $this->formFinder->findOnSuccessCallbackValuesParam($node, $onSuccessCallback);
+        if ($valuesParam === null) {
+            return null;
+        }
 
-        return null;
+        $valuesParam->type = new Identifier($fullFormDataClassName);
+        return $node;
     }
 }

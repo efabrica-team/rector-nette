@@ -200,10 +200,10 @@ Create or update form data class with all fields of Form
 
 :wrench: **configure it!**
 
-- class: [`Rector\Nette\Rector\Form\CreateOrUpdateFormDataRector`](../src/Rector/Form/CreateOrUpdateFormDataRector.php)
+- class: [`Rector\Nette\Rector\Class_\CreateOrUpdateFormDataRector`](../src/Rector/Class_/CreateOrUpdateFormDataRector.php)
 
 ```php
-use Rector\Nette\Rector\Form\CreateOrUpdateFormDataRector;
+use Rector\Nette\Rector\Class_\CreateOrUpdateFormDataRector;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {

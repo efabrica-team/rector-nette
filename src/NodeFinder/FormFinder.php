@@ -4,9 +4,16 @@ declare(strict_types=1);
 
 namespace Rector\Nette\NodeFinder;
 
+use PhpParser\Node\Expr;
+use PhpParser\Node\Expr\Array_;
+use PhpParser\Node\Expr\ArrayDimFetch;
 use PhpParser\Node\Expr\Assign;
+use PhpParser\Node\Expr\Closure;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Expr\PropertyFetch;
 use PhpParser\Node\Expr\Variable;
+use PhpParser\Node\Identifier;
+use PhpParser\Node\Param;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Expression;
@@ -23,7 +30,7 @@ final class FormFinder
     public function findFormVariable(Class_ $class): ?Variable
     {
         foreach ($class->getMethods() as $method) {
-            foreach ($method->stmts as $stmt) {
+            foreach ($method->stmts ?: [] as $stmt) {
                 if (! $stmt instanceof Expression) {
                     continue;
                 }
@@ -49,11 +56,14 @@ final class FormFinder
         return null;
     }
 
-    public function findFormFields(Class_ $node, Variable $form): array
+    /**
+     * @return array<string, array{type: string, required: bool}>
+     */
+    public function findFormFields(Class_ $class, Variable $form): array
     {
         $formFields = [];
-        foreach ($node->getMethods() as $method) {
-            foreach ($method->stmts as $stmt) {
+        foreach ($class->getMethods() as $method) {
+            foreach ($method->stmts ?: [] as $stmt) {
                 if (! $stmt instanceof Expression) {
                     continue;
                 }
@@ -93,18 +103,110 @@ final class FormFinder
         return $formFields;
     }
 
+    public function findOnSuccessCallback(Class_ $class, Variable $form): ?Expr
+    {
+        foreach ($class->getMethods() as $method) {
+            foreach ($method->stmts ?: [] as $stmt) {
+                if (! $stmt instanceof Expression) {
+                    continue;
+                }
+                if (! $stmt->expr instanceof Assign) {
+                    continue;
+                }
+
+                if (! $stmt->expr->var instanceof ArrayDimFetch) {
+                    continue;
+                }
+
+                /** @var ArrayDimFetch $arrayDimFetch */
+                $arrayDimFetch = $stmt->expr->var;
+                if (! $arrayDimFetch->var instanceof PropertyFetch) {
+                    continue;
+                }
+
+                if (! $arrayDimFetch->var->var instanceof Variable) {
+                    continue;
+                }
+
+                if ($arrayDimFetch->var->var->name !== $form->name) {
+                    continue;
+                }
+
+                if (! $arrayDimFetch->var->name instanceof Identifier) {
+                    continue;
+                }
+
+                if ($arrayDimFetch->var->name->name !== 'onSuccess') {
+                    continue;
+                }
+
+                return $stmt->expr->expr;
+            }
+        }
+        return null;
+    }
+
+    public function findOnSuccessCallbackValuesParam(Class_ $class, Expr $onSuccessCallback): ?Param
+    {
+        if ($onSuccessCallback instanceof Closure) {
+            return $onSuccessCallback->params[1] ?? null;
+        }
+
+        $methodName = null;
+        if ($onSuccessCallback instanceof Array_) {
+            /** @var Expr\ArrayItem|null $varPart */
+            $varPart = $onSuccessCallback->items[0] ?? null;
+            $methodNamePart = $onSuccessCallback->items[1] ?? null;
+
+            if ($varPart === null || $methodNamePart === null) {
+                return null;
+            }
+
+            if (! $varPart->value instanceof Variable) {
+                return null;
+            }
+
+            if ($varPart->value->name !== 'this') {
+                return null;
+            }
+
+            if (! $methodNamePart->value instanceof String_) {
+                return null;
+            }
+
+            $methodName = $methodNamePart->value->value;
+        }
+
+        if ($methodName) {
+            $classMethod = $class->getMethod($methodName);
+            if ($classMethod === null) {
+                return null;
+            }
+
+            return $classMethod->params[1] ?? null;
+        }
+
+        return null;
+    }
+
     private function findAddFieldMethodCall(MethodCall $methodCall): ?MethodCall
     {
         if ($methodCall->var instanceof Variable) {
             // skip submit buttons
-            if ($this->nodeTypeResolver->isObjectType($methodCall, new ObjectType('Nette\Forms\Controls\SubmitButton'))) {
+            if ($this->nodeTypeResolver->isObjectType(
+                $methodCall,
+                new ObjectType('Nette\Forms\Controls\SubmitButton')
+            )) {
                 return null;
             }
             if ($this->nodeTypeResolver->isObjectType($methodCall, new ObjectType('Nette\Forms\Container'))) {
                 return $methodCall;
             }
             // skip groups, renderers, translator etc.
-            if ($this->nodeTypeResolver->isObjectType($methodCall, new ObjectType('Nette\Forms\Controls\BaseControl'))) {
+            if ($this->nodeTypeResolver->isObjectType(
+                $methodCall,
+                new ObjectType('Nette\Forms\Controls\BaseControl')
+            )) {
                 return $methodCall;
             }
             return null;
