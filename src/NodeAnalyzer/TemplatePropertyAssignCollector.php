@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Rector\Nette\NodeAnalyzer;
 
+use PhpParser\Node;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\PropertyFetch;
 use PhpParser\Node\FunctionLike;
@@ -74,22 +75,31 @@ final class TemplatePropertyAssignCollector
 
         /** @var array<class-string<\PhpParser\Node>> $nodeTypes */
         $nodeTypes = ControlStructure::CONDITIONAL_NODE_SCOPE_TYPES + [FunctionLike::class];
-        $foundParent = $this->betterNodeFinder->findParentTypes($propertyFetch->var, $nodeTypes);
-
-        if ($foundParent && $this->scopeNestingComparator->isInBothIfElseBranch($foundParent, $propertyFetch)) {
-            $this->conditionalTemplateParameterAssigns[] = new ConditionalTemplateParameterAssign(
-                $assign,
-                $parameterName
-            );
-            return;
+        $foundParent = [];
+        /** @var string $nodeType */
+        foreach ($nodeTypes as $nodeType) {
+            $parentType = $this->betterNodeFinder->findParentType($propertyFetch->var, $nodeType);
+            if ($parentType instanceof Node) {
+                $foundParent[] = $parentType;
+            }
         }
 
-        if ($foundParent instanceof If_) {
-            return;
-        }
+        foreach ($foundParent as $parentType) {
+            if ($this->scopeNestingComparator->isInBothIfElseBranch($parentType, $propertyFetch)) {
+                $this->conditionalTemplateParameterAssigns[] = new ConditionalTemplateParameterAssign(
+                    $assign,
+                    $parameterName
+                );
+                return;
+            }
 
-        if ($foundParent instanceof Else_) {
-            return;
+            if ($parentType instanceof If_) {
+                return;
+            }
+
+            if ($parentType instanceof Else_) {
+                return;
+            }
         }
 
         // there is a return before this assign, to do not remove it and keep ti
