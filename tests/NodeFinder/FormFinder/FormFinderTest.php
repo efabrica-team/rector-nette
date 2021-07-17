@@ -55,7 +55,16 @@ final class FormFinderTest extends AbstractTestCase
         }
 
         $fields = $this->formFinder->findFormFields($classNode, $form);
-        $output = json_encode($fields, JSON_PRETTY_PRINT);
+
+        $output = [];
+        foreach ($fields as $field) {
+            $output[$field->getName()] = [
+                'type' => $field->getType(),
+                'required' => $field->isRequired(),
+            ];
+        }
+
+        $output = json_encode($output, JSON_PRETTY_PRINT);
         $this->assertSame($expected, $output);
     }
 

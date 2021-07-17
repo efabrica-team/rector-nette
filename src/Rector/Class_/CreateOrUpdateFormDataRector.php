@@ -25,8 +25,11 @@ final class CreateOrUpdateFormDataRector extends AbstractRector implements Confi
 
     public const FORM_DATA_CLASS_TRAITS = 'form_data_class_traits';
 
-    private ?string $formDataClassParent = '\Nette\Utils\ArrayHash';
+    private string $formDataClassParent = '\Nette\Utils\ArrayHash';
 
+    /**
+     * @var string[]
+     */
     private array $formDataClassTraits = ['\Nette\SmartObject'];
 
     public function __construct(
@@ -78,7 +81,7 @@ class MyFormFactory
 CODE_SAMPLE
                 ,
                 [
-                    self::FORM_DATA_CLASS_PARENT => null,
+                    self::FORM_DATA_CLASS_PARENT => '',
                     self::FORM_DATA_CLASS_TRAITS => [],
                 ]
             ),
@@ -92,11 +95,11 @@ CODE_SAMPLE
 
     public function configure(array $configuration): void
     {
-        if (array_key_exists(self::FORM_DATA_CLASS_PARENT, $configuration)) {
-            Assert::nullOrString($configuration[self::FORM_DATA_CLASS_PARENT]);
+        if (isset($configuration[self::FORM_DATA_CLASS_PARENT])) {
+            Assert::string($configuration[self::FORM_DATA_CLASS_PARENT]);
             $this->formDataClassParent = $configuration[self::FORM_DATA_CLASS_PARENT];
         }
-        if (array_key_exists(self::FORM_DATA_CLASS_TRAITS, $configuration)) {
+        if (isset($configuration[self::FORM_DATA_CLASS_TRAITS])) {
             Assert::isArray($configuration[self::FORM_DATA_CLASS_TRAITS]);
             $this->formDataClassTraits = $configuration[self::FORM_DATA_CLASS_TRAITS];
         }
@@ -107,6 +110,10 @@ CODE_SAMPLE
      */
     public function refactor(Node $node): ?Node
     {
+        if ($node->name === null) {
+            return null;
+        }
+
         $className = $node->name->name;
 
         $fullClassName = $this->getName($node);
@@ -117,10 +124,10 @@ CODE_SAMPLE
 
         $formFields = $this->formFinder->findFormFields($node, $form);
         $properties = [];
-        foreach ($formFields as $fieldName => $fieldProperties) {
-            $properties[$fieldName] = [
-                'type' => $fieldProperties['type'],
-                'nullable' => $fieldProperties['type'] === 'int' && $fieldProperties['required'] === false,
+        foreach ($formFields as $formField) {
+            $properties[$formField->getName()] = [
+                'type' => $formField->getType(),
+                'nullable' => $formField->getType() === 'int' && $formField->isRequired() === false,
             ];
         }
 

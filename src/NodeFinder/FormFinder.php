@@ -18,8 +18,12 @@ use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Expression;
 use PHPStan\Type\ObjectType;
+use Rector\Nette\ValueObject\FormField;
 use Rector\NodeTypeResolver\NodeTypeResolver;
 
+/**
+ * @see \Rector\Nette\Tests\NodeFinder\FormFinder\FormFinderTest
+ */
 final class FormFinder
 {
     public function __construct(
@@ -57,7 +61,7 @@ final class FormFinder
     }
 
     /**
-     * @return array<string, array{type: string, required: bool}>
+     * @return FormField[]
      */
     public function findFormFields(Class_ $class, Variable $form): array
     {
@@ -82,7 +86,14 @@ final class FormFinder
                 if (! $addFieldMethodCall) {
                     continue;
                 }
+                if (! $addFieldMethodCall->name instanceof Identifier) {
+                    continue;
+                }
+
                 $methodCallVariable = $this->findMethodCallVariable($addFieldMethodCall);
+                if ($methodCallVariable === null) {
+                    continue;
+                }
                 if ($methodCallVariable->name !== $form->name) {
                     continue;
                 }
@@ -93,10 +104,11 @@ final class FormFinder
                 }
                 $name = $arg->value;
                 if ($name instanceof String_) {
-                    $formFields[$name->value] = [
-                        'type' => $this->resolveFieldType($addFieldMethodCall->name->name),
-                        'required' => $this->isFieldRequired($methodCall),
-                    ];
+                    $formFields[] = new FormField(
+                        $name->value,
+                        $this->resolveFieldType($addFieldMethodCall->name->name),
+                        $this->isFieldRequired($methodCall)
+                    );
                 }
             }
         }
@@ -177,16 +189,16 @@ final class FormFinder
             $methodName = $methodNamePart->value->value;
         }
 
-        if ($methodName) {
-            $classMethod = $class->getMethod($methodName);
-            if ($classMethod === null) {
-                return null;
-            }
-
-            return $classMethod->params[1] ?? null;
+        if ($methodName === null) {
+            return null;
         }
 
-        return null;
+        $classMethod = $class->getMethod($methodName);
+        if ($classMethod === null) {
+            return null;
+        }
+
+        return $classMethod->params[1] ?? null;
     }
 
     private function findAddFieldMethodCall(MethodCall $methodCall): ?MethodCall
@@ -232,7 +244,7 @@ final class FormFinder
 
     private function isFieldRequired(MethodCall $methodCall): bool
     {
-        if ($methodCall->name->name === 'setRequired') {    // TODO addRule(Form:FILLED) is also required
+        if ($methodCall->name instanceof Identifier && $methodCall->name->name === 'setRequired') {    // TODO addRule(Form:FILLED) is also required
             return true;
         }
 
