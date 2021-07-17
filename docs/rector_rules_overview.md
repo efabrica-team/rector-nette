@@ -211,7 +211,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set(CreateOrUpdateFormDataRector::class)
         ->call('configure', [[
-            CreateOrUpdateFormDataRector::FORM_DATA_CLASS_PARENT => null,
+            CreateOrUpdateFormDataRector::FORM_DATA_CLASS_PARENT => '',
             CreateOrUpdateFormDataRector::FORM_DATA_CLASS_TRAITS => [],
         ]]);
 };
