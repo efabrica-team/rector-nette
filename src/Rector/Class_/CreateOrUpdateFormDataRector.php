@@ -11,7 +11,10 @@ use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\NodeFactory\ClassWithPublicPropertiesFactory;
 use Rector\Core\Rector\AbstractRector;
 use Rector\FileSystemRector\ValueObject\AddedFileWithContent;
-use Rector\Nette\NodeFinder\FormFinder;
+use Rector\Nette\NodeFinder\FormFieldsFinder;
+use Rector\Nette\NodeFinder\FormOnSuccessCallbackFinder;
+use Rector\Nette\NodeFinder\FormOnSuccessCallbackValuesParamFinder;
+use Rector\Nette\NodeFinder\FormVariableFinder;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 use Webmozart\Assert\Assert;
@@ -25,15 +28,18 @@ final class CreateOrUpdateFormDataRector extends AbstractRector implements Confi
 
     public const FORM_DATA_CLASS_TRAITS = 'form_data_class_traits';
 
-    private string $formDataClassParent = '\Nette\Utils\ArrayHash';
+    private string $formDataClassParent = 'Nette\Utils\ArrayHash';
 
     /**
      * @var string[]
      */
-    private array $formDataClassTraits = ['\Nette\SmartObject'];
+    private array $formDataClassTraits = ['Nette\SmartObject'];
 
     public function __construct(
-        private FormFinder $formFinder,
+        private FormVariableFinder $formVariableFinder,
+        private FormFieldsFinder $formFieldsFinder,
+        private FormOnSuccessCallbackFinder $formOnSuccessCallbackFinder,
+        private FormOnSuccessCallbackValuesParamFinder $formOnSuccessCallbackValuesParamFinder,
         private ClassWithPublicPropertiesFactory $classWithPublicPropertiesFactory
     ) {
     }
@@ -114,15 +120,19 @@ CODE_SAMPLE
             return null;
         }
 
-        $className = $node->name->name;
+        $shortClassName = $this->nodeNameResolver->getShortName($node);
 
         $fullClassName = $this->getName($node);
-        $form = $this->formFinder->findFormVariable($node);
+        $form = $this->formVariableFinder->find($node);
         if ($form === null) {
             return null;
         }
 
-        $formFields = $this->formFinder->findFormFields($node, $form);
+        $formFields = $this->formFieldsFinder->find($node, $form);
+        if ($formFields === []) {
+            return null;
+        }
+
         $properties = [];
         foreach ($formFields as $formField) {
             $properties[$formField->getName()] = [
@@ -131,7 +141,7 @@ CODE_SAMPLE
             ];
         }
 
-        $formDataClassName = $className . 'FormData';
+        $formDataClassName = $shortClassName . 'FormData';
         $fullFormDataClassName = '\\' . $fullClassName . 'FormData';
         $formDataClass = $this->classWithPublicPropertiesFactory->createNode(
             $fullFormDataClassName,
@@ -148,11 +158,11 @@ CODE_SAMPLE
         $addedFileWithContent = new AddedFileWithContent($targetFilePath, $printedClassContent);
         $this->removedAndAddedFilesCollector->addAddedFile($addedFileWithContent);
 
-        $onSuccessCallback = $this->formFinder->findOnSuccessCallback($node, $form);
+        $onSuccessCallback = $this->formOnSuccessCallbackFinder->find($node, $form);
         if ($onSuccessCallback === null) {
             return null;
         }
-        $valuesParam = $this->formFinder->findOnSuccessCallbackValuesParam($node, $onSuccessCallback);
+        $valuesParam = $this->formOnSuccessCallbackValuesParamFinder->find($node, $onSuccessCallback);
         if ($valuesParam === null) {
             return null;
         }

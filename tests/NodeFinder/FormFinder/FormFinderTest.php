@@ -9,25 +9,30 @@ use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Namespace_;
 use Rector\Core\Exception\ShouldNotHappenException;
-use Rector\Nette\NodeFinder\FormFinder;
+use Rector\Nette\NodeFinder\FormFieldsFinder;
+use Rector\Nette\NodeFinder\FormVariableFinder;
 use Rector\Testing\PHPUnit\AbstractTestCase;
 use Rector\Testing\TestingParser\TestingParser;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
- * @see \Rector\Nette\NodeFinder\FormFinder
+ * @see \Rector\Nette\NodeFinder\FormVariableFinder
+ * @see \Rector\Nette\NodeFinder\FormFieldsFinder
  */
 final class FormFinderTest extends AbstractTestCase
 {
-    private FormFinder $formFinder;
+    private FormVariableFinder $formVariableFinder;
+
+    private FormFieldsFinder $formFieldsFinder;
 
     private TestingParser $parser;
 
     protected function setUp(): void
     {
         $this->bootFromConfigFileInfos([new SmartFileInfo(__DIR__ . '/../../../config/config.php')]);
-        $this->formFinder = $this->getService(FormFinder::class);
+        $this->formVariableFinder = $this->getService(FormVariableFinder::class);
+        $this->formFieldsFinder = $this->getService(FormFieldsFinder::class);
         $this->parser = $this->getService(TestingParser::class);
     }
 
@@ -49,12 +54,12 @@ final class FormFinderTest extends AbstractTestCase
             throw new ShouldNotHappenException('No class node found');
         }
 
-        $form = $this->formFinder->findFormVariable($classNode);
+        $form = $this->formVariableFinder->find($classNode);
         if ($form === null) {
             throw new ShouldNotHappenException('No form variable found');
         }
 
-        $fields = $this->formFinder->findFormFields($classNode, $form);
+        $fields = $this->formFieldsFinder->find($classNode, $form);
 
         $output = [];
         foreach ($fields as $field) {
