@@ -30,6 +30,8 @@ parameters:
 
     ignoreErrors:
         - '#Class "Rector\\Nette\\Rector\\Class_\\MoveFinalGetUserToCheckRequirementsClassMethodRector" is missing @see annotation with test case class reference#'
+        # We need to think how to test rectors like this one
+        - '#Class "Rector\\Nette\\Rector\\Class_\\LatteVarTypesBasedOnPresenterTemplateParametersRector" is missing @see annotation with test case class reference#'
 
         - '#Cognitive complexity for "Rector\\Nette\\Kdyby\\ContributeEventClassResolver\:\:resolveGetterMethodByEventClassAndParam\(\)" is 10, keep it under 9#'
 
@@ -49,3 +51,8 @@ parameters:
 
         # PHPSTan false positive
         - '#Parameter \#1 \$className (.*?) expects class\-string, string given#'
+
+        # PHPStan false positive? I don't think there is some constant expression
+        -
+            message: '#Move constant expression to __construct\(\), setUp\(\) method or constant#'
+            path: src/Rector/Class_/LatteVarTypesBasedOnPresenterTemplateParametersRector.php
