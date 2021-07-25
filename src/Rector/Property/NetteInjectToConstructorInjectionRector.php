@@ -12,6 +12,9 @@ use Rector\Core\Rector\AbstractRector;
 use Rector\Core\ValueObject\PhpVersionFeature;
 use Rector\FamilyTree\NodeAnalyzer\PropertyUsageAnalyzer;
 use Rector\Nette\NodeAnalyzer\NetteInjectPropertyAnalyzer;
+use Rector\NodeTypeResolver\Node\AttributeKey;
+use Rector\PostRector\Collector\PropertyToAddCollector;
+use Rector\PostRector\ValueObject\PropertyMetadata;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -27,7 +30,8 @@ final class NetteInjectToConstructorInjectionRector extends AbstractRector
     public function __construct(
         private PropertyUsageAnalyzer $propertyUsageAnalyzer,
         private NetteInjectPropertyAnalyzer $netteInjectPropertyAnalyzer,
-        private PhpDocTagRemover $phpDocTagRemover
+        private PhpDocTagRemover $phpDocTagRemover,
+        private PropertyToAddCollector $propertyToAddCollector
     ) {
     }
 
@@ -97,19 +101,29 @@ CODE_SAMPLE
             $this->phpDocTagRemover->removeTagValueFromNode($phpDocInfo, $injectTagNode);
         }
 
-        if ($this->propertyUsageAnalyzer->isPropertyFetchedInChildClass($property)) {
-            $this->visibilityManipulator->makeProtected($property);
-        } else {
-            $this->visibilityManipulator->makePrivate($property);
-        }
+        $this->changePropertyVisibility($property);
 
-        $this->propertyAdder->addPropertyToCollector($property);
+        $class = $property->getAttribute(AttributeKey::CLASS_NODE);
+        $propertyName = $this->nodeNameResolver->getName($property);
+        $propertyType = $this->nodeTypeResolver->resolve($property);
 
-        if ($this->isAtLeastPhpVersion(PhpVersionFeature::PROPERTY_PROMOTION)) {
+        $propertyMetadata = new PropertyMetadata($propertyName, $propertyType, $property->flags);
+        $this->propertyToAddCollector->addPropertyToClass($class, $propertyMetadata);
+
+        if ($this->phpVersionProvider->isAtLeastPhpVersion(PhpVersionFeature::PROPERTY_PROMOTION)) {
             $this->removeNode($property);
             return null;
         }
 
         return $property;
+    }
+
+    private function changePropertyVisibility(Property $property): void
+    {
+        if ($this->propertyUsageAnalyzer->isPropertyFetchedInChildClass($property)) {
+            $this->visibilityManipulator->makeProtected($property);
+        } else {
+            $this->visibilityManipulator->makePrivate($property);
+        }
     }
 }
