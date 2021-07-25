@@ -13,6 +13,9 @@ use Rector\Core\Rector\AbstractRector;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Core\ValueObject\PhpVersionFeature;
 use Rector\FamilyTree\NodeAnalyzer\PropertyUsageAnalyzer;
+use Rector\NodeTypeResolver\Node\AttributeKey;
+use Rector\PostRector\Collector\PropertyToAddCollector;
+use Rector\PostRector\ValueObject\PropertyMetadata;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -23,7 +26,8 @@ final class MoveInjectToExistingConstructorRector extends AbstractRector
 {
     public function __construct(
         private PropertyUsageAnalyzer $propertyUsageAnalyzer,
-        private PhpDocTagRemover $phpDocTagRemover
+        private PhpDocTagRemover $phpDocTagRemover,
+        private PropertyToAddCollector $propertyToAddCollector
     ) {
     }
 
@@ -102,10 +106,16 @@ CODE_SAMPLE
             return null;
         }
 
+        $class = $node->getAttribute(AttributeKey::CLASS_NODE);
+
         foreach ($injectProperties as $injectProperty) {
             $this->removeInjectAnnotation($injectProperty);
             $this->changePropertyVisibility($injectProperty);
-            $this->propertyAdder->addPropertyToCollector($injectProperty);
+
+            $propertyName = $this->nodeNameResolver->getName($injectProperty);
+            $propertyType = $this->nodeTypeResolver->resolve($injectProperty);
+            $propertyMetadata = new PropertyMetadata($propertyName, $propertyType, $injectProperty->flags);
+            $this->propertyToAddCollector->addPropertyToClass($class, $propertyMetadata);
 
             if ($this->isAtLeastPhpVersion(PhpVersionFeature::PROPERTY_PROMOTION)) {
                 $this->removeNode($injectProperty);
