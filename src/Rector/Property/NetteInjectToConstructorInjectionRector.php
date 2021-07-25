@@ -110,7 +110,7 @@ CODE_SAMPLE
         $propertyMetadata = new PropertyMetadata($propertyName, $propertyType, $property->flags);
         $this->propertyToAddCollector->addPropertyToClass($class, $propertyMetadata);
 
-        if ($this->isAtLeastPhpVersion(PhpVersionFeature::PROPERTY_PROMOTION)) {
+        if ($this->phpVersionProvider->isAtLeastPhpVersion(PhpVersionFeature::PROPERTY_PROMOTION)) {
             $this->removeNode($property);
             return null;
         }
