@@ -18,6 +18,9 @@ use Rector\Nette\ValueObject\LatteVariableType;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
+/**
+ * @see \Rector\Nette\Tests\Rector\Class_\LatteVarTypesBasedOnPresenterTemplateParametersRector\LatteVarTypesBasedOnPresenterTemplateParametersRectorTest
+ */
 final class LatteVarTypesBasedOnPresenterTemplateParametersRector extends AbstractRector
 {
     public function getRuleDefinition(): RuleDefinition
