@@ -18,11 +18,14 @@ final class LatteVarTypesBasedOnPresenterTemplateParametersRectorTest extends Ab
      */
     public function test(SmartFileInfo $fileInfo): void
     {
-        [$originalPhpContent, $expectedPhpContent, $lattePath, $originalLatteContent, $expectedLatteContent] = explode('-----', $fileInfo->getContents());
+        [$originalPhpContent, $expectedPhpContent, $lattePath, $originalLatteContent, $expectedLatteContent] = explode(
+            '-----',
+            $fileInfo->getContents()
+        );
 
         $fixturePath = $this->getFixtureTempDirectory() . '/' . $fileInfo->getFilename();
         $this->createFixtureDir($fixturePath);
-        file_put_contents($fixturePath, $originalPhpContent . "-----" . $expectedPhpContent);
+        file_put_contents($fixturePath, $originalPhpContent . '-----' . $expectedPhpContent);
 
         $fixtureLattePath = $this->getFixtureTempDirectory() . '/' . trim($lattePath);
         $this->createFixtureDir($fixtureLattePath);
@@ -59,7 +62,7 @@ final class LatteVarTypesBasedOnPresenterTemplateParametersRectorTest extends Ab
     private function createFixtureDir(string $fileName): void
     {
         $dirName = dirname($fileName);
-        if (!file_exists($dirName)) {
+        if (! file_exists($dirName)) {
             mkdir($dirName, 0777, true);
         }
     }
