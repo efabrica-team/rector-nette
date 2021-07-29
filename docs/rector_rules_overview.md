@@ -321,6 +321,37 @@ Changes `json_encode()/json_decode()` to safer and more verbose `Nette\Utils\Jso
 
 <br>
 
+## LatteVarTypesBasedOnPresenterTemplateParametersRector
+
+Updates latte {varType}s based on presenter `$this->template` parameters
+
+- class: [`Rector\Nette\Rector\Class_\LatteVarTypesBasedOnPresenterTemplateParametersRector`](../src/Rector/Class_/LatteVarTypesBasedOnPresenterTemplateParametersRector.php)
+
+```diff
+ // presenters/SomePresenter.php
+ <?php
+
+ use Nette\Application\UI\Presenter;
+
+ class SomePresenter extends Presenter
+ {
+     public function renderDefault(): void
+     {
+         $this->template->title = 'My title';
+         $this->template->count = 123;
+     }
+ }
+
+ // templates/Some/default.latte
++{varType string $title}
++{varType int $count}
++
+ <h1>{$title}</h1>
+ <span class="count">{$count}</span>
+```
+
+<br>
+
 ## MagicHtmlCallToAppendAttributeRector
 
 Change magic `addClass()` etc. calls on Html to explicit methods

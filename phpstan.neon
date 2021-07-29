@@ -54,6 +54,11 @@ parameters:
         # PHPSTan false positive
         - '#Parameter \#1 \$className (.*?) expects class\-string, string given#'
 
+        # PHPStan false positive? I don't think there is some constant expression
+        -
+            message: '#Move constant expression to __construct\(\), setUp\(\) method or constant#'
+            path: src/Rector/Class_/LatteVarTypesBasedOnPresenterTemplateParametersRector.php
+
         # this is the way how it works in rector-src
         -
             message: '#Array with keys is not allowed\. Use value object to pass data instead#'
