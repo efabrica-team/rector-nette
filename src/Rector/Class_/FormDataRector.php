@@ -21,8 +21,9 @@ use Webmozart\Assert\Assert;
 
 /**
  * @see https://doc.nette.org/en/3.1/form-presenter#toc-mapping-to-classes
+ * @see \Rector\Nette\Tests\Rector\Class_\FormDataRector\FormDataRectorTest
  */
-final class CreateOrUpdateFormDataRector extends AbstractRector implements ConfigurableRectorInterface
+final class FormDataRector extends AbstractRector implements ConfigurableRectorInterface
 {
     public const FORM_DATA_CLASS_PARENT = 'form_data_class_parent';
 
@@ -46,7 +47,7 @@ final class CreateOrUpdateFormDataRector extends AbstractRector implements Confi
 
     public function getRuleDefinition(): RuleDefinition
     {
-        return new RuleDefinition('Create or update form data class with all fields of Form', [
+        return new RuleDefinition('Create form data class with all fields of Form', [
             new ConfiguredCodeSample(
                 <<<'CODE_SAMPLE'
 class MyFormFactory
