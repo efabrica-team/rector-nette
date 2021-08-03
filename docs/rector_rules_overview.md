@@ -1,4 +1,4 @@
-# 35 Rules Overview
+# 36 Rules Overview
 
 ## AddNextrasDatePickerToDateControlRector
 
@@ -238,6 +238,56 @@ Change `file_put_contents()` to `FileSystem::write()`
 
 <br>
 
+## FormDataRector
+
+Create form data class with all fields of Form
+
+:wrench: **configure it!**
+
+- class: [`Rector\Nette\Rector\Class_\FormDataRector`](../src/Rector/Class_/FormDataRector.php)
+
+```php
+use Rector\Nette\Rector\Class_\FormDataRector;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set(FormDataRector::class)
+        ->call('configure', [[
+            FormDataRector::FORM_DATA_CLASS_PARENT => '',
+            FormDataRector::FORM_DATA_CLASS_TRAITS => [],
+        ]]);
+};
+```
+
+↓
+
+```diff
++class MyFormFactoryFormData
++{
++    public string $foo;
++    public string $bar;
++}
++
+ class MyFormFactory
+ {
+     public function create()
+     {
+         $form = new Form();
+
+         $form->addText('foo', 'Foo');
+         $form->addText('bar', 'Bar')->setRequired();
+-        $form->onSuccess[] = function (Form $form, ArrayHash $values) {
++        $form->onSuccess[] = function (Form $form, MyFormFactoryFormData $values) {
+             // do something
+         }
+     }
+ }
+```
+
+<br>
+
 ## JsonDecodeEncodeToNetteUtilsJsonDecodeEncodeRector
 
 Changes `json_encode()/json_decode()` to safer and more verbose `Nette\Utils\Json::encode()/decode()` calls
@@ -273,7 +323,7 @@ Changes `json_encode()/json_decode()` to safer and more verbose `Nette\Utils\Jso
 
 ## LatteVarTypesBasedOnPresenterTemplateParametersRector
 
-Updates latte {varType}s based on presenter `$this->template` parameters
+Adds latte {varType}s based on presenter `$this->template` parameters
 
 - class: [`Rector\Nette\Rector\Class_\LatteVarTypesBasedOnPresenterTemplateParametersRector`](../src/Rector/Class_/LatteVarTypesBasedOnPresenterTemplateParametersRector.php)
 

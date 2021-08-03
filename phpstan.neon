@@ -32,6 +32,9 @@ parameters:
         - '#Class "Rector\\Nette\\Rector\\Class_\\MoveFinalGetUserToCheckRequirementsClassMethodRector" is missing @see annotation with test case class reference#'
 
         - '#Cognitive complexity for "Rector\\Nette\\Kdyby\\ContributeEventClassResolver\:\:resolveGetterMethodByEventClassAndParam\(\)" is 10, keep it under 9#'
+        - '#Cognitive complexity for "Rector\\Nette\\NodeFinder\\FormFieldsFinder\:\:find\(\)" is 10, keep it under 9#'
+        - '#Cognitive complexity for "Rector\\Nette\\NodeFinder\\FormOnSuccessCallbackFinder\:\:find\(\)" is 10, keep it under 9#'
+        - '#Cognitive complexity for "Rector\\Nette\\NodeFinder\\FormVariableFinder\:\:find\(\)" is 10, keep it under 9#'
 
         - '#generic class Rector\\BetterPhpDocParser\\PhpDocInfo\\PhpDocInfo but does not specify its types\: TNode#'
         - '#Use another value object over array with string\-keys and objects, array<string, ValueObject\>#'
@@ -54,3 +57,8 @@ parameters:
         -
             message: '#Move constant expression to __construct\(\), setUp\(\) method or constant#'
             path: src/Rector/Class_/LatteVarTypesBasedOnPresenterTemplateParametersRector.php
+
+        # this is the way how it works in rector-src
+        -
+            message: '#Array with keys is not allowed\. Use value object to pass data instead#'
+            path: src/Rector/Class_/FormDataRector.php
