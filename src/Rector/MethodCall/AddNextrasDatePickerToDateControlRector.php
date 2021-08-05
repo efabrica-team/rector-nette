@@ -125,8 +125,6 @@ CODE_SAMPLE
         }
 
         $arrayDimFetch = new ArrayDimFetch($methodCall->var, $key);
-        $new = $this->createDateTimeControlNew($methodCall);
-
         $formAssign = new Assign($arrayDimFetch, $new);
 
         if ($parent !== null) {
