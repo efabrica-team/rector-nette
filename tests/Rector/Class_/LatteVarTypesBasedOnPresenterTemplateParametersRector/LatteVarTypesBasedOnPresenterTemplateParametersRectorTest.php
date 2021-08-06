@@ -18,32 +18,7 @@ final class LatteVarTypesBasedOnPresenterTemplateParametersRectorTest extends Ab
      */
     public function test(SmartFileInfo $fileInfo): void
     {
-        [$originalPhpContent, $expectedPhpContent, $lattePath, $originalLatteContent, $expectedLatteContent] = explode(
-            '-----',
-            $fileInfo->getContents()
-        );
-
-        $fixturePath = $this->getFixtureTempDirectory() . '/' . $fileInfo->getFilename();
-        $this->createFixtureDir($fixturePath);
-        file_put_contents($fixturePath, $originalPhpContent . '-----' . $expectedPhpContent);
-
-        $fixtureLattePath = $this->getFixtureTempDirectory() . '/' . trim($lattePath);
-        $this->createFixtureDir($fixtureLattePath);
-        $originalLatteContent = trim($originalLatteContent);
-        file_put_contents($fixtureLattePath, $originalLatteContent);
-
-        $newFileInfo = new SmartFileInfo($fixturePath);
-        $this->doTestFileInfo($newFileInfo);
-
-        $addedFilesWithContent = $this->removedAndAddedFilesCollector->getAddedFilesWithContent();
-        $updatedTemplate = $addedFilesWithContent[0];
-
-        $this->assertSame($fixtureLattePath, $updatedTemplate->getFilePath());
-        $expectedLatteContent = trim($expectedLatteContent);
-        $this->assertSame($expectedLatteContent, $updatedTemplate->getFileContent());
-
-        unlink($fixturePath);
-        unlink($fixtureLattePath);
+        $this->doTestFileInfoWithAdditionalChanges($fileInfo);
     }
 
     /**
@@ -57,13 +32,5 @@ final class LatteVarTypesBasedOnPresenterTemplateParametersRectorTest extends Ab
     public function provideConfigFilePath(): string
     {
         return __DIR__ . '/config/configured_rule.php';
-    }
-
-    private function createFixtureDir(string $fileName): void
-    {
-        $dirName = dirname($fileName);
-        if (! file_exists($dirName)) {
-            mkdir($dirName, 0777, true);
-        }
     }
 }
