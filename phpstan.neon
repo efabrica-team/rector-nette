@@ -56,9 +56,18 @@ parameters:
         # PHPStan false positive? I don't think there is some constant expression
         -
             message: '#Move constant expression to __construct\(\), setUp\(\) method or constant#'
-            path: src/Rector/Class_/LatteVarTypesBasedOnPresenterTemplateParametersRector.php
+            paths:
+                - src/Rector/Class_/LatteVarTypesBasedOnPresenterTemplateParametersRector.php
+                - src/Rector/Class_/TemplateTypeBasedOnPresenterTemplateParametersRector.php
+
+        # PHPStan false positive. There is no method configure on reported line
+        -
+            message: '#Method configure\(\) with passed value object must contain assert to verify passed type#'
+            path: src/Rector/Class_/TemplateTypeBasedOnPresenterTemplateParametersRector.php
 
         # this is the way how it works in rector-src
         -
             message: '#Array with keys is not allowed\. Use value object to pass data instead#'
-            path: src/Rector/Class_/FormDataRector.php
+            paths:
+                - src/Rector/Class_/FormDataRector.php
+                - src/Rector/Class_/TemplateTypeBasedOnPresenterTemplateParametersRector.php
