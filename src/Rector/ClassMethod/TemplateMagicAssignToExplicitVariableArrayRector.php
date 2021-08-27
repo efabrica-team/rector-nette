@@ -12,6 +12,7 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Expression;
+use Rector\Core\Exception\NotImplementedYetException;
 use Rector\Core\Rector\AbstractRector;
 use Rector\Nette\NodeAnalyzer\ConditionalTemplateAssignReplacer;
 use Rector\Nette\NodeAnalyzer\NetteClassAnalyzer;
@@ -143,7 +144,9 @@ CODE_SAMPLE
         }
 
         $this->conditionalTemplateAssignReplacer->processClassMethod($templateParametersAssigns);
-        $renderMethodCall->args[1] = new Arg($array);
+
+        // has already an array?
+        $this->mergeOrApendArray($renderMethodCall, $array);
 
         foreach ($templateParametersAssigns->getTemplateParameterAssigns() as $alwaysTemplateParameterAssign) {
             $this->removeNode($alwaysTemplateParameterAssign->getAssign());
@@ -179,5 +182,20 @@ CODE_SAMPLE
         }
 
         return $classMethod;
+    }
+
+    private function mergeOrApendArray(MethodCall $methodCall, Array_ $array): void
+    {
+        if (! isset($methodCall->args[1])) {
+            $methodCall->args[1] = new Arg($array);
+            return;
+        }
+        $existingParameterArgValue = $methodCall->args[1]->value;
+        if (! $existingParameterArgValue instanceof Array_) {
+            // another parameters than array are not suported yet
+            throw new NotImplementedYetException();
+        }
+
+        $existingParameterArgValue->items = array_merge($existingParameterArgValue->items, $array->items);
     }
 }
