@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace Rector\Nette\ValueObject;
 
 use PhpParser\Node\Expr;
-use Rector\Nette\Contract\ValueObject\ParameterArrayInterface;
 
-final class TemplateParametersAssigns implements ParameterArrayInterface
+final class TemplateParametersAssigns
 {
     /**
      * @param AlwaysTemplateParameterAssign[] $templateParameterAssigns
      * @param ParameterAssign[] $conditionalTemplateParameterAssign
+     * @param AlwaysTemplateParameterAssign[] $defaultChangeableTemplateParameterAssigns
      */
     public function __construct(
         private array $templateParameterAssigns,
-        private array $conditionalTemplateParameterAssign
+        private array $conditionalTemplateParameterAssign,
+        private array $defaultChangeableTemplateParameterAssigns
     ) {
     }
 
@@ -58,6 +59,18 @@ final class TemplateParametersAssigns implements ParameterArrayInterface
             $templateVariables[$templateParameterAssign->getParameterName()] = $templateParameterAssign->getAssignedExpr();
         }
 
+        foreach ($this->defaultChangeableTemplateParameterAssigns as $alwaysTemplateParameterAssign) {
+            $templateVariables[$alwaysTemplateParameterAssign->getParameterName()] = $alwaysTemplateParameterAssign->getAssignedExpr();
+        }
+
         return $templateVariables;
+    }
+
+    /**
+     * @return AlwaysTemplateParameterAssign[]
+     */
+    public function getDefaultChangeableTemplateParameterAssigns(): array
+    {
+        return $this->defaultChangeableTemplateParameterAssigns;
     }
 }

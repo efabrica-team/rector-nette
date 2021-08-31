@@ -111,14 +111,6 @@ CODE_SAMPLE
 
     private function shouldSkip(ClassMethod $classMethod): bool
     {
-        if (! $classMethod->isPublic()) {
-            return true;
-        }
-
-        if (! $this->isNames($classMethod, ['render', 'render*'])) {
-            return true;
-        }
-
         return ! $this->netteClassAnalyzer->isInComponent($classMethod);
     }
 
@@ -147,14 +139,6 @@ CODE_SAMPLE
             return null;
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 49b7d68 (fixup! cleanup)
-=======
->>>>>>> 5ef15d5 (fixup! cleanup)
         $this->traverseNodesWithCallable($classMethod, function (Node $node) use ($templateParametersAssigns) {
             if (! $node instanceof Assign) {
                 return null;
@@ -170,23 +154,10 @@ CODE_SAMPLE
             return $this->replaceThisTemplateAssignWithVariable($templateParametersAssigns, $node);
         });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 00da73e (fixup! fixup! cleanup)
-=======
->>>>>>> 49b7d68 (fixup! cleanup)
-=======
->>>>>>> 5ef15d5 (fixup! cleanup)
         $this->conditionalTemplateAssignReplacer->processClassMethod($templateParametersAssigns);
 
         // has already an array?
         $this->methodCallArgMerger->mergeOrApendArray($renderMethodCall, 1, $array);
-
-        foreach ($templateParametersAssigns->getTemplateParameterAssigns() as $alwaysTemplateParameterAssign) {
-            $this->removeNode($alwaysTemplateParameterAssign->getAssign());
-        }
-
-        $this->rightAssignTemplateRemover->removeInClassMethod($classMethod);
 
         return $classMethod;
     }

@@ -21,6 +21,11 @@ final class AlwaysTemplateParameterAssign
         return $this->assign;
     }
 
+    public function getAssignVar(): Expr
+    {
+        return $this->assign->var;
+    }
+
     public function getParameterName(): string
     {
         return $this->parameterName;
