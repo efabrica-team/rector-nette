@@ -14,7 +14,7 @@ use PhpParser\Node\Stmt\If_;
 use PhpParser\Node\Stmt\Return_;
 use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\Nette\ValueObject\AlwaysTemplateParameterAssign;
-use Rector\Nette\ValueObject\ConditionalTemplateParameterAssign;
+use Rector\Nette\ValueObject\ParameterAssign;
 use Rector\Nette\ValueObject\TemplateParametersAssigns;
 use Rector\NodeNestingScope\ScopeNestingComparator;
 use Rector\NodeNestingScope\ValueObject\ControlStructure;
@@ -22,7 +22,7 @@ use Rector\NodeNestingScope\ValueObject\ControlStructure;
 final class TemplatePropertyAssignCollector
 {
     /**
-     * @var array<class-string<\PhpParser\Node>>
+     * @var array<class-string<Node>>
      */
     private const NODE_TYPES = ControlStructure::CONDITIONAL_NODE_SCOPE_TYPES + [FunctionLike::class];
 
@@ -34,9 +34,14 @@ final class TemplatePropertyAssignCollector
     private array $alwaysTemplateParameterAssigns = [];
 
     /**
-     * @var ConditionalTemplateParameterAssign[]
+     * @var ParameterAssign[]
      */
     private array $conditionalTemplateParameterAssigns = [];
+
+    /**
+     * @var ParameterAssign[]
+     */
+    private array $semiConditionalTemplateParameterAssigns = [];
 
     public function __construct(
         private ScopeNestingComparator $scopeNestingComparator,
@@ -99,18 +104,18 @@ final class TemplatePropertyAssignCollector
 
         foreach ($foundParents as $foundParent) {
             if ($this->scopeNestingComparator->isInBothIfElseBranch($foundParent, $propertyFetch)) {
-                $this->conditionalTemplateParameterAssigns[] = new ConditionalTemplateParameterAssign(
-                    $assign,
-                    $parameterName
-                );
+                $this->conditionalTemplateParameterAssigns[] = new ParameterAssign($assign, $parameterName);
                 return;
             }
 
             if ($foundParent instanceof If_) {
+                $this->semiConditionalTemplateParameterAssigns[] = new ParameterAssign($assign, $parameterName);
                 return;
             }
 
+            // only defined in else branch, nothing we can do
             if ($foundParent instanceof Else_) {
+                $this->semiConditionalTemplateParameterAssigns[] = new ParameterAssign($assign, $parameterName);
                 return;
             }
         }

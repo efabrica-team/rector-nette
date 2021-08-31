@@ -12,15 +12,15 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Expression;
-use Rector\Core\Exception\NotImplementedYetException;
 use Rector\Core\Rector\AbstractRector;
 use Rector\Nette\NodeAnalyzer\ConditionalTemplateAssignReplacer;
+use Rector\Nette\NodeAnalyzer\MethodCallArgMerger;
 use Rector\Nette\NodeAnalyzer\NetteClassAnalyzer;
 use Rector\Nette\NodeAnalyzer\RenderMethodAnalyzer;
-use Rector\Nette\NodeAnalyzer\RightAssignTemplateRemover;
 use Rector\Nette\NodeAnalyzer\TemplatePropertyAssignCollector;
 use Rector\Nette\NodeAnalyzer\TemplatePropertyParametersReplacer;
 use Rector\Nette\NodeFactory\RenderParameterArrayFactory;
+use Rector\Nette\ValueObject\TemplateParametersAssigns;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -35,8 +35,8 @@ final class TemplateMagicAssignToExplicitVariableArrayRector extends AbstractRec
         private NetteClassAnalyzer $netteClassAnalyzer,
         private RenderParameterArrayFactory $renderParameterArrayFactory,
         private ConditionalTemplateAssignReplacer $conditionalTemplateAssignReplacer,
-        private RightAssignTemplateRemover $rightAssignTemplateRemover,
-        private TemplatePropertyParametersReplacer $templatePropertyParametersReplacer
+        private TemplatePropertyParametersReplacer $templatePropertyParametersReplacer,
+        private MethodCallArgMerger $methodCallArgMerger
     ) {
     }
 
@@ -111,6 +111,10 @@ CODE_SAMPLE
 
     private function shouldSkip(ClassMethod $classMethod): bool
     {
+        if (! $classMethod->isPublic()) {
+            return true;
+        }
+
         if (! $this->isNames($classMethod, ['render', 'render*'])) {
             return true;
         }
@@ -143,10 +147,40 @@ CODE_SAMPLE
             return null;
         }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 49b7d68 (fixup! cleanup)
+=======
+>>>>>>> 5ef15d5 (fixup! cleanup)
+        $this->traverseNodesWithCallable($classMethod, function (Node $node) use ($templateParametersAssigns) {
+            if (! $node instanceof Assign) {
+                return null;
+            }
+
+            foreach ($templateParametersAssigns->getTemplateParameterAssigns() as $alwaysTemplateParameterAssign) {
+                if ($this->nodeComparator->areNodesEqual($node->var, $alwaysTemplateParameterAssign->getAssignVar())) {
+                    $this->removeNode($node);
+                    return null;
+                }
+            }
+
+            return $this->replaceThisTemplateAssignWithVariable($templateParametersAssigns, $node);
+        });
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 00da73e (fixup! fixup! cleanup)
+=======
+>>>>>>> 49b7d68 (fixup! cleanup)
+=======
+>>>>>>> 5ef15d5 (fixup! cleanup)
         $this->conditionalTemplateAssignReplacer->processClassMethod($templateParametersAssigns);
 
         // has already an array?
-        $this->mergeOrApendArray($renderMethodCall, $array);
+        $this->methodCallArgMerger->mergeOrApendArray($renderMethodCall, 1, $array);
 
         foreach ($templateParametersAssigns->getTemplateParameterAssigns() as $alwaysTemplateParameterAssign) {
             $this->removeNode($alwaysTemplateParameterAssign->getAssign());
@@ -184,18 +218,19 @@ CODE_SAMPLE
         return $classMethod;
     }
 
-    private function mergeOrApendArray(MethodCall $methodCall, Array_ $array): void
-    {
-        if (! isset($methodCall->args[1])) {
-            $methodCall->args[1] = new Arg($array);
-            return;
-        }
-        $existingParameterArgValue = $methodCall->args[1]->value;
-        if (! $existingParameterArgValue instanceof Array_) {
-            // another parameters than array are not suported yet
-            throw new NotImplementedYetException();
+    private function replaceThisTemplateAssignWithVariable(
+        TemplateParametersAssigns $templateParametersAssigns,
+        Assign $assign
+    ): null|Assign {
+        foreach ($templateParametersAssigns->getDefaultChangeableTemplateParameterAssigns() as $alwaysTemplateParameterAssign) {
+            if (! $this->nodeComparator->areNodesEqual($assign->var, $alwaysTemplateParameterAssign->getAssignVar())) {
+                continue;
+            }
+
+            $assign->var = new Variable($alwaysTemplateParameterAssign->getParameterName());
+            return $assign;
         }
 
-        $existingParameterArgValue->items = array_merge($existingParameterArgValue->items, $array->items);
+        return null;
     }
 }

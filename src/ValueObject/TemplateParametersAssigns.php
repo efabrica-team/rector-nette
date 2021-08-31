@@ -11,7 +11,7 @@ final class TemplateParametersAssigns implements ParameterArrayInterface
 {
     /**
      * @param AlwaysTemplateParameterAssign[] $templateParameterAssigns
-     * @param ConditionalTemplateParameterAssign[] $conditionalTemplateParameterAssign
+     * @param ParameterAssign[] $conditionalTemplateParameterAssign
      */
     public function __construct(
         private array $templateParameterAssigns,
@@ -20,7 +20,7 @@ final class TemplateParametersAssigns implements ParameterArrayInterface
     }
 
     /**
-     * @return ConditionalTemplateParameterAssign[]
+     * @return ParameterAssign[]
      */
     public function getConditionalTemplateParameterAssign(): array
     {

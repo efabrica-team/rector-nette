@@ -71,3 +71,6 @@ parameters:
             paths:
                 - src/Rector/Class_/FormDataRector.php
                 - src/Rector/Class_/TemplateTypeBasedOnPresenterTemplateParametersRector.php
+
+        # complex logic
+        - '#Cognitive complexity for "Rector\\Nette\\NodeAnalyzer\\TemplatePropertyAssignCollector\:\:processAssign\(\)" is \d+, keep it under 9#'
