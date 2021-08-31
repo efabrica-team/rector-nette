@@ -6,7 +6,7 @@ namespace Rector\Nette\ValueObject;
 
 use PhpParser\Node\Expr\Assign;
 
-final class ConditionalTemplateParameterAssign
+final class ParameterAssign
 {
     public function __construct(
         private Assign $assign,

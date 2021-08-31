@@ -24,5 +24,10 @@ final class ConditionalTemplateAssignReplacer
             $assign = $conditionalTemplateParameterAssign->getAssign();
             $assign->var = new Variable($conditionalTemplateParameterAssign->getParameterName());
         }
+
+        foreach ($templateParametersAssigns->getDefaultChangeableTemplateParameterAssigns() as $conditionalTemplateParameterAssign) {
+            $assign = $conditionalTemplateParameterAssign->getAssign();
+            $assign->var = new Variable($conditionalTemplateParameterAssign->getParameterName());
+        }
     }
 }
