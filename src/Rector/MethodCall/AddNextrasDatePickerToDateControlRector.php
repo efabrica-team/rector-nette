@@ -93,7 +93,7 @@ CODE_SAMPLE
 
             // this fixes printing indent
             $node->setAttribute(AttributeKey::ORIGINAL_NODE, null);
-            $this->addNodeBeforeNode($assign, $node);
+            $this->nodesToAddCollector->addNodeBeforeNode($assign, $node);
 
             return $node;
         }
