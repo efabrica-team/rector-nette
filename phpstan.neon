@@ -74,3 +74,8 @@ parameters:
 
         # complex logic
         - '#Cognitive complexity for "Rector\\Nette\\NodeAnalyzer\\TemplatePropertyAssignCollector\:\:processAssign\(\)" is \d+, keep it under 9#'
+
+        -
+            message: '#Unreachable statement \- code above always terminates#'
+            paths:
+                - src/NodeResolver/FormVariableInputNameTypeResolver.php
