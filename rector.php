@@ -25,17 +25,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // needed for DEAD_CODE list, just in split package like this
     $containerConfigurator->import(__DIR__ . '/config/config.php');
 
-    // reuqired for PHP 8
-//    $services = $containerConfigurator->services();
-//    $services->defaults()
-//        ->public()
-//        ->autoconfigure()
-//        ->autowire();
-
-    // needed for sets bellow, only for this split package
-//    $services->set(BinaryOpAnalyzer::class);
-//    $services->set(TestsNodeAnalyzer::class);
-
     $containerConfigurator->import(SetList::PHP_80);
     $containerConfigurator->import(SetList::PHP_74);
     $containerConfigurator->import(SetList::PHP_73);
