@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Rector\ArrayDimFetch;
 
-use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\ArrayDimFetch;
 use PhpParser\Node\Expr\Isset_;

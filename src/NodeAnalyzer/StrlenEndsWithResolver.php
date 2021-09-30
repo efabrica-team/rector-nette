@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Rector\Nette\NodeAnalyzer;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr\BinaryOp;
 use PhpParser\Node\Expr\BinaryOp\Identical;
 use PhpParser\Node\Expr\BinaryOp\NotIdentical;
 use PhpParser\Node\Expr\FuncCall;

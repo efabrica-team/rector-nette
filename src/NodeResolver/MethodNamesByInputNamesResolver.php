@@ -12,8 +12,9 @@ final class MethodNamesByInputNamesResolver
     /**
      * @param FormControlTypeResolverInterface[] $formControlTypeResolvers
      */
-    public function __construct(private array $formControlTypeResolvers)
-    {
+    public function __construct(
+        private array $formControlTypeResolvers
+    ) {
     }
 
     /**

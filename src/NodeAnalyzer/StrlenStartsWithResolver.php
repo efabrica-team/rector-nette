@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Rector\Nette\NodeAnalyzer;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr\BinaryOp;
 use PhpParser\Node\Expr\BinaryOp\Identical;
 use PhpParser\Node\Expr\BinaryOp\NotIdentical;
 use PhpParser\Node\Expr\FuncCall;
@@ -24,8 +23,10 @@ final class StrlenStartsWithResolver
     ) {
     }
 
-    public function resolveBinaryOpForFunction(Identical|NotIdentical $binaryOp, string $functionName): ?ContentExprAndNeedleExpr
-    {
+    public function resolveBinaryOpForFunction(
+        Identical|NotIdentical $binaryOp,
+        string $functionName
+    ): ?ContentExprAndNeedleExpr {
         if ($binaryOp->left instanceof Variable) {
             return $this->matchContentExprAndNeedleExpr($binaryOp->right, $binaryOp->left, $functionName);
         }

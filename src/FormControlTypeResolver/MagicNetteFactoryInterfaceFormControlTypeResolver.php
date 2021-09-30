@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Rector\Nette\FormControlTypeResolver;
 
-use PhpParser\Node\Expr;
 use PhpParser\Node;
+use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;

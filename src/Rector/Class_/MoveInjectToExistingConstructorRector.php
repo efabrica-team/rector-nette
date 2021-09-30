@@ -130,7 +130,10 @@ CODE_SAMPLE
      */
     private function getInjectProperties(Class_ $class): array
     {
-        return array_filter($class->getProperties(), fn(Property $property): bool => $this->isInjectProperty($property));
+        return array_filter(
+            $class->getProperties(),
+            fn (Property $property): bool => $this->isInjectProperty($property)
+        );
     }
 
     private function removeInjectAnnotation(Property $property): void

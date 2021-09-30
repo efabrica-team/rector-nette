@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Naming;
 
-use Nette\Utils\Strings;
 use Stringy\Stringy;
 
 final class NetteControlNaming

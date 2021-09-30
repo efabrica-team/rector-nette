@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Kdyby\NodeResolver;
 
-use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
-use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\PhpParser\Node\Value\ValueResolver;
 use Rector\Nette\Kdyby\Naming\EventClassNaming;
 use Rector\Nette\Kdyby\ValueObject\EventClassAndClassMethod;
