@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Naming;
 
-use Nette\Utils\Strings;
 use Stringy\Stringy;
 
 final class NetteControlNaming
@@ -14,7 +13,7 @@ final class NetteControlNaming
         $stringy = new Stringy($shortName);
         $variableName = (string) $stringy->camelize();
 
-        if (Strings::endsWith($variableName, 'Form')) {
+        if (\str_ends_with($variableName, 'Form')) {
             return $variableName;
         }
 

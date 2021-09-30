@@ -20,6 +20,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/ecs.php',
     ]);
 
+    $parameters->set(Option::PARALLEL, true);
+
     $parameters->set(Option::SKIP, [
         '*/Source/*', '*/Fixture/*',
 

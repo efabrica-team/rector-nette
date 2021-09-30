@@ -9,7 +9,6 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Type\TypeWithClassName;
 use Rector\Core\PhpParser\AstResolver;
 use Rector\Core\PhpParser\Node\Value\ValueResolver;
-use Rector\Core\Reflection\ReflectionResolver;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
@@ -25,7 +24,6 @@ final class GetComponentMethodCallFormControlTypeResolver implements FormControl
         private NodeNameResolver $nodeNameResolver,
         private NodeTypeResolver $nodeTypeResolver,
         private ValueResolver $valueResolver,
-        private ReflectionResolver $reflectionResolver,
         private AstResolver $astResolver
     ) {
     }

@@ -136,7 +136,7 @@ final class TemplatePropertyAssignCollector
     }
 
     /**
-     * @param \PhpParser\Node[] $nodes
+     * @param Node[] $nodes
      */
     private function isDefaultValueDefined(array $nodes): bool
     {

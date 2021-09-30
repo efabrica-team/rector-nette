@@ -28,6 +28,8 @@ parameters:
         - */Source/*
         - *Source/*
 
+    reportUnmatchedIgnoredErrors: false
+
     ignoreErrors:
         - '#Class "Rector\\Nette\\Rector\\Class_\\MoveFinalGetUserToCheckRequirementsClassMethodRector" is missing @see annotation with test case class reference#'
 
@@ -79,3 +81,10 @@ parameters:
             message: '#Unreachable statement \- code above always terminates#'
             paths:
                 - src/NodeResolver/FormVariableInputNameTypeResolver.php
+
+        # waits for php-aprser compatible with nikic/php-parser 4.13
+        - '#PhpParser\\Node\\Arg\|PhpParser\\Node\\VariadicPlaceholder#'
+
+        # false positive
+        - '#The string value "Nette\\Utils\\Strings" is repeated 6 times\. Refactor to enum to avoid typos and make clear allowed values#'
+

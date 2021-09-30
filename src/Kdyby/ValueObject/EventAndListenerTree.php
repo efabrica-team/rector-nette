@@ -17,7 +17,7 @@ final class EventAndListenerTree
      */
     public function __construct(
         private MethodCall $magicDispatchMethodCall,
-        private ?\PhpParser\Node\Stmt\Property $onMagicProperty,
+        private ?Property $onMagicProperty,
         private string $eventClassName,
         private string $eventFileLocation,
         private Namespace_ $eventClassInNamespace,

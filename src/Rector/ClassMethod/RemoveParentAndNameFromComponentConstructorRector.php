@@ -20,7 +20,6 @@ use Rector\Core\Reflection\ReflectionResolver;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\NodeAnalyzer\StaticCallAnalyzer;
 use Rector\Nette\NodeFinder\ParamFinder;
-use Rector\NodeTypeResolver\MethodParameterTypeResolver;
 use Rector\NodeTypeResolver\Node\AttributeKey;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
@@ -48,7 +47,6 @@ final class RemoveParentAndNameFromComponentConstructorRector extends AbstractRe
     public function __construct(
         private ParamFinder $paramFinder,
         private StaticCallAnalyzer $staticCallAnalyzer,
-        private MethodParameterTypeResolver $methodParameterTypeResolver,
         private ReflectionResolver $reflectionResolver
     ) {
         $this->controlObjectType = new ObjectType('Nette\Application\UI\Control');

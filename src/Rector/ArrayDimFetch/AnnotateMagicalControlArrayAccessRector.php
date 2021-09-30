@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Rector\ArrayDimFetch;
 
-use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\ArrayDimFetch;
 use PhpParser\Node\Expr\Isset_;
@@ -111,7 +110,7 @@ CODE_SAMPLE
         }
 
         // probably multiplier factory, nothing we can do... yet
-        if (Strings::contains($controlName, '-')) {
+        if (\str_contains($controlName, '-')) {
             return null;
         }
 
