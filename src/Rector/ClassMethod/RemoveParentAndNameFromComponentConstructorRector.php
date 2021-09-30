@@ -48,7 +48,6 @@ final class RemoveParentAndNameFromComponentConstructorRector extends AbstractRe
     public function __construct(
         private ParamFinder $paramFinder,
         private StaticCallAnalyzer $staticCallAnalyzer,
-        private MethodParameterTypeResolver $methodParameterTypeResolver,
         private ReflectionResolver $reflectionResolver
     ) {
         $this->controlObjectType = new ObjectType('Nette\Application\UI\Control');

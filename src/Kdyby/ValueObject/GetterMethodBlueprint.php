@@ -10,7 +10,7 @@ final class GetterMethodBlueprint
 {
     public function __construct(
         private string $methodName,
-        private ?\PhpParser\Node $returnTypeNode,
+        private ?Node $returnTypeNode,
         private string $variableName
     ) {
     }

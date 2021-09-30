@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Rector\Nette\FormControlTypeResolver;
 
+use PhpParser\Node\Expr;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Reflection\ClassReflection;
@@ -74,7 +75,7 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
         return $this->methodNamesByInputNamesResolver->resolveExpr($classMethod);
     }
 
-    private function resolveClassReflectionByExpr(Node\Expr $expr): ?ClassReflection
+    private function resolveClassReflectionByExpr(Expr $expr): ?ClassReflection
     {
         $staticType = $this->nodeTypeResolver->resolve($expr);
         if (! $staticType instanceof TypeWithClassName) {

@@ -25,7 +25,6 @@ final class GetComponentMethodCallFormControlTypeResolver implements FormControl
         private NodeNameResolver $nodeNameResolver,
         private NodeTypeResolver $nodeTypeResolver,
         private ValueResolver $valueResolver,
-        private ReflectionResolver $reflectionResolver,
         private AstResolver $astResolver
     ) {
     }

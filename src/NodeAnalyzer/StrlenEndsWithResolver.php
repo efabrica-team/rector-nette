@@ -23,10 +23,7 @@ final class StrlenEndsWithResolver
     ) {
     }
 
-    /**
-     * @param Identical|NotIdentical $binaryOp
-     */
-    public function resolveBinaryOpForFunction(BinaryOp $binaryOp): ?ContentExprAndNeedleExpr
+    public function resolveBinaryOpForFunction(Identical|NotIdentical $binaryOp): ?ContentExprAndNeedleExpr
     {
         if ($binaryOp->left instanceof Variable) {
             return $this->matchContentExprAndNeedleExpr($binaryOp->right, $binaryOp->left);

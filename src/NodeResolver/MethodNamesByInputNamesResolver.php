@@ -10,16 +10,10 @@ use Rector\Nette\Contract\FormControlTypeResolverInterface;
 final class MethodNamesByInputNamesResolver
 {
     /**
-     * @var FormControlTypeResolverInterface[]
-     */
-    private array $formControlTypeResolvers = [];
-
-    /**
      * @param FormControlTypeResolverInterface[] $formControlTypeResolvers
      */
-    public function __construct(array $formControlTypeResolvers)
+    public function __construct(private array $formControlTypeResolvers)
     {
-        $this->formControlTypeResolvers = $formControlTypeResolvers;
     }
 
     /**

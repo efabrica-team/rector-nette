@@ -78,10 +78,6 @@ final class ListeningMethodsCollector
                     return null;
                 }
 
-                if (! $node instanceof ArrayItem) {
-                    throw new ShouldNotHappenException();
-                }
-
                 $eventClassAndClassMethod = $this->resolveCustomClassMethodAndEventClass(
                     $node,
                     $classLike,
@@ -160,7 +156,7 @@ final class ListeningMethodsCollector
         $classMethodName = $this->valueResolver->getValue($arrayItem->value);
         $classMethod = $class->getMethod($classMethodName);
 
-        if (Strings::contains($eventClass, '::')) {
+        if (\str_contains($eventClass, '::')) {
             [$dispatchingClass, $property] = explode('::', $eventClass);
             $eventClass = $this->eventClassNaming->createEventClassNameFromClassAndProperty(
                 $dispatchingClass,

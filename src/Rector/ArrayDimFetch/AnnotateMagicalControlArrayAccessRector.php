@@ -111,7 +111,7 @@ CODE_SAMPLE
         }
 
         // probably multiplier factory, nothing we can do... yet
-        if (Strings::contains($controlName, '-')) {
+        if (\str_contains($controlName, '-')) {
             return null;
         }
 

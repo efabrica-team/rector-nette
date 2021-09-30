@@ -160,7 +160,7 @@ CODE_SAMPLE
     private function resolveMethodNameFromKdybyEventName(Expr $expr): string
     {
         $kdybyEventName = $this->valueResolver->getValue($expr);
-        if (Strings::contains($kdybyEventName, '::')) {
+        if (\str_contains($kdybyEventName, '::')) {
             return (string) Strings::after($kdybyEventName, '::', -1);
         }
 

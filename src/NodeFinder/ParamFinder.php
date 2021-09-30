@@ -22,7 +22,7 @@ final class ParamFinder
     /**
      * @param Node|Node[] $nodeHaystack
      */
-    public function isInAssign($nodeHaystack, Param $param): bool
+    public function isInAssign(Node|array $nodeHaystack, Param $param): bool
     {
         $variable = $param->var;
 
