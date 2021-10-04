@@ -88,3 +88,7 @@ parameters:
         # false positive
         - '#The string value "Nette\\Utils\\Strings" is repeated 6 times\. Refactor to enum to avoid typos and make clear allowed values#'
 
+
+        -
+            message: '#Parameter "eventAndListenerTree" cannot have default value#'
+            path: src/Kdyby/NodeManipulator/ListeningClassMethodArgumentManipulator.php
