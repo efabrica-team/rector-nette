@@ -77,7 +77,7 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
 
     private function resolveClassReflectionByExpr(Expr $expr): ?ClassReflection
     {
-        $staticType = $this->nodeTypeResolver->resolve($expr);
+        $staticType = $this->nodeTypeResolver->getType($expr);
         if (! $staticType instanceof TypeWithClassName) {
             return null;
         }

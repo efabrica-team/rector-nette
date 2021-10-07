@@ -113,7 +113,8 @@ CODE_SAMPLE
             $this->changePropertyVisibility($injectProperty);
 
             $propertyName = $this->nodeNameResolver->getName($injectProperty);
-            $propertyType = $this->nodeTypeResolver->resolve($injectProperty);
+            $propertyType = $this->nodeTypeResolver->getType($injectProperty);
+
             $propertyMetadata = new PropertyMetadata($propertyName, $propertyType, $injectProperty->flags);
             $this->propertyToAddCollector->addPropertyToClass($class, $propertyMetadata);
 

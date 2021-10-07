@@ -105,7 +105,7 @@ CODE_SAMPLE
 
         $class = $property->getAttribute(AttributeKey::CLASS_NODE);
         $propertyName = $this->nodeNameResolver->getName($property);
-        $propertyType = $this->nodeTypeResolver->resolve($property);
+        $propertyType = $this->nodeTypeResolver->getType($property);
 
         $propertyMetadata = new PropertyMetadata($propertyName, $propertyType, $property->flags);
         $this->propertyToAddCollector->addPropertyToClass($class, $propertyMetadata);

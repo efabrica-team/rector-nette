@@ -85,7 +85,7 @@ CODE_SAMPLE
             return null;
         }
 
-        $callerType = $this->nodeTypeResolver->resolve($node->var);
+        $callerType = $this->nodeTypeResolver->getType($node->var);
         $containerObjectType = new ObjectType('Nette\DI\Container');
 
         if (! $containerObjectType->isSuperTypeOf($callerType)->yes()) {
