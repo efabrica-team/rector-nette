@@ -148,7 +148,7 @@ CODE_SAMPLE
                 continue;
             }
 
-            $staticType = $this->getStaticType($stmt->expr->expr);
+            $staticType = $this->getType($stmt->expr->expr);
 
             $varTypes[] = new LatteVariableType(
                 (string) $this->getName($propertyFetch->name),

@@ -180,7 +180,7 @@ CODE_SAMPLE
             return false;
         }
 
-        $varStaticType = $this->getStaticType($expr->var);
+        $varStaticType = $this->getType($expr->var);
         if (! $varStaticType instanceof TypeWithClassName) {
             return false;
         }

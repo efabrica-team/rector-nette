@@ -62,7 +62,7 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
             return [];
         }
 
-        $returnedType = $this->nodeTypeResolver->getStaticType($node);
+        $returnedType = $this->nodeTypeResolver->getType($node);
         if (! $returnedType instanceof TypeWithClassName) {
             return [];
         }

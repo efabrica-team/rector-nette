@@ -41,7 +41,7 @@ final class AssignDimFetchFormTypeResolver implements FormControlTypeResolverInt
             return [];
         }
 
-        $exprType = $this->nodeTypeResolver->getStaticType($formVariableAssign->expr);
+        $exprType = $this->nodeTypeResolver->getType($formVariableAssign->expr);
         if (! $exprType instanceof TypeWithClassName) {
             return [];
         }

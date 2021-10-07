@@ -52,7 +52,7 @@ final class GetComponentMethodCallFormControlTypeResolver implements FormControl
 
         $createComponentClassMethodName = $this->createCreateComponentMethodName($node);
 
-        $staticType = $this->nodeTypeResolver->getStaticType($node);
+        $staticType = $this->nodeTypeResolver->getType($node);
 
         if (! $staticType instanceof FullyQualifiedObjectType) {
             return [];
@@ -70,7 +70,7 @@ final class GetComponentMethodCallFormControlTypeResolver implements FormControl
             $constructorClassMethodData = $this->methodNamesByInputNamesResolver->resolveExpr($constructorClassMethod);
         }
 
-        $callerType = $this->nodeTypeResolver->getStaticType($node->var);
+        $callerType = $this->nodeTypeResolver->getType($node->var);
         if (! $callerType instanceof TypeWithClassName) {
             return $constructorClassMethodData;
         }

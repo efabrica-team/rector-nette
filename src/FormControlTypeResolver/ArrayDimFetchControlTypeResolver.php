@@ -62,7 +62,7 @@ final class ArrayDimFetchControlTypeResolver implements FormControlTypeResolverI
         ArrayDimFetch $arrayDimFetch,
         string $controlShortName
     ): ?ClassMethod {
-        $callerType = $this->nodeTypeResolver->getStaticType($arrayDimFetch->var);
+        $callerType = $this->nodeTypeResolver->getType($arrayDimFetch->var);
         if (! $callerType instanceof TypeWithClassName) {
             return null;
         }

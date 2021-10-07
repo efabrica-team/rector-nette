@@ -32,7 +32,7 @@ final class VariableWithTypesFactory
         $variablesWithTypes = [];
 
         foreach ($args as $arg) {
-            $staticType = $this->nodeTypeResolver->getStaticType($arg->value);
+            $staticType = $this->nodeTypeResolver->getType($arg->value);
             $variableName = $this->variableNaming->resolveFromNodeAndType($arg, $staticType);
             if ($variableName === null) {
                 throw new ShouldNotHappenException();
