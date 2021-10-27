@@ -11,6 +11,7 @@ use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Naming\Naming\VariableNaming;
 use Rector\Nette\Kdyby\ValueObject\VariableWithType;
 use Rector\NodeTypeResolver\NodeTypeResolver;
+use Rector\PHPStanStaticTypeMapper\Enum\TypeKind;
 use Rector\StaticTypeMapper\StaticTypeMapper;
 
 final class VariableWithTypesFactory
@@ -44,7 +45,7 @@ final class VariableWithTypesFactory
 
             $phpParserTypeNode = $this->staticTypeMapper->mapPHPStanTypeToPhpParserNode(
                 $staticType,
-                \Rector\PHPStanStaticTypeMapper\Enum\TypeKind::PROPERTY()
+                TypeKind::PROPERTY()
             );
             $variablesWithTypes[] = new VariableWithType($variableName, $staticType, $phpParserTypeNode);
         }
