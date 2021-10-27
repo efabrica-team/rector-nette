@@ -14,7 +14,7 @@ includes:
     - vendor/symplify/phpstan-rules/config/string-to-constant-rules.neon
 
 parameters:
-    level: max
+    level: 8
 
     paths:
         - config
