@@ -91,3 +91,6 @@ parameters:
 
         # callback/closure false positive
         - '#Parameter \#2 \$callback of function array_filter expects callable\(PhpParser\\Node\\Expr\\ArrayItem\|null\)\: mixed, Closure\(PhpParser\\Node\\Expr\\ArrayItem\)\: true given#'
+
+        # false positive, class name
+        - '#The string value "Nette\\Utils\\Strings" is repeated \d+ times\. Refactor to enum to avoid typos and make clear allowed values#'
