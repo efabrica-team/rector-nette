@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\ValueObject;
-
-use Nette\Forms\Controls\BaseControl;
+namespace Rector\Nette\Enum;
 
 final class NetteFormMethodNameToControlType
 {
     /**
-     * @var array<string, class-string<BaseControl>>
+     * @var array<string, string>
      */
     public const METHOD_NAME_TO_CONTROL_TYPE = [
         'addText' => 'Nette\Forms\Controls\TextInput',

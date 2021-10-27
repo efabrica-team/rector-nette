@@ -10,7 +10,7 @@ use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\NodeManipulator\MethodCallManipulator;
 use Rector\Core\PhpParser\Node\Value\ValueResolver;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
-use Rector\Nette\ValueObject\NetteFormMethodNameToControlType;
+use Rector\Nette\Enum\NetteFormMethodNameToControlType;
 use Rector\NodeNameResolver\NodeNameResolver;
 
 final class OnVariableMethodCallsFormControlTypeResolver implements FormControlTypeResolverInterface

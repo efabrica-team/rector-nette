@@ -85,10 +85,9 @@ parameters:
         # waits for php-aprser compatible with nikic/php-parser 4.13
         - '#PhpParser\\Node\\Arg\|PhpParser\\Node\\VariadicPlaceholder#'
 
-        # false positive
-        - '#The string value "Nette\\Utils\\Strings" is repeated 6 times\. Refactor to enum to avoid typos and make clear allowed values#'
-
-
         -
             message: '#Parameter "eventAndListenerTree" cannot have default value#'
             path: src/Kdyby/NodeManipulator/ListeningClassMethodArgumentManipulator.php
+
+        # callback/closure false positive
+        - '#Parameter \#2 \$callback of function array_filter expects callable\(PhpParser\\Node\\Expr\\ArrayItem\|null\)\: mixed, Closure\(PhpParser\\Node\\Expr\\ArrayItem\)\: true given#'

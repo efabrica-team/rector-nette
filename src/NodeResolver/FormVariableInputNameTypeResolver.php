@@ -7,7 +7,7 @@ namespace Rector\Nette\NodeResolver;
 use PhpParser\Node\Expr;
 use Rector\Core\Exception\NotImplementedYetException;
 use Rector\Core\Exception\ShouldNotHappenException;
-use Rector\Nette\ValueObject\NetteFormMethodNameToControlType;
+use Rector\Nette\Enum\NetteFormMethodNameToControlType;
 
 final class FormVariableInputNameTypeResolver
 {
