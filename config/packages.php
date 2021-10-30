@@ -13,7 +13,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autowire()
         ->autoconfigure();
 
-    $services->load('Rector\\Nette\\NeonParser\\', __DIR__ . '/../packages/NeonParser');
+    $services->load('Rector\\Nette\\NeonParser\\', __DIR__ . '/../packages/NeonParser')
+        ->exclude([
+            __DIR__ . '/../packages/NeonParser/NeonNodeTraverser.php',
+            __DIR__ . '/../packages/NeonParser/Node',
+        ]);
 
     $services->set(Decoder::class);
 };

@@ -7,12 +7,7 @@
         "php": ">=8.0",
         "ext-xml": "*",
         "danielstjules/stringy": "^3.1",
-<<<<<<< HEAD
         "rector/rector-phpunit": "^0.11.15"
-=======
-        "rector/rector-phpunit": "^0.11",
-        "nette/neon": "^3.3"
->>>>>>> refactoring to neon ast
     },
     "require-dev": {
         "rector/rector-src": "dev-main",
@@ -26,7 +21,7 @@
         "nette/forms": "3.0.*",
         "symplify/rule-doc-generator": "^9.5",
         "phpstan/extension-installer": "^1.1",
-        "rector/phpstan-rules": "^0.4.4"
+        "rector/phpstan-rules": "^0.4.7"
     },
     "autoload": {
         "psr-4": {

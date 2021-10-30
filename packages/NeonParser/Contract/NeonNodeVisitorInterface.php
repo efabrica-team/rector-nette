@@ -6,5 +6,10 @@ use Nette\Neon\Node;
 
 interface NeonNodeVisitorInterface
 {
-    public function enterNode(Node $node);
+    /**
+     * @return class-string<\PhpParser\Node>
+     */
+    public function getNodeType(): string;
+
+    public function enterNode(Node $node): Node;
 }
