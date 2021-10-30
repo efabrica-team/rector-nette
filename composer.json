@@ -30,7 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Rector\\Nette\\": "src"
+            "Rector\\Nette\\": ["src", "packages"]
         }
     },
     "autoload-dev": {

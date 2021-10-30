@@ -13,6 +13,8 @@ use Nette\Neon\Node\LiteralNode;
 use Nette\Neon\Traverser;
 use Nette\Utils\Strings;
 use Rector\Nette\Contract\Rector\NeonRectorInterface;
+use Rector\Nette\NeonParser\NeonNodeTraverser;
+use Rector\Nette\NeonParser\NeonParser;
 use Rector\Renaming\Collector\MethodCallRenameCollector;
 use Rector\Renaming\Contract\MethodCallRenameInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -29,7 +31,8 @@ final class RenameMethodNeonRector implements NeonRectorInterface
     private const SERVICES_KEYWORD = 'services';
 
     public function __construct(
-        private MethodCallRenameCollector $methodCallRenameCollector
+        private MethodCallRenameCollector $methodCallRenameCollector,
+        private NeonParser $neonParser,
     ) {
     }
 
@@ -58,11 +61,11 @@ CODE_SAMPLE
 
     public function changeContent(string $content): string
     {
-        $decoder = new Decoder();
-        $neonNode = $decoder->parseToNode($content);
+        $neonNode = $this->neonParser->parseString($content);
+
+        $neonNodeTraverser = new NeonNodeTraverser();
 
         $isInServicesScope = false;
-
         $nodeVisitor = function (Node $neonNode) use (&$isInServicesScope) {
             if ($isInServicesScope) {
                 if ($neonNode instanceof ArrayNode) {
@@ -92,10 +95,7 @@ CODE_SAMPLE
             }
         };
 
-        // @see https://forum.nette.org/en/34804-neon-with-ast-parser-and-format-preserving-printing
-
-        $traverser = new Traverser();
-        $neonNode = $traverser->traverse($neonNode, $nodeVisitor);
+        $neonNode = $neonNodeTraverser->traverse($neonNode);
 
         $refactoredContent = $neonNode->toString();
 
