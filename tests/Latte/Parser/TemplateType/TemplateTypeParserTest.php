@@ -16,7 +16,7 @@ final class TemplateTypeParserTest extends AbstractTestCase
 
     protected function setUp(): void
     {
-        $this->bootFromConfigFileInfos([new SmartFileInfo(__DIR__ . '/../../../../config/config.php')]);
+        $this->bootFromConfigFiles([__DIR__ . '/../../../../config/config.php']);
         $this->templateTypeParser = $this->getService(TemplateTypeParser::class);
     }
 

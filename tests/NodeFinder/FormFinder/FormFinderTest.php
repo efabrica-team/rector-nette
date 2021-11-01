@@ -30,7 +30,7 @@ final class FormFinderTest extends AbstractTestCase
 
     protected function setUp(): void
     {
-        $this->bootFromConfigFileInfos([new SmartFileInfo(__DIR__ . '/../../../config/config.php')]);
+        $this->bootFromConfigFiles([__DIR__ . '/../../../config/config.php']);
         $this->formVariableFinder = $this->getService(FormVariableFinder::class);
         $this->formFieldsFinder = $this->getService(FormFieldsFinder::class);
         $this->parser = $this->getService(TestingParser::class);

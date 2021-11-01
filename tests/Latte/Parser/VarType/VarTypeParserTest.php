@@ -16,7 +16,7 @@ final class VarTypeParserTest extends AbstractTestCase
 
     protected function setUp(): void
     {
-        $this->bootFromConfigFileInfos([new SmartFileInfo(__DIR__ . '/../../../../config/config.php')]);
+        $this->bootFromConfigFiles([__DIR__ . '/../../../../config/config.php']);
         $this->varTypeParser = $this->getService(VarTypeParser::class);
     }
 
