@@ -14,5 +14,5 @@ interface NeonRectorInterface extends RectorInterface
      */
     public function getNodeType(): string;
 
-    public function enterNode(Node $node): Node;
+    public function enterNode(Node $node): Node|null;
 }

@@ -50,7 +50,7 @@ final class NeonNodeTraverser
 
             // enter node only in case of matching type
             if (is_a($node, $neonRector->getNodeType(), true)) {
-                $node = $neonRector->enterNode($node);
+                $neonRector->enterNode($node);
             }
 
             // traverse all children

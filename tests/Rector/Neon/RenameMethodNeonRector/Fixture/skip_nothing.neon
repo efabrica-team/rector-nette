@@ -1,0 +1,7 @@
+services:
+    # some comment
+    -
+        class: Nothing
+    # some comment again
+    -
+        class: NothingAgain

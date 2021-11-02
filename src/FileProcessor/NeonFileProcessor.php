@@ -36,8 +36,15 @@ final class NeonFileProcessor implements FileProcessorInterface
             $neonNodeTraverser->addNeonNodeVisitor($neonRector);
         }
 
+        $originalPrintedContent = $this->formatPreservingNeonPrinter->printNode($neonNode, $fileContent);
+
         $neonNode = $neonNodeTraverser->traverse($neonNode);
         $changedFileContent = $this->formatPreservingNeonPrinter->printNode($neonNode, $fileContent);
+
+        // has node changed?
+        if ($changedFileContent === $originalPrintedContent) {
+            return;
+        }
 
         $file->changeFileContent($changedFileContent);
     }

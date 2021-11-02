@@ -55,7 +55,7 @@ CODE_SAMPLE
     /**
      * @param SetupMethodCall $node
      */
-    public function enterNode(Node $node): Node
+    public function enterNode(Node $node): Node|null
     {
         foreach ($this->methodCallRenameCollector->getMethodCallRenames() as $methodCallRename) {
             if (! is_a($node->className, $methodCallRename->getClass(), true)) {
@@ -67,8 +67,9 @@ CODE_SAMPLE
             }
 
             $node->methodNameLiteralNode->value = $methodCallRename->getNewMethod();
+            return $node;
         }
 
-        return $node;
+        return null;
     }
 }
