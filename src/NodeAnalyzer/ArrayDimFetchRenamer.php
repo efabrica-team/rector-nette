@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Naming;
+namespace Rector\Nette\NodeAnalyzer;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\ArrayDimFetch;
