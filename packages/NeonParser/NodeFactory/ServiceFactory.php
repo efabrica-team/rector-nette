@@ -117,8 +117,6 @@ final class ServiceFactory
         return $setupMethodCalls;
     }
 
-
-
     private function resolveServiceName(LiteralNode|null $classLiteralNode, LiteralNode|null $factoryLiteralNode): string
     {
         if ($classLiteralNode) {
