@@ -103,3 +103,7 @@ parameters:
         -
             path: src/NodeFactory/ClassWithPublicPropertiesFactory.php
             message: '#Instead of array shape, use value object with specific types in constructor and getters#'
+
+        -
+            path: src/NodeAnalyzer/MethodCallManipulator.php
+            message: '#Do not use "array_filter" function with complex content, make it more readable with extracted method or single\-line statement#'
