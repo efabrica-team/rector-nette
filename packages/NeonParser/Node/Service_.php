@@ -44,14 +44,6 @@ final class Service_ extends AbstractVirtualNode
     }
 
     /**
-     * @return SetupMethodCall[]
-     */
-    public function getSetupMethodCalls(): array
-    {
-        return $this->setupMethodCalls;
-    }
-
-    /**
      * @return Node[]
      */
     public function getSubNodes(): array
