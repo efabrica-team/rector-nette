@@ -100,9 +100,7 @@ final class ContributeEventClassResolver
             return $getterMethodsWithType[$type];
         }
 
-        $paramName = $this->nodeNameResolver->getName($param->var);
         $staticType = $this->staticTypeMapper->mapPhpParserNodePHPStanType($paramType);
-
         return $this->createGetterFromParamAndStaticType($param, $staticType);
     }
 

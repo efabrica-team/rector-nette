@@ -13,6 +13,7 @@ use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
 use Rector\NodeNameResolver\NodeNameResolver;
 use Rector\NodeTypeResolver\Node\AttributeKey;
+use Symfony\Contracts\Service\Attribute\Required;
 
 final class ThisVariableInAnotherMethodFormControlTypeResolver implements FormControlTypeResolverInterface
 {
@@ -23,9 +24,7 @@ final class ThisVariableInAnotherMethodFormControlTypeResolver implements FormCo
     ) {
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function autowireThisVariableInAnotherMethodFormControlTypeResolver(
         MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
     ): void {

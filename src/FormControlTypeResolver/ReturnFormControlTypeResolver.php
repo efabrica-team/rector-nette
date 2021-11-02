@@ -11,6 +11,7 @@ use PhpParser\Node\Stmt\Return_;
 use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 final class ReturnFormControlTypeResolver implements FormControlTypeResolverInterface
 {
@@ -21,9 +22,7 @@ final class ReturnFormControlTypeResolver implements FormControlTypeResolverInte
     ) {
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function autowireReturnFormControlTypeResolver(
         MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
     ): void {
