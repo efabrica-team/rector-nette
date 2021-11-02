@@ -2,57 +2,170 @@
 
 declare(strict_types=1);
 
-namespace Rector\Naming;
+namespace Rector\Nette\Rector\Class_;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr\ArrayDimFetch;
-use PhpParser\Node\Expr\ArrowFunction;
-use PhpParser\Node\Expr\Closure;
-use PhpParser\Node\Expr\Variable;
+use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
-use PhpParser\Node\Stmt\Function_;
-use PhpParser\NodeTraverser;
-use Rector\Core\PhpParser\Comparing\NodeComparator;
-use Symplify\Astral\NodeTraverser\SimpleCallableNodeTraverser;
+use PhpParser\Node\Stmt\Property;
+use Rector\BetterPhpDocParser\PhpDocManipulator\PhpDocTagRemover;
+use Rector\Core\Exception\ShouldNotHappenException;
+use Rector\Core\Rector\AbstractRector;
+use Rector\Core\ValueObject\MethodName;
+use Rector\Core\ValueObject\PhpVersionFeature;
+use Rector\Nette\NodeAnalyzer\PropertyUsageAnalyzer;
+use Rector\NodeTypeResolver\Node\AttributeKey;
+use Rector\PostRector\Collector\PropertyToAddCollector;
+use Rector\PostRector\ValueObject\PropertyMetadata;
+use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
+use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
-final class ArrayDimFetchRenamer
+/**
+ * @see \Rector\Nette\Tests\Rector\Class_\MoveInjectToExistingConstructorRector\MoveInjectToExistingConstructorRectorTest
+ */
+final class MoveInjectToExistingConstructorRector extends AbstractRector
 {
     public function __construct(
-        private SimpleCallableNodeTraverser $simpleCallableNodeTraverser,
-        private NodeComparator $nodeComparator
+        private PropertyUsageAnalyzer $propertyUsageAnalyzer,
+        private PhpDocTagRemover $phpDocTagRemover,
+        private PropertyToAddCollector $propertyToAddCollector
     ) {
     }
 
+    public function getRuleDefinition(): RuleDefinition
+    {
+        return new RuleDefinition(
+            'Move @inject properties to constructor, if there already is one',
+            [
+                new CodeSample(
+                    <<<'CODE_SAMPLE'
+final class SomeClass
+{
     /**
-     * @see VariableRenamer::renameVariableInFunctionLike()
+     * @var SomeDependency
+     * @inject
      */
-    public function renameToVariable(
-        ClassMethod $classMethod,
-        ArrayDimFetch $arrayDimFetch,
-        string $variableName
-    ): void {
-        $this->simpleCallableNodeTraverser->traverseNodesWithCallable((array) $classMethod->stmts, function (
-            Node $node
-        ) use ($arrayDimFetch, $variableName) {
-            // do not rename element above
-            if ($node->getLine() <= $arrayDimFetch->getLine()) {
-                return null;
-            }
+    public $someDependency;
 
-            if ($this->isScopeNesting($node)) {
-                return NodeTraverser::DONT_TRAVERSE_CURRENT_AND_CHILDREN;
-            }
+    /**
+     * @var OtherDependency
+     */
+    private $otherDependency;
 
-            if (! $this->nodeComparator->areNodesEqual($node, $arrayDimFetch)) {
-                return null;
-            }
+    public function __construct(OtherDependency $otherDependency)
+    {
+        $this->otherDependency = $otherDependency;
+    }
+}
+CODE_SAMPLE
+,
+                    <<<'CODE_SAMPLE'
+final class SomeClass
+{
+    /**
+     * @var SomeDependency
+     */
+    private $someDependency;
 
-            return new Variable($variableName);
-        });
+    /**
+     * @var OtherDependency
+     */
+    private $otherDependency;
+
+    public function __construct(OtherDependency $otherDependency, SomeDependency $someDependency)
+    {
+        $this->otherDependency = $otherDependency;
+        $this->someDependency = $someDependency;
+    }
+}
+CODE_SAMPLE
+                ),
+            ]
+        );
     }
 
-    private function isScopeNesting(Node $node): bool
+    /**
+     * @return array<class-string<Node>>
+     */
+    public function getNodeTypes(): array
     {
-        return $node instanceof Closure || $node instanceof Function_ || $node instanceof ArrowFunction;
+        return [Class_::class];
+    }
+
+    /**
+     * @param Class_ $node
+     */
+    public function refactor(Node $node): ?Node
+    {
+        $injectProperties = $this->getInjectProperties($node);
+        if ($injectProperties === []) {
+            return null;
+        }
+
+        $constructClassMethod = $node->getMethod(MethodName::CONSTRUCT);
+        if (! $constructClassMethod instanceof ClassMethod) {
+            return null;
+        }
+
+        $class = $node->getAttribute(AttributeKey::CLASS_NODE);
+        if (! $class instanceof Class_) {
+            throw new ShouldNotHappenException();
+        }
+
+        foreach ($injectProperties as $injectProperty) {
+            $this->removeInjectAnnotation($injectProperty);
+            $this->changePropertyVisibility($injectProperty);
+
+            $propertyName = $this->nodeNameResolver->getName($injectProperty);
+            $propertyType = $this->nodeTypeResolver->getType($injectProperty);
+
+            $propertyMetadata = new PropertyMetadata($propertyName, $propertyType, $injectProperty->flags);
+            $this->propertyToAddCollector->addPropertyToClass($class, $propertyMetadata);
+
+            if ($this->phpVersionProvider->isAtLeastPhpVersion(PhpVersionFeature::PROPERTY_PROMOTION)) {
+                $this->removeNode($injectProperty);
+            }
+        }
+
+        return $node;
+    }
+
+    /**
+     * @return Property[]
+     */
+    private function getInjectProperties(Class_ $class): array
+    {
+        return array_filter(
+            $class->getProperties(),
+            fn (Property $property): bool => $this->isInjectProperty($property)
+        );
+    }
+
+    private function removeInjectAnnotation(Property $property): void
+    {
+        $phpDocInfo = $this->phpDocInfoFactory->createFromNodeOrEmpty($property);
+        $injectTagValueNode = $phpDocInfo->getByName('inject');
+        if ($injectTagValueNode) {
+            $this->phpDocTagRemover->removeTagValueFromNode($phpDocInfo, $injectTagValueNode);
+        }
+    }
+
+    private function changePropertyVisibility(Property $injectProperty): void
+    {
+        if ($this->propertyUsageAnalyzer->isPropertyFetchedInChildClass($injectProperty)) {
+            $this->visibilityManipulator->makeProtected($injectProperty);
+        } else {
+            $this->visibilityManipulator->makePrivate($injectProperty);
+        }
+    }
+
+    private function isInjectProperty(Property $property): bool
+    {
+        if (! $property->isPublic()) {
+            return false;
+        }
+
+        $phpDocInfo = $this->phpDocInfoFactory->createFromNodeOrEmpty($property);
+        return $phpDocInfo->hasByName('inject');
     }
 }
