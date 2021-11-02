@@ -41,6 +41,11 @@ final class ServiceFactory
         $factory = $this->resolveArrayItemByKeyword($node, self::FACTORY_KEYWORD);
 
         $className = $this->resolveServiceName($class, $factory);
+        // resolve later
+        if (! is_string($className)) {
+            return null;
+        }
+
         $setupMethodCalls = $this->resolveSetupMethodCalls($className, $node);
 
         return new Service_($className, $class, $factory, $setupMethodCalls);
@@ -117,7 +122,7 @@ final class ServiceFactory
         return $setupMethodCalls;
     }
 
-    private function resolveServiceName(LiteralNode|null $classLiteralNode, LiteralNode|null $factoryLiteralNode): string
+    private function resolveServiceName(LiteralNode|null $classLiteralNode, LiteralNode|null $factoryLiteralNode): string|null
     {
         if ($classLiteralNode) {
             return $classLiteralNode->toString();
@@ -127,6 +132,6 @@ final class ServiceFactory
             return $factoryLiteralNode->toString();
         }
 
-        throw new NeonShouldNotHappenException();
+        return null;
     }
 }
