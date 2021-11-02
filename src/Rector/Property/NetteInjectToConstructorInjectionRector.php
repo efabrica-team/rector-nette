@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Rector\Property;
 
+use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Property;
 use Rector\BetterPhpDocParser\PhpDocInfo\PhpDocInfo;
@@ -105,7 +106,7 @@ CODE_SAMPLE
         $this->changePropertyVisibility($property);
 
         $class = $property->getAttribute(AttributeKey::CLASS_NODE);
-        if (! $class instanceof Node\Stmt\Class_) {
+        if (! $class instanceof Class_) {
             throw new ShouldNotHappenException();
         }
 

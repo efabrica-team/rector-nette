@@ -142,7 +142,7 @@ CODE_SAMPLE
 
             $currentStmt = $node->getAttribute(AttributeKey::CURRENT_STATEMENT);
             $positionNode = $currentStmt ?? $node;
-            if (! $positionNode instanceof \PhpParser\Node) {
+            if (! $positionNode instanceof Node) {
                 throw new ShouldNotHappenException();
             }
 

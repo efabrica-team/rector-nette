@@ -97,7 +97,7 @@ CODE_SAMPLE
     public function refactorIdentical(Identical $identical): ?Bool_
     {
         $parent = $identical->getAttribute(AttributeKey::PARENT_NODE);
-        if (! $parent instanceof \PhpParser\Node) {
+        if (! $parent instanceof Node) {
             return null;
         }
 

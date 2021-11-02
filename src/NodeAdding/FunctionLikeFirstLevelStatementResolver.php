@@ -44,7 +44,7 @@ final class FunctionLikeFirstLevelStatementResolver
             }
 
             $currentStatement = $parent->getAttribute(AttributeKey::CURRENT_STATEMENT);
-            if (! $currentStatement instanceof \PhpParser\Node) {
+            if (! $currentStatement instanceof Node) {
                 throw new ShouldNotHappenException();
             }
         }
