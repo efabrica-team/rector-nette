@@ -16,6 +16,7 @@ use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
 use Rector\NodeNameResolver\NodeNameResolver;
 use Rector\NodeTypeResolver\NodeTypeResolver;
 use Rector\StaticTypeMapper\ValueObject\Type\FullyQualifiedObjectType;
+use Symfony\Contracts\Service\Attribute\Required;
 
 final class GetComponentMethodCallFormControlTypeResolver implements FormControlTypeResolverInterface
 {
@@ -29,9 +30,7 @@ final class GetComponentMethodCallFormControlTypeResolver implements FormControl
     ) {
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function autowireGetComponentMethodCallFormControlTypeResolver(
         MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
     ): void {

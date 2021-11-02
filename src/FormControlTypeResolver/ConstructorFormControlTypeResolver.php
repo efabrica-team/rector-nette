@@ -12,6 +12,7 @@ use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
 use Rector\NodeNameResolver\NodeNameResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 final class ConstructorFormControlTypeResolver implements FormControlTypeResolverInterface
 {
@@ -23,9 +24,7 @@ final class ConstructorFormControlTypeResolver implements FormControlTypeResolve
     ) {
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function autowireConstructorFormControlTypeResolver(
         MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
     ): void {

@@ -16,6 +16,7 @@ use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
 use Rector\NodeNameResolver\NodeNameResolver;
 use Rector\NodeTypeResolver\NodeTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormControlTypeResolverInterface
 {
@@ -29,9 +30,7 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
     ) {
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function autowireMagicNetteFactoryInterfaceFormControlTypeResolver(
         MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
     ): void {

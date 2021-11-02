@@ -14,7 +14,6 @@ use PhpParser\Node\Stmt\Expression;
 use Rector\CodingStyle\Naming\ClassNaming;
 use Rector\Core\NodeAnalyzer\ParamAnalyzer;
 use Rector\Nette\Kdyby\ContributeEventClassResolver;
-use Rector\Nette\Kdyby\ValueObject\EventAndListenerTree;
 use Rector\Nette\Kdyby\ValueObject\EventClassAndClassMethod;
 
 final class ListeningClassMethodArgumentManipulator
@@ -31,27 +30,10 @@ final class ListeningClassMethodArgumentManipulator
     ) {
     }
 
-    public function changeFromEventAndListenerTreeAndCurrentClassName(
-        EventAndListenerTree $eventAndListenerTree,
-        string $className
-    ): void {
-        $listenerClassMethods = $eventAndListenerTree->getListenerClassMethodsByClass($className);
-        if ($listenerClassMethods === []) {
-            return;
-        }
-
-        $classMethodsByEventClass = [];
-        foreach ($listenerClassMethods as $listenerClassMethod) {
-            $classMethodsByEventClass[] = new EventClassAndClassMethod($className, $listenerClassMethod);
-        }
-
-        $this->change($classMethodsByEventClass, $eventAndListenerTree);
-    }
-
     /**
      * @param EventClassAndClassMethod[] $classMethodsByEventClass
      */
-    public function change(array $classMethodsByEventClass, ?EventAndListenerTree $eventAndListenerTree = null): void
+    public function change(array $classMethodsByEventClass): void
     {
         foreach ($classMethodsByEventClass as $classMethods) {
             // are attributes already replaced
@@ -62,8 +44,7 @@ final class ListeningClassMethodArgumentManipulator
             }
 
             $oldParams = $classMethod->params;
-
-            $eventClass = $eventAndListenerTree !== null ? $eventAndListenerTree->getEventClassName() : $classMethods->getEventClass();
+            $eventClass = $classMethods->getEventClass();
 
             $this->changeClassParamToEventClass($eventClass, $classMethod);
 
@@ -73,11 +54,7 @@ final class ListeningClassMethodArgumentManipulator
                     continue;
                 }
 
-                $eventGetterToVariableAssign = $this->createEventGetterToVariableMethodCall(
-                    $eventClass,
-                    $oldParam,
-                    $eventAndListenerTree
-                );
+                $eventGetterToVariableAssign = $this->createEventGetterToVariableMethodCall($eventClass, $oldParam);
 
                 $expression = new Expression($eventGetterToVariableAssign);
 
@@ -97,20 +74,15 @@ final class ListeningClassMethodArgumentManipulator
         $classMethod->params = [$param];
     }
 
-    private function createEventGetterToVariableMethodCall(
-        string $eventClass,
-        Param $param,
-        ?EventAndListenerTree $eventAndListenerTree
-    ): Assign {
+    private function createEventGetterToVariableMethodCall(string $eventClass, Param $param): Assign
+    {
         $paramName = $this->classNaming->getVariableName($eventClass);
         $eventVariable = new Variable($paramName);
 
         $getterMethod = $this->contributeEventClassResolver->resolveGetterMethodByEventClassAndParam(
             $eventClass,
-            $param,
-            $eventAndListenerTree
+            $param
         );
-
         $methodCall = new MethodCall($eventVariable, $getterMethod);
 
         return new Assign($param->var, $methodCall);

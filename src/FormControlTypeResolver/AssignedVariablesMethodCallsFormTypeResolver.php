@@ -10,6 +10,7 @@ use PhpParser\Node\Expr\Variable;
 use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 final class AssignedVariablesMethodCallsFormTypeResolver implements FormControlTypeResolverInterface
 {
@@ -20,9 +21,7 @@ final class AssignedVariablesMethodCallsFormTypeResolver implements FormControlT
     ) {
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function autowireAssignedVariablesMethodCallsFormTypeResolver(
         MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
     ): void {
