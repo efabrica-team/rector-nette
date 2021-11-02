@@ -6,7 +6,6 @@ namespace Rector\Nette\NeonParser\Node;
 
 use Nette\Neon\Node;
 use Nette\Neon\Node\LiteralNode;
-use Rector\Nette\NeonParser\Exception\NotImplementedYetException;
 use Rector\Nette\NeonParser\Node\Service_\SetupMethodCall;
 
 /**
@@ -14,6 +13,11 @@ use Rector\Nette\NeonParser\Node\Service_\SetupMethodCall;
  */
 final class Service_ extends AbstractVirtualNode
 {
+    /**
+     * @var string
+     */
+    private const UNKNOWN_TYPE = '__UNKNOWN_TYPE__';
+
     /**
      * @param SetupMethodCall[] $setupMethodCalls
      */
@@ -40,7 +44,7 @@ final class Service_ extends AbstractVirtualNode
             return $this->factoryLiteralNode->toString();
         }
 
-        throw new NotImplementedYetException();
+        return self::UNKNOWN_TYPE;
     }
 
     /**
