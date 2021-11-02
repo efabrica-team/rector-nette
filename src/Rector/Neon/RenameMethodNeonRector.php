@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Rector\Neon;
 
+use Nette\Neon\Node;
 use Rector\Nette\Contract\Rector\NeonRectorInterface;
-use Rector\Nette\NeonParser\NeonNodeTraverserFactory;
-use Rector\Nette\NeonParser\NeonNodeVisitor\RenameMethodCallNeonNodeVisitor;
-use Rector\Nette\NeonParser\NeonParser;
-use Rector\Nette\NeonParser\Printer\FormatPreservingPrinter;
+use Rector\Nette\NeonParser\Node\Service_\SetupMethodCall;
+use Rector\Renaming\Collector\MethodCallRenameCollector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -18,10 +17,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RenameMethodNeonRector implements NeonRectorInterface
 {
     public function __construct(
-        private NeonParser $neonParser,
-        private RenameMethodCallNeonNodeVisitor $renameMethodCallNeonNodeVisitor,
-        private FormatPreservingPrinter $formatPreservingPrinter,
-        private NeonNodeTraverserFactory $neonNodeTraverserFactory
+        private MethodCallRenameCollector $methodCallRenameCollector,
     ) {
     }
 
@@ -48,14 +44,31 @@ CODE_SAMPLE
         ]);
     }
 
-    public function changeContent(string $content): string
+    /**
+     * @return class-string<Node>
+     */
+    public function getNodeType(): string
     {
-        $neonNode = $this->neonParser->parseString($content);
+        return SetupMethodCall::class;
+    }
 
-        $neonNodeTraverser = $this->neonNodeTraverserFactory->create();
-        $neonNodeTraverser->addNeonNodeVisitor($this->renameMethodCallNeonNodeVisitor);
-        $neonNode = $neonNodeTraverser->traverse($neonNode);
+    /**
+     * @param SetupMethodCall $node
+     */
+    public function enterNode(Node $node): Node
+    {
+        foreach ($this->methodCallRenameCollector->getMethodCallRenames() as $methodCallRename) {
+            if (! is_a($node->className, $methodCallRename->getClass(), true)) {
+                continue;
+            }
 
-        return $this->formatPreservingPrinter->printNode($neonNode, $content);
+            if ($node->getMethodName() !== $methodCallRename->getOldMethod()) {
+                continue;
+            }
+
+            $node->methodNameLiteralNode->value = $methodCallRename->getNewMethod();
+        }
+
+        return $node;
     }
 }

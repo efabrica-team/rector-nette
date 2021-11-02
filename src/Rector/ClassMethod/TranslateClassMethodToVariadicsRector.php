@@ -142,6 +142,10 @@ CODE_SAMPLE
 
             $currentStmt = $node->getAttribute(AttributeKey::CURRENT_STATEMENT);
             $positionNode = $currentStmt ?? $node;
+            if (! $positionNode instanceof \PhpParser\Node) {
+                throw new ShouldNotHappenException();
+            }
+
             $this->nodesToAddCollector->addNodeBeforeNode($assign, $positionNode);
 
             return NodeTraverser::STOP_TRAVERSAL;

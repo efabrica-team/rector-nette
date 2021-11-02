@@ -12,6 +12,7 @@ use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Return_;
 use Rector\Core\Exception\NotImplementedYetException;
+use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\Rector\AbstractRector;
 use Rector\Nette\Kdyby\NodeAnalyzer\GetSubscribedEventsClassMethodAnalyzer;
 use Rector\Nette\Kdyby\NodeManipulator\GetSubscribedEventsArrayManipulator;
@@ -160,6 +161,10 @@ CODE_SAMPLE
     private function resolveMethodNameFromKdybyEventName(Expr $expr): string
     {
         $kdybyEventName = $this->valueResolver->getValue($expr);
+        if (! is_string($kdybyEventName)) {
+            throw new ShouldNotHappenException();
+        }
+
         if (\str_contains($kdybyEventName, '::')) {
             return (string) Strings::after($kdybyEventName, '::', -1);
         }

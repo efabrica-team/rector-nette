@@ -112,6 +112,10 @@ CODE_SAMPLE
         $eventReference = $oldArgs[0]->value;
 
         $classAndStaticProperty = $this->valueResolver->getValue($eventReference, true);
+        if (! is_string($classAndStaticProperty)) {
+            return null;
+        }
+
         $eventClassName = $this->eventClassNaming->createEventClassNameFromClassPropertyReference(
             $classAndStaticProperty
         );

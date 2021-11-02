@@ -127,7 +127,7 @@ CODE_SAMPLE
         $arrayDimFetch = new ArrayDimFetch($methodCall->var, $key);
         $formAssign = new Assign($arrayDimFetch, $new);
 
-        if ($parent !== null) {
+        if ($parent instanceof Node) {
             $methodCalls = $this->betterNodeFinder->findInstanceOf($parent, MethodCall::class);
 
             if (count($methodCalls) > 1) {

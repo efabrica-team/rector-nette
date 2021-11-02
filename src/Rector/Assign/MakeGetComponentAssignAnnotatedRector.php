@@ -229,6 +229,10 @@ CODE_SAMPLE
         Expr $expr
     ): Type {
         $componentName = $this->valueResolver->getValue($shortControlString);
+        if (! is_string($componentName)) {
+            throw new ShouldNotHappenException();
+        }
+
         $componentName = ucfirst($componentName);
 
         $methodName = sprintf('createComponent%s', $componentName);

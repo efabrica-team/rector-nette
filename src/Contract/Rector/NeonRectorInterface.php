@@ -4,9 +4,15 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Contract\Rector;
 
+use Nette\Neon\Node;
 use Rector\Core\Contract\Rector\RectorInterface;
 
 interface NeonRectorInterface extends RectorInterface
 {
-    public function changeContent(string $content): string;
+    /**
+     * @return class-string<Node>
+     */
+    public function getNodeType(): string;
+
+    public function enterNode(Node $node): Node;
 }

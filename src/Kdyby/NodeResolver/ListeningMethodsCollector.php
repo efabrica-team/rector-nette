@@ -9,6 +9,7 @@ use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
+use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\PhpParser\Node\Value\ValueResolver;
 use Rector\Nette\Kdyby\Naming\EventClassNaming;
 use Rector\Nette\Kdyby\ValueObject\EventClassAndClassMethod;
@@ -69,6 +70,9 @@ final class ListeningMethodsCollector
                 }
 
                 $eventClass = $this->valueResolver->getValue($node->key);
+                if (! is_string($eventClass)) {
+                    throw new ShouldNotHappenException();
+                }
 
                 if ($type === self::EVENT_TYPE_CONTRIBUTTE) {
                     /** @var string $eventClass */
@@ -152,6 +156,10 @@ final class ListeningMethodsCollector
     ): ?EventClassAndClassMethod {
         // custom method name
         $classMethodName = $this->valueResolver->getValue($arrayItem->value);
+        if (! is_string($classMethodName)) {
+            throw new ShouldNotHappenException();
+        }
+
         $classMethod = $class->getMethod($classMethodName);
 
         if (\str_contains($eventClass, '::')) {

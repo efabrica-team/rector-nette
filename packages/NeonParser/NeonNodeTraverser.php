@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Rector\Nette\NeonParser;
 
 use Nette\Neon\Node;
+use Rector\Nette\Contract\Rector\NeonRectorInterface;
 use Rector\Nette\NeonParser\Contract\NeonNodeVisitorInterface;
 use Rector\Nette\NeonParser\Node\Service_;
 use Rector\Nette\NeonParser\NodeFactory\ServiceFactory;
@@ -18,7 +19,7 @@ final class NeonNodeTraverser
     /**
      * @var NeonNodeVisitorInterface[]
      */
-    private array $neonNodeVisitors = [];
+    private array $neonRectors = [];
 
     public function __construct(
         private ServiceTypeResolver $serviceTypeResolver,
@@ -26,14 +27,14 @@ final class NeonNodeTraverser
     ) {
     }
 
-    public function addNeonNodeVisitor(NeonNodeVisitorInterface $neonNodeVisitor): void
+    public function addNeonNodeVisitor(NeonRectorInterface $neonRector): void
     {
-        $this->neonNodeVisitors[] = $neonNodeVisitor;
+        $this->neonRectors[] = $neonRector;
     }
 
     public function traverse(Node $node): Node
     {
-        foreach ($this->neonNodeVisitors as $neonNodeVisitor) {
+        foreach ($this->neonRectors as $neonRector) {
             // is service node?
             // iterate single service
             $serviceType = $this->serviceTypeResolver->resolve($node);
@@ -48,8 +49,8 @@ final class NeonNodeTraverser
             }
 
             // enter node only in case of matching type
-            if (is_a($node, $neonNodeVisitor->getNodeType(), true)) {
-                $node = $neonNodeVisitor->enterNode($node);
+            if (is_a($node, $neonRector->getNodeType(), true)) {
+                $node = $neonRector->enterNode($node);
             }
 
             // traverse all children

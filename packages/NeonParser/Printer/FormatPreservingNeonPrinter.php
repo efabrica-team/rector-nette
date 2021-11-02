@@ -7,7 +7,7 @@ namespace Rector\Nette\NeonParser\Printer;
 use Nette\Neon\Node;
 use Nette\Utils\Strings;
 
-final class FormatPreservingPrinter
+final class FormatPreservingNeonPrinter
 {
     /**
      * @var string
