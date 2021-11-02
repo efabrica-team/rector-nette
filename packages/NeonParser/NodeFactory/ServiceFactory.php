@@ -6,6 +6,7 @@ namespace Rector\Nette\NeonParser\NodeFactory;
 
 use Nette\Neon\Node\ArrayItemNode;
 use Nette\Neon\Node\ArrayNode;
+use Nette\Neon\Node\EntityNode;
 use Nette\Neon\Node\LiteralNode;
 use Rector\Nette\NeonParser\Exception\NotImplementedYetException;
 use Rector\Nette\NeonParser\Node\Service_;
@@ -37,9 +38,11 @@ final class ServiceFactory
 
         $class = $this->resolveArrayItemByKeyword($node, self::CLASS_KEYWORD);
         $factory = $this->resolveArrayItemByKeyword($node, self::FACTORY_KEYWORD);
-        $setupMethodCalls = $this->resolveSetupMethodCalls($node);
 
-        return new Service_($class, $factory, $setupMethodCalls);
+        $className = $this->resolveServiceName($class, $factory);
+        $setupMethodCalls = $this->resolveSetupMethodCalls($className, $node);
+
+        return new Service_($className, $class, $factory, $setupMethodCalls);
     }
 
     private function resolveArrayItemByKeyword(ArrayItemNode $arrayItemNode, string $keyword): LiteralNode|null
@@ -58,7 +61,7 @@ final class ServiceFactory
                 continue;
             }
 
-            if ($arrayItemNode->value instanceof Node\EntityNode) {
+            if ($arrayItemNode->value instanceof EntityNode) {
                 return $arrayItemNode->value->value;
             }
 
@@ -70,9 +73,11 @@ final class ServiceFactory
         return null;
     }
 
-    private function resolveSetupMethodCalls(ArrayItemNode $arrayItemNode): array
+    /**
+     * @return SetupMethodCall[]
+     */
+    private function resolveSetupMethodCalls(string $className, ArrayItemNode $arrayItemNode): array
     {
-
         if (! $arrayItemNode->value instanceof ArrayNode) {
             return [];
         }
@@ -91,7 +96,7 @@ final class ServiceFactory
                 }
 
                 foreach ($arrayItemNode->value->items as $setupArrayItemNode) {
-                    if ($setupArrayItemNode->value instanceof Node\EntityNode) {
+                    if ($setupArrayItemNode->value instanceof EntityNode) {
                         // probably method call
                         $entityNode = $setupArrayItemNode->value;
 
@@ -101,7 +106,7 @@ final class ServiceFactory
                                 continue;
                             }
 
-                            $setupMethodCalls[] = new SetupMethodCall($entityNode->value, $entityNode);
+                            $setupMethodCalls[] = new SetupMethodCall($className, $entityNode->value, $entityNode);
                         }
                     }
                 }
@@ -109,5 +114,20 @@ final class ServiceFactory
         }
 
         return $setupMethodCalls;
+    }
+
+
+
+    private function resolveServiceName(LiteralNode|null $classLiteralNode, LiteralNode|null $factoryLiteralNode): string
+    {
+        if ($classLiteralNode) {
+            return $classLiteralNode->toString();
+        }
+
+        if ($factoryLiteralNode) {
+            return $factoryLiteralNode->toString();
+        }
+
+        throw new NotImplementedYetException();
     }
 }

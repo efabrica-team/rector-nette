@@ -5,16 +5,19 @@ declare(strict_types=1);
 namespace Rector\Nette\NeonParser\Node;
 
 use Nette\Neon\Node;
+use Rector\Nette\NeonParser\Exception\UnusedVirtualMethodException;
 
 abstract class AbstractVirtualNode extends Node
 {
-    // never used, just to make parent contract happy
-    public function toValue()
+    public function toValue(): mixed
     {
+        // never used, just to make parent contract happy
+        throw new UnusedVirtualMethodException();
     }
 
-    // never used, just to make parent contract happy
     public function toString(): string
     {
+        // never used, just to make parent contract happy
+        throw new UnusedVirtualMethodException();
     }
 }

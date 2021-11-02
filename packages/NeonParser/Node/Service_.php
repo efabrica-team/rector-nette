@@ -18,10 +18,16 @@ final class Service_ extends AbstractVirtualNode
      * @param SetupMethodCall[] $setupMethodCalls
      */
     public function __construct(
+        private string $className,
         private LiteralNode|null $classLiteralNode,
         private LiteralNode|null $factoryLiteralNode,
         private array $setupMethodCalls
     ) {
+    }
+
+    public function getClassName(): string
+    {
+        return $this->className;
     }
 
     public function getServiceType(): string
@@ -50,7 +56,15 @@ final class Service_ extends AbstractVirtualNode
      */
     public function getSubNodes(): array
     {
-        return [$this->classLiteralNode, $this->factoryLiteralNode, ...$this->setupMethodCalls];
-    }
+        $subNodes = [];
+        if ($this->classLiteralNode instanceof LiteralNode) {
+            $subNodes[] = $this->classLiteralNode;
+        }
 
+        if ($this->factoryLiteralNode instanceof LiteralNode) {
+            $subNodes[] = $this->factoryLiteralNode;
+        }
+
+        return array_merge($subNodes, $this->setupMethodCalls);
+    }
 }
