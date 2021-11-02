@@ -25,6 +25,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             __DIR__ . '/../src/Kdyby/Rector',
             __DIR__ . '/../src/Kdyby/ValueObject',
         ]);
+
     $services->set(RenameClassNonPhpRector::class);
     $services->set(RenameMethodNeonRector::class);
     $services->set(RenameMethodLatteRector::class);

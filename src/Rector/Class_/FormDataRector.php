@@ -8,9 +8,9 @@ use PhpParser\Node;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Stmt\Class_;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
-use Rector\Core\NodeFactory\ClassWithPublicPropertiesFactory;
 use Rector\Core\Rector\AbstractRector;
 use Rector\FileSystemRector\ValueObject\AddedFileWithContent;
+use Rector\Nette\NodeFactory\ClassWithPublicPropertiesFactory;
 use Rector\Nette\NodeFinder\FormFieldsFinder;
 use Rector\Nette\NodeFinder\FormOnSuccessCallbackFinder;
 use Rector\Nette\NodeFinder\FormOnSuccessCallbackValuesParamFinder;
@@ -100,15 +100,22 @@ CODE_SAMPLE
         return [Class_::class];
     }
 
+    /**
+     * @param array<string, string|string[]>  $configuration
+     */
     public function configure(array $configuration): void
     {
         if (isset($configuration[self::FORM_DATA_CLASS_PARENT])) {
-            Assert::string($configuration[self::FORM_DATA_CLASS_PARENT]);
-            $this->formDataClassParent = $configuration[self::FORM_DATA_CLASS_PARENT];
+            $formDataClassParent = $configuration[self::FORM_DATA_CLASS_PARENT];
+            Assert::string($formDataClassParent);
+            $this->formDataClassParent = $formDataClassParent;
         }
+
         if (isset($configuration[self::FORM_DATA_CLASS_TRAITS])) {
-            Assert::isArray($configuration[self::FORM_DATA_CLASS_TRAITS]);
-            $this->formDataClassTraits = $configuration[self::FORM_DATA_CLASS_TRAITS];
+            $formDataClassTraits = $configuration[self::FORM_DATA_CLASS_TRAITS];
+            Assert::isArray($formDataClassTraits);
+            Assert::allString($formDataClassTraits);
+            $this->formDataClassTraits = $formDataClassTraits;
         }
     }
 
