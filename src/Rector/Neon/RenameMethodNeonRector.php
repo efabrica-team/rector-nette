@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Rector\Neon;
 
-use Nette\Utils\Strings;
 use Rector\Nette\Contract\Rector\NeonRectorInterface;
-use Rector\Renaming\Collector\MethodCallRenameCollector;
+use Rector\Nette\NeonParser\NeonNodeTraverserFactory;
+use Rector\Nette\NeonParser\NeonNodeVisitor\RenameMethodCallNeonNodeVisitor;
+use Rector\Nette\NeonParser\NeonParser;
+use Rector\Nette\NeonParser\Printer\FormatPreservingPrinter;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -16,7 +18,10 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RenameMethodNeonRector implements NeonRectorInterface
 {
     public function __construct(
-        private MethodCallRenameCollector $methodCallRenameCollector
+        private NeonParser $neonParser,
+        private RenameMethodCallNeonNodeVisitor $renameMethodCallNeonNodeVisitor,
+        private FormatPreservingPrinter $formatPreservingPrinter,
+        private NeonNodeTraverserFactory $neonNodeTraverserFactory
     ) {
     }
 
@@ -45,20 +50,12 @@ CODE_SAMPLE
 
     public function changeContent(string $content): string
     {
-        foreach ($this->methodCallRenameCollector->getMethodCallRenames() as $methodCallRename) {
-            $oldObjectType = $methodCallRename->getOldObjectType();
-            $objectClassName = $oldObjectType->getClassName();
-            $className = str_replace('\\', '\\\\', $objectClassName);
+        $neonNode = $this->neonParser->parseString($content);
 
-            $oldMethodName = $methodCallRename->getOldMethod();
-            $newMethodName = $methodCallRename->getNewMethod();
+        $neonNodeTraverser = $this->neonNodeTraverserFactory->create();
+        $neonNodeTraverser->addNeonNodeVisitor($this->renameMethodCallNeonNodeVisitor);
+        $neonNode = $neonNodeTraverser->traverse($neonNode);
 
-            $pattern = '#\n(.*?)(class|factory): ' . $className . '(\n|\((.*?)\)\n)\1setup:(.*?)- ' . $oldMethodName . '\(#s';
-            if (Strings::match($content, $pattern)) {
-                $content = str_replace($oldMethodName . '(', $newMethodName . '(', $content);
-            }
-        }
-
-        return $content;
+        return $this->formatPreservingPrinter->printNode($neonNode, $content);
     }
 }

@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Rector\Core\Configuration\Option;
-use Rector\Nette\NodeAnalyzer\BinaryOpAnalyzer;
-use Rector\PHPUnit\NodeAnalyzer\TestsNodeAnalyzer;
+use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
+use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
@@ -22,11 +22,20 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         '*/Fixture/*',
     ]);
 
+    $services = $containerConfigurator->services();
+    $services->set(StringClassNameToClassConstantRector::class)
+        ->call('configure', [[
+            StringClassNameToClassConstantRector::CLASSES_TO_SKIP => [
+                'Nette\*',
+                'Symfony\Component\Translation\TranslatorInterface',
+                'Symfony\Contracts\EventDispatcher\Event',
+                'Kdyby\Events\Subscriber',
+            ]
+        ]]);
+
     // needed for DEAD_CODE list, just in split package like this
     $containerConfigurator->import(__DIR__ . '/config/config.php');
 
-    $containerConfigurator->import(SetList::PHP_80);
-    $containerConfigurator->import(SetList::PHP_74);
-    $containerConfigurator->import(SetList::PHP_73);
+    $containerConfigurator->import(LevelSetList::UP_TO_PHP_80);
     $containerConfigurator->import(SetList::DEAD_CODE);
 };
