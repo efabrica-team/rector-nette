@@ -28,11 +28,6 @@ final class PropertyUsageAnalyzer
 
     public function isPropertyFetchedInChildClass(Property $property): bool
     {
-        $className = $property->getAttribute(AttributeKey::CLASS_NAME);
-        if ($className === null) {
-            return false;
-        }
-
         $scope = $property->getAttribute(AttributeKey::SCOPE);
         if (! $scope instanceof Scope) {
             return false;

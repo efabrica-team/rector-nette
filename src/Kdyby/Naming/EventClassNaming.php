@@ -5,12 +5,8 @@ declare(strict_types=1);
 namespace Rector\Nette\Kdyby\Naming;
 
 use Nette\Utils\Strings;
-use PhpParser\Node\Expr\MethodCall;
-use PHPStan\Analyser\Scope;
 use Rector\CodingStyle\Naming\ClassNaming;
-use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\NodeNameResolver\NodeNameResolver;
-use Rector\NodeTypeResolver\Node\AttributeKey;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class EventClassNaming
@@ -24,33 +20,6 @@ final class EventClassNaming
         private ClassNaming $classNaming,
         private NodeNameResolver $nodeNameResolver
     ) {
-    }
-
-    /**
-     * "App\SomeNamespace\SomeClass::onUpload" → "App\SomeNamespace\Event\SomeClassUploadEvent"
-     */
-    public function createEventClassNameFromMethodCall(MethodCall $methodCall): string
-    {
-        $shortEventClassName = $this->getShortEventClassName($methodCall);
-
-        /** @var string $className */
-        $className = $methodCall->getAttribute(AttributeKey::CLASS_NAME);
-
-        return $this->prependShortClassEventWithNamespace($shortEventClassName, $className);
-    }
-
-    public function resolveEventFileLocationFromMethodCall(MethodCall $methodCall): string
-    {
-        $shortEventClassName = $this->getShortEventClassName($methodCall);
-
-        $scope = $methodCall->getAttribute(AttributeKey::SCOPE);
-        if (! $scope instanceof Scope) {
-            throw new ShouldNotHappenException();
-        }
-
-        $directory = dirname($scope->getFile());
-
-        return $directory . DIRECTORY_SEPARATOR . self::EVENT . DIRECTORY_SEPARATOR . $shortEventClassName . '.php';
     }
 
     public function resolveEventFileLocationFromClassNameAndFileInfo(
@@ -76,17 +45,6 @@ final class EventClassNaming
         $shortEventClass = $this->createShortEventClassNameFromClassAndProperty($class, $property);
 
         return $this->prependShortClassEventWithNamespace($shortEventClass, $class);
-    }
-
-    private function getShortEventClassName(MethodCall $methodCall): string
-    {
-        /** @var string $methodName */
-        $methodName = $this->nodeNameResolver->getName($methodCall->name);
-
-        /** @var string $className */
-        $className = $methodCall->getAttribute(AttributeKey::CLASS_NAME);
-
-        return $this->createShortEventClassNameFromClassAndProperty($className, $methodName);
     }
 
     private function prependShortClassEventWithNamespace(string $shortEventClassName, string $orinalClassName): string
