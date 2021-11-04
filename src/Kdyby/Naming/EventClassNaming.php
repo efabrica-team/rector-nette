@@ -5,12 +5,8 @@ declare(strict_types=1);
 namespace Rector\Nette\Kdyby\Naming;
 
 use Nette\Utils\Strings;
-use PhpParser\Node\Expr\MethodCall;
-use PHPStan\Analyser\Scope;
 use Rector\CodingStyle\Naming\ClassNaming;
-use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\NodeNameResolver\NodeNameResolver;
-use Rector\NodeTypeResolver\Node\AttributeKey;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class EventClassNaming
