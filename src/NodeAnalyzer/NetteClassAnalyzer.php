@@ -7,13 +7,14 @@ namespace Rector\Nette\NodeAnalyzer;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Type\ObjectType;
-use Rector\NodeTypeResolver\Node\AttributeKey;
+use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\NodeTypeResolver\NodeTypeResolver;
 
 final class NetteClassAnalyzer
 {
     public function __construct(
-        private NodeTypeResolver $nodeTypeResolver
+        private NodeTypeResolver $nodeTypeResolver,
+        private BetterNodeFinder $betterNodeFinder
     ) {
     }
 
@@ -22,7 +23,7 @@ final class NetteClassAnalyzer
         if ($node instanceof Class_) {
             $class = $node;
         } else {
-            $class = $node->getAttribute(AttributeKey::CLASS_NODE);
+            $class = $this->betterNodeFinder->findParentType($node, Class_::class);
         }
 
         if (! $class instanceof Class_) {

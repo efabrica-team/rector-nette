@@ -10,11 +10,11 @@ use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use Rector\Core\Exception\ShouldNotHappenException;
+use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\Core\PhpParser\Node\Value\ValueResolver;
 use Rector\Nette\Kdyby\Naming\EventClassNaming;
 use Rector\Nette\Kdyby\ValueObject\EventClassAndClassMethod;
 use Rector\Nette\Kdyby\ValueObject\NetteEventToContributeEventClass;
-use Rector\NodeTypeResolver\Node\AttributeKey;
 use Symplify\Astral\NodeTraverser\SimpleCallableNodeTraverser;
 
 final class ListeningMethodsCollector
@@ -37,7 +37,8 @@ final class ListeningMethodsCollector
     public function __construct(
         private SimpleCallableNodeTraverser $simpleCallableNodeTraverser,
         private EventClassNaming $eventClassNaming,
-        private ValueResolver $valueResolver
+        private ValueResolver $valueResolver,
+        private BetterNodeFinder $betterNodeFinder,
     ) {
     }
 
@@ -48,15 +49,17 @@ final class ListeningMethodsCollector
         ClassMethod $getSubscribedEventsClassMethod,
         string $type
     ): array {
-        /** @var Class_ $classLike */
-        $classLike = $getSubscribedEventsClassMethod->getAttribute(AttributeKey::CLASS_NODE);
+        $class = $this->betterNodeFinder->findParentType($getSubscribedEventsClassMethod, Class_::class);
+        if (! $class instanceof Class_) {
+            return [];
+        }
 
         $this->eventClassesAndClassMethods = [];
 
         $this->simpleCallableNodeTraverser->traverseNodesWithCallable(
             (array) $getSubscribedEventsClassMethod->stmts,
-            function (Node $node) use ($classLike, $type) {
-                $classMethod = $this->matchClassMethodByArrayItem($node, $classLike);
+            function (Node $node) use ($class, $type) {
+                $classMethod = $this->matchClassMethodByArrayItem($node, $class);
                 if (! $classMethod instanceof ClassMethod) {
                     return null;
                 }
@@ -82,7 +85,7 @@ final class ListeningMethodsCollector
 
                 $eventClassAndClassMethod = $this->resolveCustomClassMethodAndEventClass(
                     $node,
-                    $classLike,
+                    $class,
                     $eventClass
                 );
 

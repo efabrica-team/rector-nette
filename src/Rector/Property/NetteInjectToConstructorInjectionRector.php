@@ -14,7 +14,6 @@ use Rector\Core\Rector\AbstractRector;
 use Rector\Core\ValueObject\PhpVersionFeature;
 use Rector\Nette\NodeAnalyzer\NetteInjectPropertyAnalyzer;
 use Rector\Nette\NodeAnalyzer\PropertyUsageAnalyzer;
-use Rector\NodeTypeResolver\Node\AttributeKey;
 use Rector\PostRector\Collector\PropertyToAddCollector;
 use Rector\PostRector\ValueObject\PropertyMetadata;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -105,7 +104,7 @@ CODE_SAMPLE
 
         $this->changePropertyVisibility($property);
 
-        $class = $property->getAttribute(AttributeKey::CLASS_NODE);
+        $class = $this->betterNodeFinder->findParentType($property, Class_::class);
         if (! $class instanceof Class_) {
             throw new ShouldNotHappenException();
         }
