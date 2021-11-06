@@ -11,6 +11,7 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Expression;
 use PHPStan\Type\ObjectType;
 use Rector\BetterPhpDocParser\PhpDocManipulator\VarAnnotationManipulator;
+use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\Nette\NodeAdding\FunctionLikeFirstLevelStatementResolver;
 use Rector\NodeTypeResolver\Node\AttributeKey;
 use Rector\PostRector\Collector\NodesToAddCollector;
@@ -25,7 +26,8 @@ final class AssignAnalyzer
     public function __construct(
         private FunctionLikeFirstLevelStatementResolver $functionLikeFirstLevelStatementResolver,
         private NodesToAddCollector $nodesToAddCollector,
-        private VarAnnotationManipulator $varAnnotationManipulator
+        private VarAnnotationManipulator $varAnnotationManipulator,
+        private BetterNodeFinder $betterNodeFinder,
     ) {
     }
 
@@ -48,8 +50,7 @@ final class AssignAnalyzer
         ArrayDimFetch $arrayDimFetch,
         string $variableName
     ): bool {
-        $classMethod = $arrayDimFetch->getAttribute(AttributeKey::METHOD_NODE);
-
+        $classMethod = $this->betterNodeFinder->findParentType($arrayDimFetch, ClassMethod::class);
         if (! $classMethod instanceof ClassMethod) {
             return false;
         }

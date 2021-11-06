@@ -11,6 +11,7 @@ use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Unset_;
 use PHPStan\Type\ObjectType;
+use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\Core\Rector\AbstractRector;
 use Rector\Nette\Naming\NetteControlNaming;
 use Rector\Nette\NodeAnalyzer\ArrayDimFetchAnalyzer;
@@ -33,7 +34,8 @@ final class AnnotateMagicalControlArrayAccessRector extends AbstractRector
         private ArrayDimFetchAnalyzer $arrayDimFetchAnalyzer,
         private ControlDimFetchAnalyzer $controlDimFetchAnalyzer,
         private NetteControlNaming $netteControlNaming,
-        private AssignAnalyzer $assignAnalyzer
+        private AssignAnalyzer $assignAnalyzer,
+        private BetterNodeFinder $betterNodeFinder
     ) {
     }
 
@@ -122,7 +124,7 @@ CODE_SAMPLE
 
         $this->assignAnalyzer->addAssignExpressionForFirstCase($variableName, $node, $controlObjectType);
 
-        $classMethod = $node->getAttribute(AttributeKey::METHOD_NODE);
+        $classMethod = $this->betterNodeFinder->findParentType($node, ClassMethod::class);
         if ($classMethod instanceof ClassMethod) {
             $this->arrayDimFetchRenamer->renameToVariable($classMethod, $node, $variableName);
         }

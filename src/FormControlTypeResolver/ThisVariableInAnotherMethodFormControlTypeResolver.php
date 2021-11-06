@@ -13,7 +13,6 @@ use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
 use Rector\NodeNameResolver\NodeNameResolver;
-use Rector\NodeTypeResolver\Node\AttributeKey;
 use Symfony\Contracts\Service\Attribute\Required;
 
 final class ThisVariableInAnotherMethodFormControlTypeResolver implements FormControlTypeResolverInterface
@@ -42,7 +41,7 @@ final class ThisVariableInAnotherMethodFormControlTypeResolver implements FormCo
             return [];
         }
 
-        $classMethod = $node->getAttribute(AttributeKey::METHOD_NODE);
+        $classMethod = $this->betterNodeFinder->findParentType($node, ClassMethod::class);
         if (! $classMethod instanceof ClassMethod) {
             return [];
         }
