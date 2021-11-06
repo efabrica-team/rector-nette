@@ -8,6 +8,7 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
+use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
 use Rector\Nette\NodeResolver\MethodNamesByInputNamesResolver;
@@ -20,7 +21,8 @@ final class ThisVariableInAnotherMethodFormControlTypeResolver implements FormCo
     private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver;
 
     public function __construct(
-        private NodeNameResolver $nodeNameResolver
+        private NodeNameResolver $nodeNameResolver,
+        private BetterNodeFinder $betterNodeFinder,
     ) {
     }
 
@@ -50,12 +52,12 @@ final class ThisVariableInAnotherMethodFormControlTypeResolver implements FormCo
             return [];
         }
 
-        $classLike = $node->getAttribute(AttributeKey::CLASS_NODE);
-        if (! $classLike instanceof Class_) {
+        $class = $this->betterNodeFinder->findParentType($node, Class_::class);
+        if (! $class instanceof Class_) {
             return [];
         }
 
-        $constructorClassMethod = $classLike->getMethod(MethodName::CONSTRUCT);
+        $constructorClassMethod = $class->getMethod(MethodName::CONSTRUCT);
         if ($constructorClassMethod === null) {
             return [];
         }
