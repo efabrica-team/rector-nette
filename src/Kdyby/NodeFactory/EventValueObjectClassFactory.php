@@ -12,6 +12,8 @@ use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Namespace_;
+use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitor\NameResolver;
 use Rector\CodingStyle\Naming\ClassNaming;
 use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\PhpParser\Node\NodeFactory;
@@ -45,6 +47,15 @@ final class EventValueObjectClassFactory
         $this->decorateWithConstructorIfHasArgs($classBuilder, $args);
 
         $class = $classBuilder->getNode();
+
+        // traverse with node name resolver, to to comply with PHPStan default parser
+        $nameResolver = new NameResolver(null, [
+            'replaceNodes' => false,
+            'preserveOriginalNames' => true,
+        ]);
+        $nodeTraverser = new NodeTraverser();
+        $nodeTraverser->addVisitor($nameResolver);
+        $nodeTraverser->traverse([$class]);
 
         return $this->wrapClassToNamespace($className, $class);
     }
