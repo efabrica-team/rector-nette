@@ -27,6 +27,10 @@ final class NeonFileProcessor implements FileProcessorInterface
 
     public function process(File $file, Configuration $configuration): void
     {
+        if ($this->neonRectors === []) {
+            return;
+        }
+
         $fileContent = $file->getFileContent();
 
         $neonNode = $this->neonParser->parseString($fileContent);
