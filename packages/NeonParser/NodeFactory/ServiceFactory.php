@@ -8,8 +8,6 @@ use Nette\Neon\Node\ArrayItemNode;
 use Nette\Neon\Node\ArrayNode;
 use Nette\Neon\Node\EntityNode;
 use Nette\Neon\Node\LiteralNode;
-use Rector\Nette\Exception\NeonShouldNotHappenException;
-use Rector\Nette\NeonParser\Exception\NotImplementedYetException;
 use Rector\Nette\NeonParser\Node\Service_;
 use Nette\Neon\Node;
 use Rector\Nette\NeonParser\Node\Service_\SetupMethodCall;
