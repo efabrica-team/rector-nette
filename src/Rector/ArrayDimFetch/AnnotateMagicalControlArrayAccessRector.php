@@ -35,7 +35,6 @@ final class AnnotateMagicalControlArrayAccessRector extends AbstractRector
         private ControlDimFetchAnalyzer $controlDimFetchAnalyzer,
         private NetteControlNaming $netteControlNaming,
         private AssignAnalyzer $assignAnalyzer,
-        private BetterNodeFinder $betterNodeFinder
     ) {
     }
 
