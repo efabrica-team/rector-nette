@@ -11,7 +11,6 @@ use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Unset_;
 use PHPStan\Type\ObjectType;
-use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\Core\Rector\AbstractRector;
 use Rector\Nette\Naming\NetteControlNaming;
 use Rector\Nette\NodeAnalyzer\ArrayDimFetchAnalyzer;
