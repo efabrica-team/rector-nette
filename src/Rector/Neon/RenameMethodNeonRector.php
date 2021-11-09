@@ -35,10 +35,10 @@ CODE_SAMPLE
                 ,
                 <<<'CODE_SAMPLE'
 services:
-    -
-        class: SomeClass
-        setup:
-            - newCall
+-
+    class: SomeClass
+    setup:
+        - newCall
 CODE_SAMPLE
             ),
         ]);
