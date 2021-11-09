@@ -5,7 +5,7 @@ services:
             - add('first-key', 'first-value')
 -----
 services:
-    -
-        class: Rector\Nette\Tests\Rector\Neon\RenameMethodNeonRector\Source\SecondService('service-name')
-        setup:
-            - addConfig('first-key', 'first-value')
+-
+    class: Rector\Nette\Tests\Rector\Neon\RenameMethodNeonRector\Source\SecondService('service-name')
+    setup:
+        - addConfig('first-key', 'first-value')
