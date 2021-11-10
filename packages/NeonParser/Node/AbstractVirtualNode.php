@@ -9,13 +9,19 @@ use Rector\Nette\NeonParser\Exception\UnusedVirtualMethodException;
 
 abstract class AbstractVirtualNode extends Node
 {
-    public function toValue(): mixed
+    /**
+     * @param  callable(self): mixed|null  $evaluator
+     */
+    public function toValue(callable $evaluator = null): mixed
     {
         // never used, just to make parent contract happy
         throw new UnusedVirtualMethodException();
     }
 
-    public function toString(): string
+    /**
+     * @param  callable(self): string|null  $serializer
+     */
+    public function toString(callable $serializer = null): string
     {
         // never used, just to make parent contract happy
         throw new UnusedVirtualMethodException();
