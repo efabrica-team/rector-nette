@@ -121,7 +121,7 @@ CODE_SAMPLE
             return null;
         }
 
-        $nodeVar = $this->getObjectType($node->var);
+        $nodeVar = $this->nodeTypeResolver->getType($node->var);
         if (! $nodeVar instanceof MixedType) {
             return null;
         }
