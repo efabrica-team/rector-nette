@@ -16,6 +16,7 @@ use Rector\Nette\NodeAnalyzer\NetteInjectPropertyAnalyzer;
 use Rector\Nette\NodeAnalyzer\PropertyUsageAnalyzer;
 use Rector\PostRector\Collector\PropertyToAddCollector;
 use Rector\PostRector\ValueObject\PropertyMetadata;
+use Rector\Privatization\NodeManipulator\VisibilityManipulator;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -32,7 +33,8 @@ final class NetteInjectToConstructorInjectionRector extends AbstractRector
         private PropertyUsageAnalyzer $propertyUsageAnalyzer,
         private NetteInjectPropertyAnalyzer $netteInjectPropertyAnalyzer,
         private PhpDocTagRemover $phpDocTagRemover,
-        private PropertyToAddCollector $propertyToAddCollector
+        private PropertyToAddCollector $propertyToAddCollector,
+        private VisibilityManipulator $visibilityManipulator
     ) {
     }
 

@@ -15,6 +15,7 @@ use Rector\Core\ValueObject\PhpVersionFeature;
 use Rector\Nette\NodeAnalyzer\PropertyUsageAnalyzer;
 use Rector\PostRector\Collector\PropertyToAddCollector;
 use Rector\PostRector\ValueObject\PropertyMetadata;
+use Rector\Privatization\NodeManipulator\VisibilityManipulator;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -26,7 +27,8 @@ final class MoveInjectToExistingConstructorRector extends AbstractRector
     public function __construct(
         private PropertyUsageAnalyzer $propertyUsageAnalyzer,
         private PhpDocTagRemover $phpDocTagRemover,
-        private PropertyToAddCollector $propertyToAddCollector
+        private PropertyToAddCollector $propertyToAddCollector,
+        private VisibilityManipulator $visibilityManipulator
     ) {
     }
 

@@ -18,6 +18,7 @@ use Rector\Nette\Kdyby\NodeAnalyzer\GetSubscribedEventsClassMethodAnalyzer;
 use Rector\Nette\Kdyby\NodeManipulator\GetSubscribedEventsArrayManipulator;
 use Rector\Nette\Kdyby\NodeManipulator\ListeningClassMethodArgumentManipulator;
 use Rector\Nette\Kdyby\NodeResolver\ListeningMethodsCollector;
+use Rector\Privatization\NodeManipulator\VisibilityManipulator;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -30,7 +31,8 @@ final class ChangeNetteEventNamesInGetSubscribedEventsRector extends AbstractRec
         private GetSubscribedEventsArrayManipulator $getSubscribedEventsArrayManipulator,
         private ListeningClassMethodArgumentManipulator $listeningClassMethodArgumentManipulator,
         private ListeningMethodsCollector $listeningMethodsCollector,
-        private GetSubscribedEventsClassMethodAnalyzer $getSubscribedEventsClassMethodAnalyzer
+        private GetSubscribedEventsClassMethodAnalyzer $getSubscribedEventsClassMethodAnalyzer,
+        private VisibilityManipulator $visibilityManipulator
     ) {
     }
 
