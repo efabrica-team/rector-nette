@@ -62,9 +62,8 @@ final class VariableConstructorFormControlTypeResolver implements FormControlTyp
     }
 
     #[Required]
-    public function autowireVariableConstructorFormControlTypeResolver(
-        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
-    ): void {
+    public function autowire(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
+    {
         $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 }

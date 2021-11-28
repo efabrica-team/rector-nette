@@ -18,7 +18,7 @@ final class MethodNamesByInputNamesResolver
     }
 
     /**
-     * @return array<string, class-string>
+     * @return array<string, string>
      */
     public function resolveExpr(Node $node): array
     {

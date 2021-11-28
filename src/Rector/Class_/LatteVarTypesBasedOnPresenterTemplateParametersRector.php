@@ -128,7 +128,11 @@ CODE_SAMPLE
     private function findVarTypesForAction(ClassMethod $method): array
     {
         $varTypes = [];
-        $stmts = $method->stmts ?: [];
+        $stmts = $method->getStmts();
+        if ($stmts === null) {
+            return [];
+        }
+
         foreach ($stmts as $stmt) {
             if (! $stmt instanceof Expression) {
                 continue;

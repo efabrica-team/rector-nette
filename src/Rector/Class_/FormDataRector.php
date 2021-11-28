@@ -101,7 +101,7 @@ CODE_SAMPLE
     }
 
     /**
-     * @param array<string, string|string[]>  $configuration
+     * @param mixed[] $configuration
      */
     public function configure(array $configuration): void
     {
@@ -113,8 +113,10 @@ CODE_SAMPLE
 
         if (isset($configuration[self::FORM_DATA_CLASS_TRAITS])) {
             $formDataClassTraits = $configuration[self::FORM_DATA_CLASS_TRAITS];
+
             Assert::isArray($formDataClassTraits);
             Assert::allString($formDataClassTraits);
+
             $this->formDataClassTraits = $formDataClassTraits;
         }
     }

@@ -17,8 +17,12 @@ final class FormOnSuccessCallbackFinder
 {
     public function find(Class_ $class, Variable $form): ?Expr
     {
-        foreach ($class->getMethods() as $method) {
-            $stmts = $method->stmts ?: [];
+        foreach ($class->getMethods() as $classMethod) {
+            $stmts = $classMethod->getStmts();
+            if ($stmts === null) {
+                continue;
+            }
+
             foreach ($stmts as $stmt) {
                 if (! $stmt instanceof Expression) {
                     continue;

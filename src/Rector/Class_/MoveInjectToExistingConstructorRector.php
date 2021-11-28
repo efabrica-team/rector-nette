@@ -140,7 +140,7 @@ CODE_SAMPLE
     {
         $phpDocInfo = $this->phpDocInfoFactory->createFromNodeOrEmpty($property);
         $injectTagValueNode = $phpDocInfo->getByName('inject');
-        if ($injectTagValueNode) {
+        if ($injectTagValueNode instanceof \PHPStan\PhpDocParser\Ast\Node) {
             $this->phpDocTagRemover->removeTagValueFromNode($phpDocInfo, $injectTagValueNode);
         }
     }

@@ -33,8 +33,13 @@ final class FormFieldsFinder
     public function find(Class_ $class, Variable $form): array
     {
         $formFields = [];
-        foreach ($class->getMethods() as $method) {
-            foreach ($method->stmts ?: [] as $stmt) {
+        foreach ($class->getMethods() as $classMethod) {
+            $stmts = $classMethod->getStmts();
+            if ($stmts === null) {
+                continue;
+            }
+
+            foreach ($stmts as $stmt) {
                 if (! $stmt instanceof Expression) {
                     continue;
                 }
@@ -45,7 +50,7 @@ final class FormFieldsFinder
                 }
 
                 $addFieldMethodCall = $this->findAddFieldMethodCall($methodCall);
-                if (! $addFieldMethodCall) {
+                if (! $addFieldMethodCall instanceof MethodCall) {
                     continue;
                 }
 

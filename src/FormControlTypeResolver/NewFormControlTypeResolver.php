@@ -24,9 +24,8 @@ final class NewFormControlTypeResolver implements FormControlTypeResolverInterfa
     }
 
     #[Required]
-    public function autowireNewFormControlTypeResolver(
-        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
-    ): void {
+    public function autowire(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
+    {
         $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 
