@@ -13,6 +13,8 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @see \Rector\Nette\Tests\Rector\Neon\RenameMethodNeonRector\RenameMethodNeonRectorTest
+ *
+ * @implements NeonRectorInterface<SetupMethodCall>
  */
 final class RenameMethodNeonRector implements NeonRectorInterface
 {
@@ -44,9 +46,6 @@ CODE_SAMPLE
         ]);
     }
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return SetupMethodCall::class;

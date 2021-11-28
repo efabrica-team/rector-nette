@@ -23,19 +23,23 @@ final class FormVariableFinder
 
     public function find(Class_ $class): ?Variable
     {
-        foreach ($class->getMethods() as $method) {
-            $stmts = $method->stmts ?: [];
-            foreach ($stmts as $stmt) {
-                if (! $stmt instanceof Expression) {
+        foreach ($class->getMethods() as $classMethod) {
+            $classMethodStmts = $classMethod->getStmts();
+            if ($classMethodStmts === null) {
+                continue;
+            }
+
+            foreach ($classMethodStmts as $classMethodStmt) {
+                if (! $classMethodStmt instanceof Expression) {
                     continue;
                 }
 
-                if (! $stmt->expr instanceof Assign) {
+                if (! $classMethodStmt->expr instanceof Assign) {
                     continue;
                 }
 
-                $var = $stmt->expr->var;
-                $expr = $stmt->expr->expr;
+                $var = $classMethodStmt->expr->var;
+                $expr = $classMethodStmt->expr->expr;
 
                 if (! $var instanceof Variable) {
                     continue;

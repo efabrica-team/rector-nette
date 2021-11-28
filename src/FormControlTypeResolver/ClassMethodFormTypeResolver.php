@@ -26,9 +26,8 @@ final class ClassMethodFormTypeResolver implements FormControlTypeResolverInterf
     }
 
     #[Required]
-    public function autowireClassMethodFormTypeResolver(
-        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
-    ): void {
+    public function autowire(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
+    {
         $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 

@@ -31,9 +31,8 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
     }
 
     #[Required]
-    public function autowireMagicNetteFactoryInterfaceFormControlTypeResolver(
-        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
-    ): void {
+    public function autowire(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
+    {
         $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 

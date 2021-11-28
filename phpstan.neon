@@ -102,3 +102,13 @@ parameters:
         -
             path: src/NodeAnalyzer/MethodCallManipulator.php
             message: '#Do not use "array_filter" function with complex content, make it more readable with extracted method or single\-line statement#'
+
+        - '#Dynamic call to static method PHPUnit\\Framework\\Assert\:\:(.*?)\(\)#'
+        # rector co-variant
+        - '#Parameter \#1 \$node \(PhpParser\\Node\\(.*?) of method Rector\\Nette\\(.*?)\(\) should be contravariant with parameter \$node \(PhpParser\\Node\) of method Rector\\Core\\Contract\\Rector\\PhpRectorInterface\:\:refactor\(\)#'
+
+
+        # invalid generics
+        - '#Method (.*?) has parameter \$neonRectors with generic interface Rector\\Nette\\Contract\\Rector\\NeonRectorInterface but does not specify its types\: TNode#'
+        - '#Property (.*?) with generic interface Rector\\Nette\\Contract\\Rector\\NeonRectorInterface does not specify its types\: TNode#'
+

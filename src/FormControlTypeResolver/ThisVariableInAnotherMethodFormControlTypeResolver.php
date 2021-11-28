@@ -26,9 +26,8 @@ final class ThisVariableInAnotherMethodFormControlTypeResolver implements FormCo
     }
 
     #[Required]
-    public function autowireThisVariableInAnotherMethodFormControlTypeResolver(
-        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
-    ): void {
+    public function autowire(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
+    {
         $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 

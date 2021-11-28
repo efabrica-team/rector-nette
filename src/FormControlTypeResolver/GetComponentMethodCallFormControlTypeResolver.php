@@ -31,9 +31,8 @@ final class GetComponentMethodCallFormControlTypeResolver implements FormControl
     }
 
     #[Required]
-    public function autowireGetComponentMethodCallFormControlTypeResolver(
-        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
-    ): void {
+    public function autowire(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
+    {
         $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 

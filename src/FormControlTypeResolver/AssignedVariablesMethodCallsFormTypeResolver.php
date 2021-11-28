@@ -22,9 +22,8 @@ final class AssignedVariablesMethodCallsFormTypeResolver implements FormControlT
     }
 
     #[Required]
-    public function autowireAssignedVariablesMethodCallsFormTypeResolver(
-        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
-    ): void {
+    public function autowire(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
+    {
         $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 

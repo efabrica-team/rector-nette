@@ -25,9 +25,8 @@ final class ConstructorFormControlTypeResolver implements FormControlTypeResolve
     }
 
     #[Required]
-    public function autowireConstructorFormControlTypeResolver(
-        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
-    ): void {
+    public function autowire(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
+    {
         $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 

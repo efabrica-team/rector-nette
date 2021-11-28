@@ -23,9 +23,8 @@ final class ReturnFormControlTypeResolver implements FormControlTypeResolverInte
     }
 
     #[Required]
-    public function autowireReturnFormControlTypeResolver(
-        MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver
-    ): void {
+    public function autowire(MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver): void
+    {
         $this->methodNamesByInputNamesResolver = $methodNamesByInputNamesResolver;
     }
 
