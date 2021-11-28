@@ -116,7 +116,7 @@ CODE_SAMPLE
 
         $variableName = $this->netteControlNaming->createVariableName($controlName);
         $controlObjectType = $this->resolveControlType($node, $controlName);
-        if ($controlObjectType === null) {
+        if (!$controlObjectType instanceof ObjectType) {
             return null;
         }
 

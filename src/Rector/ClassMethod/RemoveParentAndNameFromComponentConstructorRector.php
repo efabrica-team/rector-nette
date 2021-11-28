@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Rector\ClassMethod;
 
+use PHPStan\Reflection\MethodReflection;
 use PhpParser\Node;
 use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Expr\StaticCall;
@@ -166,7 +167,7 @@ CODE_SAMPLE
     private function refactorNew(New_ $new): void
     {
         $methodReflection = $this->reflectionResolver->resolveMethodReflectionFromNew($new);
-        if ($methodReflection === null) {
+        if (!$methodReflection instanceof MethodReflection) {
             return;
         }
 

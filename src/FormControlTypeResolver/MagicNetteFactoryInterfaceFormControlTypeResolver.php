@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Rector\Nette\FormControlTypeResolver;
 
+use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
@@ -66,7 +67,7 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
         }
 
         $classMethod = $this->astResolver->resolveClassMethod($returnedType->getClassName(), MethodName::CONSTRUCT);
-        if ($classMethod === null) {
+        if (!$classMethod instanceof ClassMethod) {
             return [];
         }
 

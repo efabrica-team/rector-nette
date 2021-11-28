@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Rector\Nette\NodeFinder;
 
+use PhpParser\Node\Expr\ArrayItem;
+use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\Closure;
@@ -22,11 +24,10 @@ final class FormOnSuccessCallbackValuesParamFinder
 
         $methodName = null;
         if ($onSuccessCallback instanceof Array_) {
-            /** @var Expr\ArrayItem|null $varPart */
             $varPart = $onSuccessCallback->items[0] ?? null;
             $methodNamePart = $onSuccessCallback->items[1] ?? null;
 
-            if ($varPart === null || $methodNamePart === null) {
+            if (!$varPart instanceof ArrayItem || !$methodNamePart instanceof ArrayItem) {
                 return null;
             }
 
@@ -50,7 +51,7 @@ final class FormOnSuccessCallbackValuesParamFinder
         }
 
         $classMethod = $class->getMethod($methodName);
-        if ($classMethod === null) {
+        if (!$classMethod instanceof ClassMethod) {
             return null;
         }
 

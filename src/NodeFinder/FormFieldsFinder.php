@@ -45,7 +45,7 @@ final class FormFieldsFinder
                 }
 
                 $methodCall = $this->findMethodCall($stmt);
-                if ($methodCall === null) {
+                if (!$methodCall instanceof MethodCall) {
                     continue;
                 }
 
@@ -107,7 +107,7 @@ final class FormFieldsFinder
     private function isFormAddFieldMethodCall(MethodCall $addFieldMethodCall, Variable $form): bool
     {
         $methodCallVariable = $this->findMethodCallVariable($addFieldMethodCall);
-        if ($methodCallVariable === null) {
+        if (!$methodCallVariable instanceof Variable) {
             return false;
         }
         if ($methodCallVariable->name !== $form->name) {

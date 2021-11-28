@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Tests\NodeFinder\FormFinder;
 
+use PhpParser\Node\Expr\Variable;
 use Iterator;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
@@ -50,12 +51,12 @@ final class FormFinderTest extends AbstractTestCase
         unlink($tmpFilePath);
 
         $classNode = $this->findClassNode($nodes);
-        if ($classNode === null) {
+        if (!$classNode instanceof Class_) {
             throw new ShouldNotHappenException('No class node found');
         }
 
         $form = $this->formVariableFinder->find($classNode);
-        if ($form === null) {
+        if (!$form instanceof Variable) {
             throw new ShouldNotHappenException('No form variable found');
         }
 
