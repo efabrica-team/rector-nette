@@ -12,10 +12,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
     $parameters->set(Option::AUTO_IMPORT_NAMES, true);
-    $parameters->set(Option::PATHS, [
-        __DIR__ . '/src',
-        __DIR__ . '/tests',
-    ]);
+    $parameters->set(Option::PATHS, [__DIR__ . '/src', __DIR__ . '/tests']);
     $parameters->set(Option::SKIP, [
         // for tests
         '*/Source/*',
@@ -24,14 +21,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services = $containerConfigurator->services();
     $services->set(StringClassNameToClassConstantRector::class)
-        ->call('configure', [[
-            StringClassNameToClassConstantRector::CLASSES_TO_SKIP => [
-                'Nette\*',
-                'Symfony\Component\Translation\TranslatorInterface',
-                'Symfony\Contracts\EventDispatcher\Event',
-                'Kdyby\Events\Subscriber',
-            ]
-        ]]);
+        ->configure([
+            'Nette\*',
+            'Symfony\Component\Translation\TranslatorInterface',
+            'Symfony\Contracts\EventDispatcher\Event',
+            'Kdyby\Events\Subscriber',
+        ]);
 
     // needed for DEAD_CODE list, just in split package like this
     $containerConfigurator->import(__DIR__ . '/config/config.php');

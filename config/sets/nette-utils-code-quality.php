@@ -14,20 +14,17 @@ use Rector\Nette\Rector\NotIdentical\StrposToStringsContainsRector;
 use Rector\Transform\Rector\FuncCall\FuncCallToStaticCallRector;
 use Rector\Transform\ValueObject\FuncCallToStaticCall;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symplify\SymfonyPhpConfig\ValueObjectInliner;
 
 # @see https://tomasvotruba.com/blog/2018/07/30/hidden-gems-of-php-packages-nette-utils
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set(FuncCallToStaticCallRector::class)
-        ->call('configure', [[
-            FuncCallToStaticCallRector::FUNC_CALLS_TO_STATIC_CALLS => ValueObjectInliner::inline([
-                new FuncCallToStaticCall('file_get_contents', 'Nette\Utils\FileSystem', 'read'),
-                new FuncCallToStaticCall('unlink', 'Nette\Utils\FileSystem', 'delete'),
-                new FuncCallToStaticCall('rmdir', 'Nette\Utils\FileSystem', 'delete'),
-            ]),
-        ]]);
+        ->configure([
+            new FuncCallToStaticCall('file_get_contents', 'Nette\Utils\FileSystem', 'read'),
+            new FuncCallToStaticCall('unlink', 'Nette\Utils\FileSystem', 'delete'),
+            new FuncCallToStaticCall('rmdir', 'Nette\Utils\FileSystem', 'delete'),
+        ]);
 
     $services->set(StrposToStringsContainsRector::class);
     $services->set(SubstrStrlenFunctionToNetteUtilsStringsRector::class);

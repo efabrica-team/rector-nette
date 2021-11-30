@@ -9,7 +9,6 @@ use Rector\Renaming\Rector\Name\RenameClassRector;
 use Rector\Visibility\Rector\ClassMethod\ChangeMethodVisibilityRector;
 use Rector\Visibility\ValueObject\ChangeMethodVisibility;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symplify\SymfonyPhpConfig\ValueObjectInliner;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
@@ -18,17 +17,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(ReplaceEventManagerWithEventSubscriberRector::class);
 
     $services->set(ChangeMethodVisibilityRector::class)
-        ->call('configure', [[
-            ChangeMethodVisibilityRector::METHOD_VISIBILITIES => ValueObjectInliner::inline([
-                new ChangeMethodVisibility('Kdyby\Events\Subscriber', 'getSubscribedEvents', Visibility::STATIC),
-            ]),
-        ]]);
+        ->configure([
+            new ChangeMethodVisibility('Kdyby\Events\Subscriber', 'getSubscribedEvents', Visibility::STATIC),
+        ]);
 
     $services->set(RenameClassRector::class)
-        ->call('configure', [[
-            RenameClassRector::OLD_TO_NEW_CLASSES => [
-                'Kdyby\Events\Subscriber' => 'Symfony\Component\EventDispatcher\EventSubscriberInterface',
-                'Kdyby\Events\EventManager' => 'Symfony\Contracts\EventDispatcher\EventDispatcherInterface',
-            ],
-        ]]);
+        ->configure([
+            'Kdyby\Events\Subscriber' => 'Symfony\Component\EventDispatcher\EventSubscriberInterface',
+            'Kdyby\Events\EventManager' => 'Symfony\Contracts\EventDispatcher\EventDispatcherInterface',
+        ]);
 };
