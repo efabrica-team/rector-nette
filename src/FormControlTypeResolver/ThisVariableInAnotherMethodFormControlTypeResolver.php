@@ -56,7 +56,7 @@ final class ThisVariableInAnotherMethodFormControlTypeResolver implements FormCo
         }
 
         $constructorClassMethod = $class->getMethod(MethodName::CONSTRUCT);
-        if (!$constructorClassMethod instanceof ClassMethod) {
+        if (! $constructorClassMethod instanceof ClassMethod) {
             return [];
         }
 

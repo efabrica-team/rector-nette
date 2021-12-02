@@ -100,7 +100,7 @@ CODE_SAMPLE
         $actionVarTypes = [];
         foreach ($node->getMethods() as $method) {
             $fullActionName = $method->name->name;
-            if (!str_starts_with($fullActionName, 'action') && !str_starts_with($fullActionName, 'render')) {
+            if (! str_starts_with($fullActionName, 'action') && ! str_starts_with($fullActionName, 'render')) {
                 continue;
             }
 

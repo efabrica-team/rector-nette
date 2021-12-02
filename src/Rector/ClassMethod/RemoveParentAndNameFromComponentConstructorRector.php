@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Rector\ClassMethod;
 
-use PHPStan\Reflection\MethodReflection;
 use PhpParser\Node;
 use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Expr\StaticCall;
@@ -13,6 +12,7 @@ use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
+use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\ParameterReflection;
 use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Type\ObjectType;
@@ -167,7 +167,7 @@ CODE_SAMPLE
     private function refactorNew(New_ $new): void
     {
         $methodReflection = $this->reflectionResolver->resolveMethodReflectionFromNew($new);
-        if (!$methodReflection instanceof MethodReflection) {
+        if (! $methodReflection instanceof MethodReflection) {
             return;
         }
 

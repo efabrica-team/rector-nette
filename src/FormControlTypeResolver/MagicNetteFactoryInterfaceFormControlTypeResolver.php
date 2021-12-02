@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Rector\Nette\FormControlTypeResolver;
 
-use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\TypeWithClassName;
@@ -67,7 +67,7 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
         }
 
         $classMethod = $this->astResolver->resolveClassMethod($returnedType->getClassName(), MethodName::CONSTRUCT);
-        if (!$classMethod instanceof ClassMethod) {
+        if (! $classMethod instanceof ClassMethod) {
             return [];
         }
 

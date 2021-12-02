@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Rector\Nette\FormControlTypeResolver;
 
-use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node;
 use PhpParser\Node\Expr\New_;
+use PhpParser\Node\Stmt\ClassMethod;
 use Rector\Core\PhpParser\AstResolver;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Nette\Contract\FormControlTypeResolverInterface;
@@ -45,7 +45,7 @@ final class NewFormControlTypeResolver implements FormControlTypeResolverInterfa
         }
 
         $classMethod = $this->astResolver->resolveClassMethod($className, MethodName::CONSTRUCT);
-        if (!$classMethod instanceof ClassMethod) {
+        if (! $classMethod instanceof ClassMethod) {
             return [];
         }
 

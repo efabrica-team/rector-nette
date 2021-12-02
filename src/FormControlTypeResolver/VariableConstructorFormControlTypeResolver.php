@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Rector\Nette\FormControlTypeResolver;
 
-use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Variable;
+use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\TypeWithClassName;
 use Rector\Core\PhpParser\AstResolver;
@@ -55,7 +55,7 @@ final class VariableConstructorFormControlTypeResolver implements FormControlTyp
         }
 
         $classMethod = $this->astResolver->resolveClassMethod($formType->getClassName(), MethodName::CONSTRUCT);
-        if (!$classMethod instanceof ClassMethod) {
+        if (! $classMethod instanceof ClassMethod) {
             return [];
         }
 
