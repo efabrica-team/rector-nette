@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Rector\Nette\Rector\Class_;
 
 use PhpParser\Node;
+use PhpParser\Node\Expr;
+use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Identifier;
+use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\Class_;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
@@ -134,7 +137,7 @@ CODE_SAMPLE
 
         $fullClassName = $this->getName($node);
         $form = $this->formVariableFinder->find($node);
-        if ($form === null) {
+        if (! $form instanceof Variable) {
             return null;
         }
 
@@ -147,7 +150,7 @@ CODE_SAMPLE
         foreach ($formFields as $formField) {
             $properties[$formField->getName()] = [
                 'type' => $formField->getType(),
-                'nullable' => $formField->getType() === 'int' && $formField->isRequired() === false,
+                'nullable' => $formField->getType() === 'int' && ! $formField->isRequired(),
             ];
         }
 
@@ -169,11 +172,11 @@ CODE_SAMPLE
         $this->removedAndAddedFilesCollector->addAddedFile($addedFileWithContent);
 
         $onSuccessCallback = $this->formOnSuccessCallbackFinder->find($node, $form);
-        if ($onSuccessCallback === null) {
+        if (! $onSuccessCallback instanceof Expr) {
             return null;
         }
         $valuesParam = $this->formOnSuccessCallbackValuesParamFinder->find($node, $onSuccessCallback);
-        if ($valuesParam === null) {
+        if (! $valuesParam instanceof Param) {
             return null;
         }
 

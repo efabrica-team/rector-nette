@@ -12,6 +12,7 @@ use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
+use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\ParameterReflection;
 use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Type\ObjectType;
@@ -166,7 +167,7 @@ CODE_SAMPLE
     private function refactorNew(New_ $new): void
     {
         $methodReflection = $this->reflectionResolver->resolveMethodReflectionFromNew($new);
-        if ($methodReflection === null) {
+        if (! $methodReflection instanceof MethodReflection) {
             return;
         }
 
