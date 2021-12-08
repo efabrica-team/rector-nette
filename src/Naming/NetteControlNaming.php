@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Rector\Nette\Naming;
 
-use Stringy\Stringy;
+use Symfony\Component\String\UnicodeString;
 
 final class NetteControlNaming
 {
     public function createVariableName(string $shortName): string
     {
-        $stringy = new Stringy($shortName);
-        $variableName = (string) $stringy->camelize();
+        $variableNameUnicodeString = new UnicodeString($shortName);
+        $variableName = $variableNameUnicodeString->camel()
+            ->toString();
 
         if (\str_ends_with($variableName, 'Form')) {
             return $variableName;
@@ -22,8 +23,10 @@ final class NetteControlNaming
 
     public function createCreateComponentClassMethodName(string $shortName): string
     {
-        $stringy = new Stringy($shortName);
-        $componentName = (string) $stringy->upperCamelize();
+        $shortNameUnicodeString = new UnicodeString($shortName);
+        $componentName = $shortNameUnicodeString->upper()
+            ->camel()
+            ->toString();
 
         return 'createComponent' . $componentName;
     }

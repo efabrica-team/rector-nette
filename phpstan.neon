@@ -112,3 +112,5 @@ parameters:
         - '#Method (.*?) has parameter \$neonRectors with generic interface Rector\\Nette\\Contract\\Rector\\NeonRectorInterface but does not specify its types\: TNode#'
         - '#Property (.*?) with generic interface Rector\\Nette\\Contract\\Rector\\NeonRectorInterface does not specify its types\: TNode#'
 
+        # fixed in dev-main symplify
+        - '#Do not use chained method calls\. Put each on separated lines#'
