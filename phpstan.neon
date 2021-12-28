@@ -114,3 +114,10 @@ parameters:
 
         # fixed in dev-main symplify
         - '#Do not use chained method calls\. Put each on separated lines#'
+
+
+        -
+             message: '#Instead of array shape, use value object with specific types in constructor and getters#'
+             paths:
+                 - src/FileProcessor/LatteFileProcessor.php
+                 - src/FileProcessor/NeonFileProcessor.php

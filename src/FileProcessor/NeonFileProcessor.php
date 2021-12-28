@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Rector\Nette\FileProcessor;
 
+use Rector\ChangesReporting\ValueObjectFactory\FileDiffFactory;
 use Rector\Core\Contract\Processor\FileProcessorInterface;
 use Rector\Core\ValueObject\Application\File;
 use Rector\Core\ValueObject\Configuration;
+use Rector\Core\ValueObject\Error\SystemError;
+use Rector\Core\ValueObject\Reporting\FileDiff;
 use Rector\Nette\Contract\Rector\NeonRectorInterface;
 use Rector\Nette\NeonParser\NeonNodeTraverserFactory;
 use Rector\Nette\NeonParser\NeonParser;
 use Rector\Nette\NeonParser\Printer\FormatPreservingNeonPrinter;
-use Rector\ChangesReporting\ValueObjectFactory\FileDiffFactory;
-use Rector\Core\ValueObject\Error\SystemError;
-use Rector\Core\ValueObject\Reporting\FileDiff;
 use Rector\Parallel\ValueObject\Bridge;
 
 final class NeonFileProcessor implements FileProcessorInterface

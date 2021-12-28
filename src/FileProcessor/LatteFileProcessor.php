@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Rector\Nette\FileProcessor;
 
+use Rector\ChangesReporting\ValueObjectFactory\FileDiffFactory;
 use Rector\Core\Contract\Processor\FileProcessorInterface;
 use Rector\Core\ValueObject\Application\File;
 use Rector\Core\ValueObject\Configuration;
-use Rector\Nette\Contract\Rector\LatteRectorInterface;
 use Rector\Core\ValueObject\Error\SystemError;
 use Rector\Core\ValueObject\Reporting\FileDiff;
+use Rector\Nette\Contract\Rector\LatteRectorInterface;
 use Rector\Parallel\ValueObject\Bridge;
-use Rector\ChangesReporting\ValueObjectFactory\FileDiffFactory;
 
 final class LatteFileProcessor implements FileProcessorInterface
 {
