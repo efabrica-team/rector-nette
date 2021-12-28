@@ -11,6 +11,10 @@ use Rector\Nette\Contract\Rector\NeonRectorInterface;
 use Rector\Nette\NeonParser\NeonNodeTraverserFactory;
 use Rector\Nette\NeonParser\NeonParser;
 use Rector\Nette\NeonParser\Printer\FormatPreservingNeonPrinter;
+use Rector\ChangesReporting\ValueObjectFactory\FileDiffFactory;
+use Rector\Core\ValueObject\Error\SystemError;
+use Rector\Core\ValueObject\Reporting\FileDiff;
+use Rector\Parallel\ValueObject\Bridge;
 
 final class NeonFileProcessor implements FileProcessorInterface
 {
@@ -22,13 +26,22 @@ final class NeonFileProcessor implements FileProcessorInterface
         private NeonNodeTraverserFactory $neonNodeTraverserFactory,
         private FormatPreservingNeonPrinter $formatPreservingNeonPrinter,
         private array $neonRectors,
+        private FileDiffFactory $fileDiffFactory
     ) {
     }
 
-    public function process(File $file, Configuration $configuration): void
+    /**
+     * @return array{system_errors: SystemError[], file_diffs: FileDiff[]}
+     */
+    public function process(File $file, Configuration $configuration): array
     {
+        $systemErrorsAndFileDiffs = [
+            Bridge::SYSTEM_ERRORS => [],
+            Bridge::FILE_DIFFS => [],
+        ];
+
         if ($this->neonRectors === []) {
-            return;
+            return $systemErrorsAndFileDiffs;
         }
 
         $fileContent = $file->getFileContent();
@@ -47,10 +60,15 @@ final class NeonFileProcessor implements FileProcessorInterface
 
         // has node changed?
         if ($changedFileContent === $originalPrintedContent) {
-            return;
+            return $systemErrorsAndFileDiffs;
         }
 
         $file->changeFileContent($changedFileContent);
+
+        $fileDiff = $this->fileDiffFactory->createFileDiff($file, $fileContent, $changedFileContent);
+        $systemErrorsAndFileDiffs[Bridge::FILE_DIFFS][] = $fileDiff;
+
+        return $systemErrorsAndFileDiffs;
     }
 
     public function supports(File $file, Configuration $configuration): bool

@@ -8,6 +8,10 @@ use Rector\Core\Contract\Processor\FileProcessorInterface;
 use Rector\Core\ValueObject\Application\File;
 use Rector\Core\ValueObject\Configuration;
 use Rector\Nette\Contract\Rector\LatteRectorInterface;
+use Rector\Core\ValueObject\Error\SystemError;
+use Rector\Core\ValueObject\Reporting\FileDiff;
+use Rector\Parallel\ValueObject\Bridge;
+use Rector\ChangesReporting\ValueObjectFactory\FileDiffFactory;
 
 final class LatteFileProcessor implements FileProcessorInterface
 {
@@ -15,12 +19,22 @@ final class LatteFileProcessor implements FileProcessorInterface
      * @param LatteRectorInterface[] $latteRectors
      */
     public function __construct(
-        private array $latteRectors
+        private array $latteRectors,
+        private FileDiffFactory $fileDiffFactory
     ) {
     }
 
-    public function process(File $file, Configuration $configuration): void
+    /**
+     * @return array{system_errors: SystemError[], file_diffs: FileDiff[]}
+     */
+    public function process(File $file, Configuration $configuration): array
     {
+        $systemErrorsAndFileDiffs = [
+            Bridge::SYSTEM_ERRORS => [],
+            Bridge::FILE_DIFFS => [],
+        ];
+
+        $oldFileContent = $file->getFileContent();
         $fileContent = $file->getFileContent();
 
         foreach ($this->latteRectors as $latteRector) {
@@ -28,6 +42,15 @@ final class LatteFileProcessor implements FileProcessorInterface
         }
 
         $file->changeFileContent($fileContent);
+
+        if ($oldFileContent === $fileContent) {
+            return $systemErrorsAndFileDiffs;
+        }
+
+        $fileDiff = $this->fileDiffFactory->createFileDiff($file, $oldFileContent, $fileContent);
+        $systemErrorsAndFileDiffs[Bridge::FILE_DIFFS][] = $fileDiff;
+
+        return $systemErrorsAndFileDiffs;
     }
 
     public function supports(File $file, Configuration $configuration): bool
