@@ -65,7 +65,7 @@ final class NeonFileProcessor implements FileProcessorInterface
 
         $file->changeFileContent($changedFileContent);
 
-        $fileDiff = $this->fileDiffFactory->createFileDiff($file, $fileContent, $changedFileContent);
+        $fileDiff = $this->fileDiffFactory->createFileDiff($file, $originalPrintedContent, $changedFileContent);
         $systemErrorsAndFileDiffs[Bridge::FILE_DIFFS][] = $fileDiff;
 
         return $systemErrorsAndFileDiffs;
