@@ -10,21 +10,25 @@ if (class_exists('Nette\ComponentModel\Component')) {
 
 class Component extends Container implements \ArrayAccess
 {
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
 
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
 
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
 
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
 
