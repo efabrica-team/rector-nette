@@ -24,9 +24,9 @@ final class ListeningClassMethodArgumentManipulator
     private const EVENT_PARAMETER_REPLACED = 'event_parameter_replaced';
 
     public function __construct(
-        private ClassNaming $classNaming,
-        private ContributeEventClassResolver $contributeEventClassResolver,
-        private ParamAnalyzer $paramAnalyzer
+        private readonly ClassNaming $classNaming,
+        private readonly ContributeEventClassResolver $contributeEventClassResolver,
+        private readonly ParamAnalyzer $paramAnalyzer
     ) {
     }
 

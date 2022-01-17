@@ -17,8 +17,8 @@ final class EventClassNaming
     private const EVENT = 'Event';
 
     public function __construct(
-        private ClassNaming $classNaming,
-        private NodeNameResolver $nodeNameResolver
+        private readonly ClassNaming $classNaming,
+        private readonly NodeNameResolver $nodeNameResolver
     ) {
     }
 

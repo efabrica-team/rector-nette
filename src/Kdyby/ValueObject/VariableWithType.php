@@ -18,8 +18,8 @@ final class VariableWithType
      * @param ComplexType|Identifier|Name|NullableType|UnionType|null $phpParserTypeNode
      */
     public function __construct(
-        private string $name,
-        private Type $type,
+        private readonly string $name,
+        private readonly Type $type,
         private $phpParserTypeNode
     ) {
     }

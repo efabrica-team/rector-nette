@@ -16,8 +16,8 @@ use Symplify\Astral\NodeTraverser\SimpleCallableNodeTraverser;
 final class GetSubscribedEventsArrayManipulator
 {
     public function __construct(
-        private SimpleCallableNodeTraverser $simpleCallableNodeTraverser,
-        private ValueResolver $valueResolver
+        private readonly SimpleCallableNodeTraverser $simpleCallableNodeTraverser,
+        private readonly ValueResolver $valueResolver
     ) {
     }
 

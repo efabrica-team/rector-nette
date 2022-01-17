@@ -28,7 +28,7 @@ final class SubstrMinusToStringEndsWithRector extends AbstractRector
     private const SUBSTR = 'substr';
 
     public function __construct(
-        private BinaryOpAnalyzer $binaryOpAnalyzer
+        private readonly BinaryOpAnalyzer $binaryOpAnalyzer
     ) {
     }
 

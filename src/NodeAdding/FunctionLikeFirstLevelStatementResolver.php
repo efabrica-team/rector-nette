@@ -17,8 +17,8 @@ use Rector\NodeTypeResolver\Node\AttributeKey;
 final class FunctionLikeFirstLevelStatementResolver
 {
     public function __construct(
-        private ParentScopeFinder $parentScopeFinder,
-        private BetterNodeFinder $betterNodeFinder
+        private readonly ParentScopeFinder $parentScopeFinder,
+        private readonly BetterNodeFinder $betterNodeFinder
     ) {
     }
 

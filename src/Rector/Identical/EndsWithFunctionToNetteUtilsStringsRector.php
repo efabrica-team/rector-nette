@@ -21,7 +21,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class EndsWithFunctionToNetteUtilsStringsRector extends AbstractRector
 {
     public function __construct(
-        private StrlenEndsWithResolver $strlenEndsWithResolver
+        private readonly StrlenEndsWithResolver $strlenEndsWithResolver
     ) {
     }
 

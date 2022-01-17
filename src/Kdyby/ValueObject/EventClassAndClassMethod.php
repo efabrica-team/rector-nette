@@ -9,8 +9,8 @@ use PhpParser\Node\Stmt\ClassMethod;
 final class EventClassAndClassMethod
 {
     public function __construct(
-        private string $eventClass,
-        private ClassMethod $classMethod
+        private readonly string $eventClass,
+        private readonly ClassMethod $classMethod
     ) {
     }
 

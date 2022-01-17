@@ -22,10 +22,10 @@ final class VariableConstructorFormControlTypeResolver implements FormControlTyp
     private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver;
 
     public function __construct(
-        private NodeTypeResolver $nodeTypeResolver,
-        private NodeNameResolver $nodeNameResolver,
-        private ReflectionProvider $reflectionProvider,
-        private AstResolver $astResolver,
+        private readonly NodeTypeResolver $nodeTypeResolver,
+        private readonly NodeNameResolver $nodeNameResolver,
+        private readonly ReflectionProvider $reflectionProvider,
+        private readonly AstResolver $astResolver,
     ) {
     }
 

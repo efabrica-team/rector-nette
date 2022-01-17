@@ -28,11 +28,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class ChangeNetteEventNamesInGetSubscribedEventsRector extends AbstractRector
 {
     public function __construct(
-        private GetSubscribedEventsArrayManipulator $getSubscribedEventsArrayManipulator,
-        private ListeningClassMethodArgumentManipulator $listeningClassMethodArgumentManipulator,
-        private ListeningMethodsCollector $listeningMethodsCollector,
-        private GetSubscribedEventsClassMethodAnalyzer $getSubscribedEventsClassMethodAnalyzer,
-        private VisibilityManipulator $visibilityManipulator
+        private readonly GetSubscribedEventsArrayManipulator $getSubscribedEventsArrayManipulator,
+        private readonly ListeningClassMethodArgumentManipulator $listeningClassMethodArgumentManipulator,
+        private readonly ListeningMethodsCollector $listeningMethodsCollector,
+        private readonly GetSubscribedEventsClassMethodAnalyzer $getSubscribedEventsClassMethodAnalyzer,
+        private readonly VisibilityManipulator $visibilityManipulator
     ) {
     }
 

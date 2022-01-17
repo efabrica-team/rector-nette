@@ -17,9 +17,9 @@ use Rector\NodeNameResolver\NodeNameResolver;
 final class StrlenStartsWithResolver
 {
     public function __construct(
-        private NodeNameResolver $nodeNameResolver,
-        private ValueResolver $valueResolver,
-        private NodeComparator $nodeComparator
+        private readonly NodeNameResolver $nodeNameResolver,
+        private readonly ValueResolver $valueResolver,
+        private readonly NodeComparator $nodeComparator
     ) {
     }
 

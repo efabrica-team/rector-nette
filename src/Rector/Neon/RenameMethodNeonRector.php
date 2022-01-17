@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RenameMethodNeonRector implements NeonRectorInterface
 {
     public function __construct(
-        private MethodCallRenameCollector $methodCallRenameCollector,
+        private readonly MethodCallRenameCollector $methodCallRenameCollector,
     ) {
     }
 

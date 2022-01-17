@@ -24,10 +24,10 @@ final class AssignAnalyzer
     private array $alreadyInitializedAssignsClassMethodObjectHashes = [];
 
     public function __construct(
-        private FunctionLikeFirstLevelStatementResolver $functionLikeFirstLevelStatementResolver,
-        private NodesToAddCollector $nodesToAddCollector,
-        private VarAnnotationManipulator $varAnnotationManipulator,
-        private BetterNodeFinder $betterNodeFinder,
+        private readonly FunctionLikeFirstLevelStatementResolver $functionLikeFirstLevelStatementResolver,
+        private readonly NodesToAddCollector $nodesToAddCollector,
+        private readonly VarAnnotationManipulator $varAnnotationManipulator,
+        private readonly BetterNodeFinder $betterNodeFinder,
     ) {
     }
 

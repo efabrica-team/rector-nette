@@ -9,8 +9,8 @@ use PhpParser\Node\Expr;
 final class ContentExprAndNeedleExpr
 {
     public function __construct(
-        private Expr $contentExpr,
-        private Expr $needleExpr
+        private readonly Expr $contentExpr,
+        private readonly Expr $needleExpr
     ) {
     }
 

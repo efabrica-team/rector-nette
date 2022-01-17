@@ -30,7 +30,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class MakeGetComponentAssignAnnotatedRector extends AbstractRector
 {
     public function __construct(
-        private VarAnnotationManipulator $varAnnotationManipulator
+        private readonly VarAnnotationManipulator $varAnnotationManipulator
     ) {
     }
 

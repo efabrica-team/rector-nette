@@ -22,11 +22,11 @@ final class NeonFileProcessor implements FileProcessorInterface
      * @param NeonRectorInterface[] $neonRectors
      */
     public function __construct(
-        private NeonParser $neonParser,
-        private NeonNodeTraverserFactory $neonNodeTraverserFactory,
-        private FormatPreservingNeonPrinter $formatPreservingNeonPrinter,
-        private array $neonRectors,
-        private FileDiffFactory $fileDiffFactory
+        private readonly NeonParser $neonParser,
+        private readonly NeonNodeTraverserFactory $neonNodeTraverserFactory,
+        private readonly FormatPreservingNeonPrinter $formatPreservingNeonPrinter,
+        private readonly array $neonRectors,
+        private readonly FileDiffFactory $fileDiffFactory
     ) {
     }
 

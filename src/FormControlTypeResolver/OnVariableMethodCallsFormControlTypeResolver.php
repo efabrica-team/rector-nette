@@ -16,9 +16,9 @@ use Rector\NodeNameResolver\NodeNameResolver;
 final class OnVariableMethodCallsFormControlTypeResolver implements FormControlTypeResolverInterface
 {
     public function __construct(
-        private MethodCallManipulator $methodCallManipulator,
-        private NodeNameResolver $nodeNameResolver,
-        private ValueResolver $valueResolver
+        private readonly MethodCallManipulator $methodCallManipulator,
+        private readonly NodeNameResolver $nodeNameResolver,
+        private readonly ValueResolver $valueResolver
     ) {
     }
 

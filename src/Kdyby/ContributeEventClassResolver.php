@@ -69,9 +69,9 @@ final class ContributeEventClassResolver
     ];
 
     public function __construct(
-        private NodeNameResolver $nodeNameResolver,
-        private StaticTypeMapper $staticTypeMapper,
-        private VariableNaming $variableNaming,
+        private readonly NodeNameResolver $nodeNameResolver,
+        private readonly StaticTypeMapper $staticTypeMapper,
+        private readonly VariableNaming $variableNaming,
     ) {
     }
 
@@ -116,11 +116,9 @@ final class ContributeEventClassResolver
 
     private function resolveParamType(?Identifier $identifier, Param $param): string
     {
-        if ($identifier === null) {
-            $staticType = new MixedType();
-        } else {
-            $staticType = $this->staticTypeMapper->mapPhpParserNodePHPStanType($identifier);
-        }
+        $staticType = $identifier === null ? new MixedType() : $this->staticTypeMapper->mapPhpParserNodePHPStanType(
+            $identifier
+        );
 
         return $this->createGetterFromParamAndStaticType($param, $staticType);
     }

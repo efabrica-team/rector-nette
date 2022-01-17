@@ -36,7 +36,7 @@ final class PregMatchFunctionToNetteUtilsStringsRector extends AbstractRector
     ];
 
     public function __construct(
-        private PregMatchAllAnalyzer $pregMatchAllAnalyzer
+        private readonly PregMatchAllAnalyzer $pregMatchAllAnalyzer
     ) {
     }
 

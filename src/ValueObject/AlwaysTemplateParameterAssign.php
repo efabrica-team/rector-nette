@@ -10,9 +10,9 @@ use PhpParser\Node\Expr\Assign;
 final class AlwaysTemplateParameterAssign
 {
     public function __construct(
-        private Assign $assign,
-        private string $parameterName,
-        private Expr $assignedExpr
+        private readonly Assign $assign,
+        private readonly string $parameterName,
+        private readonly Expr $assignedExpr
     ) {
     }
 

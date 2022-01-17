@@ -21,8 +21,8 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class MoveFinalGetUserToCheckRequirementsClassMethodRector extends AbstractRector
 {
     public function __construct(
-        private CheckRequirementsClassMethodFactory $checkRequirementsClassMethodFactory,
-        private ClassInsertManipulator $classInsertManipulator
+        private readonly CheckRequirementsClassMethodFactory $checkRequirementsClassMethodFactory,
+        private readonly ClassInsertManipulator $classInsertManipulator
     ) {
     }
 
