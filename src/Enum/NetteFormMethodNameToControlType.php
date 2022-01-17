@@ -9,7 +9,7 @@ final class NetteFormMethodNameToControlType
     /**
      * @var array<string, string>
      */
-    public const METHOD_NAME_TO_CONTROL_TYPE = [
+    final public const METHOD_NAME_TO_CONTROL_TYPE = [
         'addText' => 'Nette\Forms\Controls\TextInput',
         'addPassword' => 'Nette\Forms\Controls\TextInput',
         'addEmail' => 'Nette\Forms\Controls\TextInput',

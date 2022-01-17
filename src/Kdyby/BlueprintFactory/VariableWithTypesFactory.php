@@ -17,9 +17,9 @@ use Rector\StaticTypeMapper\StaticTypeMapper;
 final class VariableWithTypesFactory
 {
     public function __construct(
-        private NodeTypeResolver $nodeTypeResolver,
-        private StaticTypeMapper $staticTypeMapper,
-        private VariableNaming $variableNaming
+        private readonly NodeTypeResolver $nodeTypeResolver,
+        private readonly StaticTypeMapper $staticTypeMapper,
+        private readonly VariableNaming $variableNaming
     ) {
     }
 

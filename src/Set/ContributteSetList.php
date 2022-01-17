@@ -11,5 +11,5 @@ final class ContributteSetList implements SetListInterface
     /**
      * @var string
      */
-    public const APITTE_ATTRIBUTES = __DIR__ . '/../../config/sets/contributte/apitte-attributes.php';
+    final public const APITTE_ATTRIBUTES = __DIR__ . '/../../config/sets/contributte/apitte-attributes.php';
 }

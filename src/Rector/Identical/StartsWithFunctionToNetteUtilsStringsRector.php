@@ -22,7 +22,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class StartsWithFunctionToNetteUtilsStringsRector extends AbstractRector
 {
     public function __construct(
-        private StrlenStartsWithResolver $strlenStartsWithResolver
+        private readonly StrlenStartsWithResolver $strlenStartsWithResolver
     ) {
     }
 

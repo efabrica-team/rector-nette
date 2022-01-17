@@ -16,7 +16,7 @@ use Rector\NodeTypeResolver\Node\AttributeKey;
 final class NetteInjectPropertyAnalyzer
 {
     public function __construct(
-        private ClassChildAnalyzer $classChildAnalyzer
+        private readonly ClassChildAnalyzer $classChildAnalyzer
     ) {
     }
 

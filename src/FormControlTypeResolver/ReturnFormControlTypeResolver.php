@@ -18,7 +18,7 @@ final class ReturnFormControlTypeResolver implements FormControlTypeResolverInte
     private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver;
 
     public function __construct(
-        private BetterNodeFinder $betterNodeFinder
+        private readonly BetterNodeFinder $betterNodeFinder
     ) {
     }
 

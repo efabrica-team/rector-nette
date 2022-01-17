@@ -19,8 +19,8 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class ContextGetByTypeToConstructorInjectionRector extends AbstractRector
 {
     public function __construct(
-        private TestsNodeAnalyzer $testsNodeAnalyzer,
-        private DependencyInjectionMethodCallAnalyzer $dependencyInjectionMethodCallAnalyzer
+        private readonly TestsNodeAnalyzer $testsNodeAnalyzer,
+        private readonly DependencyInjectionMethodCallAnalyzer $dependencyInjectionMethodCallAnalyzer
     ) {
     }
 

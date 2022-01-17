@@ -28,12 +28,12 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class AnnotateMagicalControlArrayAccessRector extends AbstractRector
 {
     public function __construct(
-        private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver,
-        private ArrayDimFetchRenamer $arrayDimFetchRenamer,
-        private ArrayDimFetchAnalyzer $arrayDimFetchAnalyzer,
-        private ControlDimFetchAnalyzer $controlDimFetchAnalyzer,
-        private NetteControlNaming $netteControlNaming,
-        private AssignAnalyzer $assignAnalyzer,
+        private readonly MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver,
+        private readonly ArrayDimFetchRenamer $arrayDimFetchRenamer,
+        private readonly ArrayDimFetchAnalyzer $arrayDimFetchAnalyzer,
+        private readonly ControlDimFetchAnalyzer $controlDimFetchAnalyzer,
+        private readonly NetteControlNaming $netteControlNaming,
+        private readonly AssignAnalyzer $assignAnalyzer,
     ) {
     }
 

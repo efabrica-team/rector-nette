@@ -28,9 +28,9 @@ use Webmozart\Assert\Assert;
  */
 final class FormDataRector extends AbstractRector implements ConfigurableRectorInterface
 {
-    public const FORM_DATA_CLASS_PARENT = 'form_data_class_parent';
+    final public const FORM_DATA_CLASS_PARENT = 'form_data_class_parent';
 
-    public const FORM_DATA_CLASS_TRAITS = 'form_data_class_traits';
+    final public const FORM_DATA_CLASS_TRAITS = 'form_data_class_traits';
 
     private string $formDataClassParent = 'Nette\Utils\ArrayHash';
 
@@ -40,11 +40,11 @@ final class FormDataRector extends AbstractRector implements ConfigurableRectorI
     private array $formDataClassTraits = ['Nette\SmartObject'];
 
     public function __construct(
-        private FormVariableFinder $formVariableFinder,
-        private FormFieldsFinder $formFieldsFinder,
-        private FormOnSuccessCallbackFinder $formOnSuccessCallbackFinder,
-        private FormOnSuccessCallbackValuesParamFinder $formOnSuccessCallbackValuesParamFinder,
-        private ClassWithPublicPropertiesFactory $classWithPublicPropertiesFactory
+        private readonly FormVariableFinder $formVariableFinder,
+        private readonly FormFieldsFinder $formFieldsFinder,
+        private readonly FormOnSuccessCallbackFinder $formOnSuccessCallbackFinder,
+        private readonly FormOnSuccessCallbackValuesParamFinder $formOnSuccessCallbackValuesParamFinder,
+        private readonly ClassWithPublicPropertiesFactory $classWithPublicPropertiesFactory
     ) {
     }
 

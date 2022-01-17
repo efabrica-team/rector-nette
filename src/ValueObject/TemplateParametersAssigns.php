@@ -14,9 +14,9 @@ final class TemplateParametersAssigns
      * @param AlwaysTemplateParameterAssign[] $defaultChangeableTemplateParameterAssigns
      */
     public function __construct(
-        private array $templateParameterAssigns,
-        private array $conditionalTemplateParameterAssign,
-        private array $defaultChangeableTemplateParameterAssigns
+        private readonly array $templateParameterAssigns,
+        private readonly array $conditionalTemplateParameterAssign,
+        private readonly array $defaultChangeableTemplateParameterAssigns
     ) {
     }
 

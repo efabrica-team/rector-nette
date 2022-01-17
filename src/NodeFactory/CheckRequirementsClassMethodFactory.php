@@ -22,7 +22,7 @@ final class CheckRequirementsClassMethodFactory
     private const CHECK_REQUIREMENTS_METHOD_NAME = 'checkRequirements';
 
     public function __construct(
-        private ParentGetterStmtsToExternalStmtsFactory $parentGetterStmtsToExternalStmtsFactory
+        private readonly ParentGetterStmtsToExternalStmtsFactory $parentGetterStmtsToExternalStmtsFactory
     ) {
     }
 

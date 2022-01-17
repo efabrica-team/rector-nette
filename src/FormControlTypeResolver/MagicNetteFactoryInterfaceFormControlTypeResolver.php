@@ -24,10 +24,10 @@ final class MagicNetteFactoryInterfaceFormControlTypeResolver implements FormCon
     private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver;
 
     public function __construct(
-        private NodeNameResolver $nodeNameResolver,
-        private NodeTypeResolver $nodeTypeResolver,
-        private ReflectionProvider $reflectionProvider,
-        private AstResolver $astResolver,
+        private readonly NodeNameResolver $nodeNameResolver,
+        private readonly NodeTypeResolver $nodeTypeResolver,
+        private readonly ReflectionProvider $reflectionProvider,
+        private readonly AstResolver $astResolver,
     ) {
     }
 

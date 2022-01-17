@@ -13,18 +13,14 @@ use Rector\NodeTypeResolver\NodeTypeResolver;
 final class NetteClassAnalyzer
 {
     public function __construct(
-        private NodeTypeResolver $nodeTypeResolver,
-        private BetterNodeFinder $betterNodeFinder
+        private readonly NodeTypeResolver $nodeTypeResolver,
+        private readonly BetterNodeFinder $betterNodeFinder
     ) {
     }
 
     public function isInComponent(Node $node): bool
     {
-        if ($node instanceof Class_) {
-            $class = $node;
-        } else {
-            $class = $this->betterNodeFinder->findParentType($node, Class_::class);
-        }
+        $class = $node instanceof Class_ ? $node : $this->betterNodeFinder->findParentType($node, Class_::class);
 
         if (! $class instanceof Class_) {
             return false;

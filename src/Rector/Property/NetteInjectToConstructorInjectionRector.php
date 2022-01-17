@@ -30,11 +30,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NetteInjectToConstructorInjectionRector extends AbstractRector
 {
     public function __construct(
-        private PropertyUsageAnalyzer $propertyUsageAnalyzer,
-        private NetteInjectPropertyAnalyzer $netteInjectPropertyAnalyzer,
-        private PhpDocTagRemover $phpDocTagRemover,
-        private PropertyToAddCollector $propertyToAddCollector,
-        private VisibilityManipulator $visibilityManipulator
+        private readonly PropertyUsageAnalyzer $propertyUsageAnalyzer,
+        private readonly NetteInjectPropertyAnalyzer $netteInjectPropertyAnalyzer,
+        private readonly PhpDocTagRemover $phpDocTagRemover,
+        private readonly PropertyToAddCollector $propertyToAddCollector,
+        private readonly VisibilityManipulator $visibilityManipulator
     ) {
     }
 

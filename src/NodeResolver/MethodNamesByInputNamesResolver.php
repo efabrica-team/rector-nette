@@ -13,7 +13,7 @@ final class MethodNamesByInputNamesResolver
      * @param FormControlTypeResolverInterface[] $formControlTypeResolvers
      */
     public function __construct(
-        private array $formControlTypeResolvers
+        private readonly array $formControlTypeResolvers
     ) {
     }
 
@@ -26,7 +26,7 @@ final class MethodNamesByInputNamesResolver
 
         foreach ($this->formControlTypeResolvers as $formControlTypeResolver) {
             $currentMethodNamesByInputNames = $formControlTypeResolver->resolve($node);
-            $methodNamesByInputNames = array_merge($methodNamesByInputNames, $currentMethodNamesByInputNames);
+            $methodNamesByInputNames = [...$methodNamesByInputNames, ...$currentMethodNamesByInputNames];
         }
 
         return $methodNamesByInputNames;

@@ -7,8 +7,8 @@ namespace Rector\Nette\ValueObject;
 final class LatteVariableType
 {
     public function __construct(
-        private string $name,
-        private string $type
+        private readonly string $name,
+        private readonly string $type
     ) {
     }
 

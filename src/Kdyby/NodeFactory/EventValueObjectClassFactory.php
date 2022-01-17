@@ -31,10 +31,10 @@ use Symplify\Astral\ValueObject\NodeBuilder\NamespaceBuilder;
 final class EventValueObjectClassFactory
 {
     public function __construct(
-        private ClassNaming $classNaming,
-        private NodeFactory $nodeFactory,
-        private NodeNameResolver $nodeNameResolver,
-        private VariableWithTypesFactory $variableWithTypesFactory
+        private readonly ClassNaming $classNaming,
+        private readonly NodeFactory $nodeFactory,
+        private readonly NodeNameResolver $nodeNameResolver,
+        private readonly VariableWithTypesFactory $variableWithTypesFactory
     ) {
     }
 

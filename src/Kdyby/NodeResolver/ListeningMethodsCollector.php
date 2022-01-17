@@ -22,12 +22,12 @@ final class ListeningMethodsCollector
     /**
      * @var string
      */
-    public const EVENT_TYPE_CONTRIBUTTE = 'contributte';
+    final public const EVENT_TYPE_CONTRIBUTTE = 'contributte';
 
     /**
      * @var string
      */
-    public const EVENT_TYPE_CUSTOM = 'custom';
+    final public const EVENT_TYPE_CUSTOM = 'custom';
 
     /**
      * @var EventClassAndClassMethod[]
@@ -35,10 +35,10 @@ final class ListeningMethodsCollector
     private array $eventClassesAndClassMethods = [];
 
     public function __construct(
-        private SimpleCallableNodeTraverser $simpleCallableNodeTraverser,
-        private EventClassNaming $eventClassNaming,
-        private ValueResolver $valueResolver,
-        private BetterNodeFinder $betterNodeFinder,
+        private readonly SimpleCallableNodeTraverser $simpleCallableNodeTraverser,
+        private readonly EventClassNaming $eventClassNaming,
+        private readonly ValueResolver $valueResolver,
+        private readonly BetterNodeFinder $betterNodeFinder,
     ) {
     }
 

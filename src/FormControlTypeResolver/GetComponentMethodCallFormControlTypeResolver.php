@@ -23,10 +23,10 @@ final class GetComponentMethodCallFormControlTypeResolver implements FormControl
     private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver;
 
     public function __construct(
-        private NodeNameResolver $nodeNameResolver,
-        private NodeTypeResolver $nodeTypeResolver,
-        private ValueResolver $valueResolver,
-        private AstResolver $astResolver
+        private readonly NodeNameResolver $nodeNameResolver,
+        private readonly NodeTypeResolver $nodeTypeResolver,
+        private readonly ValueResolver $valueResolver,
+        private readonly AstResolver $astResolver
     ) {
     }
 
@@ -87,7 +87,7 @@ final class GetComponentMethodCallFormControlTypeResolver implements FormControl
             );
         }
 
-        return array_merge($constructorClassMethodData, $createComponentClassMethodData);
+        return [...$constructorClassMethodData, ...$createComponentClassMethodData];
     }
 
     private function createCreateComponentMethodName(MethodCall $methodCall): string

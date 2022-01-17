@@ -9,8 +9,8 @@ use PhpParser\Node\Expr\Assign;
 final class ParameterAssign
 {
     public function __construct(
-        private Assign $assign,
-        private string $parameterName
+        private readonly Assign $assign,
+        private readonly string $parameterName
     ) {
     }
 

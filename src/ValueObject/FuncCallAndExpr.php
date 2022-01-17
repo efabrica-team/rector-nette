@@ -10,8 +10,8 @@ use PhpParser\Node\Expr\FuncCall;
 final class FuncCallAndExpr
 {
     public function __construct(
-        private FuncCall $funcCall,
-        private Expr $expr
+        private readonly FuncCall $funcCall,
+        private readonly Expr $expr
     ) {
     }
 

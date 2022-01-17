@@ -19,9 +19,9 @@ use Symplify\Astral\NodeTraverser\SimpleCallableNodeTraverser;
 final class ParentGetterStmtsToExternalStmtsFactory
 {
     public function __construct(
-        private NodeTypeResolver $nodeTypeResolver,
-        private SimpleCallableNodeTraverser $simpleCallableNodeTraverser,
-        private NodeComparator $nodeComparator
+        private readonly NodeTypeResolver $nodeTypeResolver,
+        private readonly SimpleCallableNodeTraverser $simpleCallableNodeTraverser,
+        private readonly NodeComparator $nodeComparator
     ) {
     }
 

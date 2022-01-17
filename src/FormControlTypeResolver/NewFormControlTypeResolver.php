@@ -19,8 +19,8 @@ final class NewFormControlTypeResolver implements FormControlTypeResolverInterfa
     private MethodNamesByInputNamesResolver $methodNamesByInputNamesResolver;
 
     public function __construct(
-        private NodeNameResolver $nodeNameResolver,
-        private AstResolver $astResolver,
+        private readonly NodeNameResolver $nodeNameResolver,
+        private readonly AstResolver $astResolver,
     ) {
     }
 

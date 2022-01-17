@@ -26,8 +26,8 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class ReplaceEventManagerWithEventSubscriberRector extends AbstractRector
 {
     public function __construct(
-        private EventClassNaming $eventClassNaming,
-        private EventValueObjectClassFactory $eventValueObjectClassFactory
+        private readonly EventClassNaming $eventClassNaming,
+        private readonly EventValueObjectClassFactory $eventValueObjectClassFactory
     ) {
     }
 

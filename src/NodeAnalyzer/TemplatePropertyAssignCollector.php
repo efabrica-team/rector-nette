@@ -64,10 +64,10 @@ final class TemplatePropertyAssignCollector
     private array $conditionalTemplateParameterAssigns = [];
 
     public function __construct(
-        private ScopeNestingComparator $scopeNestingComparator,
-        private BetterNodeFinder $betterNodeFinder,
-        private ThisTemplatePropertyFetchAnalyzer $thisTemplatePropertyFetchAnalyzer,
-        private ReturnAnalyzer $returnAnalyzer
+        private readonly ScopeNestingComparator $scopeNestingComparator,
+        private readonly BetterNodeFinder $betterNodeFinder,
+        private readonly ThisTemplatePropertyFetchAnalyzer $thisTemplatePropertyFetchAnalyzer,
+        private readonly ReturnAnalyzer $returnAnalyzer
     ) {
     }
 

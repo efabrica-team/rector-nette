@@ -18,11 +18,11 @@ use Rector\TypeDeclaration\TypeInferer\ReturnTypeInferer;
 final class ArrayDimFetchControlTypeResolver implements FormControlTypeResolverInterface
 {
     public function __construct(
-        private ControlDimFetchAnalyzer $controlDimFetchAnalyzer,
-        private NetteControlNaming $netteControlNaming,
-        private NodeTypeResolver $nodeTypeResolver,
-        private ReturnTypeInferer $returnTypeInferer,
-        private AstResolver $astResolver,
+        private readonly ControlDimFetchAnalyzer $controlDimFetchAnalyzer,
+        private readonly NetteControlNaming $netteControlNaming,
+        private readonly NodeTypeResolver $nodeTypeResolver,
+        private readonly ReturnTypeInferer $returnTypeInferer,
+        private readonly AstResolver $astResolver,
     ) {
     }
 
