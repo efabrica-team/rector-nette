@@ -47,14 +47,14 @@ class ExistingConstructorParam
      */
     private $someInterfaceToInject;
 
-    public function __construct(ISomeInterfaceToInject $someInterfaceToInject)
+    public function __construct(ISomeInterfaceToInject $someInterfaceToInject, private \Rector\Nette\Tests\Rector\MethodCall\ContextGetByTypeToConstructorInjectionRector\Source\ISomeInterfaceToInject $someInterfaceToInject2)
     {
         $this->someInterfaceToInject = $someInterfaceToInject;
     }
 
     public function run()
     {
-        $someTypeToInject = $this->someInterfaceToInject;
+        $someTypeToInject = $this->someInterfaceToInject2;
     }
 }
 

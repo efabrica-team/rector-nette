@@ -1,13 +1,12 @@
 includes:
-    - vendor/symplify/phpstan-rules/config/nette-rules.neon
+    - vendor/symplify/phpstan-rules/packages/nette/config/nette-rules.neon
     - vendor/symplify/phpstan-rules/config/static-rules.neon
     - vendor/symplify/phpstan-rules/config/array-rules.neon
     - vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
     - vendor/symplify/phpstan-rules/config/forbidden-static-rules.neon
     - vendor/symplify/phpstan-rules/config/doctrine-rules.neon
-    - vendor/symplify/phpstan-rules/config/size-rules.neon
     - vendor/symplify/phpstan-rules/config/regex-rules.neon
-    - vendor/symplify/phpstan-rules/config/symfony-rules.neon
+    - vendor/symplify/phpstan-rules/packages/symfony/config/symfony-rules.neon
     - vendor/symplify/phpstan-rules/config/test-rules.neon
     - vendor/symplify/phpstan-rules/config/services-rules.neon
     - vendor/symplify/phpstan-rules/config/naming-rules.neon
@@ -121,3 +120,12 @@ parameters:
              paths:
                  - src/FileProcessor/LatteFileProcessor.php
                  - src/FileProcessor/NeonFileProcessor.php
+
+        -
+            message: '#Add explicit array type to assigned "\$.*\->args" expression#'
+            paths:
+                - src/NodeAnalyzer/MethodCallArgMerger.php
+                - src/Rector/ClassMethod/MergeTemplateSetFileToTemplateRenderRector.php
+                - src/Rector/ClassMethod/TemplateMagicAssignToExplicitVariableArrayRector.php
+                - src/Rector/FuncCall/PregFunctionToNetteUtilsStringsRector.php
+                - src/Rector/NotIdentical/StrposToStringsContainsRector.php
