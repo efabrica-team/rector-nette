@@ -26,8 +26,11 @@ final class NetteInjectPropertyAnalyzer
             throw new ShouldNotHappenException();
         }
 
-        /** @var Scope $scope */
         $scope = $property->getAttribute(AttributeKey::SCOPE);
+        if (! $scope instanceof Scope) {
+            return false;
+        }
+
         $classReflection = $scope->getClassReflection();
         if (! $classReflection instanceof ClassReflection) {
             return false;
