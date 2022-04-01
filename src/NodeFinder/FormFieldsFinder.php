@@ -110,10 +110,7 @@ final class FormFieldsFinder
         if (! $methodCallVariable instanceof Variable) {
             return false;
         }
-        if ($methodCallVariable->name !== $form->name) {
-            return false;
-        }
-        return true;
+        return $methodCallVariable->name === $form->name;
     }
 
     private function findMethodCallVariable(MethodCall $methodCall): ?Variable
