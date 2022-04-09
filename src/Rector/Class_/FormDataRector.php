@@ -10,6 +10,7 @@ use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\Class_;
+use Rector\Core\Application\FileSystem\RemovedAndAddedFilesCollector;
 use Rector\Core\Contract\PhpParser\NodePrinterInterface;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
@@ -47,6 +48,7 @@ final class FormDataRector extends AbstractRector implements ConfigurableRectorI
         private readonly FormOnSuccessCallbackValuesParamFinder $formOnSuccessCallbackValuesParamFinder,
         private readonly ClassWithPublicPropertiesFactory $classWithPublicPropertiesFactory,
         private readonly NodePrinterInterface $nodePrinter,
+        private readonly RemovedAndAddedFilesCollector $removedAndAddedFilesCollector,
     ) {
     }
 

@@ -13,6 +13,7 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Expression;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\VerbosityLevel;
+use Rector\Core\Application\FileSystem\RemovedAndAddedFilesCollector;
 use Rector\Core\Contract\PhpParser\NodePrinterInterface;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
@@ -41,7 +42,8 @@ final class TemplateTypeBasedOnPresenterTemplateParametersRector extends Abstrac
 
     public function __construct(
         private readonly ClassWithPublicPropertiesFactory $classWithPublicPropertiesFactory,
-        private readonly NodePrinterInterface $nodePrinter
+        private readonly NodePrinterInterface $nodePrinter,
+        private readonly RemovedAndAddedFilesCollector $removedAndAddedFilesCollector,
     ) {
     }
 
