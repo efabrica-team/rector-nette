@@ -13,6 +13,7 @@ use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Name\FullyQualified;
 use PHPStan\Type\ObjectType;
+use Rector\Core\Application\FileSystem\RemovedAndAddedFilesCollector;
 use Rector\Core\Rector\AbstractRector;
 use Rector\FileSystemRector\ValueObject\AddedFileWithNodes;
 use Rector\Nette\Kdyby\Naming\EventClassNaming;
@@ -27,7 +28,8 @@ final class ReplaceEventManagerWithEventSubscriberRector extends AbstractRector
 {
     public function __construct(
         private readonly EventClassNaming $eventClassNaming,
-        private readonly EventValueObjectClassFactory $eventValueObjectClassFactory
+        private readonly EventValueObjectClassFactory $eventValueObjectClassFactory,
+        private readonly RemovedAndAddedFilesCollector $removedAndAddedFilesCollector,
     ) {
     }
 
