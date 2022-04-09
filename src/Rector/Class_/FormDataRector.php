@@ -10,6 +10,7 @@ use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\Class_;
+use Rector\Core\Contract\PhpParser\NodePrinterInterface;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
 use Rector\FileSystemRector\ValueObject\AddedFileWithContent;
@@ -44,7 +45,8 @@ final class FormDataRector extends AbstractRector implements ConfigurableRectorI
         private readonly FormFieldsFinder $formFieldsFinder,
         private readonly FormOnSuccessCallbackFinder $formOnSuccessCallbackFinder,
         private readonly FormOnSuccessCallbackValuesParamFinder $formOnSuccessCallbackValuesParamFinder,
-        private readonly ClassWithPublicPropertiesFactory $classWithPublicPropertiesFactory
+        private readonly ClassWithPublicPropertiesFactory $classWithPublicPropertiesFactory,
+        private readonly NodePrinterInterface $nodePrinter,
     ) {
     }
 
@@ -163,7 +165,7 @@ CODE_SAMPLE
             $this->formDataClassTraits
         );
 
-        $printedClassContent = "<?php\n\n" . $this->betterStandardPrinter->print($formDataClass) . "\n";
+        $printedClassContent = "<?php\n\n" . $this->nodePrinter->print($formDataClass) . "\n";
 
         $smartFileInfo = $this->file->getSmartFileInfo();
         $targetFilePath = $smartFileInfo->getRealPathDirectory() . '/' . $formDataClassName . '.php';
