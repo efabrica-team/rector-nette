@@ -13,6 +13,7 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Expression;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\VerbosityLevel;
+use Rector\Core\Contract\PhpParser\NodePrinterInterface;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
 use Rector\FileSystemRector\ValueObject\AddedFileWithContent;
@@ -39,7 +40,8 @@ final class TemplateTypeBasedOnPresenterTemplateParametersRector extends Abstrac
     private array $templateClassTraits = [];
 
     public function __construct(
-        private readonly ClassWithPublicPropertiesFactory $classWithPublicPropertiesFactory
+        private readonly ClassWithPublicPropertiesFactory $classWithPublicPropertiesFactory,
+        private readonly NodePrinterInterface $nodePrinter
     ) {
     }
 
@@ -279,7 +281,7 @@ CODE_SAMPLE
             $this->templateClassTraits
         );
 
-        $printedClassContent = "<?php\n\n" . $this->betterStandardPrinter->print($templateClass) . "\n";
+        $printedClassContent = "<?php\n\n" . $this->nodePrinter->print($templateClass) . "\n";
 
         $smartFileInfo = $this->file->getSmartFileInfo();
         $targetFilePath = $smartFileInfo->getRealPathDirectory() . '/' . $templateClassName . '.php';
