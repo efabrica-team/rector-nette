@@ -1,7 +1,10 @@
 <?php
-use Nette\Security\Passwords;
 
-class TestPresenter extends BasePresenter
+namespace Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Fixture;
+
+use Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source;
+
+class TestPresenter extends Source\BasePresenterWithConstructor
 {
     /**
      * @inject
@@ -13,35 +16,24 @@ class TestPresenter extends BasePresenter
         $this->passwords->hash('test');
     }
 }
-
-abstract class BasePresenter
-{
-    public function __construct()
-    {
-    }
-}
 ?>
 -----
 <?php
-use Nette\Security\Passwords;
 
-class TestPresenter extends BasePresenter
+namespace Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Fixture;
+
+use Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source;
+
+class TestPresenter extends Source\BasePresenterWithConstructor
 {
-    public function __construct(private \Nette\Security\Passwords $passwords)
+    public function __construct(string $baseParameter, private \Nette\Security\Passwords $passwords)
     {
-        parent::__construct();
+        parent::__construct($baseParameter);
     }
 
     public function actionTest()
     {
         $this->passwords->hash('test');
-    }
-}
-
-abstract class BasePresenter
-{
-    public function __construct()
-    {
     }
 }
 ?>
