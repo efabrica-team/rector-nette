@@ -2,18 +2,13 @@
 
 namespace Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Fixture;
 
-final class SkipIfHasParentWithConstructor extends ParentWithConstructor
+use Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\ParentWithConstructorDependency;
+
+final class SkipIfHasParentWithConstructorDependency extends ParentWithConstructorDependency
 {
     /**
      * @var \Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProduct
      * @inject
      */
     public $someProduct;
-}
-
-class ParentWithConstructor
-{
-    public function __construct($value = 100)
-    {
-    }
 }
