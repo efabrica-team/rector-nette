@@ -2,24 +2,22 @@
 
 declare(strict_types=1);
 
+use Rector\Config\RectorConfig;
 use Rector\Nette\Kdyby\Rector\MethodCall\WrapTransParameterNameRector;
 use Rector\Renaming\Rector\MethodCall\RenameMethodRector;
 use Rector\Renaming\Rector\Name\RenameClassRector;
 use Rector\Renaming\ValueObject\MethodCallRename;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $services = $containerConfigurator->services();
+return static function (RectorConfig $rectorConfig): void {
+    $rectorConfig->ruleWithConfiguration(RenameMethodRector::class, [
+        new MethodCallRename('Kdyby\Translation\Translator', 'translate', 'trans'),
+    ]);
 
-    $services->set(RenameMethodRector::class)
-        ->configure([new MethodCallRename('Kdyby\Translation\Translator', 'translate', 'trans')]);
+    $rectorConfig->ruleWithConfiguration(RenameClassRector::class, [
+        'Kdyby\Translation\Translator' => 'Nette\Localization\ITranslator',
+        'Kdyby\Translation\DI\ITranslationProvider' => 'Contributte\Translation\DI\TranslationProviderInterface',
+        'Kdyby\Translation\Phrase' => 'Contributte\Translation\Wrappers\Message',
+    ]);
 
-    $services->set(RenameClassRector::class)
-        ->configure([
-            'Kdyby\Translation\Translator' => 'Nette\Localization\ITranslator',
-            'Kdyby\Translation\DI\ITranslationProvider' => 'Contributte\Translation\DI\TranslationProviderInterface',
-            'Kdyby\Translation\Phrase' => 'Contributte\Translation\Wrappers\Message',
-        ]);
-
-    $services->set(WrapTransParameterNameRector::class);
+    $rectorConfig->rule(WrapTransParameterNameRector::class);
 };
