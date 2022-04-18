@@ -23,14 +23,9 @@ use Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\S
 
 final class SkipIfHasParentWithConstructorDependency extends ParentWithEmptyConstructor
 {
-    /**
-     * @var \Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProduct
-     */
-    private $someProduct;
-
-    public function __construct(\Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProduct $someProduct)
+    public function __construct(private \Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProduct $someProduct)
     {
-        $this->someProduct = $someProduct;
+        parent::__construct();
     }
 }
 
