@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
+use Rector\Config\RectorConfig;
 use Rector\Core\NonPhpFile\Rector\RenameClassNonPhpRector;
 use Rector\Nette\Rector\Latte\RenameMethodLatteRector;
 use Rector\Nette\Rector\Neon\RenameMethodNeonRector;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->import(__DIR__ . '/packages.php');
+return static function (RectorConfig $rectorConfig): void {
+    $rectorConfig->import(__DIR__ . '/packages.php');
 
-    $services = $containerConfigurator->services();
+    $services = $rectorConfig->services();
 
     $services->defaults()
         ->public()
@@ -26,7 +26,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             __DIR__ . '/../src/Kdyby/ValueObject',
         ]);
 
-    $services->set(RenameClassNonPhpRector::class);
-    $services->set(RenameMethodNeonRector::class);
-    $services->set(RenameMethodLatteRector::class);
+    $rectorConfig->rule(RenameClassNonPhpRector::class);
+    $rectorConfig->rule(RenameMethodNeonRector::class);
+    $rectorConfig->rule(RenameMethodLatteRector::class);
 };
