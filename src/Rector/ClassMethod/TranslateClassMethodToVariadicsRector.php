@@ -17,15 +17,15 @@ use PhpParser\NodeTraverser;
 use PHPStan\Type\ObjectType;
 use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\Rector\AbstractRector;
-use Rector\NodeTypeResolver\Node\AttributeKey;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * @see https://github.com/nette/utils/pull/178
- * @see https://github.com/contributte/translation/commit/d374c4c05b57dff1e5b327bb9bf98c392769806c
+ * @changelog https://github.com/nette/utils/pull/178
+ * @changelog https://github.com/contributte/translation/commit/d374c4c05b57dff1e5b327bb9bf98c392769806c
  *
  * @see \Rector\Nette\Tests\Rector\ClassMethod\TranslateClassMethodToVariadicsRector\TranslateClassMethodToVariadicsRectorTest
+ *
  * @note must be run before "composer update nette/utils:^3.0", because param contract break causes fatal error
  */
 final class TranslateClassMethodToVariadicsRector extends AbstractRector
@@ -139,14 +139,7 @@ CODE_SAMPLE
 
             // instantiate
             $assign = $this->createCoalesceAssign($node);
-
-            $currentStmt = $node->getAttribute(AttributeKey::CURRENT_STATEMENT);
-            $positionNode = $currentStmt ?? $node;
-            if (! $positionNode instanceof Node) {
-                throw new ShouldNotHappenException();
-            }
-
-            $this->nodesToAddCollector->addNodeBeforeNode($assign, $positionNode);
+            $this->nodesToAddCollector->addNodeBeforeNode($assign, $node);
 
             return NodeTraverser::STOP_TRAVERSAL;
         });
