@@ -12,7 +12,6 @@ use PhpParser\Node\Stmt\Expression;
 use PHPStan\Type\ObjectType;
 use Rector\BetterPhpDocParser\PhpDocManipulator\VarAnnotationManipulator;
 use Rector\Core\PhpParser\Node\BetterNodeFinder;
-use Rector\Nette\NodeAdding\FunctionLikeFirstLevelStatementResolver;
 use Rector\NodeTypeResolver\Node\AttributeKey;
 use Rector\PostRector\Collector\NodesToAddCollector;
 
@@ -24,7 +23,6 @@ final class AssignAnalyzer
     private array $alreadyInitializedAssignsClassMethodObjectHashes = [];
 
     public function __construct(
-        private readonly FunctionLikeFirstLevelStatementResolver $functionLikeFirstLevelStatementResolver,
         private readonly NodesToAddCollector $nodesToAddCollector,
         private readonly VarAnnotationManipulator $varAnnotationManipulator,
         private readonly BetterNodeFinder $betterNodeFinder,
@@ -42,8 +40,7 @@ final class AssignAnalyzer
 
         $assignExpression = $this->createAnnotatedAssignExpression($variableName, $arrayDimFetch, $controlObjectType);
 
-        $currentStatement = $this->functionLikeFirstLevelStatementResolver->resolveFirstLevelStatement($arrayDimFetch);
-        $this->nodesToAddCollector->addNodeBeforeNode($assignExpression, $currentStatement);
+        $this->nodesToAddCollector->addNodeBeforeNode($assignExpression, $arrayDimFetch);
     }
 
     private function shouldSkipForAlreadyAddedInCurrentClassMethod(

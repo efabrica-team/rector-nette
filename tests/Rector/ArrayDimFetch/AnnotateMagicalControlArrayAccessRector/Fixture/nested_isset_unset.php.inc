@@ -35,9 +35,9 @@ final class NestedIssetUnsedPresenter extends Presenter
 {
     public function go($controls)
     {
-        /** @var \Nette\Application\UI\Form $someForm */
-        $someForm = $this['someForm'];
         foreach (\array_keys($controls) as $key) {
+            /** @var \Nette\Application\UI\Form $someForm */
+            $someForm = $this['someForm'];
             if (isset($someForm[$key])) {
                 unset($someForm[$key]);
             }

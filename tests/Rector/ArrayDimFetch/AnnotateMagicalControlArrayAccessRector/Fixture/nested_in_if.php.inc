@@ -37,9 +37,9 @@ final class NestedInIf extends Presenter
 {
     public function go($value)
     {
-        /** @var \Nette\Application\UI\Form $someForm */
-        $someForm = $this['someForm'];
         if ($value) {
+            /** @var \Nette\Application\UI\Form $someForm */
+            $someForm = $this['someForm'];
             $someForm->call();
         }
 
