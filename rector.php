@@ -10,6 +10,8 @@ use Rector\Set\ValueObject\SetList;
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->importNames();
 
+    $rectorConfig->parallel();
+
     $rectorConfig->paths([__DIR__ . '/src', __DIR__ . '/tests']);
     $rectorConfig->skip([
         // for tests
