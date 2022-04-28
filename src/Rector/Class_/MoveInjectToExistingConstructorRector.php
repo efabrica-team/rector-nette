@@ -9,6 +9,7 @@ use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Property;
 use Rector\BetterPhpDocParser\PhpDocManipulator\PhpDocTagRemover;
+use Rector\Core\Php\PhpVersionProvider;
 use Rector\Core\Rector\AbstractRector;
 use Rector\Core\ValueObject\MethodName;
 use Rector\Core\ValueObject\PhpVersionFeature;
@@ -28,7 +29,8 @@ final class MoveInjectToExistingConstructorRector extends AbstractRector
         private readonly PropertyUsageAnalyzer $propertyUsageAnalyzer,
         private readonly PhpDocTagRemover $phpDocTagRemover,
         private readonly PropertyToAddCollector $propertyToAddCollector,
-        private readonly VisibilityManipulator $visibilityManipulator
+        private readonly VisibilityManipulator $visibilityManipulator,
+        private readonly PhpVersionProvider $phpVersionProvider,
     ) {
     }
 

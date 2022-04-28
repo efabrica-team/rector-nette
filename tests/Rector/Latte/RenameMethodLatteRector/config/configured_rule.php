@@ -11,8 +11,7 @@ use Rector\Renaming\ValueObject\MethodCallRename;
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->import(__DIR__ . '/../../../../../config/config.php');
 
-    $services = $rectorConfig->services();
-
-    $services->set(RenameMethodRector::class)
-        ->configure([new MethodCallRename(SomeClass::class, 'get', 'getAll')]);
+    $rectorConfig->ruleWithConfiguration(RenameMethodRector::class, [
+        new MethodCallRename(SomeClass::class, 'get', 'getAll'),
+    ]);
 };

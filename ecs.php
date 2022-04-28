@@ -2,18 +2,14 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symplify\EasyCodingStandard\ValueObject\Option;
+use PhpCsFixer\Fixer\ReturnNotation\ReturnAssignmentFixer;
+use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->import(SetList::PSR_12);
-    $containerConfigurator->import(SetList::SYMPLIFY);
-    $containerConfigurator->import(SetList::COMMON);
-    $containerConfigurator->import(SetList::CLEAN_CODE);
+return static function (ECSConfig $ecsConfig): void {
+    $ecsConfig->sets([SetList::PSR_12, SetList::SYMPLIFY, SetList::COMMON, SetList::CLEAN_CODE]);
 
-    $parameters = $containerConfigurator->parameters();
-    $parameters->set(Option::PATHS, [
+    $ecsConfig->paths([
         __DIR__ . '/src',
         __DIR__ . '/tests',
         __DIR__ . '/config',
@@ -21,13 +17,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/rector.php',
     ]);
 
-    $parameters->set(Option::PARALLEL, true);
-
-    $parameters->set(Option::SKIP, [
+    $ecsConfig->skip([
         '*/Source/*', '*/Fixture/*',
 
         // breaks annotated code - removed on symplify dev-main
-        \PhpCsFixer\Fixer\ReturnNotation\ReturnAssignmentFixer::class,
+        ReturnAssignmentFixer::class,
     ]);
-    $parameters->set(Option::LINE_ENDING, "\n");
+
+    $ecsConfig->lineEnding("\n");
 };

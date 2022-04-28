@@ -10,6 +10,7 @@ use PhpParser\Node\Stmt\Property;
 use Rector\BetterPhpDocParser\PhpDocInfo\PhpDocInfo;
 use Rector\BetterPhpDocParser\PhpDocManipulator\PhpDocTagRemover;
 use Rector\Core\Exception\ShouldNotHappenException;
+use Rector\Core\Php\PhpVersionProvider;
 use Rector\Core\Rector\AbstractRector;
 use Rector\Core\ValueObject\PhpVersionFeature;
 use Rector\Nette\NodeAnalyzer\NetteInjectPropertyAnalyzer;
@@ -34,7 +35,8 @@ final class NetteInjectToConstructorInjectionRector extends AbstractRector
         private readonly NetteInjectPropertyAnalyzer $netteInjectPropertyAnalyzer,
         private readonly PhpDocTagRemover $phpDocTagRemover,
         private readonly PropertyToAddCollector $propertyToAddCollector,
-        private readonly VisibilityManipulator $visibilityManipulator
+        private readonly VisibilityManipulator $visibilityManipulator,
+        private readonly PhpVersionProvider $phpVersionProvider,
     ) {
     }
 
