@@ -10,6 +10,7 @@ use PhpParser\Node\Stmt\Property;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use Rector\Core\Exception\ShouldNotHappenException;
+use Rector\Core\NodeAnalyzer\PropertyFetchAnalyzer;
 use Rector\Core\PhpParser\AstResolver;
 use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\FamilyTree\Reflection\FamilyRelationsAnalyzer;
@@ -22,7 +23,8 @@ final class PropertyUsageAnalyzer
         private readonly BetterNodeFinder $betterNodeFinder,
         private readonly FamilyRelationsAnalyzer $familyRelationsAnalyzer,
         private readonly NodeNameResolver $nodeNameResolver,
-        private readonly AstResolver $astResolver
+        private readonly AstResolver $astResolver,
+        private readonly PropertyFetchAnalyzer $propertyFetchAnalyzer
     ) {
     }
 
@@ -54,7 +56,7 @@ final class PropertyUsageAnalyzer
 
             $isPropertyFetched = (bool) $this->betterNodeFinder->findFirst(
                 $childClass->stmts,
-                fn (Node $node): bool => $this->nodeNameResolver->isLocalPropertyFetchNamed($node, $propertyName)
+                fn (Node $node): bool => $this->propertyFetchAnalyzer->isLocalPropertyFetchName($node, $propertyName)
             );
 
             if ($isPropertyFetched) {
