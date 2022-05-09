@@ -14,9 +14,11 @@ use PhpParser\Node\Param;
 use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\NodeTraverser;
-use PHPStan\Type\ObjectType;
+use PHPStan\Analyser\Scope;
+use PHPStan\Reflection\ClassReflection;
 use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\Rector\AbstractRector;
+use Rector\NodeTypeResolver\Node\AttributeKey;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -83,10 +85,17 @@ CODE_SAMPLE
      */
     public function refactor(Node $node): ?Node
     {
-        if (! $this->nodeTypeResolver->isMethodStaticCallOrClassMethodObjectType(
-            $node,
-            new ObjectType('Nette\Localization\ITranslator')
-        )) {
+        $scope = $node->getAttribute(AttributeKey::SCOPE);
+        if (! $scope instanceof Scope) {
+            return null;
+        }
+
+        $classReflection = $scope->getClassReflection();
+        if (! $classReflection instanceof ClassReflection) {
+            return null;
+        }
+
+        if (! $classReflection->isSubclassOf('Nette\Localization\ITranslator')) {
             return null;
         }
 
