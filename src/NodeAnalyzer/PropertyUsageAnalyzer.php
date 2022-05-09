@@ -7,15 +7,14 @@ namespace Rector\Nette\NodeAnalyzer;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Property;
-use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\NodeAnalyzer\PropertyFetchAnalyzer;
 use Rector\Core\PhpParser\AstResolver;
 use Rector\Core\PhpParser\Node\BetterNodeFinder;
+use Rector\Core\Reflection\ReflectionResolver;
 use Rector\FamilyTree\Reflection\FamilyRelationsAnalyzer;
 use Rector\NodeNameResolver\NodeNameResolver;
-use Rector\NodeTypeResolver\Node\AttributeKey;
 
 final class PropertyUsageAnalyzer
 {
@@ -24,18 +23,14 @@ final class PropertyUsageAnalyzer
         private readonly FamilyRelationsAnalyzer $familyRelationsAnalyzer,
         private readonly NodeNameResolver $nodeNameResolver,
         private readonly AstResolver $astResolver,
-        private readonly PropertyFetchAnalyzer $propertyFetchAnalyzer
+        private readonly PropertyFetchAnalyzer $propertyFetchAnalyzer,
+        private readonly ReflectionResolver $reflectionResolver
     ) {
     }
 
     public function isPropertyFetchedInChildClass(Property $property): bool
     {
-        $scope = $property->getAttribute(AttributeKey::SCOPE);
-        if (! $scope instanceof Scope) {
-            return false;
-        }
-
-        $classReflection = $scope->getClassReflection();
+        $classReflection = $this->reflectionResolver->resolveClassReflection($property);
         if (! $classReflection instanceof ClassReflection) {
             throw new ShouldNotHappenException();
         }
