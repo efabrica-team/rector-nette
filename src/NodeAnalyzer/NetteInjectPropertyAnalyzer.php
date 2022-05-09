@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace Rector\Nette\NodeAnalyzer;
 
 use PhpParser\Node\Stmt\Property;
-use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ParametersAcceptorSelector;
 use Rector\BetterPhpDocParser\PhpDocInfo\PhpDocInfo;
 use Rector\Core\Exception\ShouldNotHappenException;
+use Rector\Core\Reflection\ReflectionResolver;
 use Rector\Core\ValueObject\MethodName;
 use Rector\FamilyTree\NodeAnalyzer\ClassChildAnalyzer;
-use Rector\NodeTypeResolver\Node\AttributeKey;
 
 final class NetteInjectPropertyAnalyzer
 {
     public function __construct(
-        private readonly ClassChildAnalyzer $classChildAnalyzer
+        private readonly ClassChildAnalyzer $classChildAnalyzer,
+        private readonly ReflectionResolver $reflectionResolver
     ) {
     }
 
@@ -32,12 +32,7 @@ final class NetteInjectPropertyAnalyzer
             return false;
         }
 
-        $scope = $property->getAttribute(AttributeKey::SCOPE);
-        if (! $scope instanceof Scope) {
-            return false;
-        }
-
-        $classReflection = $scope->getClassReflection();
+        $classReflection = $this->reflectionResolver->resolveClassReflection($property);
         if (! $classReflection instanceof ClassReflection) {
             return false;
         }
