@@ -45,7 +45,7 @@ final class VariableWithTypesFactory
 
             $phpParserTypeNode = $this->staticTypeMapper->mapPHPStanTypeToPhpParserNode(
                 $staticType,
-                TypeKind::PROPERTY()
+                TypeKind::PROPERTY
             );
             $variablesWithTypes[] = new VariableWithType($variableName, $staticType, $phpParserTypeNode);
         }
