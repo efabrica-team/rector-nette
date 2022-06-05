@@ -8,9 +8,7 @@ includes:
     - vendor/symplify/phpstan-rules/config/regex-rules.neon
     - vendor/symplify/phpstan-rules/packages/symfony/config/symfony-rules.neon
     - vendor/symplify/phpstan-rules/config/test-rules.neon
-    - vendor/symplify/phpstan-rules/config/services-rules.neon
     - vendor/symplify/phpstan-rules/config/naming-rules.neon
-    - vendor/symplify/phpstan-rules/config/string-to-constant-rules.neon
 
 parameters:
     level: 8
@@ -129,3 +127,6 @@ parameters:
                 - src/Rector/ClassMethod/TemplateMagicAssignToExplicitVariableArrayRector.php
                 - src/Rector/FuncCall/PregFunctionToNetteUtilsStringsRector.php
                 - src/Rector/NotIdentical/StrposToStringsContainsRector.php
+
+        # resolve later
+        - '#On passing a constant, the method should have an enum type\. See https\://phpstan\.org/writing\-php\-code/phpdoc\-types\#literals\-and\-constants#'
