@@ -1,12 +1,12 @@
 includes:
-    - vendor/symplify/phpstan-rules/packages/nette/config/nette-rules.neon
+    - vendor/symplify/phpstan-rules/config/packages/nette/nette-rules.neon
+    - vendor/symplify/phpstan-rules/config/packages/symfony/symfony-rules.neon
     - vendor/symplify/phpstan-rules/config/static-rules.neon
     - vendor/symplify/phpstan-rules/config/array-rules.neon
     - vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
     - vendor/symplify/phpstan-rules/config/forbidden-static-rules.neon
     - vendor/symplify/phpstan-rules/config/doctrine-rules.neon
     - vendor/symplify/phpstan-rules/config/regex-rules.neon
-    - vendor/symplify/phpstan-rules/packages/symfony/config/symfony-rules.neon
     - vendor/symplify/phpstan-rules/config/test-rules.neon
     - vendor/symplify/phpstan-rules/config/naming-rules.neon
 
