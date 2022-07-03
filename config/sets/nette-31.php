@@ -18,7 +18,6 @@ use Rector\Renaming\ValueObject\MethodCallRename;
 use Rector\Renaming\ValueObject\RenameStaticMethod;
 use Rector\Transform\Rector\Assign\DimFetchAssignToMethodCallRector;
 use Rector\Transform\Rector\Assign\PropertyFetchToMethodCallRector;
-use Rector\Transform\Rector\MethodCall\CallableInMethodCallToVariableRector;
 use Rector\Transform\ValueObject\CallableInMethodCallToVariable;
 use Rector\Transform\ValueObject\DimFetchAssignToMethodCall;
 use Rector\Transform\ValueObject\PropertyFetchToMethodCall;
@@ -33,11 +32,6 @@ return static function (RectorConfig $rectorConfig): void {
 
     // some attributes were added in nette 3.0, but only in one of latest patch versions; it's is safer to add them in 3.1
     $rectorConfig->sets([NetteSetList::ANNOTATIONS_TO_ATTRIBUTES]);
-
-    $rectorConfig->ruleWithConfiguration(CallableInMethodCallToVariableRector::class, [
-        // see https://github.com/nette/caching/commit/5ffe263752af5ccf3866a28305e7b2669ab4da82
-        new CallableInMethodCallToVariable('Nette\Caching\Cache', 'save', 1),
-    ]);
 
     $rectorConfig->ruleWithConfiguration(RenameClassRector::class, [
         'Nette\Bridges\ApplicationLatte\Template' => 'Nette\Bridges\ApplicationLatte\DefaultTemplate',
