@@ -139,7 +139,7 @@ CODE_SAMPLE
             return null;
         }
 
-        foreach ($staticCall->args as $staticCallArg) {
+        foreach ($staticCall->args as $position => $staticCallArg) {
             if (! $staticCallArg->value instanceof Variable) {
                 continue;
             }
@@ -150,10 +150,10 @@ CODE_SAMPLE
                 continue;
             }
 
-            $this->removeNode($staticCallArg);
+            unset($staticCall->args[$position]);
         }
 
-        if ($this->shouldRemoveEmptyCall($staticCall)) {
+        if ($staticCall->args === []) {
             $this->removeNode($staticCall);
             return null;
         }
@@ -186,7 +186,7 @@ CODE_SAMPLE
                 continue;
             }
 
-            $this->removeNode($arg);
+            unset($new->args[$position]);
         }
     }
 
@@ -221,18 +221,5 @@ CODE_SAMPLE
                 $this->removeNode($param);
             }
         }
-    }
-
-    private function shouldRemoveEmptyCall(StaticCall $staticCall): bool
-    {
-        foreach ($staticCall->args as $arg) {
-            if ($this->nodesToRemoveCollector->isNodeRemoved($arg)) {
-                continue;
-            }
-
-            return false;
-        }
-
-        return true;
     }
 }
