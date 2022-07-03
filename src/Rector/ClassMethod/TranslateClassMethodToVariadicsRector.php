@@ -18,6 +18,7 @@ use PHPStan\Reflection\ClassReflection;
 use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\Rector\AbstractRector;
 use Rector\Core\Reflection\ReflectionResolver;
+use Rector\PostRector\Collector\NodesToAddCollector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -36,8 +37,10 @@ final class TranslateClassMethodToVariadicsRector extends AbstractRector
      */
     private const PARAMETERS = 'parameters';
 
-    public function __construct(private readonly ReflectionResolver $reflectionResolver)
-    {
+    public function __construct(
+        private readonly ReflectionResolver $reflectionResolver,
+        private readonly NodesToAddCollector $nodesToAddCollector,
+    ) {
     }
 
     public function getRuleDefinition(): RuleDefinition
