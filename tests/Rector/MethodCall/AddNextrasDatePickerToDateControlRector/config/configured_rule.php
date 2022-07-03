@@ -8,7 +8,6 @@ use Rector\Nette\Rector\MethodCall\AddNextrasDatePickerToDateControlRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->import(__DIR__ . '/../../../../../config/config.php');
-    $services = $rectorConfig->services();
 
-    $services->set(AddNextrasDatePickerToDateControlRector::class);
+    $rectorConfig->rule(AddNextrasDatePickerToDateControlRector::class);
 };

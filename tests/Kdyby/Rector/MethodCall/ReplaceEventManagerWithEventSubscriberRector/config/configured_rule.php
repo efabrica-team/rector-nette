@@ -7,7 +7,6 @@ use Rector\Nette\Kdyby\Rector\MethodCall\ReplaceEventManagerWithEventSubscriberR
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->import(__DIR__ . '/../../../../../../config/config.php');
-    $services = $rectorConfig->services();
 
-    $services->set(ReplaceEventManagerWithEventSubscriberRector::class);
+    $rectorConfig->rule(ReplaceEventManagerWithEventSubscriberRector::class);
 };

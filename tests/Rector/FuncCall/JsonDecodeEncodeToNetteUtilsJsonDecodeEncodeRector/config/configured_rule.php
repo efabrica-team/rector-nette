@@ -7,7 +7,6 @@ use Rector\Nette\Rector\FuncCall\JsonDecodeEncodeToNetteUtilsJsonDecodeEncodeRec
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->import(__DIR__ . '/../../../../../config/config.php');
-    $services = $rectorConfig->services();
 
-    $services->set(JsonDecodeEncodeToNetteUtilsJsonDecodeEncodeRector::class);
+    $rectorConfig->rule(JsonDecodeEncodeToNetteUtilsJsonDecodeEncodeRector::class);
 };

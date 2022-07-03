@@ -7,7 +7,6 @@ use Rector\Nette\Rector\Identical\EndsWithFunctionToNetteUtilsStringsRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->import(__DIR__ . '/../../../../../config/config.php');
-    $services = $rectorConfig->services();
 
-    $services->set(EndsWithFunctionToNetteUtilsStringsRector::class);
+    $rectorConfig->rule(EndsWithFunctionToNetteUtilsStringsRector::class);
 };
