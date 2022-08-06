@@ -64,7 +64,7 @@ final class AnotherControl extends Control
 {
 }
 CODE_SAMPLE
-,
+                    ,
                     <<<'CODE_SAMPLE'
 use Nette\Application\UI\Control;
 

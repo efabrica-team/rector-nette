@@ -69,7 +69,7 @@ final class SomePresenter extends Presenter
     }
 }
 CODE_SAMPLE
-,
+                    ,
                     <<<'CODE_SAMPLE'
 use Nette\Application\UI\Presenter;
 use Nette\Application\UI\Form;

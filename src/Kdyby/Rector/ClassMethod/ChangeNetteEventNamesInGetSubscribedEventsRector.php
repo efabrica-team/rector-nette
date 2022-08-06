@@ -63,7 +63,7 @@ class GetApplesSubscriber implements Subscriber
     }
 }
 CODE_SAMPLE
-,
+                    ,
                     <<<'CODE_SAMPLE'
 use Contributte\Events\Extra\Event\Application\ShutdownEvent;
 use Kdyby\Events\Subscriber;
