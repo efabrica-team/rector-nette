@@ -105,7 +105,7 @@ class SomeDefaultTemplate extends Template
 <h1>{$title}</h1>
 <span class="count">{$count}</span>
 CODE_SAMPLE
-                ,
+                    ,
                     [
                         self::TEMPLATE_CLASS_PARENT => '',
                         self::TEMPLATE_CLASS_TRAITS => [],

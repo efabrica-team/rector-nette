@@ -42,7 +42,7 @@ final class SubstrMinusToStringEndsWithRector extends AbstractRector
 substr($var, -4) !== 'Test';
 substr($var, -4) === 'Test';
 CODE_SAMPLE
-,
+                    ,
                     <<<'CODE_SAMPLE'
 ! \Nette\Utils\Strings::endsWith($var, 'Test');
 \Nette\Utils\Strings::endsWith($var, 'Test');

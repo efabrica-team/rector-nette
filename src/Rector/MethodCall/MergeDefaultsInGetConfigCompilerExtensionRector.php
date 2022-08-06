@@ -38,7 +38,7 @@ final class SomeExtension extends CompilerExtension
     }
 }
 CODE_SAMPLE
-,
+                    ,
                     <<<'CODE_SAMPLE'
 use Nette\DI\CompilerExtension;
 

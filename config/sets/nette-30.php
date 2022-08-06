@@ -20,7 +20,6 @@ use Rector\Renaming\ValueObject\MethodCallRename;
 use Rector\Renaming\ValueObject\RenameClassConstFetch;
 use Rector\Transform\Rector\StaticCall\StaticCallToMethodCallRector;
 use Rector\Transform\ValueObject\StaticCallToMethodCall;
-use Rector\TypeDeclaration\Rector\MethodCall\FormerNullableArgumentToScalarTypedRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->sets([
@@ -34,8 +33,6 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->rule(MergeDefaultsInGetConfigCompilerExtensionRector::class);
     // Control class has remove __construct(), e.g. https://github.com/Pixidos/GPWebPay/pull/16/files#diff-fdc8251950f85c5467c63c249df05786
     $rectorConfig->rule(RemoveParentCallWithoutParentRector::class);
-    // https://github.com/nette/utils/commit/d0041ba59f5d8bf1f5b3795fd76d43fb13ea2e15
-    $rectorConfig->rule(FormerNullableArgumentToScalarTypedRector::class);
 
     $rectorConfig->ruleWithConfiguration(StaticCallToMethodCallRector::class, [
         new StaticCallToMethodCall('Nette\Security\Passwords', 'hash', 'Nette\Security\Passwords', 'hash'),

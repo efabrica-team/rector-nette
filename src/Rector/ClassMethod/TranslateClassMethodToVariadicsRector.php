@@ -60,7 +60,7 @@ final class SomeClass implements ITranslator
     }
 }
 CODE_SAMPLE
-,
+                    ,
                     <<<'CODE_SAMPLE'
 use Nette\Localization\ITranslator;
 

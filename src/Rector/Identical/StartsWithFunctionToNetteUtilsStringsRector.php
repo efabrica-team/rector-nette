@@ -48,7 +48,7 @@ public function start($needle)
 }
 }
 CODE_SAMPLE
-            ,
+                ,
                 <<<'CODE_SAMPLE'
 use Nette\Utils\Strings;
 
