@@ -1,4 +1,4 @@
-# 34 Rules Overview
+# 33 Rules Overview
 
 ## AddNextrasDatePickerToDateControlRector
 
@@ -634,28 +634,6 @@ Change setClass with class and arguments to separated methods
 -            ->setClass('SomeClass', [1, 2]);
 +            ->setFactory('SomeClass', [1, 2]);
      }
- }
-```
-
-<br>
-
-## StartsWithFunctionToNetteUtilsStringsRector
-
-Use `Nette\Utils\Strings::startsWith()` over bare string-functions
-
-- class: [`Rector\Nette\Rector\Identical\StartsWithFunctionToNetteUtilsStringsRector`](../src/Rector/Identical/StartsWithFunctionToNetteUtilsStringsRector.php)
-
-```diff
-+use Nette\Utils\Strings;
-+
- class SomeClass
- {
- public function start($needle)
- {
-     $content = 'Hi, my name is Tom';
--    $yes = substr($content, 0, strlen($needle)) === $needle;
-+    $yes = Strings::startsWith($content, $needle);
- }
  }
 ```
 
