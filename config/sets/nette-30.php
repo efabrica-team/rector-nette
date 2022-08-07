@@ -8,7 +8,6 @@ use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\StaticCall\RemoveParentCallWithoutParentRector;
 use Rector\Nette\Rector\Class_\MoveFinalGetUserToCheckRequirementsClassMethodRector;
 use Rector\Nette\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector;
-use Rector\Nette\Rector\MethodCall\AddNextrasDatePickerToDateControlRector;
 use Rector\Nette\Rector\MethodCall\ConvertAddUploadWithThirdArgumentTrueToAddMultiUploadRector;
 use Rector\Nette\Rector\MethodCall\MagicHtmlCallToAppendAttributeRector;
 use Rector\Nette\Rector\MethodCall\MergeDefaultsInGetConfigCompilerExtensionRector;
@@ -29,7 +28,6 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__ . '/nette-30/nette-30-param-types.php',
     ]);
 
-    $rectorConfig->rule(AddNextrasDatePickerToDateControlRector::class);
     $rectorConfig->rule(MergeDefaultsInGetConfigCompilerExtensionRector::class);
     // Control class has remove __construct(), e.g. https://github.com/Pixidos/GPWebPay/pull/16/files#diff-fdc8251950f85c5467c63c249df05786
     $rectorConfig->rule(RemoveParentCallWithoutParentRector::class);
