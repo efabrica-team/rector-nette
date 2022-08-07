@@ -9,7 +9,6 @@ use Rector\Nette\Rector\FuncCall\PregFunctionToNetteUtilsStringsRector;
 use Rector\Nette\Rector\FuncCall\PregMatchFunctionToNetteUtilsStringsRector;
 use Rector\Nette\Rector\FuncCall\SubstrStrlenFunctionToNetteUtilsStringsRector;
 use Rector\Nette\Rector\LNumber\ReplaceTimeNumberWithDateTimeConstantRector;
-use Rector\Nette\Rector\NotIdentical\StrposToStringsContainsRector;
 use Rector\Transform\Rector\FuncCall\FuncCallToStaticCallRector;
 use Rector\Transform\ValueObject\FuncCallToStaticCall;
 
@@ -21,7 +20,6 @@ return static function (RectorConfig $rectorConfig): void {
         new FuncCallToStaticCall('rmdir', 'Nette\Utils\FileSystem', 'delete'),
     ]);
 
-    $rectorConfig->rule(StrposToStringsContainsRector::class);
     $rectorConfig->rule(SubstrStrlenFunctionToNetteUtilsStringsRector::class);
     $rectorConfig->rule(PregMatchFunctionToNetteUtilsStringsRector::class);
     $rectorConfig->rule(PregFunctionToNetteUtilsStringsRector::class);
