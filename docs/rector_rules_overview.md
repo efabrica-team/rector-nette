@@ -1,4 +1,4 @@
-# 27 Rules Overview
+# 26 Rules Overview
 
 ## BuilderExpandToHelperExpandRector
 
@@ -94,27 +94,6 @@ convert `addUpload()` with 3rd argument true to `addMultiUpload()`
  $form = new Nette\Forms\Form();
 -$form->addUpload('...', '...', true);
 +$form->addMultiUpload('...', '...');
-```
-
-<br>
-
-## FilePutContentsToFileSystemWriteRector
-
-Change `file_put_contents()` to `FileSystem::write()`
-
-- class: [`Rector\Nette\Rector\FuncCall\FilePutContentsToFileSystemWriteRector`](../src/Rector/FuncCall/FilePutContentsToFileSystemWriteRector.php)
-
-```diff
- class SomeClass
- {
-     public function run()
-     {
--        file_put_contents('file.txt', 'content');
-+        \Nette\Utils\FileSystem::write('file.txt', 'content');
-
-         file_put_contents('file.txt', 'content_to_append', FILE_APPEND);
-     }
- }
 ```
 
 <br>
