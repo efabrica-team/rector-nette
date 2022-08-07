@@ -95,16 +95,17 @@ CODE_SAMPLE
             return null;
         }
 
-        if (count($node->args) < 2) {
+        $args = $node->getArgs();
+        if (count($args) < 2) {
             return null;
         }
 
-        if (! $node->args[1]->value instanceof Array_) {
+        if (! $args[1]->value instanceof Array_) {
             return null;
         }
 
         /** @var Array_ $parametersArrayNode */
-        $parametersArrayNode = $node->args[1]->value;
+        $parametersArrayNode = $args[1]->value;
 
         foreach ($parametersArrayNode->items as $arrayItem) {
             if ($arrayItem === null) {
