@@ -20,11 +20,11 @@ final class ReplaceEventManagerWithEventSubscriberRectorTest extends AbstractRec
     }
 
     /**
-     * @return Iterator<array<SmartFileInfo|AddedFileWithContent>>
+     * @return Iterator<SmartFileInfo>
      */
     public function provideData(): Iterator
     {
-        yield [new SmartFileInfo(__DIR__ . '/Fixture/fixture.php.inc')];
+        return $this->yieldFilesFromDirectory(__DIR__ . '/Fixture');
     }
 
     public function provideConfigFilePath(): string
