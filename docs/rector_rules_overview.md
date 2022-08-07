@@ -1,4 +1,4 @@
-# 30 Rules Overview
+# 28 Rules Overview
 
 ## BuilderExpandToHelperExpandRector
 
@@ -477,29 +477,6 @@ Renames method calls in NEON configs
 
 <br>
 
-## RenderMethodParamToTypeDeclarationRector
-
-Move `@param` declarations on `render()` method in Nette components and presenter to strict type declarations
-
-- class: [`Rector\Nette\Rector\ClassMethod\RenderMethodParamToTypeDeclarationRector`](../src/Rector/ClassMethod/RenderMethodParamToTypeDeclarationRector.php)
-
-```diff
- use Nette\Application\UI\Control;
-
- final class SomeControl extends Control
- {
--    /**
--     * @param string $name
--     */
--    public function render($name)
-+    public function render(string $name)
-     {
-     }
- }
-```
-
-<br>
-
 ## ReplaceEventManagerWithEventSubscriberRector
 
 Change Kdyby EventManager to EventDispatcher
@@ -588,26 +565,6 @@ Change setClass with class and arguments to separated methods
          $containerBuilder->addDefinition('...')
 -            ->setClass('SomeClass', [1, 2]);
 +            ->setFactory('SomeClass', [1, 2]);
-     }
- }
-```
-
-<br>
-
-## StrposToStringsContainsRector
-
-Use `Nette\Utils\Strings` over bare string-functions
-
-- class: [`Rector\Nette\Rector\NotIdentical\StrposToStringsContainsRector`](../src/Rector/NotIdentical/StrposToStringsContainsRector.php)
-
-```diff
- class SomeClass
- {
-     public function run()
-     {
-         $name = 'Hi, my name is Tom';
--        return strpos($name, 'Hi') !== false;
-+        return \Nette\Utils\Strings::contains($name, 'Hi');
      }
  }
 ```
