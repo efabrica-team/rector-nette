@@ -1,26 +1,4 @@
-# 33 Rules Overview
-
-## AddNextrasDatePickerToDateControlRector
-
-Nextras/Form upgrade of addDatePicker method call to DateControl assign
-
-- class: [`Rector\Nette\Rector\MethodCall\AddNextrasDatePickerToDateControlRector`](../src/Rector/MethodCall/AddNextrasDatePickerToDateControlRector.php)
-
-```diff
- use Nette\Application\UI\Form;
-
- class SomeClass
- {
-     public function run()
-     {
-         $form = new Form();
--        $form->addDatePicker('key', 'Label');
-+        $form['key'] = new \Nextras\FormComponents\Controls\DateControl('Label');
-     }
- }
-```
-
-<br>
+# 32 Rules Overview
 
 ## BuilderExpandToHelperExpandRector
 
