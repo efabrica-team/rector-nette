@@ -1,4 +1,4 @@
-# 28 Rules Overview
+# 27 Rules Overview
 
 ## BuilderExpandToHelperExpandRector
 
@@ -456,23 +456,6 @@ Renames method calls in LATTE templates
 
 -<div n:foreach="$someClass->oldCall() as $item"></div>
 +<div n:foreach="$someClass->newCall() as $item"></div>
-```
-
-<br>
-
-## RenameMethodNeonRector
-
-Renames method calls in NEON configs
-
-- class: [`Rector\Nette\Rector\Neon\RenameMethodNeonRector`](../src/Rector/Neon/RenameMethodNeonRector.php)
-
-```diff
- services:
-     -
-         class: SomeClass
-         setup:
--            - oldCall
-+            - newCall
 ```
 
 <br>
