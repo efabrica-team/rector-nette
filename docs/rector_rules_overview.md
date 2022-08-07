@@ -1,4 +1,4 @@
-# 32 Rules Overview
+# 30 Rules Overview
 
 ## BuilderExpandToHelperExpandRector
 
@@ -94,29 +94,6 @@ convert `addUpload()` with 3rd argument true to `addMultiUpload()`
  $form = new Nette\Forms\Form();
 -$form->addUpload('...', '...', true);
 +$form->addMultiUpload('...', '...');
-```
-
-<br>
-
-## EndsWithFunctionToNetteUtilsStringsRector
-
-Use `Nette\Utils\Strings::endsWith()` over bare string-functions
-
-- class: [`Rector\Nette\Rector\Identical\EndsWithFunctionToNetteUtilsStringsRector`](../src/Rector/Identical/EndsWithFunctionToNetteUtilsStringsRector.php)
-
-```diff
-+use Nette\Utils\Strings;
-+
- class SomeClass
- {
-     public function end($needle)
-     {
-         $content = 'Hi, my name is Tom';
--
--        $yes = substr($content, -strlen($needle)) === $needle;
-+        $yes = Strings::endsWith($content, $needle);
-     }
- }
 ```
 
 <br>
@@ -633,21 +610,6 @@ Use `Nette\Utils\Strings` over bare string-functions
 +        return \Nette\Utils\Strings::contains($name, 'Hi');
      }
  }
-```
-
-<br>
-
-## SubstrMinusToStringEndsWithRector
-
-Change substr function with minus to `Strings::endsWith()`
-
-- class: [`Rector\Nette\Rector\Identical\SubstrMinusToStringEndsWithRector`](../src/Rector/Identical/SubstrMinusToStringEndsWithRector.php)
-
-```diff
--substr($var, -4) !== 'Test';
--substr($var, -4) === 'Test';
-+! \Nette\Utils\Strings::endsWith($var, 'Test');
-+\Nette\Utils\Strings::endsWith($var, 'Test');
 ```
 
 <br>

@@ -8,7 +8,6 @@ use Rector\Nette\Rector\FuncCall\JsonDecodeEncodeToNetteUtilsJsonDecodeEncodeRec
 use Rector\Nette\Rector\FuncCall\PregFunctionToNetteUtilsStringsRector;
 use Rector\Nette\Rector\FuncCall\PregMatchFunctionToNetteUtilsStringsRector;
 use Rector\Nette\Rector\FuncCall\SubstrStrlenFunctionToNetteUtilsStringsRector;
-use Rector\Nette\Rector\Identical\EndsWithFunctionToNetteUtilsStringsRector;
 use Rector\Nette\Rector\LNumber\ReplaceTimeNumberWithDateTimeConstantRector;
 use Rector\Nette\Rector\NotIdentical\StrposToStringsContainsRector;
 use Rector\Transform\Rector\FuncCall\FuncCallToStaticCallRector;
@@ -26,7 +25,6 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->rule(SubstrStrlenFunctionToNetteUtilsStringsRector::class);
     $rectorConfig->rule(PregMatchFunctionToNetteUtilsStringsRector::class);
     $rectorConfig->rule(PregFunctionToNetteUtilsStringsRector::class);
-    $rectorConfig->rule(EndsWithFunctionToNetteUtilsStringsRector::class);
     $rectorConfig->rule(JsonDecodeEncodeToNetteUtilsJsonDecodeEncodeRector::class);
     $rectorConfig->rule(FilePutContentsToFileSystemWriteRector::class);
     $rectorConfig->rule(ReplaceTimeNumberWithDateTimeConstantRector::class);
