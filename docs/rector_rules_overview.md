@@ -1,4 +1,4 @@
-# 25 Rules Overview
+# 22 Rules Overview
 
 ## BuilderExpandToHelperExpandRector
 
@@ -15,41 +15,6 @@ Change `containerBuilder->expand()` to static call with parameters
      {
 -        $value = $this->getContainerBuilder()->expand('%value');
 +        $value = \Nette\DI\Helpers::expand('%value', $this->getContainerBuilder()->parameters);
-     }
- }
-```
-
-<br>
-
-## ChangeNetteEventNamesInGetSubscribedEventsRector
-
-Change EventSubscriber from Kdyby to Contributte
-
-- class: [`Rector\Nette\Kdyby\Rector\ClassMethod\ChangeNetteEventNamesInGetSubscribedEventsRector`](../src/Kdyby/Rector/ClassMethod/ChangeNetteEventNamesInGetSubscribedEventsRector.php)
-
-```diff
-+use Contributte\Events\Extra\Event\Application\ShutdownEvent;
- use Kdyby\Events\Subscriber;
- use Nette\Application\Application;
--use Nette\Application\UI\Presenter;
-
- class GetApplesSubscriber implements Subscriber
- {
--    public function getSubscribedEvents()
-+    public static function getSubscribedEvents()
-     {
-         return [
--            Application::class . '::onShutdown',
-+            ShutdownEvent::class => 'onShutdown',
-         ];
-     }
-
--    public function onShutdown(Presenter $presenter)
-+    public function onShutdown(ShutdownEvent $shutdownEvent)
-     {
-+        $presenter = $shutdownEvent->getPresenter();
-         $presenterName = $presenter->getName();
-         // ...
      }
  }
 ```
@@ -413,38 +378,6 @@ Renames method calls in LATTE templates
 
 <br>
 
-## ReplaceEventManagerWithEventSubscriberRector
-
-Change Kdyby EventManager to EventDispatcher
-
-- class: [`Rector\Nette\Kdyby\Rector\MethodCall\ReplaceEventManagerWithEventSubscriberRector`](../src/Kdyby/Rector/MethodCall/ReplaceEventManagerWithEventSubscriberRector.php)
-
-```diff
- use Kdyby\Events\EventManager;
-
- final class SomeClass
- {
-     /**
-      * @var EventManager
-      */
-     private $eventManager;
-
-     public function __construct(EventManager $eventManager)
-     {
-         $this->eventManager = eventManager;
-     }
-
-     public function run()
-     {
-         $key = '2000';
--        $this->eventManager->dispatchEvent(static::class . '::onCopy', new EventArgsList([$this, $key]));
-+        $this->eventManager->dispatch(new SomeClassCopyEvent($this, $key));
-     }
- }
-```
-
-<br>
-
 ## ReplaceTimeNumberWithDateTimeConstantRector
 
 Replace time numbers with `Nette\Utils\DateTime` constants
@@ -621,31 +554,6 @@ Change `translate()` method call 2nd arg to variadic
      {
 +        $count = $parameters[0] ?? null;
          return [$message, $count];
-     }
- }
-```
-
-<br>
-
-## WrapTransParameterNameRector
-
-Adds %% to placeholder name of `trans()` method if missing
-
-- class: [`Rector\Nette\Kdyby\Rector\MethodCall\WrapTransParameterNameRector`](../src/Kdyby/Rector/MethodCall/WrapTransParameterNameRector.php)
-
-```diff
- use Symfony\Component\Translation\Translator;
-
- final class SomeController
- {
-     public function run()
-     {
-         $translator = new Translator('');
-         $translated = $translator->trans(
-             'Hello %name%',
--            ['name' => $name]
-+            ['%name%' => $name]
-         );
      }
  }
 ```
