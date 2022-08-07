@@ -17,9 +17,4 @@ final class KdybySetList implements SetListInterface
      * @var string
      */
     final public const KDYBY_TRANSLATOR_TO_CONTRIBUTTE_TRANSLATION = __DIR__ . '/../../config/sets/kdyby/kdyby-translator-to-contributte-translation.php';
-
-    /**
-     * @var string
-     */
-    final public const KDYBY_RABBIT_MQ_TO_SYMFONY = __DIR__ . '/../../config/sets/kdyby/kdyby-rabbit-mq-to-symfony.php';
 }
