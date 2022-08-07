@@ -59,12 +59,14 @@ CODE_SAMPLE
             return null;
         }
 
-        $args = $node->args;
+        $args = $node->getArgs();
         if (! isset($args[2])) {
             return null;
         }
 
-        if ($this->valueResolver->isTrue($node->args[2]->value)) {
+        $thirdArg = $args[2];
+
+        if ($this->valueResolver->isTrue($thirdArg->value)) {
             $node->name = new Identifier('addMultiUpload');
             unset($node->args[2]);
             return $node;

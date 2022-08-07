@@ -6,7 +6,6 @@ use Rector\Arguments\Rector\ClassMethod\ReplaceArgumentDefaultValueRector;
 use Rector\Arguments\ValueObject\ReplaceArgumentDefaultValue;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\StaticCall\RemoveParentCallWithoutParentRector;
-use Rector\Nette\Rector\Class_\MoveFinalGetUserToCheckRequirementsClassMethodRector;
 use Rector\Nette\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector;
 use Rector\Nette\Rector\MethodCall\ConvertAddUploadWithThirdArgumentTrueToAddMultiUploadRector;
 use Rector\Nette\Rector\MethodCall\MagicHtmlCallToAppendAttributeRector;
@@ -83,6 +82,5 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->rule(MagicHtmlCallToAppendAttributeRector::class);
     $rectorConfig->rule(RequestGetCookieDefaultArgumentToCoalesceRector::class);
     $rectorConfig->rule(RemoveParentAndNameFromComponentConstructorRector::class);
-    $rectorConfig->rule(MoveFinalGetUserToCheckRequirementsClassMethodRector::class);
     $rectorConfig->rule(ConvertAddUploadWithThirdArgumentTrueToAddMultiUploadRector::class);
 };

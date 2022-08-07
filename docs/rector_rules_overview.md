@@ -1,4 +1,4 @@
-# 26 Rules Overview
+# 25 Rules Overview
 
 ## BuilderExpandToHelperExpandRector
 
@@ -272,32 +272,6 @@ Change `$this->template->setFile()` `$this->template->render()`
 -        $this->template->setFile(__DIR__ . '/someFile.latte');
 -        $this->template->render();
 +        $this->template->render(__DIR__ . '/someFile.latte');
-     }
- }
-```
-
-<br>
-
-## MoveFinalGetUserToCheckRequirementsClassMethodRector
-
-Presenter method `getUser()` is now final, move logic to `checkRequirements()`
-
-- class: [`Rector\Nette\Rector\Class_\MoveFinalGetUserToCheckRequirementsClassMethodRector`](../src/Rector/Class_/MoveFinalGetUserToCheckRequirementsClassMethodRector.php)
-
-```diff
- use Nette\Application\UI\Presenter;
-
- class SomeControl extends Presenter
- {
--    public function getUser()
-+    public function checkRequirements()
-     {
--        $user = parent::getUser();
-+        $user = $this->getUser();
-         $user->getStorage()->setNamespace('admin_session');
--        return $user;
-+
-+        parent::checkRequirements();
      }
  }
 ```

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Rector\Nette\NodeFinder;
 
+use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
@@ -131,8 +132,8 @@ final class FormFieldsFinder
      */
     private function addFormField(array $formFields, MethodCall $addFieldMethodCall, MethodCall $methodCall): array
     {
-        $arg = $addFieldMethodCall->args[0] ?? null;
-        if (! $arg) {
+        $arg = $addFieldMethodCall->getArgs()[0] ?? null;
+        if (! $arg instanceof Arg) {
             return $formFields;
         }
 

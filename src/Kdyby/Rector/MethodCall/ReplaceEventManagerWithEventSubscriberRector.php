@@ -108,7 +108,7 @@ CODE_SAMPLE
 
         $node->name = new Identifier('dispatch');
 
-        $oldArgs = $node->args;
+        $oldArgs = $node->getArgs();
         $node->args = [];
 
         $eventReference = $oldArgs[0]->value;
@@ -164,7 +164,9 @@ CODE_SAMPLE
             /** @var New_ $new */
             $new = $oldArgs[1]->value;
 
-            $array = $new->args[0]->value;
+            $newArgs = $new->getArgs();
+
+            $array = $newArgs[0]->value;
             if (! $array instanceof Array_) {
                 return [];
             }

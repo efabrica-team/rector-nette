@@ -20,7 +20,7 @@ final class VariableWithType
     public function __construct(
         private readonly string $name,
         private readonly Type $type,
-        private $phpParserTypeNode
+        private readonly ?Node $phpParserTypeNode
     ) {
     }
 
