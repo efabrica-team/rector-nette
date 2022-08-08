@@ -27,6 +27,10 @@ parameters:
 
     reportUnmatchedIgnoredErrors: false
 
+    bootstrapFiles:
+        # loads scoped files like SmartFileInfo
+        - vendor/rector/rector/vendor/scoper-autoload.php
+
     ignoreErrors:
         - '#generic class Rector\\BetterPhpDocParser\\PhpDocInfo\\PhpDocInfo but does not specify its types\: TNode#'
         - '#Use another value object over array with string\-keys and objects, array<string, ValueObject\>#'
@@ -55,3 +59,7 @@ parameters:
 
         # resolve later
         - '#On passing a constant, the method should have an enum type\. See https\://phpstan\.org/writing\-php\-code/phpdoc\-types\#literals\-and\-constants#'
+
+        -
+            message: '#Do not use chained method calls\. Put each on separated lines#'
+            path: config/*
