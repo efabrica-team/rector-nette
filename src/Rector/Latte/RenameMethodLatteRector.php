@@ -17,9 +17,9 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RenameMethodLatteRector implements LatteRectorInterface
 {
     public function __construct(
-        private readonly MethodCallRenameCollector $methodCallRenameCollector,
-        private readonly TemplateTypeParser $templateTypeParser,
-        private readonly VarTypeParser $varTypeParser
+        private MethodCallRenameCollector $methodCallRenameCollector,
+        private TemplateTypeParser $templateTypeParser,
+        private VarTypeParser $varTypeParser
     ) {
     }
 

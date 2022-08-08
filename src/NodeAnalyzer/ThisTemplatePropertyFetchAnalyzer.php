@@ -13,7 +13,7 @@ use Rector\NodeNameResolver\NodeNameResolver;
 final class ThisTemplatePropertyFetchAnalyzer
 {
     public function __construct(
-        private readonly NodeNameResolver $nodeNameResolver
+        private NodeNameResolver $nodeNameResolver
     ) {
     }
 

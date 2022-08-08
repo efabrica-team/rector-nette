@@ -16,8 +16,8 @@ use Rector\FamilyTree\NodeAnalyzer\ClassChildAnalyzer;
 final class NetteInjectPropertyAnalyzer
 {
     public function __construct(
-        private readonly ClassChildAnalyzer $classChildAnalyzer,
-        private readonly ReflectionResolver $reflectionResolver
+        private ClassChildAnalyzer $classChildAnalyzer,
+        private ReflectionResolver $reflectionResolver
     ) {
     }
 

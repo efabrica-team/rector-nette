@@ -17,7 +17,7 @@ use Rector\NodeTypeResolver\NodeTypeResolver;
 final class FormVariableFinder
 {
     public function __construct(
-        private readonly NodeTypeResolver $nodeTypeResolver
+        private NodeTypeResolver $nodeTypeResolver
     ) {
     }
 

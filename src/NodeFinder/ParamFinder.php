@@ -14,8 +14,8 @@ use Rector\NodeTypeResolver\Node\AttributeKey;
 final class ParamFinder
 {
     public function __construct(
-        private readonly BetterNodeFinder $betterNodeFinder,
-        private readonly NodeComparator $nodeComparator
+        private BetterNodeFinder $betterNodeFinder,
+        private NodeComparator $nodeComparator
     ) {
     }
 

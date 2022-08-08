@@ -13,8 +13,8 @@ use Rector\NodeTypeResolver\NodeTypeResolver;
 final class NetteClassAnalyzer
 {
     public function __construct(
-        private readonly NodeTypeResolver $nodeTypeResolver,
-        private readonly BetterNodeFinder $betterNodeFinder
+        private NodeTypeResolver $nodeTypeResolver,
+        private BetterNodeFinder $betterNodeFinder
     ) {
     }
 

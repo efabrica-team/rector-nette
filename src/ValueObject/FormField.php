@@ -7,9 +7,9 @@ namespace Rector\Nette\ValueObject;
 final class FormField
 {
     public function __construct(
-        private readonly string $name,
-        private readonly string $type,
-        private readonly bool $isRequired,
+        private string $name,
+        private string $type,
+        private bool $isRequired,
     ) {
     }
 

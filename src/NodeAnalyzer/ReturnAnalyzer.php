@@ -13,8 +13,8 @@ use Rector\NodeNestingScope\ScopeNestingComparator;
 final class ReturnAnalyzer
 {
     public function __construct(
-        private readonly BetterNodeFinder $betterNodeFinder,
-        private readonly ScopeNestingComparator $scopeNestingComparator
+        private BetterNodeFinder $betterNodeFinder,
+        private ScopeNestingComparator $scopeNestingComparator
     ) {
     }
 

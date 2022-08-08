@@ -38,8 +38,8 @@ final class TranslateClassMethodToVariadicsRector extends AbstractRector
     private const PARAMETERS = 'parameters';
 
     public function __construct(
-        private readonly ReflectionResolver $reflectionResolver,
-        private readonly NodesToAddCollector $nodesToAddCollector,
+        private ReflectionResolver $reflectionResolver,
+        private NodesToAddCollector $nodesToAddCollector,
     ) {
     }
 

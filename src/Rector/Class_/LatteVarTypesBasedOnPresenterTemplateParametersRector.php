@@ -25,7 +25,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class LatteVarTypesBasedOnPresenterTemplateParametersRector extends AbstractRector
 {
     public function __construct(
-        private readonly RemovedAndAddedFilesCollector $removedAndAddedFilesCollector
+        private RemovedAndAddedFilesCollector $removedAndAddedFilesCollector
     ) {
     }
 

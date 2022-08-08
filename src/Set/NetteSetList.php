@@ -11,30 +11,30 @@ final class NetteSetList implements SetListInterface
     /**
      * @var string
      */
-    final public const NETTE_REMOVE_INJECT = __DIR__ . '/../../config/sets/nette-remove-inject.php';
+    public const NETTE_REMOVE_INJECT = __DIR__ . '/../../config/sets/nette-remove-inject.php';
 
     /**
      * @var string
      */
-    final public const NETTE_24 = __DIR__ . '/../../config/sets/nette-24.php';
+    public const NETTE_24 = __DIR__ . '/../../config/sets/nette-24.php';
 
     /**
      * @var string
      */
-    final public const NETTE_30 = __DIR__ . '/../../config/sets/nette-30.php';
+    public const NETTE_30 = __DIR__ . '/../../config/sets/nette-30.php';
 
     /**
      * @var string
      */
-    final public const NETTE_31 = __DIR__ . '/../../config/sets/nette-31.php';
+    public const NETTE_31 = __DIR__ . '/../../config/sets/nette-31.php';
 
     /**
      * @var string
      */
-    final public const NETTE_CODE_QUALITY = __DIR__ . '/../../config/sets/nette-code-quality.php';
+    public const NETTE_CODE_QUALITY = __DIR__ . '/../../config/sets/nette-code-quality.php';
 
     /**
      * @var string
      */
-    final public const ANNOTATIONS_TO_ATTRIBUTES = __DIR__ . '/../../config/sets/nette/annotations-to-attributes.php';
+    public const ANNOTATIONS_TO_ATTRIBUTES = __DIR__ . '/../../config/sets/nette/annotations-to-attributes.php';
 }

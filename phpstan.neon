@@ -25,19 +25,13 @@ parameters:
         - */Source/*
         - *Source/*
 
-    reportUnmatchedIgnoredErrors: false
+#    reportUnmatchedIgnoredErrors: false
 
     bootstrapFiles:
         # loads scoped files like SmartFileInfo
         - vendor/rector/rector/vendor/scoper-autoload.php
 
     ignoreErrors:
-        - '#generic class Rector\\BetterPhpDocParser\\PhpDocInfo\\PhpDocInfo but does not specify its types\: TNode#'
-        - '#Use another value object over array with string\-keys and objects, array<string, ValueObject\>#'
-
-        # not on PHP 7.4 yet
-        - '#Cognitive complexity for "Rector\\Nette\\NodeAnalyzer\\TemplatePropertyAssignCollector\:\:processAssign\(\)" is 21, keep it under 10#'
-
         # PHPStan false positive. There is no method configure on reported line
         -
             message: '#Method configure\(\) with passed value object must contain assert to verify passed type#'
@@ -51,14 +45,6 @@ parameters:
 
         # rector co-variant
         - '#Parameter \#1 \$node \(PhpParser\\Node\\(.*?) of method Rector\\Nette\\(.*?)\(\) should be contravariant with parameter \$node \(PhpParser\\Node\) of method Rector\\Core\\Contract\\Rector\\PhpRectorInterface\:\:refactor\(\)#'
-
-        -
-             message: '#Instead of array shape, use value object with specific types in constructor and getters#'
-             paths:
-                 - src/FileProcessor/LatteFileProcessor.php
-
-        # resolve later
-        - '#On passing a constant, the method should have an enum type\. See https\://phpstan\.org/writing\-php\-code/phpdoc\-types\#literals\-and\-constants#'
 
         -
             message: '#Do not use chained method calls\. Put each on separated lines#'

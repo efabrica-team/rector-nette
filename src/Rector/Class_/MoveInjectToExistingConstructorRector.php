@@ -26,11 +26,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class MoveInjectToExistingConstructorRector extends AbstractRector
 {
     public function __construct(
-        private readonly PropertyUsageAnalyzer $propertyUsageAnalyzer,
-        private readonly PhpDocTagRemover $phpDocTagRemover,
-        private readonly PropertyToAddCollector $propertyToAddCollector,
-        private readonly VisibilityManipulator $visibilityManipulator,
-        private readonly PhpVersionProvider $phpVersionProvider,
+        private PropertyUsageAnalyzer $propertyUsageAnalyzer,
+        private PhpDocTagRemover $phpDocTagRemover,
+        private PropertyToAddCollector $propertyToAddCollector,
+        private VisibilityManipulator $visibilityManipulator,
+        private PhpVersionProvider $phpVersionProvider,
     ) {
     }
 

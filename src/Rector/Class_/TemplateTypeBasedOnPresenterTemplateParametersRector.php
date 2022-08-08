@@ -29,9 +29,9 @@ use Webmozart\Assert\Assert;
  */
 final class TemplateTypeBasedOnPresenterTemplateParametersRector extends AbstractRector implements ConfigurableRectorInterface
 {
-    final public const TEMPLATE_CLASS_PARENT = 'template_class_parent';
+    public const TEMPLATE_CLASS_PARENT = 'template_class_parent';
 
-    final public const TEMPLATE_CLASS_TRAITS = 'template_class_traits';
+    public const TEMPLATE_CLASS_TRAITS = 'template_class_traits';
 
     private string $templateClassParent = 'Nette\Bridges\ApplicationLatte\Template';
 
@@ -41,9 +41,9 @@ final class TemplateTypeBasedOnPresenterTemplateParametersRector extends Abstrac
     private array $templateClassTraits = [];
 
     public function __construct(
-        private readonly ClassWithPublicPropertiesFactory $classWithPublicPropertiesFactory,
-        private readonly NodePrinterInterface $nodePrinter,
-        private readonly RemovedAndAddedFilesCollector $removedAndAddedFilesCollector,
+        private ClassWithPublicPropertiesFactory $classWithPublicPropertiesFactory,
+        private NodePrinterInterface $nodePrinter,
+        private RemovedAndAddedFilesCollector $removedAndAddedFilesCollector,
     ) {
     }
 

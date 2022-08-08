@@ -40,12 +40,15 @@ final class RemoveParentAndNameFromComponentConstructorRector extends AbstractRe
      */
     private const NAME = 'name';
 
-    private readonly ObjectType $controlObjectType;
+    /**
+     * @readonly
+     */
+    private ObjectType $controlObjectType;
 
     public function __construct(
-        private readonly ParamFinder $paramFinder,
-        private readonly StaticCallAnalyzer $staticCallAnalyzer,
-        private readonly ReflectionResolver $reflectionResolver
+        private ParamFinder $paramFinder,
+        private StaticCallAnalyzer $staticCallAnalyzer,
+        private ReflectionResolver $reflectionResolver
     ) {
         $this->controlObjectType = new ObjectType('Nette\Application\UI\Control');
     }

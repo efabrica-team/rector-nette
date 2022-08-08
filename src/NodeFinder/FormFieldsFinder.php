@@ -23,8 +23,8 @@ use Rector\NodeTypeResolver\NodeTypeResolver;
 final class FormFieldsFinder
 {
     public function __construct(
-        private readonly NodeTypeResolver $nodeTypeResolver,
-        private readonly NodeNameResolver $nodeNameResolver
+        private NodeTypeResolver $nodeTypeResolver,
+        private NodeNameResolver $nodeNameResolver
     ) {
     }
 

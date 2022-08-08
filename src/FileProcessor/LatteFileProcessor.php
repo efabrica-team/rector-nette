@@ -19,8 +19,8 @@ final class LatteFileProcessor implements FileProcessorInterface
      * @param LatteRectorInterface[] $latteRectors
      */
     public function __construct(
-        private readonly array $latteRectors,
-        private readonly FileDiffFactory $fileDiffFactory
+        private array $latteRectors,
+        private FileDiffFactory $fileDiffFactory
     ) {
     }
 

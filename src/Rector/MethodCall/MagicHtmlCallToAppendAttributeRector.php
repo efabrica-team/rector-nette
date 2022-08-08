@@ -80,8 +80,7 @@ CODE_SAMPLE
         if ($this->isName($node->name, 'setClass')) {
             $node->name = new Identifier('appendAttribute');
 
-            $args = array_merge([new Arg(new String_('class'))], $node->args);
-            $node->args = $args;
+            $node->args = array_merge([new Arg(new String_('class'))], $node->args);
 
             return $node;
         }

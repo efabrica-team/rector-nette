@@ -19,12 +19,12 @@ use Rector\NodeNameResolver\NodeNameResolver;
 final class PropertyUsageAnalyzer
 {
     public function __construct(
-        private readonly BetterNodeFinder $betterNodeFinder,
-        private readonly FamilyRelationsAnalyzer $familyRelationsAnalyzer,
-        private readonly NodeNameResolver $nodeNameResolver,
-        private readonly AstResolver $astResolver,
-        private readonly PropertyFetchAnalyzer $propertyFetchAnalyzer,
-        private readonly ReflectionResolver $reflectionResolver
+        private BetterNodeFinder $betterNodeFinder,
+        private FamilyRelationsAnalyzer $familyRelationsAnalyzer,
+        private NodeNameResolver $nodeNameResolver,
+        private AstResolver $astResolver,
+        private PropertyFetchAnalyzer $propertyFetchAnalyzer,
+        private ReflectionResolver $reflectionResolver
     ) {
     }
 

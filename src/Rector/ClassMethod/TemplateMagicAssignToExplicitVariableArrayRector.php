@@ -30,13 +30,13 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class TemplateMagicAssignToExplicitVariableArrayRector extends AbstractRector
 {
     public function __construct(
-        private readonly TemplatePropertyAssignCollector $templatePropertyAssignCollector,
-        private readonly RenderMethodAnalyzer $renderMethodAnalyzer,
-        private readonly NetteClassAnalyzer $netteClassAnalyzer,
-        private readonly RenderParameterArrayFactory $renderParameterArrayFactory,
-        private readonly ConditionalTemplateAssignReplacer $conditionalTemplateAssignReplacer,
-        private readonly TemplatePropertyParametersReplacer $templatePropertyParametersReplacer,
-        private readonly MethodCallArgMerger $methodCallArgMerger
+        private TemplatePropertyAssignCollector $templatePropertyAssignCollector,
+        private RenderMethodAnalyzer $renderMethodAnalyzer,
+        private NetteClassAnalyzer $netteClassAnalyzer,
+        private RenderParameterArrayFactory $renderParameterArrayFactory,
+        private ConditionalTemplateAssignReplacer $conditionalTemplateAssignReplacer,
+        private TemplatePropertyParametersReplacer $templatePropertyParametersReplacer,
+        private MethodCallArgMerger $methodCallArgMerger
     ) {
     }
 
