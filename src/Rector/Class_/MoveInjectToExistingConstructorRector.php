@@ -113,7 +113,7 @@ CODE_SAMPLE
             $this->removeInjectAnnotation($injectProperty);
             $this->changePropertyVisibility($injectProperty);
 
-            $propertyName = $this->nodeNameResolver->getName($injectProperty);
+            $propertyName = $injectProperty->props[0]->name->toString();
             $propertyType = $this->nodeTypeResolver->getType($injectProperty);
 
             $propertyMetadata = new PropertyMetadata($propertyName, $propertyType, $injectProperty->flags);

@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Rector\Nette\NodeFactory;
 
+use PhpParser\Builder\Class_ as ClassBuilder;
+use PhpParser\Builder\Property;
+use PhpParser\Builder\TraitUse;
 use PhpParser\Node\NullableType;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Namespace_;
-use Symplify\Astral\ValueObject\NodeBuilder\ClassBuilder;
-use Symplify\Astral\ValueObject\NodeBuilder\NamespaceBuilder;
-use Symplify\Astral\ValueObject\NodeBuilder\PropertyBuilder;
-use Symplify\Astral\ValueObject\NodeBuilder\TraitUseBuilder;
 
 /**
  * @see \Rector\Nette\Tests\NodeFactory\ClassWithPublicPropertiesFactory\ClassWithPublicPropertiesFactoryTest
@@ -35,7 +34,7 @@ final class ClassWithPublicPropertiesFactory
 
         $namespaceBuilder = null;
         if ($namespace !== '') {
-            $namespaceBuilder = new NamespaceBuilder($namespace);
+            $namespaceBuilder = new \PhpParser\Builder\Namespace_($namespace);
         }
 
         $classBuilder = new ClassBuilder($className);
@@ -44,7 +43,7 @@ final class ClassWithPublicPropertiesFactory
         }
 
         foreach ($traits as $trait) {
-            $classBuilder->addStmt(new TraitUseBuilder($this->fixFullyQualifiedName($trait)));
+            $classBuilder->addStmt(new TraitUse($this->fixFullyQualifiedName($trait)));
         }
 
         foreach ($properties as $propertyName => $propertySettings) {
@@ -54,7 +53,7 @@ final class ClassWithPublicPropertiesFactory
                 $propertyType = new NullableType($propertyType);
             }
 
-            $propertyBuilder = new PropertyBuilder($propertyName);
+            $propertyBuilder = new Property($propertyName);
             $propertyBuilder->setType($propertyType);
             $classBuilder->addStmt($propertyBuilder);
         }

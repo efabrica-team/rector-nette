@@ -3,7 +3,6 @@ includes:
     - vendor/symplify/phpstan-rules/config/packages/symfony/symfony-rules.neon
     - vendor/symplify/phpstan-rules/config/static-rules.neon
     - vendor/symplify/phpstan-rules/config/array-rules.neon
-    - vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
     - vendor/symplify/phpstan-rules/config/forbidden-static-rules.neon
     - vendor/symplify/phpstan-rules/config/doctrine-rules.neon
     - vendor/symplify/phpstan-rules/config/regex-rules.neon
@@ -25,7 +24,7 @@ parameters:
         - */Source/*
         - *Source/*
 
-#    reportUnmatchedIgnoredErrors: false
+    reportUnmatchedIgnoredErrors: false
 
     bootstrapFiles:
         # loads scoped files like SmartFileInfo
@@ -38,8 +37,10 @@ parameters:
             path: src/Rector/Class_/TemplateTypeBasedOnPresenterTemplateParametersRector.php
 
         -
-            path: src/NodeFactory/ClassWithPublicPropertiesFactory.php
             message: '#Instead of array shape, use value object with specific types in constructor and getters#'
+            paths:
+                - src/NodeFactory/ClassWithPublicPropertiesFactory.php
+                - src/FileProcessor/LatteFileProcessor.php
 
         - '#Dynamic call to static method PHPUnit\\Framework\\Assert\:\:(.*?)\(\)#'
 
@@ -49,3 +50,11 @@ parameters:
         -
             message: '#Do not use chained method calls\. Put each on separated lines#'
             path: config/*
+
+        -
+            message: '#Use another value object over array with string\-keys and objects, array<string, ValueObject>#'
+            path: src/ValueObject/TemplateParametersAssigns.php
+
+        - '#Instead of "PhpParser\\Builder\\(.*?)" class/interface use "Rector\\Core\\PhpParser\\Builder\\(.*?)"#'
+
+        - '#Cognitive complexity for "Rector\\Nette\\NodeAnalyzer\\TemplatePropertyAssignCollector\:\:processAssign\(\)" is 21, keep it under 10#'
