@@ -12,8 +12,9 @@ final class ReplaceEventManagerWithEventSubscriberRectorTest extends AbstractRec
 {
     /**
      * @dataProvider provideData()
+     * @return never
      */
-    public function test(SmartFileInfo $fixtureFileInfo): never
+    public function test(SmartFileInfo $fixtureFileInfo)
     {
         $this->markTestSkipped('Without this test, there is some Comment autoload issue');
     }
