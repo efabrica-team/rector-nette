@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector;
+namespace RectorNette\Tests\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
- * @see \Rector\Nette\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector
+ * @see \RectorNette\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector
  */
 final class TemplateTypeBasedOnPresenterTemplateParametersRectorTest extends AbstractRectorTestCase
 {

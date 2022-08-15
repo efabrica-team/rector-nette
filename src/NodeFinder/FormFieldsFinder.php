@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\NodeFinder;
+namespace RectorNette\NodeFinder;
 
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\Assign;
@@ -13,12 +13,12 @@ use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Expression;
 use PHPStan\Type\ObjectType;
-use Rector\Nette\ValueObject\FormField;
+use RectorNette\ValueObject\FormField;
 use Rector\NodeNameResolver\NodeNameResolver;
 use Rector\NodeTypeResolver\NodeTypeResolver;
 
 /**
- * @see \Rector\Nette\Tests\NodeFinder\FormFinder\FormFinderTest
+ * @see \RectorNette\Tests\NodeFinder\FormFinder\FormFinderTest
  */
 final class FormFieldsFinder
 {

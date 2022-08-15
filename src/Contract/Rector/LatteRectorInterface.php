@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Contract\Rector;
+namespace RectorNette\Contract\Rector;
 
 use Rector\Core\Contract\Rector\RectorInterface;
 

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Rector\Class_\FormDataRector;
+namespace RectorNette\Tests\Rector\Class_\FormDataRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
- * @see \Rector\Nette\Rector\Class_\FormDataRector
+ * @see \RectorNette\Rector\Class_\FormDataRector
  */
 final class FormDataRectorTest extends AbstractRectorTestCase
 {

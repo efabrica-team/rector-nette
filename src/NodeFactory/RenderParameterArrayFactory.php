@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\NodeFactory;
+namespace RectorNette\NodeFactory;
 
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Scalar\String_;
-use Rector\Nette\ValueObject\TemplateParametersAssigns;
+use RectorNette\ValueObject\TemplateParametersAssigns;
 
 final class RenderParameterArrayFactory
 {

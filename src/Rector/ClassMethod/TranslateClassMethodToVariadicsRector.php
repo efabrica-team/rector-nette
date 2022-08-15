@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Rector\ClassMethod;
+namespace RectorNette\Rector\ClassMethod;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\ArrayDimFetch;
@@ -26,7 +26,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @changelog https://github.com/nette/utils/pull/178
  * @changelog https://github.com/contributte/translation/commit/d374c4c05b57dff1e5b327bb9bf98c392769806c
  *
- * @see \Rector\Nette\Tests\Rector\ClassMethod\TranslateClassMethodToVariadicsRector\TranslateClassMethodToVariadicsRectorTest
+ * @see \RectorNette\Tests\Rector\ClassMethod\TranslateClassMethodToVariadicsRector\TranslateClassMethodToVariadicsRectorTest
  *
  * @note must be run before "composer update nette/utils:^3.0", because param contract break causes fatal error
  */

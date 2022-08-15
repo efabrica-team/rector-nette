@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\Kdyby\Rector\MethodCall\ReplaceEventManagerWithEventSubscriberRector\Fixture;
+namespace RectorNette\Tests\Kdyby\Rector\MethodCall\ReplaceEventManagerWithEventSubscriberRector\Fixture;
 
 use Kdyby\Events\EventManager;
 
@@ -27,7 +27,7 @@ final class SomeClass
 -----
 <?php
 
-namespace Rector\Nette\Tests\Kdyby\Rector\MethodCall\ReplaceEventManagerWithEventSubscriberRector\Fixture;
+namespace RectorNette\Tests\Kdyby\Rector\MethodCall\ReplaceEventManagerWithEventSubscriberRector\Fixture;
 
 use Kdyby\Events\EventManager;
 
@@ -46,7 +46,7 @@ final class SomeClass
     public function run()
     {
         $key = '2000';
-        $this->eventManager->dispatch(new \Rector\Nette\Tests\Kdyby\Rector\MethodCall\ReplaceEventManagerWithEventSubscriberRector\Fixture\Event\SomeClassCopyEvent($this, $key));
+        $this->eventManager->dispatch(new \RectorNette\Tests\Kdyby\Rector\MethodCall\ReplaceEventManagerWithEventSubscriberRector\Fixture\Event\SomeClassCopyEvent($this, $key));
     }
 }
 

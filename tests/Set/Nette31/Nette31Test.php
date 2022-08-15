@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Set\Nette31;
+namespace RectorNette\Tests\Set\Nette31;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;

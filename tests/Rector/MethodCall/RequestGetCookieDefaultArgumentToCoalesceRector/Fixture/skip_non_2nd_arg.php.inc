@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\MethodCall\RequestGetCookieDefaultArgumentToCoalesceRector\Fixture;
+namespace RectorNette\Tests\Rector\MethodCall\RequestGetCookieDefaultArgumentToCoalesceRector\Fixture;
 
 use Nette\Http\Request;
 

@@ -13,7 +13,7 @@ use PHPStan\Type\StringType;
 use PHPStan\Type\UnionType;
 use Rector\Config\RectorConfig;
 use Rector\Core\ValueObject\MethodName;
-use Rector\Nette\Rector\ClassMethod\TranslateClassMethodToVariadicsRector;
+use RectorNette\Rector\ClassMethod\TranslateClassMethodToVariadicsRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationRector;
 use Rector\TypeDeclaration\ValueObject\AddParamTypeDeclaration;
 

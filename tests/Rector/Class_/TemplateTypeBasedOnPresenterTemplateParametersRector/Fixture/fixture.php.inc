@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector\Fixture;
+namespace RectorNette\Tests\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector\Fixture;
 
 use Nette\Application\UI\Presenter;
 
@@ -21,7 +21,7 @@ SomeDefaultTemplate.php
 -----
 <?php
 
-namespace Rector\Nette\Tests\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector\Fixture;
+namespace RectorNette\Tests\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector\Fixture;
 
 class SomeDefaultTemplate extends \Nette\Bridges\ApplicationLatte\Template
 {
@@ -34,7 +34,7 @@ templates/Some/default.latte
 <h1>{$title}</h1>
 <span class="count">{$count}</span>
 -----
-{templateType Rector\Nette\Tests\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector\Fixture\SomeDefaultTemplate}
+{templateType RectorNette\Tests\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector\Fixture\SomeDefaultTemplate}
 
 <h1>{$title}</h1>
 <span class="count">{$count}</span>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Fixture;
+namespace RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Fixture;
 
 use DateTimeInterface;
 use stdClass;

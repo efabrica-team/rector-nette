@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Rector\ClassMethod\MergeTemplateSetFileToTemplateRenderRector;
+namespace RectorNette\Tests\Rector\ClassMethod\MergeTemplateSetFileToTemplateRenderRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;

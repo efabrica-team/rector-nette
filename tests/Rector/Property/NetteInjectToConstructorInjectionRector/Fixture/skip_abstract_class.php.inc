@@ -1,8 +1,8 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Fixture;
+namespace RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Fixture;
 
-use Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProductWithParent;
+use RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProductWithParent;
 
 abstract class SkipAbstractClass
 {

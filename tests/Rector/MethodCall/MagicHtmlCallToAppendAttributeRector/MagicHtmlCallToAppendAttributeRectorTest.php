@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Rector\MethodCall\MagicHtmlCallToAppendAttributeRector;
+namespace RectorNette\Tests\Rector\MethodCall\MagicHtmlCallToAppendAttributeRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;

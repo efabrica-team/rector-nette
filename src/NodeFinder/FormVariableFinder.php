@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\NodeFinder;
+namespace RectorNette\NodeFinder;
 
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\Variable;
@@ -12,7 +12,7 @@ use PHPStan\Type\ObjectType;
 use Rector\NodeTypeResolver\NodeTypeResolver;
 
 /**
- * @see \Rector\Nette\Tests\NodeFinder\FormFinder\FormFinderTest
+ * @see \RectorNette\Tests\NodeFinder\FormFinder\FormFinderTest
  */
 final class FormVariableFinder
 {

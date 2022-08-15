@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Rector\Latte;
+namespace RectorNette\Rector\Latte;
 
-use Rector\Nette\Contract\Rector\LatteRectorInterface;
-use Rector\Nette\Latte\Parser\TemplateTypeParser;
-use Rector\Nette\Latte\Parser\VarTypeParser;
+use RectorNette\Contract\Rector\LatteRectorInterface;
+use RectorNette\Latte\Parser\TemplateTypeParser;
+use RectorNette\Latte\Parser\VarTypeParser;
 use Rector\Renaming\Collector\MethodCallRenameCollector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * @see \Rector\Nette\Tests\Rector\Latte\RenameMethodLatteRector\RenameMethodLatteRectorTest
+ * @see \RectorNette\Tests\Rector\Latte\RenameMethodLatteRector\RenameMethodLatteRectorTest
  */
 final class RenameMethodLatteRector implements LatteRectorInterface
 {

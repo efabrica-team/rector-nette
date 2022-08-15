@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector;
+namespace RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Rector\ClassMethod;
+namespace RectorNette\Rector\ClassMethod;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\New_;
@@ -17,8 +17,8 @@ use PHPStan\Type\ObjectType;
 use Rector\Core\Rector\AbstractRector;
 use Rector\Core\Reflection\ReflectionResolver;
 use Rector\Core\ValueObject\MethodName;
-use Rector\Nette\NodeAnalyzer\StaticCallAnalyzer;
-use Rector\Nette\NodeFinder\ParamFinder;
+use RectorNette\NodeAnalyzer\StaticCallAnalyzer;
+use RectorNette\NodeFinder\ParamFinder;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -26,7 +26,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see https://github.com/nette/component-model/commit/1fb769f4602cf82694941530bac1111b3c5cd11b
  * This only applied to child of \Nette\Application\UI\Control, not Forms! Forms still need to be attached to their parents
  *
- * @see \Rector\Nette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\RemoveParentAndNameFromComponentConstructorRectorTest
+ * @see \RectorNette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\RemoveParentAndNameFromComponentConstructorRectorTest
  */
 final class RemoveParentAndNameFromComponentConstructorRector extends AbstractRector
 {

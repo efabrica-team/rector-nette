@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Latte\Parser\TemplateType;
+namespace RectorNette\Tests\Latte\Parser\TemplateType;
 
 use Iterator;
-use Rector\Nette\Latte\Parser\TemplateTypeParser;
+use RectorNette\Latte\Parser\TemplateTypeParser;
 use Rector\Testing\PHPUnit\AbstractTestCase;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;

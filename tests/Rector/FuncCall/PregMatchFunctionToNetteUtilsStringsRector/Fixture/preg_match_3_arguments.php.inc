@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\FuncCall\PregMatchFunctionToNetteUtilsStringsRector\Fixture;
+namespace RectorNette\Tests\Rector\FuncCall\PregMatchFunctionToNetteUtilsStringsRector\Fixture;
 
 class PregMatch3Arguments
 {
@@ -16,7 +16,7 @@ class PregMatch3Arguments
 -----
 <?php
 
-namespace Rector\Nette\Tests\Rector\FuncCall\PregMatchFunctionToNetteUtilsStringsRector\Fixture;
+namespace RectorNette\Tests\Rector\FuncCall\PregMatchFunctionToNetteUtilsStringsRector\Fixture;
 
 class PregMatch3Arguments
 {

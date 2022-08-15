@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 
-use Rector\Nette\Tests\Rector\Latte\RenameMethodLatteRector\Source\SomeClass;
+use RectorNette\Tests\Rector\Latte\RenameMethodLatteRector\Source\SomeClass;
 use Rector\Renaming\Rector\MethodCall\RenameMethodRector;
 use Rector\Renaming\ValueObject\MethodCallRename;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\FuncCall\PregMatchFunctionToNetteUtilsStringsRector\Fixture;
+namespace RectorNette\Tests\Rector\FuncCall\PregMatchFunctionToNetteUtilsStringsRector\Fixture;
 
 class PregMatchAllKeepFormat
 {
@@ -17,7 +17,7 @@ class PregMatchAllKeepFormat
 -----
 <?php
 
-namespace Rector\Nette\Tests\Rector\FuncCall\PregMatchFunctionToNetteUtilsStringsRector\Fixture;
+namespace RectorNette\Tests\Rector\FuncCall\PregMatchFunctionToNetteUtilsStringsRector\Fixture;
 
 class PregMatchAllKeepFormat
 {

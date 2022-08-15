@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\Fixture;
+namespace RectorNette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\Fixture;
 
 use Nette\Application\UI\Presenter;
 

@@ -1,5 +1,5 @@
 {
-    "name": "rector/rector-nette",
+    "name": "efabrica/rector-nette",
     "type": "rector-extension",
     "license": "MIT",
     "description": "Rector upgrades rules for Nette Framework",
@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Rector\\Nette\\": "src"
+            "RectorNette\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Rector\\Nette\\Tests\\": "tests"
+            "RectorNette\\Tests\\": "tests"
         },
         "classmap": [
             "stubs"

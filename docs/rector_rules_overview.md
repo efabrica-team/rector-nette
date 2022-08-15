@@ -4,7 +4,7 @@
 
 Change `containerBuilder->expand()` to static call with parameters
 
-- class: [`Rector\Nette\Rector\MethodCall\BuilderExpandToHelperExpandRector`](../src/Rector/MethodCall/BuilderExpandToHelperExpandRector.php)
+- class: [`RectorNette\Rector\MethodCall\BuilderExpandToHelperExpandRector`](../src/Rector/MethodCall/BuilderExpandToHelperExpandRector.php)
 
 ```diff
  use Nette\DI\CompilerExtension;
@@ -25,7 +25,7 @@ Change `containerBuilder->expand()` to static call with parameters
 
 Move dependency get via `$context->getByType()` to constructor injection
 
-- class: [`Rector\Nette\Rector\MethodCall\ContextGetByTypeToConstructorInjectionRector`](../src/Rector/MethodCall/ContextGetByTypeToConstructorInjectionRector.php)
+- class: [`RectorNette\Rector\MethodCall\ContextGetByTypeToConstructorInjectionRector`](../src/Rector/MethodCall/ContextGetByTypeToConstructorInjectionRector.php)
 
 ```diff
  class SomeClass
@@ -53,7 +53,7 @@ Move dependency get via `$context->getByType()` to constructor injection
 
 convert `addUpload()` with 3rd argument true to `addMultiUpload()`
 
-- class: [`Rector\Nette\Rector\MethodCall\ConvertAddUploadWithThirdArgumentTrueToAddMultiUploadRector`](../src/Rector/MethodCall/ConvertAddUploadWithThirdArgumentTrueToAddMultiUploadRector.php)
+- class: [`RectorNette\Rector\MethodCall\ConvertAddUploadWithThirdArgumentTrueToAddMultiUploadRector`](../src/Rector/MethodCall/ConvertAddUploadWithThirdArgumentTrueToAddMultiUploadRector.php)
 
 ```diff
  $form = new Nette\Forms\Form();
@@ -69,11 +69,11 @@ Create form data class with all fields of Form
 
 :wrench: **configure it!**
 
-- class: [`Rector\Nette\Rector\Class_\FormDataRector`](../src/Rector/Class_/FormDataRector.php)
+- class: [`RectorNette\Rector\Class_\FormDataRector`](../src/Rector/Class_/FormDataRector.php)
 
 ```php
 use Rector\Config\RectorConfig;
-use Rector\Nette\Rector\Class_\FormDataRector;
+use RectorNette\Rector\Class_\FormDataRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->ruleWithConfiguration(FormDataRector::class, [
@@ -114,7 +114,7 @@ return static function (RectorConfig $rectorConfig): void {
 
 Changes `json_encode()/json_decode()` to safer and more verbose `Nette\Utils\Json::encode()/decode()` calls
 
-- class: [`Rector\Nette\Rector\FuncCall\JsonDecodeEncodeToNetteUtilsJsonDecodeEncodeRector`](../src/Rector/FuncCall/JsonDecodeEncodeToNetteUtilsJsonDecodeEncodeRector.php)
+- class: [`RectorNette\Rector\FuncCall\JsonDecodeEncodeToNetteUtilsJsonDecodeEncodeRector`](../src/Rector/FuncCall/JsonDecodeEncodeToNetteUtilsJsonDecodeEncodeRector.php)
 
 ```diff
  class SomeClass
@@ -147,7 +147,7 @@ Changes `json_encode()/json_decode()` to safer and more verbose `Nette\Utils\Jso
 
 Adds latte {varType}s based on presenter `$this->template` parameters
 
-- class: [`Rector\Nette\Rector\Class_\LatteVarTypesBasedOnPresenterTemplateParametersRector`](../src/Rector/Class_/LatteVarTypesBasedOnPresenterTemplateParametersRector.php)
+- class: [`RectorNette\Rector\Class_\LatteVarTypesBasedOnPresenterTemplateParametersRector`](../src/Rector/Class_/LatteVarTypesBasedOnPresenterTemplateParametersRector.php)
 
 ```diff
  // presenters/SomePresenter.php
@@ -178,7 +178,7 @@ Adds latte {varType}s based on presenter `$this->template` parameters
 
 Change magic `addClass()` etc. calls on Html to explicit methods
 
-- class: [`Rector\Nette\Rector\MethodCall\MagicHtmlCallToAppendAttributeRector`](../src/Rector/MethodCall/MagicHtmlCallToAppendAttributeRector.php)
+- class: [`RectorNette\Rector\MethodCall\MagicHtmlCallToAppendAttributeRector`](../src/Rector/MethodCall/MagicHtmlCallToAppendAttributeRector.php)
 
 ```diff
  use Nette\Utils\Html;
@@ -200,7 +200,7 @@ Change magic `addClass()` etc. calls on Html to explicit methods
 
 Change `$this->getConfig($defaults)` to array_merge
 
-- class: [`Rector\Nette\Rector\MethodCall\MergeDefaultsInGetConfigCompilerExtensionRector`](../src/Rector/MethodCall/MergeDefaultsInGetConfigCompilerExtensionRector.php)
+- class: [`RectorNette\Rector\MethodCall\MergeDefaultsInGetConfigCompilerExtensionRector`](../src/Rector/MethodCall/MergeDefaultsInGetConfigCompilerExtensionRector.php)
 
 ```diff
  use Nette\DI\CompilerExtension;
@@ -225,7 +225,7 @@ Change `$this->getConfig($defaults)` to array_merge
 
 Change `$this->template->setFile()` `$this->template->render()`
 
-- class: [`Rector\Nette\Rector\ClassMethod\MergeTemplateSetFileToTemplateRenderRector`](../src/Rector/ClassMethod/MergeTemplateSetFileToTemplateRenderRector.php)
+- class: [`RectorNette\Rector\ClassMethod\MergeTemplateSetFileToTemplateRenderRector`](../src/Rector/ClassMethod/MergeTemplateSetFileToTemplateRenderRector.php)
 
 ```diff
  use Nette\Application\UI\Control;
@@ -247,7 +247,7 @@ Change `$this->template->setFile()` `$this->template->render()`
 
 Move `@inject` properties to constructor, if there already is one
 
-- class: [`Rector\Nette\Rector\Class_\MoveInjectToExistingConstructorRector`](../src/Rector/Class_/MoveInjectToExistingConstructorRector.php)
+- class: [`RectorNette\Rector\Class_\MoveInjectToExistingConstructorRector`](../src/Rector/Class_/MoveInjectToExistingConstructorRector.php)
 
 ```diff
  final class SomeClass
@@ -279,7 +279,7 @@ Move `@inject` properties to constructor, if there already is one
 
 Turns properties with `@inject` to private properties and constructor injection
 
-- class: [`Rector\Nette\Rector\Property\NetteInjectToConstructorInjectionRector`](../src/Rector/Property/NetteInjectToConstructorInjectionRector.php)
+- class: [`RectorNette\Rector\Property\NetteInjectToConstructorInjectionRector`](../src/Rector/Property/NetteInjectToConstructorInjectionRector.php)
 
 ```diff
  /**
@@ -301,7 +301,7 @@ Turns properties with `@inject` to private properties and constructor injection
 
 Use `Nette\Utils\Strings` over bare `preg_split()` and `preg_replace()` functions
 
-- class: [`Rector\Nette\Rector\FuncCall\PregFunctionToNetteUtilsStringsRector`](../src/Rector/FuncCall/PregFunctionToNetteUtilsStringsRector.php)
+- class: [`RectorNette\Rector\FuncCall\PregFunctionToNetteUtilsStringsRector`](../src/Rector/FuncCall/PregFunctionToNetteUtilsStringsRector.php)
 
 ```diff
 +use Nette\Utils\Strings;
@@ -323,7 +323,7 @@ Use `Nette\Utils\Strings` over bare `preg_split()` and `preg_replace()` function
 
 Use `Nette\Utils\Strings` over bare `preg_match()` and `preg_match_all()` functions
 
-- class: [`Rector\Nette\Rector\FuncCall\PregMatchFunctionToNetteUtilsStringsRector`](../src/Rector/FuncCall/PregMatchFunctionToNetteUtilsStringsRector.php)
+- class: [`RectorNette\Rector\FuncCall\PregMatchFunctionToNetteUtilsStringsRector`](../src/Rector/FuncCall/PregMatchFunctionToNetteUtilsStringsRector.php)
 
 ```diff
 +use Nette\Utils\Strings;
@@ -345,7 +345,7 @@ Use `Nette\Utils\Strings` over bare `preg_match()` and `preg_match_all()` functi
 
 Remove `$parent` and `$name` in control constructor
 
-- class: [`Rector\Nette\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector`](../src/Rector/ClassMethod/RemoveParentAndNameFromComponentConstructorRector.php)
+- class: [`RectorNette\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector`](../src/Rector/ClassMethod/RemoveParentAndNameFromComponentConstructorRector.php)
 
 ```diff
  use Nette\Application\UI\Control;
@@ -367,7 +367,7 @@ Remove `$parent` and `$name` in control constructor
 
 Renames method calls in LATTE templates
 
-- class: [`Rector\Nette\Rector\Latte\RenameMethodLatteRector`](../src/Rector/Latte/RenameMethodLatteRector.php)
+- class: [`RectorNette\Rector\Latte\RenameMethodLatteRector`](../src/Rector/Latte/RenameMethodLatteRector.php)
 
 ```diff
  {varType SomeClass $someClass}
@@ -382,7 +382,7 @@ Renames method calls in LATTE templates
 
 Replace time numbers with `Nette\Utils\DateTime` constants
 
-- class: [`Rector\Nette\Rector\LNumber\ReplaceTimeNumberWithDateTimeConstantRector`](../src/Rector/LNumber/ReplaceTimeNumberWithDateTimeConstantRector.php)
+- class: [`RectorNette\Rector\LNumber\ReplaceTimeNumberWithDateTimeConstantRector`](../src/Rector/LNumber/ReplaceTimeNumberWithDateTimeConstantRector.php)
 
 ```diff
  final class SomeClass
@@ -401,7 +401,7 @@ Replace time numbers with `Nette\Utils\DateTime` constants
 
 Add removed `Nette\Http\Request::getCookies()` default value as coalesce
 
-- class: [`Rector\Nette\Rector\MethodCall\RequestGetCookieDefaultArgumentToCoalesceRector`](../src/Rector/MethodCall/RequestGetCookieDefaultArgumentToCoalesceRector.php)
+- class: [`RectorNette\Rector\MethodCall\RequestGetCookieDefaultArgumentToCoalesceRector`](../src/Rector/MethodCall/RequestGetCookieDefaultArgumentToCoalesceRector.php)
 
 ```diff
  use Nette\Http\Request;
@@ -422,7 +422,7 @@ Add removed `Nette\Http\Request::getCookies()` default value as coalesce
 
 Change setClass with class and arguments to separated methods
 
-- class: [`Rector\Nette\Rector\MethodCall\SetClassWithArgumentToSetFactoryRector`](../src/Rector/MethodCall/SetClassWithArgumentToSetFactoryRector.php)
+- class: [`RectorNette\Rector\MethodCall\SetClassWithArgumentToSetFactoryRector`](../src/Rector/MethodCall/SetClassWithArgumentToSetFactoryRector.php)
 
 ```diff
  use Nette\DI\ContainerBuilder;
@@ -444,7 +444,7 @@ Change setClass with class and arguments to separated methods
 
 Use `Nette\Utils\Strings` over bare string-functions
 
-- class: [`Rector\Nette\Rector\FuncCall\SubstrStrlenFunctionToNetteUtilsStringsRector`](../src/Rector/FuncCall/SubstrStrlenFunctionToNetteUtilsStringsRector.php)
+- class: [`RectorNette\Rector\FuncCall\SubstrStrlenFunctionToNetteUtilsStringsRector`](../src/Rector/FuncCall/SubstrStrlenFunctionToNetteUtilsStringsRector.php)
 
 ```diff
  class SomeClass
@@ -463,7 +463,7 @@ Use `Nette\Utils\Strings` over bare string-functions
 
 Change `$this->templates->{magic}` to `$this->template->render(..., $values)` in components
 
-- class: [`Rector\Nette\Rector\ClassMethod\TemplateMagicAssignToExplicitVariableArrayRector`](../src/Rector/ClassMethod/TemplateMagicAssignToExplicitVariableArrayRector.php)
+- class: [`RectorNette\Rector\ClassMethod\TemplateMagicAssignToExplicitVariableArrayRector`](../src/Rector/ClassMethod/TemplateMagicAssignToExplicitVariableArrayRector.php)
 
 ```diff
  use Nette\Application\UI\Control;
@@ -487,11 +487,11 @@ Creates Template class and adds latte {templateType} based on presenter `$this->
 
 :wrench: **configure it!**
 
-- class: [`Rector\Nette\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector`](../src/Rector/Class_/TemplateTypeBasedOnPresenterTemplateParametersRector.php)
+- class: [`RectorNette\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector`](../src/Rector/Class_/TemplateTypeBasedOnPresenterTemplateParametersRector.php)
 
 ```php
 use Rector\Config\RectorConfig;
-use Rector\Nette\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector;
+use RectorNette\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->ruleWithConfiguration(TemplateTypeBasedOnPresenterTemplateParametersRector::class, [
@@ -542,7 +542,7 @@ return static function (RectorConfig $rectorConfig): void {
 
 Change `translate()` method call 2nd arg to variadic
 
-- class: [`Rector\Nette\Rector\ClassMethod\TranslateClassMethodToVariadicsRector`](../src/Rector/ClassMethod/TranslateClassMethodToVariadicsRector.php)
+- class: [`RectorNette\Rector\ClassMethod\TranslateClassMethodToVariadicsRector`](../src/Rector/ClassMethod/TranslateClassMethodToVariadicsRector.php)
 
 ```diff
  use Nette\Localization\ITranslator;

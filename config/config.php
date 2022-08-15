@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 use Rector\Core\NonPhpFile\Rector\RenameClassNonPhpRector;
-use Rector\Nette\Rector\Latte\RenameMethodLatteRector;
+use RectorNette\Rector\Latte\RenameMethodLatteRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $services = $rectorConfig->services();

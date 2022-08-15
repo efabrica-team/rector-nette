@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source;
+namespace RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source;
 
 abstract class ParentWithEmptyConstructor
 {

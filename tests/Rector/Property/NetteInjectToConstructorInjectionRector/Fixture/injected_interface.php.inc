@@ -1,8 +1,8 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Fixture;
+namespace RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Fixture;
 
-use Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProductWithInterface;
+use RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProductWithInterface;
 
 class ClassWithInjects4
 {
@@ -17,13 +17,13 @@ class ClassWithInjects4
 -----
 <?php
 
-namespace Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Fixture;
+namespace RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Fixture;
 
-use Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProductWithInterface;
+use RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProductWithInterface;
 
 class ClassWithInjects4
 {
-    public function __construct(private \Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProductWithInterface $property)
+    public function __construct(private \RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProductWithInterface $property)
     {
     }
 }

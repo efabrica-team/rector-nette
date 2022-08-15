@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\NodeFactory\ClassWithPublicPropertiesFactory;
+namespace RectorNette\Tests\NodeFactory\ClassWithPublicPropertiesFactory;
 
 use Iterator;
 use Nette\Utils\Json;
 use Rector\Core\PhpParser\Printer\BetterStandardPrinter;
-use Rector\Nette\NodeFactory\ClassWithPublicPropertiesFactory;
+use RectorNette\NodeFactory\ClassWithPublicPropertiesFactory;
 use Rector\Testing\PHPUnit\AbstractTestCase;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
- * @see \Rector\Nette\NodeFactory\ClassWithPublicPropertiesFactory
+ * @see \RectorNette\NodeFactory\ClassWithPublicPropertiesFactory
  */
 final class ClassWithPublicPropertiesFactoryTest extends AbstractTestCase
 {

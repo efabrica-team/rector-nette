@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Rector\ClassMethod;
+namespace RectorNette\Rector\ClassMethod;
 
 use PhpParser\Node;
 use PhpParser\Node\Arg;
@@ -13,19 +13,19 @@ use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Expression;
 use Rector\Core\Rector\AbstractRector;
-use Rector\Nette\NodeAnalyzer\ConditionalTemplateAssignReplacer;
-use Rector\Nette\NodeAnalyzer\MethodCallArgMerger;
-use Rector\Nette\NodeAnalyzer\NetteClassAnalyzer;
-use Rector\Nette\NodeAnalyzer\RenderMethodAnalyzer;
-use Rector\Nette\NodeAnalyzer\TemplatePropertyAssignCollector;
-use Rector\Nette\NodeAnalyzer\TemplatePropertyParametersReplacer;
-use Rector\Nette\NodeFactory\RenderParameterArrayFactory;
-use Rector\Nette\ValueObject\TemplateParametersAssigns;
+use RectorNette\NodeAnalyzer\ConditionalTemplateAssignReplacer;
+use RectorNette\NodeAnalyzer\MethodCallArgMerger;
+use RectorNette\NodeAnalyzer\NetteClassAnalyzer;
+use RectorNette\NodeAnalyzer\RenderMethodAnalyzer;
+use RectorNette\NodeAnalyzer\TemplatePropertyAssignCollector;
+use RectorNette\NodeAnalyzer\TemplatePropertyParametersReplacer;
+use RectorNette\NodeFactory\RenderParameterArrayFactory;
+use RectorNette\ValueObject\TemplateParametersAssigns;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * @see \Rector\Nette\Tests\Rector\ClassMethod\TemplateMagicAssignToExplicitVariableArrayRector\TemplateMagicAssignToExplicitVariableArrayRectorTest
+ * @see \RectorNette\Tests\Rector\ClassMethod\TemplateMagicAssignToExplicitVariableArrayRector\TemplateMagicAssignToExplicitVariableArrayRectorTest
  */
 final class TemplateMagicAssignToExplicitVariableArrayRector extends AbstractRector
 {

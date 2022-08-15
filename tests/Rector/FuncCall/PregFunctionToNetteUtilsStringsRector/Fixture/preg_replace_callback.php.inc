@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\FuncCall\PregFunctionToNetteUtilsStringsRector\Fixture;
+namespace RectorNette\Tests\Rector\FuncCall\PregFunctionToNetteUtilsStringsRector\Fixture;
 
 class PregReplaceCallback
 {
@@ -18,7 +18,7 @@ class PregReplaceCallback
 -----
 <?php
 
-namespace Rector\Nette\Tests\Rector\FuncCall\PregFunctionToNetteUtilsStringsRector\Fixture;
+namespace RectorNette\Tests\Rector\FuncCall\PregFunctionToNetteUtilsStringsRector\Fixture;
 
 class PregReplaceCallback
 {

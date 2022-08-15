@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Rector\Latte\RenameMethodLatteRector;
+namespace RectorNette\Tests\Rector\Latte\RenameMethodLatteRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;

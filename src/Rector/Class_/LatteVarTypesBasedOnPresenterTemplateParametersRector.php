@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Rector\Class_;
+namespace RectorNette\Rector\Class_;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\Assign;
@@ -15,12 +15,12 @@ use PHPStan\Type\VerbosityLevel;
 use Rector\Core\Application\FileSystem\RemovedAndAddedFilesCollector;
 use Rector\Core\Rector\AbstractRector;
 use Rector\FileSystemRector\ValueObject\AddedFileWithContent;
-use Rector\Nette\ValueObject\LatteVariableType;
+use RectorNette\ValueObject\LatteVariableType;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * @see \Rector\Nette\Tests\Rector\Class_\LatteVarTypesBasedOnPresenterTemplateParametersRector\LatteVarTypesBasedOnPresenterTemplateParametersRectorTest
+ * @see \RectorNette\Tests\Rector\Class_\LatteVarTypesBasedOnPresenterTemplateParametersRector\LatteVarTypesBasedOnPresenterTemplateParametersRectorTest
  */
 final class LatteVarTypesBasedOnPresenterTemplateParametersRector extends AbstractRector
 {

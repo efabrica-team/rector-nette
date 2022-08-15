@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\NodeAnalyzer;
+namespace RectorNette\NodeAnalyzer;
 
 use PhpParser\Node\Expr\ArrayDimFetch;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Scalar\String_;
-use Rector\Nette\ValueObject\TemplateParametersAssigns;
+use RectorNette\ValueObject\TemplateParametersAssigns;
 
 final class TemplatePropertyParametersReplacer
 {
