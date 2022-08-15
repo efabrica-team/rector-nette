@@ -15,11 +15,7 @@ return static function (RectorConfig $rectorConfig): void {
         ->autoconfigure();
 
     $services->load('RectorNette\\', __DIR__ . '/../src')
-        ->exclude([
-            __DIR__ . '/../src/Contract',
-            __DIR__ . '/../src/Rector',
-            __DIR__ . '/../src/ValueObject',
-        ]);
+        ->exclude([__DIR__ . '/../src/Contract', __DIR__ . '/../src/Rector', __DIR__ . '/../src/ValueObject']);
 
     $rectorConfig->rule(RenameClassNonPhpRector::class);
     $rectorConfig->rule(RenameMethodLatteRector::class);
