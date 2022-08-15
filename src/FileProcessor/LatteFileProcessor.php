@@ -10,8 +10,8 @@ use Rector\Core\ValueObject\Application\File;
 use Rector\Core\ValueObject\Configuration;
 use Rector\Core\ValueObject\Error\SystemError;
 use Rector\Core\ValueObject\Reporting\FileDiff;
-use RectorNette\Contract\Rector\LatteRectorInterface;
 use Rector\Parallel\ValueObject\Bridge;
+use RectorNette\Contract\Rector\LatteRectorInterface;
 
 final class LatteFileProcessor implements FileProcessorInterface
 {

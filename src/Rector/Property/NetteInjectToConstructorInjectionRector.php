@@ -13,11 +13,11 @@ use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\Php\PhpVersionProvider;
 use Rector\Core\Rector\AbstractRector;
 use Rector\Core\ValueObject\PhpVersionFeature;
-use RectorNette\NodeAnalyzer\NetteInjectPropertyAnalyzer;
-use RectorNette\NodeAnalyzer\PropertyUsageAnalyzer;
 use Rector\PostRector\Collector\PropertyToAddCollector;
 use Rector\PostRector\ValueObject\PropertyMetadata;
 use Rector\Privatization\NodeManipulator\VisibilityManipulator;
+use RectorNette\NodeAnalyzer\NetteInjectPropertyAnalyzer;
+use RectorNette\NodeAnalyzer\PropertyUsageAnalyzer;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 

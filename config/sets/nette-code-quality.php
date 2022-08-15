@@ -3,14 +3,14 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
+use Rector\Transform\Rector\FuncCall\FuncCallToStaticCallRector;
+use Rector\Transform\ValueObject\FuncCallToStaticCall;
 use RectorNette\Rector\ClassMethod\TemplateMagicAssignToExplicitVariableArrayRector;
 use RectorNette\Rector\FuncCall\JsonDecodeEncodeToNetteUtilsJsonDecodeEncodeRector;
 use RectorNette\Rector\FuncCall\PregFunctionToNetteUtilsStringsRector;
 use RectorNette\Rector\FuncCall\PregMatchFunctionToNetteUtilsStringsRector;
 use RectorNette\Rector\FuncCall\SubstrStrlenFunctionToNetteUtilsStringsRector;
 use RectorNette\Rector\LNumber\ReplaceTimeNumberWithDateTimeConstantRector;
-use Rector\Transform\Rector\FuncCall\FuncCallToStaticCallRector;
-use Rector\Transform\ValueObject\FuncCallToStaticCall;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->rule(TemplateMagicAssignToExplicitVariableArrayRector::class);

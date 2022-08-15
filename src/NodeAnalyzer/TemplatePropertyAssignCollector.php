@@ -22,10 +22,10 @@ use PhpParser\Node\Stmt\Switch_;
 use PhpParser\Node\Stmt\While_;
 use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\PhpParser\Node\BetterNodeFinder;
+use Rector\NodeNestingScope\ScopeNestingComparator;
 use RectorNette\ValueObject\AlwaysTemplateParameterAssign;
 use RectorNette\ValueObject\ParameterAssign;
 use RectorNette\ValueObject\TemplateParametersAssigns;
-use Rector\NodeNestingScope\ScopeNestingComparator;
 
 final class TemplatePropertyAssignCollector
 {

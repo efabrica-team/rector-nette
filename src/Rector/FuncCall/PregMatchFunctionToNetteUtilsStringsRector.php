@@ -15,8 +15,8 @@ use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Return_;
 use Rector\Core\Rector\AbstractRector;
-use RectorNette\NodeAnalyzer\PregMatchAllAnalyzer;
 use Rector\NodeTypeResolver\Node\AttributeKey;
+use RectorNette\NodeAnalyzer\PregMatchAllAnalyzer;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 

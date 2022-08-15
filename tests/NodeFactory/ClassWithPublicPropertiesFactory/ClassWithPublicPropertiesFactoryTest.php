@@ -7,8 +7,8 @@ namespace RectorNette\Tests\NodeFactory\ClassWithPublicPropertiesFactory;
 use Iterator;
 use Nette\Utils\Json;
 use Rector\Core\PhpParser\Printer\BetterStandardPrinter;
-use RectorNette\NodeFactory\ClassWithPublicPropertiesFactory;
 use Rector\Testing\PHPUnit\AbstractTestCase;
+use RectorNette\NodeFactory\ClassWithPublicPropertiesFactory;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
