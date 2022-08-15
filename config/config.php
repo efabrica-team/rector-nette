@@ -14,7 +14,7 @@ return static function (RectorConfig $rectorConfig): void {
         ->autowire()
         ->autoconfigure();
 
-    $services->load('Rector\\Nette\\', __DIR__ . '/../src')
+    $services->load('RectorNette\\', __DIR__ . '/../src')
         ->exclude([
             __DIR__ . '/../src/Contract',
             __DIR__ . '/../src/Rector',
