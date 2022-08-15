@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace RectorNette\Rector\Latte;
 
+use Rector\Renaming\Collector\MethodCallRenameCollector;
 use RectorNette\Contract\Rector\LatteRectorInterface;
 use RectorNette\Latte\Parser\TemplateTypeParser;
 use RectorNette\Latte\Parser\VarTypeParser;
-use Rector\Renaming\Collector\MethodCallRenameCollector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 

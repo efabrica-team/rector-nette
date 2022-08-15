@@ -13,9 +13,9 @@ use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Expression;
 use PHPStan\Type\ObjectType;
-use RectorNette\ValueObject\FormField;
 use Rector\NodeNameResolver\NodeNameResolver;
 use Rector\NodeTypeResolver\NodeTypeResolver;
+use RectorNette\ValueObject\FormField;
 
 /**
  * @see \RectorNette\Tests\NodeFinder\FormFinder\FormFinderTest

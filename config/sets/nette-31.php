@@ -9,8 +9,6 @@ use Rector\Composer\Rector\ChangePackageVersionComposerRector;
 use Rector\Composer\Rector\RemovePackageComposerRector;
 use Rector\Composer\ValueObject\PackageAndVersion;
 use Rector\Config\RectorConfig;
-use RectorNette\Rector\MethodCall\ContextGetByTypeToConstructorInjectionRector;
-use RectorNette\Set\NetteSetList;
 use Rector\Renaming\Rector\MethodCall\RenameMethodRector;
 use Rector\Renaming\Rector\Name\RenameClassRector;
 use Rector\Renaming\Rector\StaticCall\RenameStaticMethodRector;
@@ -22,6 +20,8 @@ use Rector\Transform\ValueObject\DimFetchAssignToMethodCall;
 use Rector\Transform\ValueObject\PropertyFetchToMethodCall;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationRector;
 use Rector\TypeDeclaration\ValueObject\AddParamTypeDeclaration;
+use RectorNette\Rector\MethodCall\ContextGetByTypeToConstructorInjectionRector;
+use RectorNette\Set\NetteSetList;
 
 return static function (RectorConfig $rectorConfig): void {
     // forms 3.1

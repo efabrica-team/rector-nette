@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace RectorNette\Tests\Latte\Parser\TemplateType;
 
 use Iterator;
-use RectorNette\Latte\Parser\TemplateTypeParser;
 use Rector\Testing\PHPUnit\AbstractTestCase;
+use RectorNette\Latte\Parser\TemplateTypeParser;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 

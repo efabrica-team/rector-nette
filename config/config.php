@@ -19,8 +19,6 @@ return static function (RectorConfig $rectorConfig): void {
             __DIR__ . '/../src/Contract',
             __DIR__ . '/../src/Rector',
             __DIR__ . '/../src/ValueObject',
-            __DIR__ . '/../src/Kdyby/Rector',
-            __DIR__ . '/../src/Kdyby/ValueObject',
         ]);
 
     $rectorConfig->rule(RenameClassNonPhpRector::class);

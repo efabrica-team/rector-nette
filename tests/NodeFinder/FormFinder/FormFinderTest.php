@@ -10,10 +10,10 @@ use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Namespace_;
 use Rector\Core\Exception\ShouldNotHappenException;
-use RectorNette\NodeFinder\FormFieldsFinder;
-use RectorNette\NodeFinder\FormVariableFinder;
 use Rector\Testing\PHPUnit\AbstractTestCase;
 use Rector\Testing\TestingParser\TestingParser;
+use RectorNette\NodeFinder\FormFieldsFinder;
+use RectorNette\NodeFinder\FormVariableFinder;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
