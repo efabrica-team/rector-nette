@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\NodeFinder\FormFinder\Fixture;
+namespace RectorNette\Tests\NodeFinder\FormFinder\Fixture;
 
 use Nette\Application\UI\Form;
 

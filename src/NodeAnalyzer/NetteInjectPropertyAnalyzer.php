@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\NodeAnalyzer;
+namespace RectorNette\NodeAnalyzer;
 
 use PhpParser\Node\Stmt\Property;
 use PHPStan\Reflection\ClassReflection;

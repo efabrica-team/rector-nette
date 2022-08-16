@@ -1,4 +1,4 @@
-{varType Rector\Nette\Tests\Rector\Latte\RenameMethodLatteRector\Source\SomeClass $abcd}
+{varType RectorNette\Tests\Rector\Latte\RenameMethodLatteRector\Source\SomeClass $abcd}
 {varType string $text}
 {varType int $number}
 
@@ -8,22 +8,22 @@
 -----
 Array
 (
-    [0] => Rector\Nette\ValueObject\LatteVariableType Object
+    [0] => RectorNette\ValueObject\LatteVariableType Object
         (
-            [name:Rector\Nette\ValueObject\LatteVariableType:private] => abcd
-            [type:Rector\Nette\ValueObject\LatteVariableType:private] => Rector\Nette\Tests\Rector\Latte\RenameMethodLatteRector\Source\SomeClass
+            [name:RectorNette\ValueObject\LatteVariableType:private] => abcd
+            [type:RectorNette\ValueObject\LatteVariableType:private] => RectorNette\Tests\Rector\Latte\RenameMethodLatteRector\Source\SomeClass
         )
 
-    [1] => Rector\Nette\ValueObject\LatteVariableType Object
+    [1] => RectorNette\ValueObject\LatteVariableType Object
         (
-            [name:Rector\Nette\ValueObject\LatteVariableType:private] => text
-            [type:Rector\Nette\ValueObject\LatteVariableType:private] => string
+            [name:RectorNette\ValueObject\LatteVariableType:private] => text
+            [type:RectorNette\ValueObject\LatteVariableType:private] => string
         )
 
-    [2] => Rector\Nette\ValueObject\LatteVariableType Object
+    [2] => RectorNette\ValueObject\LatteVariableType Object
         (
-            [name:Rector\Nette\ValueObject\LatteVariableType:private] => number
-            [type:Rector\Nette\ValueObject\LatteVariableType:private] => int
+            [name:RectorNette\ValueObject\LatteVariableType:private] => number
+            [type:RectorNette\ValueObject\LatteVariableType:private] => int
         )
 
 )

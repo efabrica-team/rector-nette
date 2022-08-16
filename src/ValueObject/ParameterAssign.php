@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\ValueObject;
+namespace RectorNette\ValueObject;
 
 use PhpParser\Node\Expr\Assign;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Rector\ClassMethod\TemplateMagicAssignToExplicitVariableArrayRector;
+namespace RectorNette\Tests\Rector\ClassMethod\TemplateMagicAssignToExplicitVariableArrayRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;

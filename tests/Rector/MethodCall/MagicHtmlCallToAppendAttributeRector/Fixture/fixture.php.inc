@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\MethodCall\MagicHtmlCallToAppendAttributeRector\Fixture;
+namespace RectorNette\Tests\Rector\MethodCall\MagicHtmlCallToAppendAttributeRector\Fixture;
 
 use Nette\Utils\Html;
 
@@ -17,7 +17,7 @@ final class SomeClass
 -----
 <?php
 
-namespace Rector\Nette\Tests\Rector\MethodCall\MagicHtmlCallToAppendAttributeRector\Fixture;
+namespace RectorNette\Tests\Rector\MethodCall\MagicHtmlCallToAppendAttributeRector\Fixture;
 
 use Nette\Utils\Html;
 

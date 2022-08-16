@@ -7,15 +7,15 @@ See available [Nette rules](/docs/rector_rules_overview.md)
 This package is a Rector extension developed by community around Nette. To add it, install package as dependency:
 
 ```bash
-composer require <todo>/rector-nette --dev
+composer require efabrica/rector-nette --dev
 ```
 
 ## Use Sets
 
-To add a set to your config, use `Rector\Nette\Set\NetteSetList` class and pick one of constants:
+To add a set to your config, use `RectorNette\Set\NetteSetList` class and pick one of constants:
 
 ```php
-use Rector\Nette\Set\NetteSetList;
+use RectorNette\Set\NetteSetList;
 use Rector\Config\RectorConfig;
 
 return static function (RectorConfig $rectorConfig): void {

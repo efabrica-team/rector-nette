@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Rector\MethodCall;
+namespace RectorNette\Rector\MethodCall;
 
 use PhpParser\Node;
 use PhpParser\Node\Arg;
@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see https://github.com/Kdyby/Doctrine/commit/db80bf77c0b68af88dfe7eddb2cb2db94aedb04a#diff-ccc8ba07edfa3a425ddfe564acb50656R291
  *
- * @see \Rector\Nette\Tests\Rector\MethodCall\BuilderExpandToHelperExpandRector\BuilderExpandToHelperExpandRectorTest
+ * @see \RectorNette\Tests\Rector\MethodCall\BuilderExpandToHelperExpandRector\BuilderExpandToHelperExpandRectorTest
  */
 final class BuilderExpandToHelperExpandRector extends AbstractRector
 {

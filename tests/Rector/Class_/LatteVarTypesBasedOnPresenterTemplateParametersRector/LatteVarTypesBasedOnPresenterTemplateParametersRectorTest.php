@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Rector\Class_\LatteVarTypesBasedOnPresenterTemplateParametersRector;
+namespace RectorNette\Tests\Rector\Class_\LatteVarTypesBasedOnPresenterTemplateParametersRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
- * @see \Rector\Nette\Rector\Class_\LatteVarTypesBasedOnPresenterTemplateParametersRector
+ * @see \RectorNette\Rector\Class_\LatteVarTypesBasedOnPresenterTemplateParametersRector
  */
 final class LatteVarTypesBasedOnPresenterTemplateParametersRectorTest extends AbstractRectorTestCase
 {

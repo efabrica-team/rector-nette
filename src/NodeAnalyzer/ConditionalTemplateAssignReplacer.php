@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\NodeAnalyzer;
+namespace RectorNette\NodeAnalyzer;
 
 use PhpParser\Node\Expr\Variable;
-use Rector\Nette\ValueObject\TemplateParametersAssigns;
+use RectorNette\ValueObject\TemplateParametersAssigns;
 
 /**
  * Replaces:

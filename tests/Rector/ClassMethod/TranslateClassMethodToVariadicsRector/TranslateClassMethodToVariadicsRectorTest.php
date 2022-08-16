@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Rector\ClassMethod\TranslateClassMethodToVariadicsRector;
+namespace RectorNette\Tests\Rector\ClassMethod\TranslateClassMethodToVariadicsRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;

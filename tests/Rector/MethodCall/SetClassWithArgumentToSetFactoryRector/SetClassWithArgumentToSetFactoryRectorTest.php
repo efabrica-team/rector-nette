@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Rector\MethodCall\SetClassWithArgumentToSetFactoryRector;
+namespace RectorNette\Tests\Rector\MethodCall\SetClassWithArgumentToSetFactoryRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;

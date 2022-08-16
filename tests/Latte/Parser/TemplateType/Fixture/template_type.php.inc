@@ -1,19 +1,19 @@
-{templateType Rector\Nette\Tests\Rector\Latte\RenameMethodLatteRector\Source\SomeTemplate}
+{templateType RectorNette\Tests\Rector\Latte\RenameMethodLatteRector\Source\SomeTemplate}
 
 <div class="container"></div>
 -----
 Array
 (
-    [0] => Rector\Nette\ValueObject\LatteVariableType Object
+    [0] => RectorNette\ValueObject\LatteVariableType Object
         (
-            [name:Rector\Nette\ValueObject\LatteVariableType:private] => someClass
-            [type:Rector\Nette\ValueObject\LatteVariableType:private] => Rector\Nette\Tests\Rector\Latte\RenameMethodLatteRector\Source\SomeClass
+            [name:RectorNette\ValueObject\LatteVariableType:private] => someClass
+            [type:RectorNette\ValueObject\LatteVariableType:private] => RectorNette\Tests\Rector\Latte\RenameMethodLatteRector\Source\SomeClass
         )
 
-    [1] => Rector\Nette\ValueObject\LatteVariableType Object
+    [1] => RectorNette\ValueObject\LatteVariableType Object
         (
-            [name:Rector\Nette\ValueObject\LatteVariableType:private] => someText
-            [type:Rector\Nette\ValueObject\LatteVariableType:private] => string
+            [name:RectorNette\ValueObject\LatteVariableType:private] => someText
+            [type:RectorNette\ValueObject\LatteVariableType:private] => string
         )
 
 )

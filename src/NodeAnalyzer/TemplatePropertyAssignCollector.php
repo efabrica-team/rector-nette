@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\NodeAnalyzer;
+namespace RectorNette\NodeAnalyzer;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\Assign;
@@ -22,10 +22,10 @@ use PhpParser\Node\Stmt\Switch_;
 use PhpParser\Node\Stmt\While_;
 use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\PhpParser\Node\BetterNodeFinder;
-use Rector\Nette\ValueObject\AlwaysTemplateParameterAssign;
-use Rector\Nette\ValueObject\ParameterAssign;
-use Rector\Nette\ValueObject\TemplateParametersAssigns;
 use Rector\NodeNestingScope\ScopeNestingComparator;
+use RectorNette\ValueObject\AlwaysTemplateParameterAssign;
+use RectorNette\ValueObject\ParameterAssign;
+use RectorNette\ValueObject\TemplateParametersAssigns;
 
 final class TemplatePropertyAssignCollector
 {

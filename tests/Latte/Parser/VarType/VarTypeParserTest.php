@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Latte\Parser\VarType;
+namespace RectorNette\Tests\Latte\Parser\VarType;
 
 use Iterator;
-use Rector\Nette\Latte\Parser\VarTypeParser;
 use Rector\Testing\PHPUnit\AbstractTestCase;
+use RectorNette\Latte\Parser\VarTypeParser;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 

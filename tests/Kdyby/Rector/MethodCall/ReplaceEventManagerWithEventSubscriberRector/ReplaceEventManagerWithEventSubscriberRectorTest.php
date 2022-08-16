@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Kdyby\Rector\MethodCall\ReplaceEventManagerWithEventSubscriberRector;
+namespace RectorNette\Tests\Kdyby\Rector\MethodCall\ReplaceEventManagerWithEventSubscriberRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
@@ -12,8 +12,9 @@ final class ReplaceEventManagerWithEventSubscriberRectorTest extends AbstractRec
 {
     /**
      * @dataProvider provideData()
+     * @return never
      */
-    public function test(SmartFileInfo $fixtureFileInfo): never
+    public function test(SmartFileInfo $fixtureFileInfo)
     {
         $this->markTestSkipped('Without this test, there is some Comment autoload issue');
     }

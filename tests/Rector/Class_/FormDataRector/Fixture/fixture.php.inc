@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\Class_\FormDataRector\Fixture;
+namespace RectorNette\Tests\Rector\Class_\FormDataRector\Fixture;
 
 use Nette\Application\UI\Form;
 use Nette\Utils\ArrayHash;
@@ -23,7 +23,7 @@ class MyFormFactory
 -----
 <?php
 
-namespace Rector\Nette\Tests\Rector\Class_\FormDataRector\Fixture;
+namespace RectorNette\Tests\Rector\Class_\FormDataRector\Fixture;
 
 use Nette\Application\UI\Form;
 use Nette\Utils\ArrayHash;
@@ -36,7 +36,7 @@ class MyFormFactory
 
         $form->addText('foo', 'Foo');
         $form->addText('bar', 'Bar')->setRequired();
-        $form->onSuccess[] = function (Form $form, \Rector\Nette\Tests\Rector\Class_\FormDataRector\Fixture\MyFormFactoryFormData $values) {
+        $form->onSuccess[] = function (Form $form, \RectorNette\Tests\Rector\Class_\FormDataRector\Fixture\MyFormFactoryFormData $values) {
             // do something
         };
     }
@@ -49,7 +49,7 @@ MyFormFactoryFormData.php
 -----
 <?php
 
-namespace Rector\Nette\Tests\Rector\Class_\FormDataRector\Fixture;
+namespace RectorNette\Tests\Rector\Class_\FormDataRector\Fixture;
 
 class MyFormFactoryFormData extends \Nette\Utils\ArrayHash
 {

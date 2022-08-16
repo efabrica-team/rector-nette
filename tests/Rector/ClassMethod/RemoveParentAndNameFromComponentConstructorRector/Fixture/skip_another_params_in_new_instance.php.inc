@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\Fixture;
+namespace RectorNette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\Fixture;
 
-use Rector\Nette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\Source\SomeControlWithoutConstructorParentAndName;
+use RectorNette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\Source\SomeControlWithoutConstructorParentAndName;
 
 final class SkipAnotherParamInNewInstance
 {

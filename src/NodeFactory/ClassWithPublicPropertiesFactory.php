@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\NodeFactory;
+namespace RectorNette\NodeFactory;
 
 use PhpParser\Builder\Class_ as ClassBuilder;
 use PhpParser\Builder\Property;
@@ -12,7 +12,7 @@ use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Namespace_;
 
 /**
- * @see \Rector\Nette\Tests\NodeFactory\ClassWithPublicPropertiesFactory\ClassWithPublicPropertiesFactoryTest
+ * @see \RectorNette\Tests\NodeFactory\ClassWithPublicPropertiesFactory\ClassWithPublicPropertiesFactoryTest
  */
 final class ClassWithPublicPropertiesFactory
 {

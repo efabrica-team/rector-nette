@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Rector\FuncCall;
+namespace RectorNette\Rector\FuncCall;
 
 use PhpParser\Node;
 use PhpParser\Node\Arg;
@@ -15,15 +15,15 @@ use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Return_;
 use Rector\Core\Rector\AbstractRector;
-use Rector\Nette\NodeAnalyzer\PregMatchAllAnalyzer;
 use Rector\NodeTypeResolver\Node\AttributeKey;
+use RectorNette\NodeAnalyzer\PregMatchAllAnalyzer;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @see https://tomasvotruba.com/blog/2019/02/07/what-i-learned-by-using-thecodingmachine-safe/#is-there-a-better-way
  *
- * @see \Rector\Nette\Tests\Rector\FuncCall\PregMatchFunctionToNetteUtilsStringsRector\PregMatchFunctionToNetteUtilsStringsRectorTest
+ * @see \RectorNette\Tests\Rector\FuncCall\PregMatchFunctionToNetteUtilsStringsRector\PregMatchFunctionToNetteUtilsStringsRectorTest
  */
 final class PregMatchFunctionToNetteUtilsStringsRector extends AbstractRector
 {

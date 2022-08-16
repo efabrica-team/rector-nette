@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\Class_\LatteVarTypesBasedOnPresenterTemplateParametersRector\Fixture;
+namespace RectorNette\Tests\Rector\Class_\LatteVarTypesBasedOnPresenterTemplateParametersRector\Fixture;
 
 use Nette\Application\UI\Presenter;
 

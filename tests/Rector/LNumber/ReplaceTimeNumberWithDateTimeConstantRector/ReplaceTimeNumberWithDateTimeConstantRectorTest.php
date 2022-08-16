@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Rector\LNumber\ReplaceTimeNumberWithDateTimeConstantRector;
+namespace RectorNette\Tests\Rector\LNumber\ReplaceTimeNumberWithDateTimeConstantRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;

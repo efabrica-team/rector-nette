@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Rector\Class_;
+namespace RectorNette\Rector\Class_;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr;
@@ -15,18 +15,18 @@ use Rector\Core\Contract\PhpParser\NodePrinterInterface;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
 use Rector\FileSystemRector\ValueObject\AddedFileWithContent;
-use Rector\Nette\NodeFactory\ClassWithPublicPropertiesFactory;
-use Rector\Nette\NodeFinder\FormFieldsFinder;
-use Rector\Nette\NodeFinder\FormOnSuccessCallbackFinder;
-use Rector\Nette\NodeFinder\FormOnSuccessCallbackValuesParamFinder;
-use Rector\Nette\NodeFinder\FormVariableFinder;
+use RectorNette\NodeFactory\ClassWithPublicPropertiesFactory;
+use RectorNette\NodeFinder\FormFieldsFinder;
+use RectorNette\NodeFinder\FormOnSuccessCallbackFinder;
+use RectorNette\NodeFinder\FormOnSuccessCallbackValuesParamFinder;
+use RectorNette\NodeFinder\FormVariableFinder;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 use Webmozart\Assert\Assert;
 
 /**
  * @see https://doc.nette.org/en/3.1/form-presenter#toc-mapping-to-classes
- * @see \Rector\Nette\Tests\Rector\Class_\FormDataRector\FormDataRectorTest
+ * @see \RectorNette\Tests\Rector\Class_\FormDataRector\FormDataRectorTest
  */
 final class FormDataRector extends AbstractRector implements ConfigurableRectorInterface
 {

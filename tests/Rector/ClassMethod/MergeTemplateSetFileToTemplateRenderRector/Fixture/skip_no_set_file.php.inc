@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\ClassMethod\MergeTemplateSetFileToTemplateRenderRector\Fixture;
+namespace RectorNette\Tests\Rector\ClassMethod\MergeTemplateSetFileToTemplateRenderRector\Fixture;
 
 use Nette\Application\UI\Control;
 

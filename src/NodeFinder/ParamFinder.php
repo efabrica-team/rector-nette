@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\NodeFinder;
+namespace RectorNette\NodeFinder;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\Assign;

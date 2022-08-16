@@ -6,7 +6,7 @@ use Rector\Config\RectorConfig;
 
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
-use Rector\Nette\Rector\Property\NetteInjectToConstructorInjectionRector;
+use RectorNette\Rector\Property\NetteInjectToConstructorInjectionRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->import(__DIR__ . '/../../../../../config/config.php');

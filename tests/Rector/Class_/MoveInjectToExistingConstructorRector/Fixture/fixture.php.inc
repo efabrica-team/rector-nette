@@ -1,9 +1,9 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\Class_\MoveInjectToExistingConstructorRector\Fixture;
+namespace RectorNette\Tests\Rector\Class_\MoveInjectToExistingConstructorRector\Fixture;
 
-use Rector\Nette\Tests\Rector\Class_\MoveInjectToExistingConstructorRector\Source\OtherDependency;
-use Rector\Nette\Tests\Rector\Class_\MoveInjectToExistingConstructorRector\Source\SomeDependency;
+use RectorNette\Tests\Rector\Class_\MoveInjectToExistingConstructorRector\Source\OtherDependency;
+use RectorNette\Tests\Rector\Class_\MoveInjectToExistingConstructorRector\Source\SomeDependency;
 
 final class Fixture
 {
@@ -28,10 +28,10 @@ final class Fixture
 -----
 <?php
 
-namespace Rector\Nette\Tests\Rector\Class_\MoveInjectToExistingConstructorRector\Fixture;
+namespace RectorNette\Tests\Rector\Class_\MoveInjectToExistingConstructorRector\Fixture;
 
-use Rector\Nette\Tests\Rector\Class_\MoveInjectToExistingConstructorRector\Source\OtherDependency;
-use Rector\Nette\Tests\Rector\Class_\MoveInjectToExistingConstructorRector\Source\SomeDependency;
+use RectorNette\Tests\Rector\Class_\MoveInjectToExistingConstructorRector\Source\OtherDependency;
+use RectorNette\Tests\Rector\Class_\MoveInjectToExistingConstructorRector\Source\SomeDependency;
 
 final class Fixture
 {
@@ -40,7 +40,7 @@ final class Fixture
      */
     private $otherDependency;
 
-    public function __construct(OtherDependency $otherDependency, private \Rector\Nette\Tests\Rector\Class_\MoveInjectToExistingConstructorRector\Source\SomeDependency $someDependency)
+    public function __construct(OtherDependency $otherDependency, private \RectorNette\Tests\Rector\Class_\MoveInjectToExistingConstructorRector\Source\SomeDependency $someDependency)
     {
         $this->otherDependency = $otherDependency;
     }

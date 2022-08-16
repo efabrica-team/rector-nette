@@ -1,8 +1,8 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\Fixture;
+namespace RectorNette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\Fixture;
 
-use Rector\Nette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\Source\SomeControlWithConstructorParentAndName;
+use RectorNette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\Source\SomeControlWithConstructorParentAndName;
 
 final class NewInstance
 {
@@ -16,9 +16,9 @@ final class NewInstance
 -----
 <?php
 
-namespace Rector\Nette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\Fixture;
+namespace RectorNette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\Fixture;
 
-use Rector\Nette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\Source\SomeControlWithConstructorParentAndName;
+use RectorNette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector\Source\SomeControlWithConstructorParentAndName;
 
 final class NewInstance
 {

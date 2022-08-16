@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Rector\Class_;
+namespace RectorNette\Rector\Class_;
 
 use Nette\Utils\Strings;
 use PhpParser\Node;
@@ -18,14 +18,14 @@ use Rector\Core\Contract\PhpParser\NodePrinterInterface;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
 use Rector\FileSystemRector\ValueObject\AddedFileWithContent;
-use Rector\Nette\NodeFactory\ClassWithPublicPropertiesFactory;
-use Rector\Nette\ValueObject\LatteVariableType;
+use RectorNette\NodeFactory\ClassWithPublicPropertiesFactory;
+use RectorNette\ValueObject\LatteVariableType;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 use Webmozart\Assert\Assert;
 
 /**
- * @see \Rector\Nette\Tests\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector\TemplateTypeBasedOnPresenterTemplateParametersRectorTest
+ * @see \RectorNette\Tests\Rector\Class_\TemplateTypeBasedOnPresenterTemplateParametersRector\TemplateTypeBasedOnPresenterTemplateParametersRectorTest
  */
 final class TemplateTypeBasedOnPresenterTemplateParametersRector extends AbstractRector implements ConfigurableRectorInterface
 {

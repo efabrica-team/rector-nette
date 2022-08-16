@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\NodeFinder\FormFinder;
+namespace RectorNette\Tests\NodeFinder\FormFinder;
 
 use Iterator;
 use PhpParser\Node;
@@ -10,16 +10,16 @@ use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Namespace_;
 use Rector\Core\Exception\ShouldNotHappenException;
-use Rector\Nette\NodeFinder\FormFieldsFinder;
-use Rector\Nette\NodeFinder\FormVariableFinder;
 use Rector\Testing\PHPUnit\AbstractTestCase;
 use Rector\Testing\TestingParser\TestingParser;
+use RectorNette\NodeFinder\FormFieldsFinder;
+use RectorNette\NodeFinder\FormVariableFinder;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
- * @see \Rector\Nette\NodeFinder\FormVariableFinder
- * @see \Rector\Nette\NodeFinder\FormFieldsFinder
+ * @see \RectorNette\NodeFinder\FormVariableFinder
+ * @see \RectorNette\NodeFinder\FormFieldsFinder
  */
 final class FormFinderTest extends AbstractTestCase
 {

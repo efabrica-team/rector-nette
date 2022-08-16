@@ -1,13 +1,13 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Fixture;
+namespace RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Fixture;
 
-use Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\ParentWithEmptyConstructor;
+use RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\ParentWithEmptyConstructor;
 
 final class SkipIfHasParentWithConstructorDependency extends ParentWithEmptyConstructor
 {
     /**
-     * @var \Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProduct
+     * @var \RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProduct
      * @inject
      */
     public $someProduct;
@@ -17,13 +17,13 @@ final class SkipIfHasParentWithConstructorDependency extends ParentWithEmptyCons
 -----
 <?php
 
-namespace Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Fixture;
+namespace RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Fixture;
 
-use Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\ParentWithEmptyConstructor;
+use RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\ParentWithEmptyConstructor;
 
 final class SkipIfHasParentWithConstructorDependency extends ParentWithEmptyConstructor
 {
-    public function __construct(private \Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProduct $someProduct)
+    public function __construct(private \RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\Source\SomeProduct $someProduct)
     {
         parent::__construct();
     }

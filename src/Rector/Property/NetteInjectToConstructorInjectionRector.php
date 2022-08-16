@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Rector\Property;
+namespace RectorNette\Rector\Property;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
@@ -13,11 +13,11 @@ use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\Php\PhpVersionProvider;
 use Rector\Core\Rector\AbstractRector;
 use Rector\Core\ValueObject\PhpVersionFeature;
-use Rector\Nette\NodeAnalyzer\NetteInjectPropertyAnalyzer;
-use Rector\Nette\NodeAnalyzer\PropertyUsageAnalyzer;
 use Rector\PostRector\Collector\PropertyToAddCollector;
 use Rector\PostRector\ValueObject\PropertyMetadata;
 use Rector\Privatization\NodeManipulator\VisibilityManipulator;
+use RectorNette\NodeAnalyzer\NetteInjectPropertyAnalyzer;
+use RectorNette\NodeAnalyzer\PropertyUsageAnalyzer;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -26,7 +26,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * - https://doc.nette.org/en/2.4/di-usage#toc-inject-annotations
  * - https://github.com/Kdyby/Autowired/blob/master/docs/en/index.md#autowired-properties
  *
- * @see \Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\NetteInjectToConstructorInjectionRectorTest
+ * @see \RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\NetteInjectToConstructorInjectionRectorTest
  */
 final class NetteInjectToConstructorInjectionRector extends AbstractRector
 {

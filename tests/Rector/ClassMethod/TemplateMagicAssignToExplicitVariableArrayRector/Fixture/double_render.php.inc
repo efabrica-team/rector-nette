@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\ClassMethod\TemplateMagicAssignToExplicitVariableArrayRector\Fixture;
+namespace RectorNette\Tests\Rector\ClassMethod\TemplateMagicAssignToExplicitVariableArrayRector\Fixture;
 
 use Nette\Application\UI\Control;
 
@@ -22,7 +22,7 @@ final class DoubleRender extends Control
 -----
 <?php
 
-namespace Rector\Nette\Tests\Rector\ClassMethod\TemplateMagicAssignToExplicitVariableArrayRector\Fixture;
+namespace RectorNette\Tests\Rector\ClassMethod\TemplateMagicAssignToExplicitVariableArrayRector\Fixture;
 
 use Nette\Application\UI\Control;
 

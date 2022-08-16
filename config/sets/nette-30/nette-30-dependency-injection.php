@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\Nette\Rector\MethodCall\BuilderExpandToHelperExpandRector;
-use Rector\Nette\Rector\MethodCall\SetClassWithArgumentToSetFactoryRector;
+use RectorNette\Rector\MethodCall\BuilderExpandToHelperExpandRector;
+use RectorNette\Rector\MethodCall\SetClassWithArgumentToSetFactoryRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->rule(SetClassWithArgumentToSetFactoryRector::class);

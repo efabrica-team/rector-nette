@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\FixturePhp74;
+namespace RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\FixturePhp74;
 
 use stdClass;
 
@@ -16,7 +16,7 @@ class TypedProperty
 -----
 <?php
 
-namespace Rector\Nette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\FixturePhp74;
+namespace RectorNette\Tests\Rector\Property\NetteInjectToConstructorInjectionRector\FixturePhp74;
 
 use stdClass;
 

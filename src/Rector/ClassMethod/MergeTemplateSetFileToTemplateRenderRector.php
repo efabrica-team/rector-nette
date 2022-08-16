@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Rector\ClassMethod;
+namespace RectorNette\Rector\ClassMethod;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Stmt\ClassMethod;
 use Rector\Core\Rector\AbstractRector;
-use Rector\Nette\NodeAnalyzer\NetteClassAnalyzer;
+use RectorNette\NodeAnalyzer\NetteClassAnalyzer;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * @see \Rector\Nette\Tests\Rector\ClassMethod\MergeTemplateSetFileToTemplateRenderRector\MergeTemplateSetFileToTemplateRenderRectorTest
+ * @see \RectorNette\Tests\Rector\ClassMethod\MergeTemplateSetFileToTemplateRenderRector\MergeTemplateSetFileToTemplateRenderRectorTest
  */
 final class MergeTemplateSetFileToTemplateRenderRector extends AbstractRector
 {

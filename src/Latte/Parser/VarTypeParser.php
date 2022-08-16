@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Latte\Parser;
+namespace RectorNette\Latte\Parser;
 
 use Nette\Utils\Strings;
-use Rector\Nette\ValueObject\LatteVariableType;
+use RectorNette\ValueObject\LatteVariableType;
 
 final class VarTypeParser
 {

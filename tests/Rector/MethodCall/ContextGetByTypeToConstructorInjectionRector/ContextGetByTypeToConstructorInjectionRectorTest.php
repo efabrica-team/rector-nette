@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\Nette\Tests\Rector\MethodCall\ContextGetByTypeToConstructorInjectionRector;
+namespace RectorNette\Tests\Rector\MethodCall\ContextGetByTypeToConstructorInjectionRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;

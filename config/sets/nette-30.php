@@ -6,11 +6,6 @@ use Rector\Arguments\Rector\ClassMethod\ReplaceArgumentDefaultValueRector;
 use Rector\Arguments\ValueObject\ReplaceArgumentDefaultValue;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\StaticCall\RemoveParentCallWithoutParentRector;
-use Rector\Nette\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector;
-use Rector\Nette\Rector\MethodCall\ConvertAddUploadWithThirdArgumentTrueToAddMultiUploadRector;
-use Rector\Nette\Rector\MethodCall\MagicHtmlCallToAppendAttributeRector;
-use Rector\Nette\Rector\MethodCall\MergeDefaultsInGetConfigCompilerExtensionRector;
-use Rector\Nette\Rector\MethodCall\RequestGetCookieDefaultArgumentToCoalesceRector;
 use Rector\Renaming\Rector\ClassConstFetch\RenameClassConstFetchRector;
 use Rector\Renaming\Rector\MethodCall\RenameMethodRector;
 use Rector\Renaming\Rector\Name\RenameClassRector;
@@ -18,6 +13,11 @@ use Rector\Renaming\ValueObject\MethodCallRename;
 use Rector\Renaming\ValueObject\RenameClassConstFetch;
 use Rector\Transform\Rector\StaticCall\StaticCallToMethodCallRector;
 use Rector\Transform\ValueObject\StaticCallToMethodCall;
+use RectorNette\Rector\ClassMethod\RemoveParentAndNameFromComponentConstructorRector;
+use RectorNette\Rector\MethodCall\ConvertAddUploadWithThirdArgumentTrueToAddMultiUploadRector;
+use RectorNette\Rector\MethodCall\MagicHtmlCallToAppendAttributeRector;
+use RectorNette\Rector\MethodCall\MergeDefaultsInGetConfigCompilerExtensionRector;
+use RectorNette\Rector\MethodCall\RequestGetCookieDefaultArgumentToCoalesceRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->sets([
