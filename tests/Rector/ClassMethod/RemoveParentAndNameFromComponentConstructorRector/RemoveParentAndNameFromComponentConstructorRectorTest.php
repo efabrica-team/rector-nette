@@ -13,13 +13,13 @@ final class RemoveParentAndNameFromComponentConstructorRectorTest extends Abstra
     /**
      * @dataProvider provideData()
      */
-    public function test(SmartFileInfo $fileInfo): void
+    public function test(string $file): void
     {
-        $this->doTestFileInfo($fileInfo);
+        $this->doTestFile($file);
     }
 
     /**
-     * @return Iterator<SmartFileInfo>
+     * @return Iterator<string>
      */
     public function provideData(): Iterator
     {

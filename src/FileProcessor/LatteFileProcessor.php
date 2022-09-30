@@ -55,8 +55,8 @@ final class LatteFileProcessor implements FileProcessorInterface
 
     public function supports(File $file, Configuration $configuration): bool
     {
-        $fileInfo = $file->getSmartFileInfo();
-        return $fileInfo->hasSuffixes($this->getSupportedFileExtensions());
+        $filePathExtension = pathinfo($file->getFilePath(), PATHINFO_EXTENSION);
+        return in_array($filePathExtension, $configuration->getFileExtensions(), true);
     }
 
     /**

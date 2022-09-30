@@ -285,8 +285,7 @@ CODE_SAMPLE
 
         $printedClassContent = "<?php\n\n" . $this->nodePrinter->print($templateClass) . "\n";
 
-        $smartFileInfo = $this->file->getSmartFileInfo();
-        $targetFilePath = $smartFileInfo->getRealPathDirectory() . '/' . $templateClassName . '.php';
+        $targetFilePath = dirname($this->file->getFilePath()) . '/' . $templateClassName . '.php';
 
         $addedFileWithContent = new AddedFileWithContent($targetFilePath, $printedClassContent);
         $this->removedAndAddedFilesCollector->addAddedFile($addedFileWithContent);
@@ -296,8 +295,7 @@ CODE_SAMPLE
 
     private function findTemplateFilePath(string $presenterName, string $actionName): ?string
     {
-        $smartFileInfo = $this->file->getSmartFileInfo();
-        $dir = $smartFileInfo->getRealPathDirectory();
+        $dir = dirname($this->file->getFilePath());
         $dir = is_dir("${dir}/templates") ? $dir : dirname($dir);
 
         $templateFileCandidates = [

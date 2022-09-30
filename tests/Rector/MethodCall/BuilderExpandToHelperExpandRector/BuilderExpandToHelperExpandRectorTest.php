@@ -6,20 +6,19 @@ namespace RectorNette\Tests\Rector\MethodCall\BuilderExpandToHelperExpandRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
-use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class BuilderExpandToHelperExpandRectorTest extends AbstractRectorTestCase
 {
     /**
      * @dataProvider provideData()
      */
-    public function test(SmartFileInfo $fileInfo): void
+    public function test(string $file): void
     {
-        $this->doTestFileInfo($fileInfo);
+        $this->doTestFile($file);
     }
 
     /**
-     * @return Iterator<SmartFileInfo>
+     * @return Iterator<string>
      */
     public function provideData(): Iterator
     {

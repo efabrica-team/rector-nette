@@ -6,7 +6,6 @@ namespace RectorNette\Tests\Rector\MethodCall\ContextGetByTypeToConstructorInjec
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
-use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class ContextGetByTypeToConstructorInjectionRectorPhp74Test extends AbstractRectorTestCase
 {
@@ -14,13 +13,13 @@ final class ContextGetByTypeToConstructorInjectionRectorPhp74Test extends Abstra
      * @requires PHP 7.4
      * @dataProvider provideData()
      */
-    public function test(SmartFileInfo $fileInfo): void
+    public function test(string $file): void
     {
-        $this->doTestFileInfo($fileInfo);
+        $this->doTestFile($file);
     }
 
     /**
-     * @return Iterator<SmartFileInfo>
+     * @return Iterator<string>
      */
     public function provideData(): Iterator
     {

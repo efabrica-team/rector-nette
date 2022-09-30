@@ -6,23 +6,25 @@ namespace RectorNette\Tests\Rector\Class_\FormDataRector;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
-use Symplify\SmartFileSystem\SmartFileInfo;
+use RectorNette\Tests\Behavior\MultipleFilesChangedTrait;
 
 /**
  * @see \RectorNette\Rector\Class_\FormDataRector
  */
 final class FormDataRectorTest extends AbstractRectorTestCase
 {
+    use MultipleFilesChangedTrait;
+
     /**
      * @dataProvider provideData()
      */
-    public function test(SmartFileInfo $fileInfo): void
+    public function test(string $file): void
     {
-        $this->doTestFileInfoWithAdditionalChanges($fileInfo);
+        $this->doTestFileInfoWithAdditionalChanges($file);
     }
 
     /**
-     * @return Iterator<SmartFileInfo>
+     * @return Iterator<string>
      */
     public function provideData(): Iterator
     {
