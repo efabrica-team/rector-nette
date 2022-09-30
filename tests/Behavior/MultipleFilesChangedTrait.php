@@ -8,9 +8,8 @@ use Rector\Core\Exception\ShouldNotHappenException;
 
 trait MultipleFilesChangedTrait
 {
-    protected function doTestFileInfoWithAdditionalChanges(
-        string $fixtureFilePath,
-    ): void {
+    protected function doTestFileInfoWithAdditionalChanges(string $fixtureFilePath,): void
+    {
         $separator = '-----';
         [$originalContent, $expectedContent, $additionalInfo] = explode(
             $separator,
@@ -26,7 +25,7 @@ trait MultipleFilesChangedTrait
         $fixturePath = $this->getFixtureTempDirectory() . '/' . pathinfo($fixtureFilePath, PATHINFO_FILENAME);
         $this->createFixtureDir($fixturePath);
         $fixtureContent = $originalContent;
-        if (trim($expectedContent)) {
+        if (trim($expectedContent) !== '' && trim($expectedContent) !== '0') {
             $fixtureContent .= $separator . $expectedContent;
         }
         file_put_contents($fixturePath, $fixtureContent);

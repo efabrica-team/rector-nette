@@ -6,7 +6,6 @@ namespace RectorNette\Tests\Rector\ClassMethod\RemoveParentAndNameFromComponentC
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
-use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class RemoveParentAndNameFromComponentConstructorRectorTest extends AbstractRectorTestCase
 {
