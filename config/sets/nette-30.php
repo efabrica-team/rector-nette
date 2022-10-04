@@ -21,7 +21,6 @@ use RectorNette\Rector\MethodCall\RequestGetCookieDefaultArgumentToCoalesceRecto
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->sets([
-        __DIR__ . '/nette-30/nette-30-composer.php',
         __DIR__ . '/nette-30/nette-30-dependency-injection.php',
         __DIR__ . '/nette-30/nette-30-return-types.php',
         __DIR__ . '/nette-30/nette-30-param-types.php',
