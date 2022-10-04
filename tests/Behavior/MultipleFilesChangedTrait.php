@@ -8,7 +8,7 @@ use Rector\Core\Exception\ShouldNotHappenException;
 
 trait MultipleFilesChangedTrait
 {
-    protected function doTestFileInfoWithAdditionalChanges(string $fixtureFilePath,): void
+    protected function doTestFileInfoWithAdditionalChanges(string $fixtureFilePath): void
     {
         $separator = '-----';
         [$originalContent, $expectedContent, $additionalInfo] = explode(

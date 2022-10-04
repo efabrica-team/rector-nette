@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
+use Rector\Config\RectorConfig;
 use RectorComposer\Rector\ChangePackageVersionComposerRector;
 use RectorComposer\Rector\RemovePackageComposerRector;
 use RectorComposer\ValueObject\PackageAndVersion;
-use Rector\Config\RectorConfig;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->ruleWithConfiguration(ChangePackageVersionComposerRector::class, [
