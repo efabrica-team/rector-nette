@@ -22,7 +22,7 @@ jobs:
         run: composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
 
       - name: Install PHP code sniffer as dev dependency
-        run: mkdir codesniffer && cd codesniffer && composer require efabrica/coding-standard --dev && cd ../
+        run: mkdir codesniffer && cd codesniffer && echo "{}" >> composer.json && composer config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true && composer require efabrica/coding-standard --dev && cd ../
 
       - name: Code sniffer
         run: codesniffer/vendor/bin/phpcs src tests --standard=vendor/efabrica/coding-standard/eFabrica -n
