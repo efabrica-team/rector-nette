@@ -1,5 +1,4 @@
 includes:
-    - vendor/symplify/phpstan-rules/config/packages/nette/nette-rules.neon
     - vendor/symplify/phpstan-rules/config/packages/symfony/symfony-rules.neon
     - vendor/symplify/phpstan-rules/config/static-rules.neon
     - vendor/symplify/phpstan-rules/config/array-rules.neon
