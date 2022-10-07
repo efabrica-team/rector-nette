@@ -6,7 +6,6 @@ namespace RectorNette\Tests\Kdyby\Rector\MethodCall\ReplaceEventManagerWithEvent
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
-use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class ReplaceEventManagerWithEventSubscriberRectorTest extends AbstractRectorTestCase
 {
@@ -14,13 +13,13 @@ final class ReplaceEventManagerWithEventSubscriberRectorTest extends AbstractRec
      * @dataProvider provideData()
      * @return never
      */
-    public function test(SmartFileInfo $fixtureFileInfo)
+    public function test(string $file)
     {
         $this->markTestSkipped('Without this test, there is some Comment autoload issue');
     }
 
     /**
-     * @return Iterator<SmartFileInfo>
+     * @return Iterator<string>
      */
     public function provideData(): Iterator
     {

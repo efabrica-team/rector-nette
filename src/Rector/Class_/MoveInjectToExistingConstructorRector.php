@@ -8,6 +8,7 @@ use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Property;
+use PHPStan\PhpDocParser\Ast\Node as PHPStanNode;
 use Rector\BetterPhpDocParser\PhpDocManipulator\PhpDocTagRemover;
 use Rector\Core\Php\PhpVersionProvider;
 use Rector\Core\Rector\AbstractRector;
@@ -142,7 +143,7 @@ CODE_SAMPLE
     {
         $phpDocInfo = $this->phpDocInfoFactory->createFromNodeOrEmpty($property);
         $injectTagValueNode = $phpDocInfo->getByName('inject');
-        if ($injectTagValueNode instanceof \PHPStan\PhpDocParser\Ast\Node) {
+        if ($injectTagValueNode instanceof PHPStanNode) {
             $this->phpDocTagRemover->removeTagValueFromNode($phpDocInfo, $injectTagValueNode);
         }
     }

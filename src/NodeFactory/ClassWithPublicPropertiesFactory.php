@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RectorNette\NodeFactory;
 
 use PhpParser\Builder\Class_ as ClassBuilder;
+use PhpParser\Builder\Namespace_ as NamespaceBuilder;
 use PhpParser\Builder\Property;
 use PhpParser\Builder\TraitUse;
 use PhpParser\Node\NullableType;
@@ -34,7 +35,7 @@ final class ClassWithPublicPropertiesFactory
 
         $namespaceBuilder = null;
         if ($namespace !== '') {
-            $namespaceBuilder = new \PhpParser\Builder\Namespace_($namespace);
+            $namespaceBuilder = new NamespaceBuilder($namespace);
         }
 
         $classBuilder = new ClassBuilder($className);

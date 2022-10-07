@@ -169,8 +169,7 @@ CODE_SAMPLE
 
         $printedClassContent = "<?php\n\n" . $this->nodePrinter->print($formDataClass) . "\n";
 
-        $smartFileInfo = $this->file->getSmartFileInfo();
-        $targetFilePath = $smartFileInfo->getRealPathDirectory() . '/' . $formDataClassName . '.php';
+        $targetFilePath = dirname($this->file->getFilePath()) . '/' . $formDataClassName . '.php';
 
         $addedFileWithContent = new AddedFileWithContent($targetFilePath, $printedClassContent);
         $this->removedAndAddedFilesCollector->addAddedFile($addedFileWithContent);

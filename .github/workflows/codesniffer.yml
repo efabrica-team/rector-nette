@@ -1,0 +1,28 @@
+name: PHP code sniffer
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: null
+
+jobs:
+  codesniffer:
+    runs-on: ubuntu-latest
+    name: PHP code sniffer
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Composer update
+        run: composer update --no-progress --no-interaction
+
+      - name: Allow plugin
+        run: composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+
+      - name: Install PHP code sniffer as dev dependency
+        run: mkdir codesniffer && cd codesniffer && echo "{}" >> composer.json && composer config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true && composer require efabrica/coding-standard --dev && cd ../
+
+      - name: Code sniffer
+        run: codesniffer/vendor/bin/phpcs src tests --standard=codesniffer/vendor/efabrica/coding-standard/eFabrica  --extensions="php" -n

@@ -14,7 +14,7 @@ class ParentWithSomeTypeToInjectPropertyPresenter implements IPresenter
     {
     }
 
-    function run(Request $request): IResponse
+    public function run(Request $request): IResponse
     {
     }
 }

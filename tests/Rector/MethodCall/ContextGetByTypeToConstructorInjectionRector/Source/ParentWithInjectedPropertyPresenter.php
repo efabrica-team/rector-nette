@@ -13,9 +13,9 @@ class ParentWithInjectedPropertyPresenter implements IPresenter
     /**
      * @inject
      */
-    public \RectorNette\Tests\Rector\MethodCall\ContextGetByTypeToConstructorInjectionRector\Source\SomeTypeToInject $someTypeToInject;
+    public SomeTypeToInject $someTypeToInject;
 
-    function run(Request $request): IResponse
+    public function run(Request $request): IResponse
     {
     }
 }

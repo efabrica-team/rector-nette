@@ -198,8 +198,7 @@ CODE_SAMPLE
 
     private function findTemplateFilePath(string $presenterName, string $actionName): ?string
     {
-        $smartFileInfo = $this->file->getSmartFileInfo();
-        $dir = $smartFileInfo->getRealPathDirectory();
+        $dir = dirname($this->file->getFilePath());
         $dir = is_dir("${dir}/templates") ? $dir : dirname($dir);
 
         $templateFileCandidates = [
