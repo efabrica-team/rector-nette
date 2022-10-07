@@ -25,4 +25,4 @@ jobs:
         run: mkdir codesniffer && cd codesniffer && echo "{}" >> composer.json && composer config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true && composer require efabrica/coding-standard --dev && cd ../
 
       - name: Code sniffer
-        run: codesniffer/vendor/bin/phpcs src tests --standard=vendor/efabrica/coding-standard/eFabrica -n
+        run: codesniffer/vendor/bin/phpcs src tests --standard=codesniffer/vendor/efabrica/coding-standard/eFabrica -n
