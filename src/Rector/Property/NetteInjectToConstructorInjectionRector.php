@@ -7,6 +7,7 @@ namespace RectorNette\Rector\Property;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Property;
+use PHPStan\PhpDocParser\Ast\Node as PHPStanNode;
 use Rector\BetterPhpDocParser\PhpDocInfo\PhpDocInfo;
 use Rector\BetterPhpDocParser\PhpDocManipulator\PhpDocTagRemover;
 use Rector\Core\Exception\ShouldNotHappenException;
@@ -102,7 +103,7 @@ CODE_SAMPLE
     private function refactorNetteInjectProperty(PhpDocInfo $phpDocInfo, Property $property): ?Property
     {
         $injectTagNode = $phpDocInfo->getByName('inject');
-        if ($injectTagNode instanceof \PHPStan\PhpDocParser\Ast\Node) {
+        if ($injectTagNode instanceof PHPStanNode) {
             $this->phpDocTagRemover->removeTagValueFromNode($phpDocInfo, $injectTagNode);
         }
 
